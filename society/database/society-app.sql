@@ -79,33 +79,6 @@ LOCK TABLES `deposit_history` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `interest_rates`
---
-
-DROP TABLE IF EXISTS `interest_rates`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `interest_rates` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` int(11) NOT NULL,
-  `value` float NOT NULL,
-  `create_date` datetime NOT NULL,
-  `expire_date` datetime DEFAULT NULL,
-  `description` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='interest rate details';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `interest_rates`
---
-
-LOCK TABLES `interest_rates` WRITE;
-/*!40000 ALTER TABLE `interest_rates` DISABLE KEYS */;
-/*!40000 ALTER TABLE `interest_rates` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `loan`
 --
 
@@ -186,9 +159,12 @@ CREATE TABLE `member` (
   `modified_date` datetime DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `dob` date NOT NULL,
+  `deposit_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `member_address_id_idx` (`addressid`),
-  CONSTRAINT `member_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `member_deposit_id_idx` (`deposit_id`),
+  CONSTRAINT `member_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `member_deposit_id` FOREIGN KEY (`deposit_id`) REFERENCES `member_deposit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='member details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -198,8 +174,88 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh','pundir','8287536955',1,'2015-11-14 00:00:00','2015-11-14 00:00:00',1,'1983-11-15');
+INSERT INTO `member` VALUES (1,'deepak','singh','pundir','8287536955',1,'2015-11-14 00:00:00','2015-11-14 00:00:00',1,'1983-11-15',NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `member_deposit`
+--
+
+DROP TABLE IF EXISTS `member_deposit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `member_deposit` (
+  `id` int(11) NOT NULL,
+  `share_value` double DEFAULT NULL,
+  `installment_value` double DEFAULT NULL,
+  `installment_freq` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='member deposit configuration';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `member_deposit`
+--
+
+LOCK TABLES `member_deposit` WRITE;
+/*!40000 ALTER TABLE `member_deposit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `member_deposit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `new_table`
+--
+
+DROP TABLE IF EXISTS `new_table`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `new_table` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `share_value` double DEFAULT NULL,
+  `installment_value` double DEFAULT NULL,
+  `installment_freq` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `new_table`
+--
+
+LOCK TABLES `new_table` WRITE;
+/*!40000 ALTER TABLE `new_table` DISABLE KEYS */;
+/*!40000 ALTER TABLE `new_table` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `society_config`
+--
+
+DROP TABLE IF EXISTS `society_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `society_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` int(11) NOT NULL,
+  `value` double NOT NULL,
+  `create_date` datetime NOT NULL,
+  `expire_date` datetime DEFAULT NULL,
+  `description` varchar(50) DEFAULT NULL,
+  `value2` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='society rules configuration details';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `society_config`
+--
+
+LOCK TABLES `society_config` WRITE;
+/*!40000 ALTER TABLE `society_config` DISABLE KEYS */;
+INSERT INTO `society_config` VALUES (1,1,8,'2015-11-19 00:00:00',NULL,'share value interest rate',NULL),(2,2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate',NULL),(3,3,2500,'2015-11-19 00:00:00',NULL,'minimum and maximum share value',50000),(4,4,500,'2015-11-19 00:00:00',NULL,'minimum and maximum installment value',50000);
+/*!40000 ALTER TABLE `society_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -236,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-14 21:46:01
+-- Dump completed on 2015-11-19 23:03:40

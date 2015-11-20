@@ -1,23 +1,23 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Society Application</title>
-        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
-        <script src="/node_modules/requirejs/require.js"></script>
-        <script>
-            require(["/require-conf.js"], function () {
-                require(["/app.js"]);
-            });
-        </script>
-    </head>
-    <body ng-controller="appController">
-        <header ng-bind-template="{{heading}}"></header>
-        <nav>Navigation bar</nav>
-        <section>
-            <div ng-view></div>
-        </section>
-        <footer ng-bind-template="{{footer}}"></footer>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Society Application</title>
+    <base href="/" target=""/>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+    <script src="/node_modules/requirejs/require.js"></script>
+    <script>
+        require(["/require-conf.js"], function () {
+            require(["/app.js"]);
+        });
+    </script>
+</head>
+<body ng-controller="appController">
+<div nav-bar></div>
+<section>
+    <div ng-view></div>
+</section>
+</body>
 </html>

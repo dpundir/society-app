@@ -9,6 +9,7 @@ define([
     'angular-animate',
     'angular-ui-bootstrap',
     'javascripts/home/controllers/homeController',
+    'javascripts/home/directive/navigationBar',
     'javascripts/admin/controllers/adminLoginController',
     'javascripts/member/controllers/memberRegistrationController'
 ], function(angular) {

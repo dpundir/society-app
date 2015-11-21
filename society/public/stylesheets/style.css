@@ -17,8 +17,12 @@ body {
     text-align: left;
 }
 .menu.open>.dropdown-menu{
-    width: 100%;
+    width: 200px;
     left: 10px;
+}
+.dropdown-menu li.header:hover{
+    cursor: none;
+    background-color: #ffffff;
 }
 .dropdown span{
     color: #337ab7;
@@ -28,7 +32,6 @@ body {
     cursor: pointer;;
 }
 .dropdown h5{
-    padding-left: 10px;
     font-weight: 700;
 }
 .navbar-nav .open .dropdown-menu{
@@ -108,7 +111,7 @@ h1{
 h2{
     margin-top: 10px;
     font-size: 30px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 50px;
 }
 h3 {
@@ -130,19 +133,82 @@ img { max-width: 100%; }
     margin-left: 10px;
 }
 .home{
-    margin-top: 5%;
-    left: 30%;
+    padding: 30px 15px;
+    margin-bottom: 30px;
+}
+.home .tile:hover{
+    box-shadow: 0 5px 15px 0px #000000;
+    -webkit-transform: scale(1.04);
+    transform: scale(1.04);
+}
+.home .tile {
+    margin-bottom: 20px;
+    color: #fff;
+    padding: 15px;
+    overflow: hidden;
+    border-radius: 3px;
+    height: 250px;
+    max-width: 270px;
+    float: left;
+    background: #FFF;
     position: relative;
-    height: 400px;
-    width: 40%;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    box-shadow: 0px 1px 15px 2px #757575;
-    background: url(../image/home.jpg) no-repeat center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    transform: translateZ(0);
+    box-shadow: 0px 0px 3px 2px #808080;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+.bg-green{
+    background: #00acac!important;
+}
+.bg-green-a{
+    background: #007f80;
+}
+.bg-purple{
+    background: #727cb6!important;;
+}
+.bg-purple-a{
+    background: #5763a8
+}
+.bg-black{
+    background: #2d353c!important;
+}
+.bg-black-a{
+    background: #21272c;
+}
+.bg-blue{
+    background: #348fe2!important;
+}
+.bg-blue-a{
+    background: #1d77c9;
+}
+.home .tile .tile-title{
+    color: rgba(255,255,255,.6);
+}
+.home .tile .tile-stat{
+    line-height: 40px;
+    font-size: 36px;
+    font-weight: 400;
+    margin: 10px 0px 50px;
+}
+.home .tile a:hover{
+    text-decoration: underline;
+}
+.home .tile a{
+    line-height: 20px;
+    padding: 10px 15px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom:0;
+    text-align: right;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
 }
 .inner-bg {
     padding: 60px 0 80px 0;

@@ -38,15 +38,17 @@ define([
                 'templateUrl': 'javascripts/admin/partials/admin-login.html',
                 'controller': 'adminLoginController'
             }).otherwise({
-                'redirectTo': '/home'
+                'redirectTo': '/admin-login'
             });
 
-        }).controller("appController", function($rootScope, $scope) {
+        }).controller("appController",['$rootScope','$scope', function($rootScope, $scope) {
             $scope.heading = 'Application Heading';
             $scope.ngViewPlaceholder = 'NG View Placeholder';
             $scope.footer = 'Footer';
-            $scope.isAuthenticated = false;
-        });
+            $scope.navBarConfig = {
+                showNavBar : false
+            };
+        }]);
 
     angular.bootstrap(document, ["societyApp"]);
 });

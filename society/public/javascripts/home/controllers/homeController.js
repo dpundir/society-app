@@ -2,9 +2,7 @@ define([
     'angular'
 ],function(){
     angular.module("societyApp.home",[])
-        .controller('homeController',['$scope','$timeout','$location',function($scope,$timeout,$location){
-            $timeout(function(){
-                $location.url('/admin-login');
-            },3000);
+        .controller('homeController',['$scope',function($scope){
+            $scope.navBarConfig.showNavBar = true;
     }]);
 });

@@ -1,0 +1,7 @@
+<div class="row acct-detail-section">
+    <tabset>
+        <tab ng-repeat="tab in tabConfig" heading="{{tab.title}}" active="tab.active">
+            {{tab.content}}
+        </tab>
+    </tabset>
+</div>

@@ -104,13 +104,13 @@ hr{
 }
 h1{
     margin-top: 10px;
-    font-size: 38px;
+    font-size: 30px;
     font-weight: 100;
     line-height: 50px;
 }
 h2{
     margin-top: 10px;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 50px;
 }
@@ -139,11 +139,10 @@ img { max-width: 100%; }
 .home .tile:hover{
     box-shadow: 0 5px 15px 0px #000000;
     -webkit-transform: scale(1.04);
-    transform: scale(1.04);
+    transform: scale(1);
 }
 .home .tile {
     margin-bottom: 20px;
-    color: #fff;
     padding: 15px;
     overflow: hidden;
     border-radius: 3px;
@@ -153,7 +152,7 @@ img { max-width: 100%; }
     background: #FFF;
     position: relative;
     transform: translateZ(0);
-    box-shadow: 0px 0px 3px 2px #808080;
+    box-shadow: 0px 0px 3px 1px #808080;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
@@ -163,38 +162,31 @@ img { max-width: 100%; }
     transition-property: box-shadow, transform;
 }
 .bg-green{
-    background: #00acac!important;
+    border: 1px solid #00acac!important;
 }
-.bg-green-a{
-    background: #007f80;
+.bg-a{
+    background: #337ab7;
 }
 .bg-purple{
-    background: #727cb6!important;;
-}
-.bg-purple-a{
-    background: #5763a8
+    border: 1px solid #727cb6!important;;
 }
 .bg-black{
-    background: #2d353c!important;
-}
-.bg-black-a{
-    background: #21272c;
+    border: 1px solid #2d353c!important;
 }
 .bg-blue{
-    background: #348fe2!important;
-}
-.bg-blue-a{
-    background: #1d77c9;
+    border: 1px solid #348fe2!important;
 }
 .home .tile .tile-title{
-    color: rgba(255,255,255,.6);
+    color: #0d0d0d;
 }
 .home .tile .tile-stat{
     line-height: 40px;
     font-size: 36px;
     font-weight: 400;
     margin: 10px 0px 50px;
+    color: #0d0d0d;
 }
+
 .home .tile a:hover{
     text-decoration: underline;
 }
@@ -209,6 +201,19 @@ img { max-width: 100%; }
     color: #fff;
     font-size: 14px;
     cursor: pointer;
+}
+.acct-detail-section{
+    margin-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.nav-tabs>li>a{
+    color: #337ab7;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    border: 1px solid #404040;
+    border-bottom-color: transparent;
+    box-shadow: 0px -1px 2px 0px #4d4d4d;
 }
 .inner-bg {
     padding: 60px 0 80px 0;

@@ -137,16 +137,20 @@ img { max-width: 100%; }
     margin-bottom: 30px;
 }
 .home .tile:hover{
-    box-shadow: 0 5px 15px 0px #000000;
+    box-shadow: 0 5px 15px 0px #0d0d0d;
     -webkit-transform: scale(1.04);
     transform: scale(1);
+}
+.home .tile p{
+    margin: 0;
+    line-height: 20px;
 }
 .home .tile {
     margin-bottom: 20px;
     padding: 15px;
     overflow: hidden;
     border-radius: 3px;
-    height: 250px;
+    height: 200px;
     max-width: 270px;
     float: left;
     background: #FFF;
@@ -178,12 +182,12 @@ img { max-width: 100%; }
 }
 .home .tile .tile-title{
     color: #0d0d0d;
+    margin: 0;
 }
 .home .tile .tile-stat{
-    line-height: 40px;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 400;
-    margin: 10px 0px 50px;
+    margin: 10px 0px 0px;
     color: #0d0d0d;
 }
 

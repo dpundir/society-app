@@ -5,29 +5,59 @@
 var db = require('mysql');
 var restService = require('./rest-service');
 
-module.exports.fetchData = function (req, res) {
-  var entity = req.params.entity;
+module.exports.fetchMemberData = function (req, res) {
   var id = req.params.id;
-  var fields = {};
+  var filter = {};
   if(id){
-    fields.id = parseInt(id, 10);
+    filter.mid = parseInt(id, 10);
   }
-  restService.fetchData(entity, '*', fields, {id: 'desc'}, res);
+  restService.fetchEntityData('member_address_view', '*', filter, {mid: 'desc'}, res);
 };
 
-module.exports.createData = function (req, res) {
+module.exports.fetchEntityData = function (req, res) {
+  var id = req.params.id;
   var entity = req.params.entity;
-  var data = req.body;
-  restService.createData(entity, data, res);
+  var filter = {};
+  if(id){
+    filter.id = parseInt(id, 10);
+  }
+  restService.fetchEntityData(entity, '*', filter, {id: 'desc'}, res);
 };
 
-module.exports.updateData = function (req, res) {
-  var entity = req.params.entity;
+module.exports.createEntityData = function (req, res) {
+  var data = req.body;
+  restService.createEntityData('member', data, res);
+};
+
+module.exports.createMemberData = function (req, res) {
+  var data = req.body;
+  restService.createEntityData('address', data.address, function(resultData){
+    data.addressid = resultData.id;
+    delete data.address;
+    restService.createEntityData('member', data, res);
+  });
+};
+
+module.exports.updateEntityData = function (req, res) {
   var id = req.params.id;
   var data = req.body;
-  var fields = {};
+  var filter = {};
   if(id){
-    fields.id = parseInt(id, 10);
+    filter.id = parseInt(id, 10);
   }
-  restService.updateData(entity, data, fields, res);
+  restService.updateEntityData('member', data, filter, res);
+};
+
+module.exports.updateMemberData = function (req, res) {
+  var id = req.params.id;
+  var data = req.body;
+  var filter = {};
+  if(id){
+    filter.id = parseInt(id, 10);
+  }
+  restService.updateEntityData('address', data.address, filter, function(count){
+    data.addressid = data.address.id;
+    delete data.address;
+    restService.updateEntityData('member', data, filter, res);
+  });
 };

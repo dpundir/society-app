@@ -29,9 +29,13 @@ body {
     color: #1c4264;
 }
 .dropdown li:hover{
-    background-color: #f8f8f8;
+    background: #F6F3F3;
     cursor: pointer;;
-    color:#0b1b28;;
+    color:#000000;
+}
+.dropdown li:hover a{
+    cursor: pointer;;
+    color:#000000;
 }
 .dropdown h5{
     font-weight: 700;
@@ -441,3 +445,6 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     font-weight: 700;
 }
 /*css for spinner ends*/
+.reg-form .ng-invalid.ng-invalid-required.ng-touched{
+    border: 2px solid #a94442;
+}

@@ -19,26 +19,29 @@ body {
 .menu.open>.dropdown-menu{
     width: 200px;
     left: 10px;
+    top: 50px;
 }
 .dropdown-menu li.header:hover{
     cursor: none;
     background-color: #ffffff;
 }
-.dropdown span{
-    color: #337ab7;
+.dropdown li {
+    color: #1c4264;
 }
 .dropdown li:hover{
     background-color: #f8f8f8;
     cursor: pointer;;
+    color:#0b1b28;;
 }
 .dropdown h5{
     font-weight: 700;
+    color: #000000;
 }
 .navbar-nav .open .dropdown-menu{
     position: absolute;
     float: none;
     width: auto;
-    margin-top: 10px;
+    margin-top: 8px;
     right: 0;
     left: auto;
     background: #ffffff;

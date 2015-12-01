@@ -17,82 +17,86 @@
                     <hr/>
                     <div class=" form-bottom">
                         <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Member Information:</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="fname" placeholder="First name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="mname" placeholder="Middle name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="lname" placeholder="Last name">
-                                    </div>
-                                </div>
+                            <div class="panel-heading">
+                                <h4>Member Information:</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="phone" placeholder="Mobile number">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="fname" placeholder="First name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="mname"
+                                                   placeholder="Middle name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="lname" placeholder="Last name">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group input-group">
-                                        <input type="text" class="form-control"
-                                               datepicker-popup="{{format}}"
-                                               ng-model="dob" is-open="status.opened"
-                                               max-date="maxDate"
-                                               datepicker-options="dateOptions"
-                                               ng-required="true" close-text="Close" placeholder="Date of birth"/>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="phone"
+                                                   placeholder="Mobile number">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group input-group">
+                                            <input type="text" class="form-control"
+                                                   datepicker-popup="{{format}}"
+                                                   ng-model="dob" is-open="status.opened"
+                                                   max-date="maxDate"
+                                                   datepicker-options="dateOptions"
+                                                   ng-required="true" close-text="Close" placeholder="Date of birth"/>
                                   <span class="input-group-btn">
                                     <button type="button"
                                             class="btn btn-default btn-datepicker"
                                             ng-click="open()">
                                         <i class="glyphicon glyphicon-calendar"></i></button>
                                   </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h4>Member Address:</h4>
                             </div>
                             <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="address" placeholder="Address">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="address" placeholder="Address">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="city" placeholder="Select City">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="state"
+                                                   placeholder="Select State">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="pincode" placeholder="Pincode">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="city" placeholder="Select City">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="state" placeholder="Select State">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="pincode" placeholder="Pincode">
-                                </div>
-                            </div>
-                        </div>
-                                </div></div>
                         <div class="row btn-register">
                             <div class="col-sm-4 column">
                                 <button type="button" class="btn btn-primary">Register</button>

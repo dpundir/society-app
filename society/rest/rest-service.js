@@ -8,46 +8,79 @@ var databaseConfiguration = require('./database-configuration');
 
 var pool = db.createPool(databaseConfiguration);
 
-module.exports.fetchData = function (table, fields, where, order, res) {
+var fetchData = function (table, fields, where, order, res) {
+
   pool.getConnection(function(err, connection) {
     mysqlUtilities.upgrade(connection);
     mysqlUtilities.introspection(connection);
     connection.select(table, fields, where, order, function (err, rows, fields) {
       connection.release();
       if (err) throw err;
-      res.send(rows);
+      if(typeof(res) == 'function'){
+        res(rows);
+      } else {
+        res.send(rows);
+      }
     });
   });
 };
 
-module.exports.createData = function (table, data, res) {
+var createData = function (table, data, res) {
   pool.getConnection(function(err, connection) {
     mysqlUtilities.upgrade(connection);
     mysqlUtilities.introspection(connection);
     connection.insert(table, data, function (err, recordId) {
       connection.release();
       if (err) throw err;
-      res.send({id: recordId});
+      if(typeof(res) == 'function'){
+        res({id: recordId});
+      } else {
+        res.send({id: recordId});
+      }
     });
   });
 };
 
-module.exports.updateData = function (table, data, where, res) {
+var updateData = function (table, data, where, res) {
   pool.getConnection(function(err, connection) {
     mysqlUtilities.upgrade(connection);
     mysqlUtilities.introspection(connection);
     connection.update(table, data, where, function (err, affectedRows) {
       connection.release();
       if (err) throw err;
-      res.send({count:affectedRows});
+      if(typeof(res) == 'function'){
+        res({count:affectedRows});
+      } else {
+        res.send({count:affectedRows});
+      }
     });
   });
 };
 
-module.exports.login = function (req, res) {
+var fetchEntityData = function (entity, fields, filter, sort, res) {
+  fetchData(entity, fields, filter, sort, res);
+};
+
+var createEntityData = function (entity, data, res) {
+  createData(entity, data, res);
+};
+
+var updateEntityData = function (entity, data, filter, res) {
+  updateData(entity, data, filter, res);
+};
+
+var login = function (req, res) {
 
 };
 
-module.exports.logout = function (req, res) {
+var logout = function (req, res) {
 
+};
+
+module.exports ={
+  login: login,
+  logout: logout,
+  fetchEntityData: fetchEntityData,
+  createEntityData: createEntityData,
+  updateEntityData: updateEntityData
 };

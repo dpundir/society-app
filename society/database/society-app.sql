@@ -33,7 +33,7 @@ CREATE TABLE `address` (
   `state` varchar(45) NOT NULL,
   `pincode` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='address details';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='address details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(10,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102');
+INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(10,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(11,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,6 +160,9 @@ CREATE TABLE `member` (
   `status` int(11) DEFAULT NULL,
   `dob` date NOT NULL,
   `deposit_id` int(11) DEFAULT NULL,
+  `ffname` varchar(45) DEFAULT NULL,
+  `fmname` varchar(45) DEFAULT NULL,
+  `flname` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `member_address_id_idx` (`addressid`),
   KEY `member_deposit_id_idx` (`deposit_id`),
@@ -174,9 +177,40 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh','pundir','8287536955',1,'2015-11-14 00:00:00','2015-11-14 00:00:00',1,'1983-11-15',NULL);
+INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir'),(2,'debashis',NULL,'mishra','8882227771',9,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `member_address_view`
+--
+
+DROP TABLE IF EXISTS `member_address_view`;
+/*!50001 DROP VIEW IF EXISTS `member_address_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `member_address_view` AS SELECT 
+ 1 AS `mid`,
+ 1 AS `mfname`,
+ 1 AS `mmname`,
+ 1 AS `mlname`,
+ 1 AS `mphone`,
+ 1 AS `mcreate_date`,
+ 1 AS `mmodified_date`,
+ 1 AS `mstatus`,
+ 1 AS `mdob`,
+ 1 AS `mdeposit_id`,
+ 1 AS `mffname`,
+ 1 AS `mfmname`,
+ 1 AS `mflname`,
+ 1 AS `aid`,
+ 1 AS `aaddress1`,
+ 1 AS `aaddress2`,
+ 1 AS `aaddress3`,
+ 1 AS `acity`,
+ 1 AS `astate`,
+ 1 AS `apincode`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `member_deposit`
@@ -201,32 +235,6 @@ CREATE TABLE `member_deposit` (
 LOCK TABLES `member_deposit` WRITE;
 /*!40000 ALTER TABLE `member_deposit` DISABLE KEYS */;
 /*!40000 ALTER TABLE `member_deposit` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `new_table`
---
-
-DROP TABLE IF EXISTS `new_table`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `new_table` (
-  `id` int(11) NOT NULL,
-  `member_id` int(11) DEFAULT NULL,
-  `share_value` double DEFAULT NULL,
-  `installment_value` double DEFAULT NULL,
-  `installment_freq` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `new_table`
---
-
-LOCK TABLES `new_table` WRITE;
-/*!40000 ALTER TABLE `new_table` DISABLE KEYS */;
-/*!40000 ALTER TABLE `new_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -282,6 +290,24 @@ LOCK TABLES `society_expense` WRITE;
 /*!40000 ALTER TABLE `society_expense` DISABLE KEYS */;
 /*!40000 ALTER TABLE `society_expense` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `member_address_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `member_address_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `member_address_view` AS (select `m`.`id` AS `mid`,`m`.`fname` AS `mfname`,`m`.`mname` AS `mmname`,`m`.`lname` AS `mlname`,`m`.`phone` AS `mphone`,`m`.`create_date` AS `mcreate_date`,`m`.`modified_date` AS `mmodified_date`,`m`.`status` AS `mstatus`,`m`.`dob` AS `mdob`,`m`.`deposit_id` AS `mdeposit_id`,`m`.`ffname` AS `mffname`,`m`.`fmname` AS `mfmname`,`m`.`flname` AS `mflname`,`a`.`id` AS `aid`,`a`.`address1` AS `aaddress1`,`a`.`address2` AS `aaddress2`,`a`.`address3` AS `aaddress3`,`a`.`city` AS `acity`,`a`.`state` AS `astate`,`a`.`pincode` AS `apincode` from (`member` `m` join `address` `a` on((`m`.`addressid` = `a`.`id`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -292,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-19 23:03:40
+-- Dump completed on 2015-12-01 11:39:27

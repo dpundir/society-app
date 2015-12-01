@@ -33,7 +33,7 @@ CREATE TABLE `address` (
   `state` varchar(45) NOT NULL,
   `pincode` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='address details';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='address details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(10,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(11,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301');
+INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(10,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(11,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ DROP TABLE IF EXISTS `member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `member` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(45) DEFAULT NULL,
   `mname` varchar(45) DEFAULT NULL,
   `lname` varchar(45) DEFAULT NULL,
@@ -168,7 +168,7 @@ CREATE TABLE `member` (
   KEY `member_deposit_id_idx` (`deposit_id`),
   CONSTRAINT `member_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_deposit_id` FOREIGN KEY (`deposit_id`) REFERENCES `member_deposit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='member details';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='member details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir'),(2,'debashis',NULL,'mishra','8882227771',9,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra');
+INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir'),(2,'debashis',NULL,'mishra','8882227771',9,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra'),(3,'neeraj','a','kumar','1287536955',12,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1981-11-14',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +220,7 @@ DROP TABLE IF EXISTS `member_deposit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `member_deposit` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `share_value` double DEFAULT NULL,
   `installment_value` double DEFAULT NULL,
   `installment_freq` int(11) DEFAULT NULL,
@@ -318,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-01 11:39:27
+-- Dump completed on 2015-12-01 16:01:06

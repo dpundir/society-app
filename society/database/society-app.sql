@@ -42,7 +42,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(10,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(11,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101');
+INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +177,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir'),(2,'debashis',NULL,'mishra','8882227771',9,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra'),(3,'neeraj','a','kumar','1287536955',12,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1981-11-14',NULL,NULL,NULL,NULL);
+INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir'),(2,'debashis',NULL,'mishra','8882227771',2,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra'),(3,'neeraj','a','kumar','1287536955',3,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1981-11-14',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-01 16:01:06
+-- Dump completed on 2015-12-03 22:03:35

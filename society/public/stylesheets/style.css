@@ -448,3 +448,66 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 .reg-form .ng-invalid.ng-invalid-required.ng-touched{
     border: 2px solid #a94442;
 }
+
+.member-list{
+    min-height: 48px;
+    height: auto;
+    margin-top: 0;
+}
+.member-inner-list{
+    font-size: inherit;
+    height: inherit;
+    text-align: left;
+    text-transform: none;
+    width: 100%;
+    white-space: normal;
+    position: relative;
+    padding: 0 16px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 0 3px 0 #4d4d4d;
+    backface-visibility: hidden;
+    transition-duration: 0.3s;
+    transition-property: box-shadow, transform;
+}
+.member-list .member-inner-list:hover{
+    background-color: rgba(158,158,158,0.2);
+    cursor: pointer;
+    color: #000000;
+    box-shadow: 0 0 10px 1px #808080;
+    transform: scale(1);
+}
+.member-list p{
+    text-align: center;
+    flex: 1;
+    line-height: 1.6em;
+    letter-spacing: 0.010em;
+    margin: 0;
+}
+.member-list .society-avatar{
+    width: 50px;
+    height: 50px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+    box-sizing: content-box;
+}
+.list-header{
+    display: flex;
+}
+.list-header>div:not(.header-img){
+    flex: 1;
+}
+.list-header h4{
+    flex: 1;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+}
+.header-img{
+    width: 50px;
+}

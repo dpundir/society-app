@@ -7,13 +7,18 @@ define([
     'angular-resource',
     'angular-route',
     'angular-animate',
+    'angular-aria',
     'angular-ui-bootstrap',
+    'javascripts/member',
+    'javascripts/home',
+    'javascripts/admin',
     'javascripts/home/controllers/homeController',
     'javascripts/home/directive/navigationBar',
     'javascripts/home/directive/dashBoardTile',
     'javascripts/home/directive/accountTab',
     'javascripts/admin/controllers/adminLoginController',
-    'javascripts/member/controllers/memberRegistrationController'
+    'javascripts/member/controllers/memberRegistrationController',
+    'javascripts/member/controllers/memberList'
 ], function(angular) {
     var app = angular.module("societyApp", [
         "ngRoute",
@@ -31,6 +36,9 @@ define([
             }).when('/member-registration', {
                 'templateUrl': 'javascripts/member/partials/member-registration.html',
                 'controller': 'memberRegistrationController'
+            }).when('/member-list', {
+                'templateUrl': 'javascripts/member/partials/member-list.html',
+                'controller': 'memberListController'
             }).when('/society', {
                 'templateUrl': 'javascripts/society/partials/society.html'
             }).when('/home', {

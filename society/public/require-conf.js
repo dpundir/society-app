@@ -14,7 +14,6 @@ requirejs.config({
         'angular-scenario': 'node_modules/angular-scenario/angular-scenario',
         'angular-stable': 'node_modules/angular-stable/angular-stable',
         'angular-messages': 'node_modules/angular-messages/angular-messages',
-
         'require': 'node_modules/requirejs/require',
         'rx': 'node_modules/rx/dist/rx.all',
         'rxjquery': 'node_modules/rxjs-jquery/rx.jquery',

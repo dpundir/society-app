@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8 society-form">
-                <form class="form-horizontal">
+                <form class="form-horizontal reg-form" name="registrationForm" non-validate>
+
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3 class="text-primary">New Member Registration</h3>
@@ -16,89 +17,140 @@
                     </div>
                     <hr/>
                     <div class=" form-bottom">
-                        <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Member Information:</h4>
+                        <div>
+                            <p class="text-danger">Please fill all required fields.</p>
                         </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="fname" placeholder="First name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="mname" placeholder="Middle name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="lname" placeholder="Last name">
-                                    </div>
-                                </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4>Member Information:</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="phone" placeholder="Mobile number">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="fname" placeholder="First name"
+                                                   required="" ng-model="member.fname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="mname" placeholder="Middle name" ng-model="member.mname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="lname" placeholder="Last name"
+                                                   required="" ng-model="member.lname">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group input-group">
-                                        <input type="text" class="form-control"
-                                               datepicker-popup="{{format}}"
-                                               ng-model="dob" is-open="status.opened"
-                                               max-date="maxDate"
-                                               datepicker-options="dateOptions"
-                                               ng-required="true" close-text="Close" placeholder="Date of birth"/>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="ffname" placeholder="Father's first name"
+                                                   required="" ng-model="member.ffname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="fmname" placeholder="Father's middle name" ng-model="member.fmname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="flname" placeholder="Father's last name"
+                                                   required="" ng-model="member.flname">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="phone"
+                                                   placeholder="Mobile number" required="" ng-model="member.phone">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group input-group">
+                                            <input type="text" class="form-control"
+                                                   datepicker-popup="{{dob.format}}"
+                                                   ng-model="dob.selected" is-open="dob.status.opened"
+                                                   max-date="dob.maxDate"
+                                                   datepicker-options="dob.dateOptions"
+                                                   ng-required="true" close-text="Close" placeholder="Date of birth" required=""/>
                                   <span class="input-group-btn">
                                     <button type="button"
                                             class="btn btn-default btn-datepicker"
                                             ng-click="open()">
                                         <i class="glyphicon glyphicon-calendar"></i></button>
                                   </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h4>Member Address:</h4>
                             </div>
                             <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="address" placeholder="Address">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="address" placeholder="Address"
+                                                   required="" ng-model="address.address1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="city" placeholder="Select City"
+                                                   required="" ng-model="address.city">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="state"
+                                                   placeholder="Select State"
+                                                   required="" ng-model="address.state">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="pincode" placeholder="Enter pincode"
+                                                   required="" ng-model="address.pin">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="city" placeholder="Select City">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="state" placeholder="Select State">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="pincode" placeholder="Pincode">
-                                </div>
-                            </div>
-                        </div>
-                                </div></div>
                         <div class="row btn-register">
                             <div class="col-sm-4 column">
-                                <button type="button" class="btn btn-primary">Register</button>
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        ng-click="register(registrationForm)">Register</button>
                             </div>
                             <div class="col-sm-4 column col-margin-10">
-                                <button type="button" class="btn btn-warning">Cancel</button>
+                                <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
                             </div>
                         </div>
                     </div>

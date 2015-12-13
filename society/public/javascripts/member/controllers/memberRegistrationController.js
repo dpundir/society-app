@@ -1,24 +1,55 @@
 define([
-    'angular'
+    'angular',
+    'javascripts/member/services/Member'
 ],function(){
-    angular.module("societyApp.member",[])
-        .controller('memberRegistrationController',['$scope',function($scope){
-            $scope.dob = '';
-            $scope.maxDate = new Date();
-            $scope.open = function($event) {
-                $scope.status.opened = true;
+    angular.module("societyApp.member")
+        .controller('memberRegistrationController',
+        ['$scope','MemberService','$location',
+            function($scope, MemberService, $location){
+
+            /*
+            * @method
+            * @name validateRegistrationForm
+            * */
+            function validateRegistrationForm(){
+                return true;
+            }
+            /*
+            * Default member
+            * @type object
+            * */
+            $scope.member = MemberService.defaultMember();
+            /*
+            * Default address
+            * @type object
+            * */
+            $scope.address = MemberService.defaultMemberAddress();
+            /*
+            * Default date picker config
+            * @type object
+            * */
+            $scope.dob = {
+                maxDate: new Date(),
+                dateOption: {
+                    formatYear: 'yy',
+                    startingDay: 1
+                },
+                format: 'dd-MMMM-yyyy',
+                status: {
+                    opened: false
+                },
+                selected:''
             };
-            $scope.dateOptions = {
-                formatYear: 'yy',
-                startingDay: 1
+            $scope.open = function() {
+                this.dob.status.opened = true;
             };
 
-            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-            $scope.format = $scope.formats[0];
-            $scope.status = {
-                opened: false
-            };
+            $scope.register = function register(form){
 
+            };
+            $scope.cancel = function cancel(){
+                $location.url('/home');
+            }
         }]);
 });
 

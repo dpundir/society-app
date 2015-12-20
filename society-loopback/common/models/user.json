@@ -1,0 +1,22 @@
+{
+  "name": "user",
+  "base": "User",
+  "idInjection": true,
+  "mysql": {
+    "schema": "society",
+    "table": "member"
+  },
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+  },
+  "acls": [],
+  "methods": []
+}

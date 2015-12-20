@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Address": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "DepositHistory": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "Loan": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "M2mMemberLoan": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "Member": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "MemberAddressView": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "MemberDeposit": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "SocietyConfig": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "SocietyExpense": {
+    "dataSource": "mysql-ds",
+    "public": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysql-ds": {
+    "host": "localhost",
+    "database": "society",
+    "password": "admin123",
+    "name": "mysql-ds",
+    "connector": "mysql",
+    "user": "admin"
+  }
+}

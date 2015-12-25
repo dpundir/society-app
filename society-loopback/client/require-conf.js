@@ -28,7 +28,8 @@ requirejs.config({
         'jquery': 'node_modules/jquery/dist/jquery',
         'jqueryUI': 'node_modules/jquery-ui/jquery-ui',
         'angular-ui-bootstrap': 'node_modules/angular-ui-bootstrap/ui-bootstrap-tpls',
-        'angular-ui-grid': 'node_modules/angular-ui-grid/ui-grid'
+        'angular-ui-grid': 'node_modules/angular-ui-grid/ui-grid',
+      'ngStorage': 'node_modules/ng-storage/ngStorage'
     },
     shim: {
         'angular-lodash'         : {deps: ['angular', 'lodash']},
@@ -80,7 +81,8 @@ requirejs.config({
         'rx': {deps: ["jquery"], "exports": "rx"},
         'angular-gridster': {deps: ['angular']},
         'angular-ui-bootstrap': ['angular'],
-        'rxjquery': {deps: ["jquery", "rx"]}
+        'rxjquery': {deps: ["jquery", "rx"]},
+      'ngStorage': {deps: ["angular"]}
     },
     waitSeconds: 0,
     priority: [

@@ -2,7 +2,7 @@ define([
     'angular',
     'javascripts/member/services/Member'
 ],function(){
-    angular.module("societyApp.member")
+    angular.module("societyApp.member.controller.memberregistration", ["societyApp.member.services.member"])
         .controller('memberRegistrationController',
         ['$scope','MemberService','$location',
             function($scope, MemberService, $location){

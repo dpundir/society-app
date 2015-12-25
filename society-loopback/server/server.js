@@ -7,6 +7,15 @@ var cons = require('consolidate');
 var app = module.exports = loopback();
 
 app.middleware('initial', bodyParser.urlencoded({ extended: true }));
+app.middleware('initial', bodyParser.json({ extended: true }));
+
+app.use(loopback.token({ model: app.models.accessToken }));
+
+app.engine('html', cons.lodash);
+app.engine('ejs', cons.ejs);
+app.set('view engine', 'html');
+//app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.start = function() {
   // start the web server
@@ -20,10 +29,6 @@ app.start = function() {
     }
   });
 };
-
-app.engine('html', cons.lodash);
-app.set('view engine', 'html');
-app.set('views', path.join(__dirname, 'views'));
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.

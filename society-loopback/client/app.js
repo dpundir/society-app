@@ -4,24 +4,21 @@
 define([
     'angular',
     'bootstrap',
+  'angular-cookies',
     'angular-resource',
     'angular-route',
     'angular-animate',
     'angular-aria',
     'angular-ui-bootstrap',
-    'javascripts/member',
-    'javascripts/home',
+  'ngStorage',
     'javascripts/admin',
-    'javascripts/home/controllers/homeController',
-    'javascripts/home/directive/navigationBar',
-    'javascripts/home/directive/dashBoardTile',
-    'javascripts/home/directive/accountTab',
-    'javascripts/admin/controllers/adminLoginController',
-    'javascripts/member/controllers/memberRegistrationController',
-    'javascripts/member/controllers/memberList'
+  'javascripts/member',
+  'javascripts/home',
 ], function(angular) {
     var app = angular.module("societyApp", [
         "ngRoute",
+      "ngCookies",
+      "ngStorage",
         "ui.bootstrap",
         "societyApp.home",
         "societyApp.admin",
@@ -44,11 +41,14 @@ define([
             }).when('/home', {
                 'templateUrl': 'javascripts/home/partials/home.html',
                 'controller':'homeController'
-            }).when('/admin-login', {
-                'templateUrl': 'javascripts/admin/partials/admin-login.html',
+            }).when('/login/:action?', {
+                'templateUrl': 'javascripts/admin/partials/login.html',
                 'controller': 'adminLoginController'
+            }).when('/register/success', {
+              'templateUrl': 'javascripts/admin/partials/register-success.html',
+              'controller': 'registerController'
             }).otherwise({
-                'redirectTo': '/admin-login'
+                'redirectTo': '/login'
             });
 
         }).controller("appController",['$rootScope','$scope', function($rootScope, $scope) {

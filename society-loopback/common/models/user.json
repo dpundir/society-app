@@ -2,21 +2,16 @@
   "name": "user",
   "base": "User",
   "idInjection": true,
-  "mysql": {
-    "schema": "society",
-    "table": "member"
-  },
-  "properties": {
-    "username": {
-      "type": "string"
-    },
-    "phone": {
-      "type": "string"
-    }
-  },
+  "properties": {},
   "validations": [],
-  "relations": {
-  },
-  "acls": [],
+  "relations": {},
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "accessType": "READ",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": []
 }

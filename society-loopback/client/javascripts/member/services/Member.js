@@ -1,7 +1,7 @@
 define([
   'angular'
 ], function () {
-  angular.module("societyApp.member")
+  angular.module("societyApp.member.services.member", [])
     .service('MemberService', ['$http', '$q', 'restInterface', function ($http, $q, restInterface) {
       this.defaultMember = function defaultMember() {
         return {

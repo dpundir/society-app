@@ -1,7 +1,7 @@
 define([
     'angular'
 ],function(){
-    angular.module("societyApp.home")
+    angular.module("societyApp.home.controller.home", [])
         .controller('homeController',['$scope',function($scope){
             $scope.navBarConfig.showNavBar = true;
             $scope.tabs = [

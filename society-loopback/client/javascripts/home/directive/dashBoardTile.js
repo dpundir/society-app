@@ -1,7 +1,7 @@
 define([
     'angular'
 ], function () {
-    angular.module("societyApp.home")
+    angular.module("societyApp.home.directive.dashboardtitle", [])
         .directive('dashboardTile',['$rootScope',function ($rootScope) {
             return{
                 restrict: 'A',

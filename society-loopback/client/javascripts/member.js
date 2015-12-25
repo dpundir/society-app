@@ -3,7 +3,13 @@
  */
 define([
     'angular',
-  'javascripts/common/services/rest-interface'
+  'javascripts/member/services/Member',
+  'javascripts/member/controllers/memberList',
+  'javascripts/member/controllers/memberRegistrationController'
 ],function(angular) {
-    angular.module("societyApp.member",["societyApp.services"]);
+    angular.module("societyApp.member",[
+      "societyApp.member.services.member",
+      "societyApp.member.controller.memberlist",
+      "societyApp.member.controller.memberregistration"
+    ]);
 });

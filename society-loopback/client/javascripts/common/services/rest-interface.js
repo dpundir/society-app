@@ -1,8 +1,8 @@
 define([
   'angular'
 ],function() {
-  angular.module("societyApp.services",[])
-    .factory('restInterface',['$http','$q',function ($http, $q) {
+  angular.module("societyApp.common.services.restinterface",[])
+    .factory('restInterface',['$rootScope', '$http','$q',function ($rootScope, $http, $q) {
 
       function get(url, data, param, header) {
         return call('GET', url, data, param, header);

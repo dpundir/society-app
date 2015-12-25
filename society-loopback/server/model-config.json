@@ -14,23 +14,34 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mysql-ds",
+    "public": false
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mysql-ds",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mysql-ds",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mysql-ds",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mysql-ds",
     "public": false
+  },
+  "Email": {
+    "dataSource": "emailDs"
+  },
+  "user": {
+    "dataSource": "mysql-ds",
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
   },
   "Address": {
     "dataSource": "mysql-ds",

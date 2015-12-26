@@ -294,7 +294,9 @@ img { max-width: 100%; }
     border-radius: 0 0 4px 4px;
     text-align: left;
 }
-
+.form-bottom .form-group{
+    margin-bottom: 10px;
+}
 .form-bottom form textarea {
     height: 100px;
 }
@@ -325,6 +327,16 @@ img { max-width: 100%; }
     padding: 0;
     margin-left: 15px;
 }
+.form-text{
+    font-size: 14px;
+    font-weight: 600;
+}
+.label-input{
+    height: 15px;
+    padding: 0 0 0 5px;
+    line-height: 15px;
+    margin-bottom: 5px;
+}
 .form-bottom form .input-error {
     border-color: #19b9e7;
 }
@@ -350,7 +362,7 @@ input[type="password"],
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #f8f8f8;
+    background: #fff;
     border: 1px solid #ddd;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -455,7 +467,7 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     margin-top: 0;
 }
 .member-inner-list{
-    font-size: inherit;
+    font-size: 14px;
     height: inherit;
     text-align: left;
     text-transform: none;
@@ -473,6 +485,9 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     transition-duration: 0.3s;
     transition-property: box-shadow, transform;
 }
+.member-inner-list label{
+    margin: 0 10px 0 10px;
+}
 .member-list .member-inner-list:hover{
     background-color: rgba(158,158,158,0.2);
     cursor: pointer;
@@ -481,11 +496,14 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     transform: scale(1);
 }
 .member-list p{
-    text-align: center;
+    text-align: left;
     flex: 1;
     line-height: 1.6em;
     letter-spacing: 0.010em;
-    margin: 0;
+    margin: 10px 0 10px 50px;
+}
+.member-list .btn+.btn{
+    margin-left: 10px;
 }
 .member-list .society-avatar{
     width: 50px;

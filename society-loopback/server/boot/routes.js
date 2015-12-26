@@ -9,11 +9,6 @@ module.exports = function (app) {
   var AccessToken = app.models.AccessToken;
   var router = app.loopback.Router();
 
-  router.get('/', function (req, res) {
-    res.render('index.html', {
-      loginFailed: false
-    });
-  });
   router.get('/app', function (req, res, next) {
     res.render('index.html', { title: 'Express', loginFailed: false });
   });
@@ -44,26 +39,11 @@ module.exports = function (app) {
     } else if(req.accessToken){
       User.logout(req.accessToken.id, function (err) {
         if (err) return next(err);
-        res.redirect('/');
+        res.redirect('/app/#login');
       });
     } else{
       return res.sendStatus(401);
     }
-  });
-
-  app.use(router);
-  //login page
-  /*  app.get('/', function(req, res) {
-   var credentials = dsConfig.emailDs.transports[0].auth;
-   res.render('login', {
-   email: credentials.user,
-   password: credentials.pass
-   });
-   });*/
-
-  //verified
-  router.get('/verified', function (req, res) {
-    res.render('verified');
   });
 
   //send an email with instructions to reset an existing user's password
@@ -114,4 +94,6 @@ module.exports = function (app) {
       });
     });
   });
+
+  app.use(router);
 }

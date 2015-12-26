@@ -14,7 +14,6 @@ app.use(loopback.token({ model: app.models.accessToken }));
 app.engine('html', cons.lodash);
 app.engine('ejs', cons.ejs);
 app.set('view engine', 'html');
-//app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.start = function() {

@@ -12,7 +12,7 @@ module.exports = function(user) {
       from: 'society.swastik@gmail.com',
       subject: 'Thanks for registering.',
       template: path.resolve(__dirname, '../../server/views/verify.ejs'),
-      redirect: '/verified',
+      redirect: '%2Fapp%23%2Fregister%2Fverified',
       user: user
     };
 
@@ -25,7 +25,7 @@ module.exports = function(user) {
         title: 'Signed up successfully',
         content: 'Please check your email and click on the verification link ' +
             'before logging in.',
-        redirectTo: '#/login',
+        redirectTo: '/app#/login',
         redirectToLinkText: 'Log in'
       });
     });

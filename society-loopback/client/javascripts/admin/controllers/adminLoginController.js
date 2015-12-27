@@ -8,9 +8,12 @@ define([
             $scope.isError = false;
             $scope.errorLoginText = '';
             var action = $routeParams.action;
+            $scope.headerText = 'Login';
             if (action === 'reset') {
+                $scope.headerText = 'Reset password';
                 $scope.actionText = 'Reset';
             } else if (action === 'register') {
+                $scope.headerText = 'Register';
                 $scope.actionText = 'Register';
             }
             $scope.adminLogin = function (form) {

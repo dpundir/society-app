@@ -13,8 +13,8 @@ define([
             } else if (action === 'register') {
                 $scope.actionText = 'Register';
             }
-            $scope.adminLogin = function(form){
-                if(form.$invalid){
+            $scope.adminLogin = function (form) {
+                if (form.$invalid) {
                     form.username.$setTouched();
                     form.password.$setTouched();
                     $scope.isError = true;
@@ -29,15 +29,15 @@ define([
                 }
                 var action = $routeParams.action;
                 if (action === 'reset') {
-                    AuthenticationService.reset(authenticationData);
+                    AuthenticationService.requestResetPassword(authenticationData);
                 } else if (action === 'register') {
                     AuthenticationService.register(authenticationData);
                 } else {
-                    AuthenticationService.authenticate(authenticationData).then(function(data){
+                    AuthenticationService.authenticate(authenticationData).then(function (data) {
                         $scope.isError = false;
                         $scope.errorLoginText = "";
                         $location.url('/home');
-                    },function(data){
+                    }, function (data) {
                         $scope.isError = true;
                         $scope.errorLoginText = 'Invalid id/password, Please try again.';
                     });

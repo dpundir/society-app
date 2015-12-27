@@ -15,7 +15,7 @@ define([
                 this.authenticate = function authenticate(body) {
                     var defer = $q.defer();
                     restInterface.post('/login', body).then(function (data) {
-                        $cookies.put('access-token',data.accessToken);
+                        $cookies.put('access-token', data.accessToken);
                         $sessionStorage.accessToken = data.accessToken;
                         defer.resolve(data);
                     }, function (data) {
@@ -38,6 +38,27 @@ define([
                     }, function (data) {
                         $cookies.remove('access-token');
                         delete $sessionStorage.accessToken;
+                    });
+                };
+                this.requestResetPassword = function requestResetPassword(body) {
+                    restInterface.post('/request/reset/password', body).then(function (data) {
+                        console.log(data);
+                        $sessionStorage.register = data;
+                        $location.url('/reset/success');
+                    }, function (data) {
+                        console.log(data);
+                        delete $sessionStorage.accessToken;
+                        $cookies.remove('access-token');
+                    });
+                };
+                this.resetPassword = function resetPassword(body) {
+                    restInterface.post('/reset/password', body).then(function (data) {
+                        console.log(data);
+                        $location.url('/login');
+                    }, function (data) {
+                        console.log(data);
+                        delete $sessionStorage.accessToken;
+                        $cookies.remove('access-token');
                     });
                 };
             }

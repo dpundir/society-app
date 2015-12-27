@@ -36,7 +36,7 @@ define([
                  * */
                 function updateMemberDetail(form, type){
                     function successCB(){
-                        $location.url('/member-list');
+                        $location.url('/member');
                     }
                     function errorCB(){}
                     if(validateRegistrationForm(form)){

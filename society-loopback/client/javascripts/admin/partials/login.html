@@ -7,7 +7,7 @@
                     <div class="form-box">
                         <div class="form-top">
                             <div class="form-top-left">
-                                <h1 class="text-primary">Login</h1>
+                                <h1 class="text-primary" ng-bind="headerText"></h1>
                             </div>
                             <div class="form-top-right">
                                 <i class="glyphicon glyphicon-log-in"></i>
@@ -25,10 +25,9 @@
                                            placeholder="Username"
                                            class="form-username form-control" required=""
                                            id="form-username" ng-model="username">
-                                </div>
                                 <div class="form-group">
                                     <input type="password"
-                                           name="password"
+                                           name="password" ng-hide="actionText === 'Reset'"
                                            placeholder="Password"
                                            class="form-password form-control" required=""
                                            id="form-password" ng-model="password">

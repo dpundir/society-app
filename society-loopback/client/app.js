@@ -31,7 +31,7 @@ define([
             $routeProvider.when('/member/:action/:id?', {
                 'templateUrl': 'javascripts/member/partials/member.html',
                 'controller': 'memberRegistrationController'
-            }).when('/member-list', {
+            }).when('/member', {
                 'templateUrl': 'javascripts/member/partials/member-list.html',
                 'controller': 'memberListController'
             }).when('/home', {
@@ -43,6 +43,12 @@ define([
             }).when('/register/:message', {
                 'templateUrl': 'javascripts/admin/partials/register-message.html',
                 'controller': 'registerController'
+            }).when('/reset/password', {
+              'templateUrl': 'javascripts/admin/partials/reset-password.html',
+              'controller': 'resetPassword'
+            }).when('/reset/:message', {
+              'templateUrl': 'javascripts/admin/partials/register-message.html',
+              'controller': 'registerController'
             }).otherwise({
                 'redirectTo': '/login'
             });

@@ -33,7 +33,7 @@ module.exports = function(user) {
 
   //send password reset link when requested
   user.on('resetPasswordRequest', function(info) {
-    var url = 'http://' + config.host + ':' + config.port + '/reset-password';
+    var url = 'http://' + config.host + ':' + config.port + '/app#/reset/password';
     var html = 'Click <a href="' + url + '?access_token=' +
         info.accessToken.id + '">here</a> to reset your password';
 

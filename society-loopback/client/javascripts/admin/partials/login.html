@@ -15,19 +15,36 @@
                         </div>
                         <hr/>
                         <div class="form-bottom">
-                            <form role="form" action="" method="post" class="login-form">
+                            <form role="form" action="" method="post" class="login-form" name="loginForm">
+                                <div>
+                                    <p class="text-danger" ng-show="isError" ng-bind="errorLoginText"></p>
+                                </div>
                                 <div class="form-group">
-                                    <input type="text" name="form-username" placeholder="Username" class="form-username form-control" id="form-username" ng-model="username">
+                                    <input type="text"
+                                           name="username"
+                                           placeholder="Username"
+                                           class="form-username form-control" required=""
+                                           id="form-username" ng-model="username">
                                 </div>
-                                <div class="form-group" ng-hide="actionText === 'Reset'">
-                                    <input type="password" name="form-password" placeholder="Password" class="form-password form-control" id="form-password" ng-model="password">
+                                <div class="form-group">
+                                    <input type="password"
+                                           name="password" ng-hide="actionText === 'Reset'"
+                                           placeholder="Password"
+                                           class="form-password form-control" required=""
+                                           id="form-password" ng-model="password">
                                 </div>
-                                <div ng-show="actionText === 'Login'">
-                                    <a href="app#/login/reset" class="text-primary">Reset Password</a>
-                                    <a href="app#/login/register" class="text-primary">Register User</a>
-                                </div>
-                                <button type="button" class="btn btn-primary" ng-click="adminLogin()" ng-bind="actionText"></button>
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        ng-click="adminLogin(loginForm)"
+                                        ng-bind="actionText"></button>
                             </form>
+                            <div ng-show="actionText === 'Login'">
+                                Forgot password? <a href="app/#/login/reset" class="text-primary">Reset Here</a></br>
+                                New User? <a href="app/#/login/register" class="text-primary">Register</a>
+                            </div>
+                            <div ng-show="actionText === 'Reset' || actionText === 'Register'">
+                                Back to <a href="app/#/login" class="text-primary">Login page</a></br>
+                            </div>
                         </div>
                     </div>
                 </div>

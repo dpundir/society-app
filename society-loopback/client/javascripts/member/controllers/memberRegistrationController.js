@@ -83,7 +83,6 @@ define([
                         $scope.dob.selected = new Date(data.dob);
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.EDIT;
-                        console.log(data);
                     })
                 }
                 /*

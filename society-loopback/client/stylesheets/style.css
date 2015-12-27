@@ -459,10 +459,10 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     font-weight: 700;
 }
 /*css for spinner ends*/
+.login-form .ng-invalid.ng-invalid-required.ng-touched,
 .reg-form .ng-invalid.ng-invalid-required.ng-touched{
     border: 2px solid #a94442;
 }
-
 .member-list{
     min-height: 48px;
     height: auto;

@@ -2,10 +2,6 @@
  * Created by Deepak.Pundir on 12/25/2015.
  */
 
-var main = function (req, res, next) {
-  res.render('index.html', { title: 'Express', loginFailed: false });
-};
-
 var login = function (req, res) {
   var User = req.app.models.user;
   User.login({
@@ -84,7 +80,6 @@ var resetPassword = function (req, res, next) {
 };
 
 module.exports = {
-  main: main,
   login: login,
   logout: logout,
   requestResetPassword: requestResetPassword,

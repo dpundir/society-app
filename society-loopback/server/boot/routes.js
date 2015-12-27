@@ -6,7 +6,9 @@ module.exports = function (app) {
   var router = app.loopback.Router();
   var authentication = require("../controller/authentication");
 
-  router.get('/app', authentication.main);
+  router.get('/app', function (req, res, next) {
+    res.render('index.html');
+  });
 
   //log a user in
   router.post('/login', authentication.login);

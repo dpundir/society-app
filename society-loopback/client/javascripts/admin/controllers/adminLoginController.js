@@ -14,14 +14,16 @@ define([
             }
             $scope.adminLogin = function(){
                 var authenticationData = {"password": $scope.password};
+              if(action !== 'reset') {
                 if ($scope.username.indexOf('@') > 0) {
-                    authenticationData.email = $scope.username;
+                  authenticationData.email = $scope.username;
                 } else {
-                    authenticationData.username = $scope.username;
+                  authenticationData.username = $scope.username;
                 }
+              }
                 var action = $routeParams.action;
                 if (action === 'reset') {
-                    AuthenticationService.reset(authenticationData);
+                    AuthenticationService.requestResetPassword(authenticationData);
                 } else if (action === 'register') {
                     AuthenticationService.register(authenticationData);
                 } else {

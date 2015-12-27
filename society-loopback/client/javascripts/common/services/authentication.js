@@ -38,6 +38,25 @@ define([
             delete $sessionStorage.accessToken;
           });
         };
+        this.requestResetPassword = function requestResetPassword(body) {
+          restInterface.post('/request/reset/password', body).then(function (data) {
+            console.log(data);
+            $sessionStorage.register = data;
+            $location.url('/reset/success');
+          }, function (data) {
+            console.log(data);
+            delete $sessionStorage.accessToken;
+          });
+        };
+        this.resetPassword = function resetPassword(body) {
+          restInterface.post('/reset/password', body).then(function (data) {
+            console.log(data);
+            $location.url('/login');
+          }, function (data) {
+            console.log(data);
+            delete $sessionStorage.accessToken;
+          });
+        };
       }
     ]);
 });

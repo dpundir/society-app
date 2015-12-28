@@ -47,15 +47,11 @@
     "dataSource": "mysql-ds",
     "public": true
   },
-  "DepositHistory": {
-    "dataSource": "mysql-ds",
-    "public": true
-  },
   "Loan": {
     "dataSource": "mysql-ds",
     "public": true
   },
-  "M2mMemberLoan": {
+  "MemberLoan": {
     "dataSource": "mysql-ds",
     "public": true
   },
@@ -76,6 +72,10 @@
     "public": true
   },
   "SocietyExpense": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "TransactionHistory": {
     "dataSource": "mysql-ds",
     "public": true
   }

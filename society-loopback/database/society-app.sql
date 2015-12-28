@@ -58,7 +58,7 @@ CREATE TABLE `acl` (
   `principalType` varchar(512) DEFAULT NULL,
   `principalId` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `acl` (
 
 LOCK TABLES `acl` WRITE;
 /*!40000 ALTER TABLE `acl` DISABLE KEYS */;
-INSERT INTO `acl` VALUES (1,'Member','*','*','DENY','ROLE','$unauthenticated'),(2,'MemberDeposit','*','*','DENY','ROLE','$unauthenticated'),(3,'Address','*','*','DENY','ROLE','$unauthenticated'),(4,'TransactionHistory','*','*','DENY','ROLE','$unauthenticated'),(5,'Loan','*','*','DENY','ROLE','$unauthenticated'),(6,'MemberLoan','*','*','DENY','ROLE','$unauthenticated'),(7,'SocietyConfig','*','*','DENY','ROLE','$unauthenticated'),(8,'SocietyExpense','*','*','DENY','ROLE','$unauthenticated'),(9,'Member','*','*','ALLOW','ROLE','admin');
+INSERT INTO `acl` VALUES (1,'Member','*','*','DENY','ROLE','$unauthenticated'),(2,'MemberDeposit','*','*','DENY','ROLE','$unauthenticated'),(3,'Address','*','*','DENY','ROLE','$unauthenticated'),(4,'TransactionHistory','*','*','DENY','ROLE','$unauthenticated'),(5,'Loan','*','*','DENY','ROLE','$unauthenticated'),(6,'MemberLoan','*','*','DENY','ROLE','$unauthenticated'),(7,'SocietyConfig','*','*','DENY','ROLE','$unauthenticated'),(8,'SocietyExpense','*','*','DENY','ROLE','$unauthenticated'),(9,'Member','*','*','DENY','ROLE','$everyone'),(10,'Member','*','*','ALLOW','ROLE','admin');
 /*!40000 ALTER TABLE `acl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +310,7 @@ CREATE TABLE `rolemapping` (
 
 LOCK TABLES `rolemapping` WRITE;
 /*!40000 ALTER TABLE `rolemapping` DISABLE KEYS */;
-INSERT INTO `rolemapping` VALUES (1,'ROLE','1',1);
+INSERT INTO `rolemapping` VALUES (1,'USER','1',1);
 /*!40000 ALTER TABLE `rolemapping` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -462,4 +462,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-28 21:40:18
+-- Dump completed on 2015-12-28 22:58:56

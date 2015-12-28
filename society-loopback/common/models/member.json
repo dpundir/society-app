@@ -238,15 +238,15 @@
   },
   "validations": [],
   "relations": {
-    "address":{
+    "address": {
       "type": "hasOne",
       "model": "Address",
       "foreignKey": "id",
-      "keyFrom":"addressid"
+      "keyFrom": "addressid"
     },
-    "depositHistory":{
+    "transactionHistory": {
       "type": "hasMany",
-      "model": "DepositHistory",
+      "model": "TransactionHistory",
       "foreignKey": "id",
       "keyTo": "memberId"
     }

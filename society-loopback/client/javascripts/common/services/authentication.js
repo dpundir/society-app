@@ -8,12 +8,12 @@ define([
     angular.module("societyApp.common.services.authentication", ['ngCookies', 'ngStorage'])
         .service('AuthenticationService', ['$http', '$q', '$cookies', '$location', 'restInterface', '$sessionStorage',
             function ($http, $q, $cookies, $location, restInterface, $sessionStorage) {
-                delete $sessionStorage.accessToken;
                 this.isAuthenticated = function isAuthenticated() {
                     return $cookies.get('access-token') !== undefined;
                 };
                 this.authenticate = function authenticate(body) {
                     var defer = $q.defer();
+                  delete $sessionStorage.accessToken;
                     restInterface.post('/login', body).then(function (data) {
                         $cookies.put('access-token', data.accessToken);
                         $sessionStorage.accessToken = data.accessToken;

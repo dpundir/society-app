@@ -15,6 +15,10 @@
     </script>
 </head>
 <body ng-controller="appController">
+<div class="spinner-body" ng-show="showLoading">
+    <div class="spinner-loader"></div>
+</div>
+
 <div nav-bar config="navBarConfig"></div>
 <section>
     <div ng-view></div>

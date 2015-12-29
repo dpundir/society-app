@@ -61,6 +61,7 @@ define([
             $scope.navBarConfig = {
                 showNavBar: false
             };
+            $scope.showLoading = false;
             $rootScope.$on('$locationChangeStart',function(event, newUrl, oldUrl, newState, oldState){
                 if(!AuthenticationService.isAuthenticated()){
                     $scope.navBarConfig.showNavBar = false;

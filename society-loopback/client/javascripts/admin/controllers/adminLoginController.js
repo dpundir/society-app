@@ -17,6 +17,7 @@ define([
                 $scope.actionText = 'Register';
             }
             $scope.adminLogin = function (form) {
+                $scope.showLoading = true;
                 if (form.$invalid) {
                     form.username.$setTouched();
                     form.password.$setTouched();
@@ -40,6 +41,7 @@ define([
                         $scope.isError = false;
                         $scope.errorLoginText = "";
                         $location.url('/home');
+                        $scope.showLoading = false;
                     }, function (data) {
                         $scope.isError = true;
                         $scope.errorLoginText = 'Invalid id/password, Please try again.';

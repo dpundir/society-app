@@ -17,12 +17,13 @@ define([
                 $scope.actionText = 'Register';
             }
             $scope.adminLogin = function (form) {
-                $scope.showLoading = true;
+                $scope.loader.show = true;
                 if (form.$invalid) {
                     form.username.$setTouched();
                     form.password.$setTouched();
                     $scope.isError = true;
                     $scope.errorLoginText = "Username/password required.";
+                    $scope.loader.show = false;
                     return;
                 }
                 var authenticationData = {"password": $scope.password};
@@ -41,7 +42,7 @@ define([
                         $scope.isError = false;
                         $scope.errorLoginText = "";
                         $location.url('/home');
-                        $scope.showLoading = false;
+                        $scope.loader.show = false;
                     }, function (data) {
                         $scope.isError = true;
                         $scope.errorLoginText = 'Invalid id/password, Please try again.';

@@ -4,11 +4,11 @@
 define([
   'angular'
 ], function () {
-  var MyHttpInterceptor = angular.module("societyApp.common.services.httpinterceptor", ["ngStorage"]);
-  MyHttpInterceptor.factory('MyHttpInterceptor', ['$sessionStorage', function ($sessionStorage) {
+  var MyHttpInterceptor = angular.module("societyApp.common.services.httpinterceptor", ["ngCookies"]);
+  MyHttpInterceptor.factory('MyHttpInterceptor', ['$cookies', function ($cookies) {
       return {
         'request': function (config) {
-          config.headers['Authorization'] = $sessionStorage.accessToken;
+          config.headers['Authorization'] = $cookies.get('access-token');
           return config;
         }
       };

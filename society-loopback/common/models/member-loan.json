@@ -1,5 +1,5 @@
 {
-  "name": "M2mMemberLoan",
+  "name": "MemberLoan",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
@@ -7,7 +7,7 @@
   },
   "mysql": {
     "schema": "society",
-    "table": "m2m_member_loan"
+    "table": "member_loan"
   },
   "properties": {
     "memberid": {

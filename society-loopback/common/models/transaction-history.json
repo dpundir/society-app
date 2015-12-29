@@ -1,5 +1,5 @@
 {
-  "name": "DepositHistory",
+  "name": "TransactionHistory",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
@@ -7,7 +7,7 @@
   },
   "mysql": {
     "schema": "society",
-    "table": "deposit_history"
+    "table": "transaction_history"
   },
   "properties": {
     "id": {
@@ -126,11 +126,12 @@
   },
   "validations": [],
   "relations": {
-  "member":{
-    "type": "belongsTo",
-    "model": "Member",
-    "foreignKey": "memberId"
-  }},
+    "member": {
+      "type": "belongsTo",
+      "model": "Member",
+      "foreignKey": "memberId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -8,7 +8,6 @@ define([
     angular.module("societyApp.common.services.authentication", ['ngCookies', 'ngStorage'])
         .service('AuthenticationService', ['$http', '$q', '$cookies', '$location', 'restInterface', '$sessionStorage',
             function ($http, $q, $cookies, $location, restInterface, $sessionStorage) {
-                delete $sessionStorage.accessToken;
                 this.isAuthenticated = function isAuthenticated() {
                     return $cookies.get('access-token') !== undefined;
                 };
@@ -16,17 +15,14 @@ define([
                     var defer = $q.defer();
                     restInterface.post('/login', body).then(function (data) {
                         $cookies.put('access-token', data.accessToken);
-                        $sessionStorage.accessToken = data.accessToken;
                         defer.resolve(data);
                     }, function (data) {
-                        delete $sessionStorage.accessToken;
                         defer.reject(data);
                     });
                     return defer.promise;
                 };
                 this.logout = function logout() {
                     restInterface.get('/logout').then(function (data) {
-                        delete $sessionStorage.accessToken;
                         $cookies.remove('access-token');
                         $location.url('/login');
                     });
@@ -37,7 +33,6 @@ define([
                         $location.url('/register/success');
                     }, function (data) {
                         $cookies.remove('access-token');
-                        delete $sessionStorage.accessToken;
                     });
                 };
                 this.requestResetPassword = function requestResetPassword(body) {
@@ -47,7 +42,6 @@ define([
                         $location.url('/reset/success');
                     }, function (data) {
                         console.log(data);
-                        delete $sessionStorage.accessToken;
                         $cookies.remove('access-token');
                     });
                 };
@@ -57,7 +51,6 @@ define([
                         $location.url('/login');
                     }, function (data) {
                         console.log(data);
-                        delete $sessionStorage.accessToken;
                         $cookies.remove('access-token');
                     });
                 };

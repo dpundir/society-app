@@ -1,209 +1,32 @@
 <div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8 society-form">
-                <form class="form-horizontal reg-form" name="registrationForm" non-validate>
-
-                    <div class="form-top">
-                        <div class="form-top-left">
-                            <h3 class="text-primary" ng-bind="primaryHeaderText"></h3>
-
-                            <p class="text-info" ng-bind="secondaryHeaderText"></p>
-                        </div>
-                        <div class="form-top-right">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                        </div>
-                    </div>
-                    <!--hr/-->
-                    <div class=" form-bottom">
-                        <div>
-                            <p class="text-danger" ng-bind="formValidationInfoText"></p>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h4>Member Information:</h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">First name</span>
-                                            </div>
-                                            <input type="text" name="fname"
-                                                   class="form-control"
-                                                   id="fname" ng-disabled="isViewMode"
-                                                   required="" ng-model="member.fname">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Middle name</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" ng-disabled="isViewMode"
-                                                   id="mname" ng-model="member.mname">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Last name</span>
-                                            </div>
-                                            <input type="text" name="lname"
-                                                   class="form-control"
-                                                   id="lname" ng-disabled="isViewMode"
-                                                   required="" ng-model="member.lname">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Father's first name</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" name="ffname"
-                                                   id="ffname" ng-disabled="isViewMode"
-                                                   required="" ng-model="member.ffname">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Father's middle name</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" ng-disabled="isViewMode"
-                                                   id="fmname" ng-model="member.fmname">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Father's last name</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" name="flname"
-                                                   id="flname" ng-disabled="isViewMode"
-                                                   required="" ng-model="member.flname">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Mobile number</span>
-                                            </div>
-                                            <input type="text" class="form-control" id="phone" name="phone"
-                                                   ng-disabled="isViewMode" required="" ng-model="member.phone">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="label-input">
-                                            <span class="form-text">Date of birth</span>
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <input type="text" class="form-control" ng-disabled="isViewMode"
-                                                   datepicker-popup="{{dob.format}}"
-                                                   ng-model="dob.selected" is-open="dob.status.opened"
-                                                   max-date="dob.maxDate"
-                                                   datepicker-options="dob.dateOptions" id="dob" name="dob"
-                                                   ng-required="true" close-text="Close" required=""/>
-                                  <span class="input-group-btn">
-                                    <button type="button" ng-disabled="isViewMode"
-                                            class="btn btn-default btn-datepicker"
-                                            ng-click="open()">
-                                        <i class="glyphicon glyphicon-calendar"></i></button>
-                                  </span>
-                                        </div>
-                                    </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10 vertical-tab">
+                <tabset>
+                    <tab heading="Member details">
+                        <div class="row society-form">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3 class="text-primary" ng-bind="primaryHeaderText"></h3>
+                                    <p class="text-info" ng-bind="secondaryHeaderText"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h4>Member Address:</h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">House/Flat No</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" name="address1"
-                                                   id="address1" ng-disabled="isViewMode"
-                                                   required="" ng-model="address.address1">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Street</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" name="address2"
-                                                   id="address2" ng-disabled="isViewMode"
-                                                   required="" ng-model="address.address2">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">City</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" name="city"
-                                                   id="city" ng-disabled="isViewMode"
-                                                   required="" ng-model="address.city">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">State</span>
-                                            </div>
-                                            <input type="text" class="form-control" id="state"
-                                                   ng-disabled="isViewMode" name="state"
-                                                   required="" ng-model="address.state">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="label-input">
-                                                <span class="form-text">Enter pincode</span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control" name="pincode"
-                                                   id="pincode" ng-disabled="isViewMode"
-                                                   required="" ng-model="address.pincode">
-                                        </div>
-                                    </div>
+                    </tab>
+                    <tab heading="Deposit">
+                        <div class="row society-form">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3 class="text-primary">Deposit</h3>
+                                    <p class="text-info"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row btn-register">
-                            <div class="col-sm-4 column">
-                                <button type="button"
-                                        class="btn btn-primary"
-                                        ng-click="register(registrationForm)" ng-bind="actionText"></button>
-                            </div>
-                            <div class="col-sm-4 column col-margin-10">
-                                <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
+                    </tab>
+                </tabset>
             </div>
+
         </div>
     </div>
 </div>

@@ -19,11 +19,11 @@ define([
             $scope.adminLogin = function (form) {
                 $scope.loader.show = true;
                 if (form.$invalid) {
+                    $scope.loader.show = false;
                     form.username.$setTouched();
                     form.password.$setTouched();
                     $scope.isError = true;
                     $scope.errorLoginText = "Username/password required.";
-                    $scope.loader.show = false;
                     return;
                 }
                 var authenticationData = {"password": $scope.password};
@@ -44,6 +44,7 @@ define([
                         $location.url('/home');
                         $scope.loader.show = false;
                     }, function (data) {
+                        $scope.loader.show = false;
                         $scope.isError = true;
                         $scope.errorLoginText = 'Invalid id/password, Please try again.';
                     });

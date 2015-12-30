@@ -262,7 +262,9 @@ img { max-width: 100%; }
     -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
     text-align: left;
 }
-
+.society-form .form-control[disabled]{
+    cursor: default;
+}
 .form-top-left {
     float: left;
     width: 75%;
@@ -500,7 +502,6 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 }
 .member-list .member-inner-list:hover{
     background-color: rgba(158,158,158,0.2);
-    cursor: pointer;
     color: #000000;
     box-shadow: 0 0 10px 1px #808080;
     transform: scale(1);
@@ -538,4 +539,22 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 }
 .header-img{
     width: 50px;
+}
+.vertical-tab .nav-tabs{
+    float: left;
+    margin-right: 20px;
+    border-right: 1px solid #ddd;
+}
+.vertical-tab .nav-tabs>li{
+    float: none;
+}
+.vertical-tab > .nav-tabs > li > a {
+    min-width: 30px;
+    margin-right: 0;
+    margin-bottom: 3px;
+}
+.vertical-tab > .tab-content > .tab-pane .active {
+    border-color: #ddd transparent #ddd #ddd;
+    border-left-color: #ffffff;
+
 }

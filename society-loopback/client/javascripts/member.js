@@ -5,7 +5,7 @@ define([
     'angular',
   'javascripts/member/services/Member',
   'javascripts/member/controllers/memberList',
-  'javascripts/member/controllers/memberRegistrationController'
+  'javascripts/member/controllers/memberController'
 ],function(angular) {
     angular.module("societyApp.member",[
       "societyApp.member.services.member",

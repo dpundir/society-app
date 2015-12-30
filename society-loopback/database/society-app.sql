@@ -153,6 +153,8 @@ CREATE TABLE `member` (
   `fmname` varchar(45) DEFAULT NULL,
   `flname` varchar(45) DEFAULT NULL,
   `sex` char(1) NOT NULL,
+  `deposit` int(11) DEFAULT NULL,
+  `marital_status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `member_address_id_idx` (`addressid`),
   KEY `member_deposit_id_idx` (`deposit_id`),
@@ -167,7 +169,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir','m'),(2,'debashis',NULL,'mishra','8882227771',2,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra','m'),(3,'neeraj','a','kumar','1287536955',9,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1981-11-14',NULL,NULL,NULL,NULL,'m'),(4,'usha','','rawat','8287536955',13,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'deepak','singh','pundir','f'),(5,'isha','','rawateee','9650111463',14,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'makan','singh','pundir','f');
+INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir','m',NULL,NULL),(2,'debashis',NULL,'mishra','8882227771',2,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra','m',NULL,NULL),(3,'neeraj','a','kumar','1287536955',9,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1981-11-14',NULL,NULL,NULL,NULL,'m',NULL,NULL),(4,'usha','','rawat','8287536955',13,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'deepak','singh','pundir','f',NULL,NULL),(5,'isha','','rawateee','9650111463',14,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'makan','singh','pundir','f',NULL,NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,4 +465,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-29 23:00:45
+-- Dump completed on 2015-12-30 21:30:38

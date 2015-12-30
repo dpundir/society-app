@@ -38,6 +38,17 @@ var logout = function (req, res) {
   }
 };
 
+var userMember = function (req, res) {
+  var User = req.app.models.user;
+  User.fetchMember(req, function (err, member) {
+    if (err) {
+      res.sendStatus(err.statusCode);
+    } else {
+      res.send(member);
+    }
+  });
+};
+
 var requestResetPassword = function (req, res, next) {
   var User = req.app.models.user;
   User.resetPassword({
@@ -82,6 +93,7 @@ var resetPassword = function (req, res, next) {
 module.exports = {
   login: login,
   logout: logout,
+  userMember: userMember,
   requestResetPassword: requestResetPassword,
   resetPassword: resetPassword
 }

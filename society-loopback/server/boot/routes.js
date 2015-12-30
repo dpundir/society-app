@@ -13,6 +13,7 @@ module.exports = function (app) {
   //log a user in
   router.post('/login', authentication.login);
   router.get('/logout', authentication.logout);
+  router.get('/usermember', authentication.userMember);
 
   //send an email with instructions to reset an existing user's password
   router.post('/request/reset/password', authentication.requestResetPassword);

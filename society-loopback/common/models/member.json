@@ -249,6 +249,12 @@
       "model": "TransactionHistory",
       "foreignKey": "id",
       "keyTo": "memberId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": "id",
+      "keyTo": "userid"
     }
   },
   "acls": [],

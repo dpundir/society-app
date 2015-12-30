@@ -2,7 +2,7 @@ define([
     'angular'
 ], function () {
     angular.module("societyApp.home.directive.navigationbar", [])
-        .directive('navBar',['$rootScope', 'AuthenticationService',function ($rootScope, AuthenticationService) {
+        .directive('navBar',['$rootScope', 'AuthenticationService', 'restInterface', function ($rootScope, AuthenticationService, restInterface) {
             return{
                 restrict: 'A',
                 scope:{
@@ -11,6 +11,11 @@ define([
                 controller: ['$scope',function($scope){
                   $scope.logout = function(){
                     AuthenticationService.logout();
+                  };
+                  $scope.userProfile = function(){
+                    restInterface.get('/api/users/usermember').then(function(data){
+                      console.log(data);
+                    });
                   }
                 }],
                 templateUrl:'javascripts/home/partials/nav-bar.html',

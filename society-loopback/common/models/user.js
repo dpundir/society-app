@@ -47,4 +47,39 @@ module.exports = function(user) {
       console.log('> sending password reset email to:', info.email);
     });
   });
+
+  user.fetchMember = function(req, cb){
+    var TokenModel = req.app.models.AccessToken;
+
+    TokenModel.findForRequest(req, {}, function(err, token) {
+      if(err){
+        cb(err, null);
+      }
+      user.findById(token.userId, {include:"member", fields:['id', 'email', 'username', 'member', 'memberid']}, function(err, usermember){
+        if(err){
+          cb(err, null);
+        }
+        cb(null, usermember);
+      })
+    });
+  };
+
+  user.remoteMethod(
+    'fetchMember',
+    {
+      description: 'Fetch member details for logged in user with access token.',
+      accepts: [
+        {arg: 'req', type: 'object', http: {source: 'req'},
+          description: 'Do not supply this argument, it is automatically extracted ' +
+          'from request headers.'
+        }
+      ],
+      returns: {
+        arg: 'member', type: 'object',
+        description:
+          'The response body contains properties of the User details'
+      },
+      http: {verb: 'get', path: '/usermember'}
+    }
+  );
 };

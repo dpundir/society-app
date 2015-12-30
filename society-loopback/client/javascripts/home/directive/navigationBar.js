@@ -13,7 +13,7 @@ define([
                     AuthenticationService.logout();
                   };
                   $scope.userProfile = function(){
-                    restInterface.get('/usermember').then(function(data){
+                    restInterface.get('/api/users/usermember').then(function(data){
                       console.log(data);
                     });
                   }

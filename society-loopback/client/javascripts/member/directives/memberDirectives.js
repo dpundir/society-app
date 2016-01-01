@@ -71,13 +71,19 @@ define([
                     saveHandler: "&"
                 },
                 controller: ['$scope',function($scope){
+                    var installmentFreq = {
+                        12: 'Monthly',
+                        6: 'Half yearly',
+                        3: 'Quarterly',
+                        1: 'Yearly'
+                    };
                     function resetTransaction(){
                         $scope.transaction = {
                             depositAmount: $scope.deposit.installmentValue,
                             penaltyAmount: 0,
                             type: '1',
                             remarks: 'saving installment',
-                            id:''
+                            id: ''
                         };
                     }
                     function resetError(){
@@ -87,6 +93,8 @@ define([
                         };
                         $scope.successMsg = '';
                         $scope.showSuccessMsg = false;
+                        $scope.errorMsg = '';
+                        $scope.showErrorMsg = false;
                     }
                     function validateDepositForm(form){
                         if(form.$invalid){
@@ -118,16 +126,28 @@ define([
                             $scope.saveHandler({transaction: $scope.transaction});
                         }
                     };
-                    $scope.$watch('deposit.installmentValue',function(installmentValue){
-                         if(installmentValue){
-                             $scope.transaction.depositAmount = installmentValue;
+                    $scope.$watch('deposit',function(deposit){
+                         if(deposit.installmentValue){
+                             $scope.transaction.depositAmount = deposit.installmentValue;
                          }
-                    });
+                        if(deposit.installmentFreq){
+                            $scope.installmentFrequency = installmentFreq[deposit.installmentFreq];
+                        }
+                    },true);
                     $scope.deposit.successCB = function(){
                         $scope.isCollapsed = true;
                         $scope.successMsg = 'Deposit Successful.';
                         $scope.showSuccessMsg = true;
                         resetTransaction();
+                    };
+                    $scope.deposit.errorCB = function(){
+                        $scope.errorMsg = 'Error in deposit, please try again later.';
+                        $scope.showErrorMsg = true;
+                    };
+                    $scope.deposit.reset = function(){
+                        $scope.isCollapsed = true;
+                        resetTransaction();
+                        resetError();
                     };
                     $scope.isCollapsed = true;
                     resetTransaction();

@@ -59,10 +59,6 @@
     "dataSource": "mysql-ds",
     "public": true
   },
-  "MemberAddressView": {
-    "dataSource": "mysql-ds",
-    "public": true
-  },
   "MemberDeposit": {
     "dataSource": "mysql-ds",
     "public": true

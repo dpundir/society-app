@@ -47,7 +47,7 @@ define([
             this.getMemberDetail = function getMemberDetail(id, filter){
                 var defaultMemberFilter = {
                     "filter": {
-                        "include": ["address"]}
+                        "include": ["address", "memberDeposit"]}
                 };
                 filter = angular.merge(filter || {}, defaultMemberFilter);
                 return restInterface.get('/api/Members/'+id, null, filter);

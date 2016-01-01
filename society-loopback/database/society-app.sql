@@ -87,7 +87,7 @@ CREATE TABLE `address` (
   `state` varchar(45) NOT NULL,
   `pincode` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='address details';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='address details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101');
+INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `member` (
   KEY `member_deposit_id_idx` (`deposit_id`),
   CONSTRAINT `member_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_deposit_id` FOREIGN KEY (`deposit_id`) REFERENCES `member_deposit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='member details';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='member details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,40 +169,9 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',NULL,'surbir','singh','pundir','m',NULL,NULL),(2,'debashis',NULL,'mishra','8882227771',2,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra','m',NULL,NULL),(3,'neeraj','a','kumar','1287536955',9,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1981-11-14',NULL,NULL,NULL,NULL,'m',NULL,NULL),(4,'usha','','rawat','8287536955',13,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'deepak','singh','pundir','f',NULL,NULL),(5,'isha','','rawateee','9650111463',14,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'makan','singh','pundir','f',NULL,NULL);
+INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955',1,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1983-11-14',1,'surbir','singh','pundir','m',100,NULL),(2,'debashis',NULL,'mishra','8882227771',2,'2015-11-30 00:00:00','2015-11-30 00:00:00',1,'1988-11-01',NULL,'d',NULL,'mishra','m',1000,NULL),(3,'neeraj','a','kumar','1287536955',9,'2015-11-13 00:00:00','2015-11-13 00:00:00',1,'1981-11-14',NULL,NULL,NULL,NULL,'m',20,NULL),(4,'usha','','rawat','8287536955',13,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'deepak','singh','pundir','f',0,NULL),(5,'isha','','rawateee','9650111463',14,'2015-12-27 00:00:00',NULL,NULL,'2001-11-15',NULL,'makan','singh','pundir','f',200,NULL),(6,'Sanjay','singh','pundir','8287536911',15,'2016-01-01 00:00:00',NULL,NULL,'1980-06-18',NULL,'surbir','singh','pundir','m',10000,NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Temporary view structure for view `member_address_view`
---
-
-DROP TABLE IF EXISTS `member_address_view`;
-/*!50001 DROP VIEW IF EXISTS `member_address_view`*/;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-/*!50001 CREATE VIEW `member_address_view` AS SELECT 
- 1 AS `mid`,
- 1 AS `mfname`,
- 1 AS `mmname`,
- 1 AS `mlname`,
- 1 AS `mphone`,
- 1 AS `mcreate_date`,
- 1 AS `mmodified_date`,
- 1 AS `mstatus`,
- 1 AS `mdob`,
- 1 AS `mdeposit_id`,
- 1 AS `mffname`,
- 1 AS `mfmname`,
- 1 AS `mflname`,
- 1 AS `aid`,
- 1 AS `aaddress1`,
- 1 AS `aaddress2`,
- 1 AS `aaddress3`,
- 1 AS `acity`,
- 1 AS `astate`,
- 1 AS `apincode`*/;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `member_deposit`
@@ -438,24 +407,6 @@ LOCK TABLES `user` WRITE;
 INSERT INTO `user` VALUES (1,NULL,NULL,'$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4',NULL,NULL,NULL,1),(2,NULL,NULL,'$2a$10$IRL48tyo8QlU/Ol/vqAEIOOod8JovqjMljouJS9Fn20fS3KZuNh6q',NULL,NULL,'deepak.pundir@abcd.com',1,'8fe533fe616cc9af0a2e491858a807ea7c65bace073da7128605a3ba420caa64a44a0e3a909e62de29f09a669df76426ed83abe6aed95c8761505a821395f35e',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Final view structure for view `member_address_view`
---
-
-/*!50001 DROP VIEW IF EXISTS `member_address_view`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `member_address_view` AS (select `m`.`id` AS `mid`,`m`.`fname` AS `mfname`,`m`.`mname` AS `mmname`,`m`.`lname` AS `mlname`,`m`.`phone` AS `mphone`,`m`.`create_date` AS `mcreate_date`,`m`.`modified_date` AS `mmodified_date`,`m`.`status` AS `mstatus`,`m`.`dob` AS `mdob`,`m`.`deposit_id` AS `mdeposit_id`,`m`.`ffname` AS `mffname`,`m`.`fmname` AS `mfmname`,`m`.`flname` AS `mflname`,`a`.`id` AS `aid`,`a`.`address1` AS `aaddress1`,`a`.`address2` AS `aaddress2`,`a`.`address3` AS `aaddress3`,`a`.`city` AS `acity`,`a`.`state` AS `astate`,`a`.`pincode` AS `apincode` from (`member` `m` join `address` `a` on((`m`.`addressid` = `a`.`id`)))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -466,4 +417,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-31 22:01:35
+-- Dump completed on 2016-01-01 10:54:31

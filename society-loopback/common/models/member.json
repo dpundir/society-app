@@ -234,7 +234,55 @@
         "nullable": "Y"
       },
       "_selectable": true
-    }
+    },
+    "sex": {
+      "type": "String",
+      "required": false,
+      "length": 1,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "sex",
+        "dataType": "char",
+        "dataLength": 1,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      },
+      "_selectable": true
+    },
+    "deposit": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "deposit",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+  "marital_status": {
+    "type": "Number",
+    "required": false,
+    "length": null,
+    "precision": 10,
+    "scale": 0,
+    "mysql": {
+      "columnName": "marital_status",
+      "dataType": "int",
+      "dataLength": null,
+      "dataPrecision": 10,
+      "dataScale": 0,
+      "nullable": "Y"
+    },
+    "_selectable": true
+  }
   },
   "validations": [],
   "relations": {
@@ -243,6 +291,12 @@
       "model": "Address",
       "foreignKey": "id",
       "keyFrom": "addressid"
+    },
+    "memberDeposit": {
+      "type": "hasOne",
+      "model": "MemberDeposit",
+      "foreignKey": "id",
+      "keyFrom": "depositId"
     },
     "transactionHistory": {
       "type": "hasMany",

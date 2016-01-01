@@ -13,7 +13,8 @@ define([
     'ngStorage',
     'javascripts/admin',
     'javascripts/member',
-    'javascripts/home'
+    'javascripts/home',
+  'javascripts/loan'
 ], function (angular) {
     var app = angular.module("societyApp", [
         "ngRoute",
@@ -22,7 +23,8 @@ define([
         "ui.bootstrap",
         "societyApp.home",
         "societyApp.admin",
-        "societyApp.member"
+        "societyApp.member",
+      "societyApp.loan"
     ])
         .config(function ($routeProvider, $provide) {
             $provide.value('$context', {});
@@ -50,7 +52,8 @@ define([
                 'templateUrl': 'javascripts/admin/partials/register-message.html',
                 'controller': 'registerController'
             }).when('/loan/:id', {
-              'templateUrl': 'javascripts/loan/partials/loan-detail.html'
+              'templateUrl': 'javascripts/loan/partials/loan-detail.html',
+              'controller': 'loanController'
             }).otherwise({
                 'redirectTo': '/login'
             });

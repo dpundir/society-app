@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS `loan`;
 CREATE TABLE `loan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `memberid` int(11) NOT NULL,
-  `active` binary(0) DEFAULT NULL,
+  `active` int(11) DEFAULT NULL,
   `createdate` datetime DEFAULT NULL,
   `closedate` datetime DEFAULT NULL,
   `amount` double DEFAULT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE `loan` (
   PRIMARY KEY (`id`),
   KEY `loan_member_id_idx` (`memberid`),
   CONSTRAINT `loan_member_id` FOREIGN KEY (`memberid`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,6 +127,7 @@ CREATE TABLE `loan` (
 
 LOCK TABLES `loan` WRITE;
 /*!40000 ALTER TABLE `loan` DISABLE KEYS */;
+INSERT INTO `loan` VALUES (1,1,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',10000,5400),(2,1,0,'2015-12-01 00:00:00','2016-02-28 00:00:00',20000,1900);
 /*!40000 ALTER TABLE `loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,6 +230,7 @@ CREATE TABLE `member_loan` (
 
 LOCK TABLES `member_loan` WRITE;
 /*!40000 ALTER TABLE `member_loan` DISABLE KEYS */;
+INSERT INTO `member_loan` VALUES (1,2,1,3),(2,1,2,3);
 /*!40000 ALTER TABLE `member_loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -417,4 +419,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-01 10:54:31
+-- Dump completed on 2016-01-01 15:33:56

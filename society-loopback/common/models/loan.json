@@ -44,18 +44,18 @@
       "_selectable": false
     },
     "active": {
-      "type": "Binary",
+      "type": "Number",
       "required": false,
-      "length": 0,
-      "precision": null,
-      "scale": null,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
       "mysql": {
         "columnName": "active",
-        "dataType": "binary",
-        "dataLength": 0,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
       },
       "_selectable": true
     },
@@ -125,7 +125,12 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "memberLoan": {
+      "type": "hasOne",
+      "model": "MemberLoan",
+      "foreignKey": "loanid"
+    }},
   "acls": [],
   "methods": {}
 }

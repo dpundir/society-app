@@ -83,7 +83,7 @@ define([
                 return defer.promise;
             };
             this.addNewTransaction = function(transaction){
-                return restInterface.post('api/TransactionHistories',transaction);
+                return restInterface.post('api/Members/transaction',transaction);
             }
         }])
 });

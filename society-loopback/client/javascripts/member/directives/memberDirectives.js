@@ -67,9 +67,55 @@ define([
             return{
                 restrict: 'A',
                 scope:{
-
+                    deposit: "=",
+                    saveHandler: "&"
                 },
                 controller: ['$scope',function($scope){
+                    $scope.transaction = {
+                        depositAmount: 0,
+                        penaltyAmount: 0,
+                        type: '',
+                        remarks: '',
+                        id:''
+                    };
+                    function resetError(){
+                        $scope.error = {
+                            isError: false,
+                            errorText: ''
+                        };
+                    }
+                    function validateDepositForm(form){
+                        if(form.$invalid){
+                            $scope.error.isError = true;
+                            $scope.error.errorText = 'Field marked with * are required.';
+                            return false;
+                        }
+                        if(isNaN($scope.transaction.depositAmount) || isNaN($scope.transaction.penaltyAmount)){
+                            $scope.error.isError = true;
+                            $scope.error.errorText = 'Only numbers are allowed in amount field.';
+                            return false;
+                        }
+                        if($scope.transaction.depositAmount === 0){
+                            $scope.error.isError = true;
+                            $scope.error.errorText = 'Deposit amount cannot be 0.';
+                            return false;
+                        }
+                        if($scope.transaction.depositAmount < $scope.deposit.installmentValue){
+                            $scope.error.isError = true;
+                            $scope.error.errorText = 'Deposit amount cannot be less than installment value.';
+                            return false;
+                        }
+                        return true;
+                    }
+                    $scope.saveNewDeposit = function(form){
+                        var isValidDepositForm = validateDepositForm(form);
+                        if(isValidDepositForm){
+                            resetError();
+                            $scope.saveHandler({transaction: $scope.transaction});
+                        }
+                    };
+                    $scope.isCollapsed = true;
+                    resetError();
                 }],
                 templateUrl:'javascripts/member/partials/memberDeposit.html',
                 link:function(){}

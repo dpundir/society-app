@@ -1,0 +1,115 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Account Information</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Account Balance:</label>
+                    <span ng-bind="deposit.deposit"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Currency:</label>
+                    <span>INR</span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Installment frequency:</label>
+                    <span ng-bind="deposit.installmentFreq"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Installment value:</label>
+                    <span ng-bind="deposit.installmentValue"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">New deposit</button>
+</br>
+</br>
+<div collapse="isCollapsed">
+    <form class="form-horizontal reg-form" name="depositForm" non-validate>
+        <div class="form-bottom">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>New Deposit Information</h4>
+                </div>
+                <div class="panel-body">
+                    <div ng-show="error.isError">
+                        <p class="text-danger" ng-bind="error.errorText"></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label-input">
+                                    <span class="form-text">Deposit amount</span>
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <input type="text" name="damount"
+                                       class="form-control"
+                                       id="amount"
+                                       required="" ng-model="transaction.depositAmount">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label-input">
+                                    <span class="form-text">Penalty amount</span>
+                                </div>
+                                <input type="text" name="pamount"
+                                       class="form-control"
+                                       id="pamount" ng-model="transaction.penaltyAmount">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label-input">
+                                    <span class="form-text">Type</span>
+                                    <span class="text-danger" ng-show="!isViewMode">*</span>
+                                </div>
+                                <select name="gender" ng-model="transaction.type"
+                                        class="form-control"
+                                         required="">
+                                    <option value="1">Saving</option>
+                                    <option value="2">Loan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="label-input">
+                                    <span class="form-text">Remarks</span>
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <input type="text" name="remarks"
+                                       class="form-control"
+                                       id="remarks"
+                                       required="" ng-model="transaction.remarks">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row deposit-form">
+                <div class="col-sm-2">
+                    <button type="button"
+                            class="btn btn-primary"
+                            ng-click="saveNewDeposit(depositForm)">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -103,6 +103,7 @@ define([
                 $scope.saveNewDeposit = function(transaction){
                     transaction.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
                     transaction.memberId = $scope.member.id;
+                  transaction.depositAmount = Number(transaction.depositAmount);
                     MemberService.addNewTransaction(transaction).then(function(data){
                         console.log(data);
                     },function(error){

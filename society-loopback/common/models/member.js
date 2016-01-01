@@ -4,20 +4,23 @@ module.exports = function(Member) {
 
   Member.memberTransaction = function(req, cb){
     var TransactionHistory = req.app.models.TransactionHistory;
-    Member.beginTransaction(function(err, tx){
-      var memberid = req.body.member_id;
-      var deposit = req.body.deposit;
+    Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function(err, tx){
+      var memberid = req.body.memberId;
+      var deposit = req.body.depositAmount;
 
       TransactionHistory.create(req.body, {transaction: tx}, function(err1, data1) {
         if(err1){
+          tx.rollback();
           cb(err1, null);
         }
         Member.findById(memberid, {transaction: tx}, function(err2, data2){
           if(err2){
+            tx.rollback();
             cb(err2, null);
           }
           Member.update({id: memberid}, {deposit: data2.deposit+deposit}, {transaction: tx}, function(err3, data3){
             if(err3){
+              tx.rollback();
               cb(err3, null);
             }
             tx.commit();

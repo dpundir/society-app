@@ -71,18 +71,22 @@ define([
                     saveHandler: "&"
                 },
                 controller: ['$scope',function($scope){
-                    $scope.transaction = {
-                        depositAmount: 0,
-                        penaltyAmount: 0,
-                        type: '',
-                        remarks: '',
-                        id:''
-                    };
+                    function resetTransaction(){
+                        $scope.transaction = {
+                            depositAmount: $scope.deposit.installmentValue,
+                            penaltyAmount: 0,
+                            type: '1',
+                            remarks: 'saving installment',
+                            id:''
+                        };
+                    }
                     function resetError(){
                         $scope.error = {
                             isError: false,
                             errorText: ''
                         };
+                        $scope.successMsg = '';
+                        $scope.showSuccessMsg = false;
                     }
                     function validateDepositForm(form){
                         if(form.$invalid){
@@ -114,7 +118,19 @@ define([
                             $scope.saveHandler({transaction: $scope.transaction});
                         }
                     };
+                    $scope.$watch('deposit.installmentValue',function(installmentValue){
+                         if(installmentValue){
+                             $scope.transaction.depositAmount = installmentValue;
+                         }
+                    });
+                    $scope.deposit.successCB = function(){
+                        $scope.isCollapsed = true;
+                        $scope.successMsg = 'Deposit Successful.';
+                        $scope.showSuccessMsg = true;
+                        resetTransaction();
+                    };
                     $scope.isCollapsed = true;
+                    resetTransaction();
                     resetError();
                 }],
                 templateUrl:'javascripts/member/partials/memberDeposit.html',

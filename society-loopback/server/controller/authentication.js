@@ -4,9 +4,11 @@
 
 var login = function (req, res) {
   var User = req.app.models.user;
+  var TWO_MINUTES = 60 * 2;
   User.login({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    ttl: TWO_MINUTES
   }, 'user', function (err, token) {
     if (err) {
       res.sendStatus(err.statusCode);

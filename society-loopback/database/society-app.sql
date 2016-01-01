@@ -385,6 +385,7 @@ CREATE TABLE `transaction_history` (
   `create_date` datetime NOT NULL,
   `loan_id` int(11) DEFAULT NULL,
   `type` int(11) NOT NULL,
+  `remarks` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `member_id_idx` (`member_id`),
   KEY `dh_loan_id_idx` (`loan_id`),
@@ -399,7 +400,7 @@ CREATE TABLE `transaction_history` (
 
 LOCK TABLES `transaction_history` WRITE;
 /*!40000 ALTER TABLE `transaction_history` DISABLE KEYS */;
-INSERT INTO `transaction_history` VALUES (1,1,100,0,'2015-12-14 00:00:00',NULL,1),(2,1,10,0,'2015-12-14 00:00:00',NULL,1),(3,2,150,0,'2015-12-14 00:00:00',NULL,1);
+INSERT INTO `transaction_history` VALUES (1,1,100,0,'2015-12-14 00:00:00',NULL,1,NULL),(2,1,10,0,'2015-12-19 00:00:00',NULL,1,NULL),(3,2,150,0,'2015-12-24 00:00:00',NULL,1,NULL);
 /*!40000 ALTER TABLE `transaction_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -425,7 +426,7 @@ CREATE TABLE `user` (
   `lastUpdated` datetime DEFAULT NULL,
   `memberid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -465,4 +466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-30 21:30:38
+-- Dump completed on 2015-12-31 22:01:35

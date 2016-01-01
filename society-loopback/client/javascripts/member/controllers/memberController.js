@@ -65,6 +65,8 @@ define([
                         $scope.address = data.address;
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.dob = new Date(data.dob);
+                        $scope.memberDeposit = data.memberDeposit;
+                        $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.EDIT;
                     })
@@ -98,7 +100,15 @@ define([
                             break;
                     }
                 }
+                $scope.saveNewDeposit = function(transaction){
+                    transaction.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
+                    transaction.memberId = $scope.member.id;
+                    MemberService.addNewTransaction(transaction).then(function(data){
+                        console.log(data);
+                    },function(error){
 
+                    })
+                };
                 $scope.register = function register(form) {
                     switch($scope.mode){
                         case VIEW_MODE.EDIT:

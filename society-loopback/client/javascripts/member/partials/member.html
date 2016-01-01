@@ -26,10 +26,8 @@
                     <tab heading="Deposit" disable="mode == 1">
                         <div class="row society-form">
                             <div class="form-top">
-                                <div>
-                                    <h3 class="text-primary">Deposit</h3>
-                                    <p class="text-info"></p>
-                                </div>
+                                <div member-deposit deposit="memberDeposit"
+                                     save-handler="saveNewDeposit(transaction)"></div>
                             </div>
                         </div>
                     </tab>
@@ -40,11 +38,7 @@
                                     <h3 class="text-primary">Loan</h3>
                                     <p class="text-info"></p>
                                 </div>
-                                <div member-loan member="member"
-                                     address="address"
-                                     is-view-mode="isViewMode"
-                                     action-text="actionText"
-                                     click-handler="register(form)"></div>
+                                <div member-loan></div>
                             </div>
                         </div>
                     </tab>
@@ -53,6 +47,16 @@
                             <div class="form-top">
                                 <div>
                                     <h3 class="text-primary">Documents</h3>
+                                    <p class="text-info"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Transaction history">
+                        <div class="row society-form">
+                            <div class="form-top">
+                                <div>
+                                    <h3 class="text-primary">Transaction history</h3>
                                     <p class="text-info"></p>
                                 </div>
                             </div>

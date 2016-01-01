@@ -630,3 +630,9 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 .vertical-tab .nav-tabs>li.disabled a{
     color: #d5d5d5;
 }
+.deposit-form .btn{
+    min-width: 160px;
+}
+label{
+    font-size: 14px;
+}

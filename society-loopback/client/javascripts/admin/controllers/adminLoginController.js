@@ -17,8 +17,9 @@ define([
                 $scope.actionText = 'Register';
             }
             $scope.adminLogin = function (form) {
+                var action = $routeParams.action;
                 $scope.loader.show = true;
-                if (form.$invalid) {
+                if (form.$invalid && action !== 'reset') {
                     $scope.loader.show = false;
                     form.username.$setTouched();
                     form.password.$setTouched();
@@ -32,7 +33,6 @@ define([
                 } else {
                     authenticationData.username = $scope.username;
                 }
-                var action = $routeParams.action;
                 if (action === 'reset') {
                     AuthenticationService.requestResetPassword(authenticationData);
                 } else if (action === 'register') {

@@ -45,7 +45,7 @@ define([
                     $scope.address = MemberService.defaultMemberAddress();
                     //header texts
                     $scope.primaryHeaderText = 'New Member Registration';
-                    $scope.secondaryHeaderText = 'Please fill below form to add new member:';
+                    $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
                     $scope.actionText = 'Register';
                     $scope.mode = VIEW_MODE.NEW;
@@ -77,7 +77,7 @@ define([
                     $scope.mode = VIEW_MODE.UPDATE;
                     $scope.isViewMode = false;
                     $scope.primaryHeaderText = 'Edit Member Details';
-                    $scope.secondaryHeaderText = 'Please update below form to edit member';
+                    $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
                     $scope.actionText = 'Update';
                 }

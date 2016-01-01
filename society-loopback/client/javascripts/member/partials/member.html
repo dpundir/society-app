@@ -7,18 +7,47 @@
                     <tab heading="Member details">
                         <div class="row society-form">
                             <div class="form-top">
-                                <div class="form-top-left">
+                                <div>
                                     <h3 class="text-primary" ng-bind="primaryHeaderText"></h3>
                                     <p class="text-info" ng-bind="secondaryHeaderText"></p>
+                                </div>
+                                <div>
+                                    <p class="text-danger" ng-bind="formValidationInfoText"></p>
+                                </div>
+                                <div member-details member="member"
+                                     address="address"
+                                     is-view-mode="isViewMode"
+                                     action-text="actionText"
+                                     click-handler="register(form)"></div>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <tab heading="Deposit" disable="mode == 1">
+                        <div class="row society-form">
+                            <div class="form-top">
+                                <div>
+                                    <h3 class="text-primary">Deposit</h3>
+                                    <p class="text-info"></p>
                                 </div>
                             </div>
                         </div>
                     </tab>
-                    <tab heading="Deposit">
+                    <tab heading="Loan" disable="mode == 1">
                         <div class="row society-form">
                             <div class="form-top">
-                                <div class="form-top-left">
-                                    <h3 class="text-primary">Deposit</h3>
+                                <div>
+                                    <h3 class="text-primary">Loan</h3>
+                                    <p class="text-info"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Documents">
+                        <div class="row society-form">
+                            <div class="form-top">
+                                <div>
+                                    <h3 class="text-primary">Documents</h3>
                                     <p class="text-info"></p>
                                 </div>
                             </div>

@@ -10,7 +10,8 @@
                     <div ng-repeat="person in people" class="member-inner-list">
                         <img alt="{{::person.fullName}}" ng-src="{{::person.img}}" class="society-avatar"/>
                         <p>
-                            <label>Name:</label><span ng-bind="::person.fullName"></span></br>
+                            <span ng-bind="::person.fullName" class="text-name"></span></br>
+                            <label>Member ID:</label><span ng-bind="::person.id"></span></br>
                             <label>Address:</label><span ng-bind="::person.fullAddress"></span></br>
                             <label>Contact No:</label><span ng-bind="::person.phone"></span>
                         </p>

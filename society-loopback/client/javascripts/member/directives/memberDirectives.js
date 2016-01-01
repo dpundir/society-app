@@ -1,35 +1,69 @@
 define([
-    'angular'
-], function () {
+    'angular',
+    'lodash'
+], function (angular, _) {
     angular.module("societyApp.member.directives",[])
-        .directive('member-details',['$rootScope',function ($rootScope) {
+        .directive('memberDetails',['$rootScope',function ($rootScope) {
             return{
                 restrict: 'A',
                 scope:{
                     member : '=',
-                    memberAddress: '=',
-                    editable:'@'
+                    address: '=',
+                    isViewMode:'=',
+                    actionText:'=',
+                    clickHandler:'&'
                 },
                 controller: ['$scope',function($scope){
+                    /*
+                     * @method
+                     * @name validateRegistrationForm
+                     * */
+                    function validateRegistrationForm(form) {
+                        if(form.$invalid){
+                            var formFields = ['fname','lname','ffname','flname','phone','dob','address1','address2','city','state','pincode'];
+                            _.each(formFields,function(name){
+                                if(form[name].$invalid){
+                                    form[name].$setTouched();
+                                }
+                            });
+                            return false;
+                        }else{
+                            return true;
+                        }
+                    }
+                    /*
+                     * Default date picker config
+                     * @type object
+                     * */
+                    $scope.dob = {
+                        maxDate: new Date(),
+                        dateOption: {
+                            formatYear: 'yy',
+                            startingDay: 1
+                        },
+                        format: 'dd-MM-yyyy',
+                        status: {
+                            opened: false
+                        }
+                    };
+                    $scope.open = function open() {
+                        this.dob.status.opened = true;
+                    };
+                    $scope.register = function(form){
+                        var isFormValid = true;
+                        if(this.$parent.mode !== 2){
+                            isFormValid = validateRegistrationForm(form)
+                        }
+                        if(isFormValid) {
+                            $scope.clickHandler({form: form});
+                        }
+                    }
                 }],
                 templateUrl:'javascripts/member/partials/memberDetails.html',
                 link:function(){}
             }
         }])
-        .directive('member-address',['$rootScope',function ($rootScope) {
-            return{
-                restrict: 'A',
-                scope:{
-                    address : '=',
-                    editable:'@'
-                },
-                controller: ['$scope',function($scope){
-                }],
-                templateUrl:'javascripts/member/partials/memberAddress.html',
-                link:function(){}
-            }
-        }])
-        .directive('member-deposit',['$rootScope',function ($rootScope) {
+        .directive('memberDeposit',['$rootScope',function ($rootScope) {
             return{
                 restrict: 'A',
                 scope:{
@@ -41,7 +75,7 @@ define([
                 link:function(){}
             }
         }])
-        ..directive('member-loan',['$rootScope',function ($rootScope) {
+        .directive('memberLoan',['$rootScope',function ($rootScope) {
             return{
                 restrict: 'A',
                 scope:{

@@ -10,6 +10,9 @@ body {
 body > section{
     padding-top: 70px;
 }
+h4{
+    font-size: 16px;
+}
 .menu{
     float: left;
     padding: 12px;
@@ -187,7 +190,7 @@ img { max-width: 100%; }
     border: 1px solid #2d353c!important;
 }
 .bg-blue{
-    border: 1px solid #348fe2!important;
+    border: 1px solid rgb(16,108,200)!important;
 }
 .home .tile .tile-title{
     color: #0d0d0d;
@@ -232,7 +235,6 @@ img { max-width: 100%; }
     padding: 60px 0 80px 0;
 }
 .society-form{
-    border: 1px solid #cccccc;
     border-radius: 4px;
     box-shadow: 0px 1px 10px 1px #cccccc;
     padding: 20px;
@@ -240,7 +242,12 @@ img { max-width: 100%; }
 .top-content .text {
     color: #fff;
 }
-
+.panel-primary>.panel-heading{
+    background-color: #fff;
+    border-bottom: 2px solid;
+    padding: 0;
+    color: #000;
+}
 .top-content .text h1 { color: #fff; }
 
 .top-content .description {
@@ -264,6 +271,11 @@ img { max-width: 100%; }
 }
 .society-form .form-control[disabled]{
     cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+}
+.society-form .form-control{
+    border: 1px solid #cccccb;
 }
 .form-top-left {
     float: left;
@@ -282,17 +294,14 @@ img { max-width: 100%; }
 }
 .panel{
     padding: 10px 10px 10px 10px;
-    background: #eeeeee;
     border-radius: 4px;
     border: 1px solid #cccccc;
     box-shadow: 0px 1px 10px 1px #cccccc;
 }
 .panel-heading{
-    padding: 5px 20px;
+    padding: 0;
 }
 .form-bottom {
-    padding: 25px 25px 30px 25px;
-    background: #eee;
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
     border-radius: 0 0 4px 4px;
@@ -333,7 +342,8 @@ img { max-width: 100%; }
 }
 .form-text{
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
+    color: #000;
 }
 .label-input{
     height: 15px;
@@ -357,10 +367,12 @@ img { max-width: 100%; }
     h1, h2 { font-size: 32px; }
 
 }
-
-
+select{
+    width: 100%;
+}
 input[type="text"],
 input[type="password"],
+select,
 .form-control {
     height: 35px;
     margin: 0;
@@ -499,9 +511,9 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 }
 .member-inner-list label{
     margin: 0 10px 0 10px;
+    font-size: 12px;
 }
 .member-list .member-inner-list:hover{
-    background-color: rgba(158,158,158,0.2);
     color: #000000;
     box-shadow: 0 0 10px 1px #808080;
     transform: scale(1);
@@ -525,6 +537,10 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     border-radius: 50%;
     box-sizing: content-box;
 }
+.text-name{
+    text-transform: uppercase;
+    margin-left: 10px;
+}
 .list-header{
     display: flex;
 }
@@ -543,10 +559,53 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 .vertical-tab .nav-tabs{
     float: left;
     margin-right: 20px;
-    border-right: 1px solid #ddd;
+    margin-top: 10px;
+    border: none;
 }
 .vertical-tab .nav-tabs>li{
     float: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+    align-items: center;
+    padding: 0 6px;
+    margin: 6px 8px;
+    line-height: 36px;
+    min-height: 36px;
+    background: 0 0;
+    white-space: nowrap;
+    min-width: 88px;
+    width: 200px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+    font-style: inherit;
+    font-variant: inherit;
+    font-family: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+}
+.vertical-tab .nav>li>a:focus,
+.vertical-tab .nav>li>a:hover,
+.vertical-tab .nav-tabs>li:hover{
+    box-shadow: none;
+    color: #000000;
+    background-color: #fff;
+    border-color: transparent;
+}
+.vertical-tab .nav-tabs>li.active{
+    background-color: rgb(16,108,200);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    color: rgba(255,255,255,0.87);
+}
+.vertical-tab .nav-tabs>li.active>a{
+    color: rgba(255,255,255,0.87);
+}
+.vertical-tab .nav-tabs>li.active>a:hover{
+    border-color: transparent;
 }
 .vertical-tab > .nav-tabs > li > a {
     min-width: 30px;
@@ -557,4 +616,15 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     border-color: #ddd transparent #ddd #ddd;
     border-left-color: #ffffff;
 
+}
+.vertical-tab .nav-tabs>li.active>a,
+.vertical-tab .nav-tabs>li.active>a:focus,
+.vertical-tab .nav-tabs>li.active>a:hover{
+    box-shadow: none;
+    background: none;
+    border-color: transparent;
+}
+.vertical-tab .nav-tabs>li.disabled,
+.vertical-tab .nav-tabs>li.disabled a{
+    color: #d5d5d5;
 }

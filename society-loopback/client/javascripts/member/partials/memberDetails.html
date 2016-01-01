@@ -1,12 +1,7 @@
 
 <form class="form-horizontal reg-form" name="registrationForm" non-validate>
 
-
-    <!--hr/-->
     <div class=" form-bottom">
-        <div>
-            <p class="text-danger" ng-bind="formValidationInfoText"></p>
-        </div>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h4>Member Information:</h4>
@@ -17,6 +12,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">First name</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text" name="fname"
                                    class="form-control"
@@ -38,6 +34,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">Last name</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text" name="lname"
                                    class="form-control"
@@ -51,6 +48,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">Father's first name</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text"
                                    class="form-control" name="ffname"
@@ -72,6 +70,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">Father's last name</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text"
                                    class="form-control" name="flname"
@@ -81,23 +80,39 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="label-input">
+                                <span class="form-text">Gender</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
+                            </div>
+                            <select name="gender" ng-model="member.sex"
+                                    class="form-control"
+                                    ng-disabled="isViewMode" required="">
+                                <option value="m">Male</option>
+                                <option value="f">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">Mobile number</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text" class="form-control" id="phone" name="phone"
                                    ng-disabled="isViewMode" required="" ng-model="member.phone">
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="label-input">
                             <span class="form-text">Date of birth</span>
+                            <span class="text-danger" ng-show="!isViewMode">*</span>
                         </div>
                         <div class="form-group input-group">
                             <input type="text" class="form-control" ng-disabled="isViewMode"
                                    datepicker-popup="{{dob.format}}"
-                                   ng-model="dob.selected" is-open="dob.status.opened"
+                                   ng-model="member.dob" is-open="dob.status.opened"
                                    max-date="dob.maxDate"
                                    datepicker-options="dob.dateOptions" id="dob" name="dob"
                                    ng-required="true" close-text="Close" required=""/>
@@ -122,6 +137,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">House/Flat No</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text"
                                    class="form-control" name="address1"
@@ -133,6 +149,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">Street</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text"
                                    class="form-control" name="address2"
@@ -146,6 +163,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">City</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text"
                                    class="form-control" name="city"
@@ -157,6 +175,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">State</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text" class="form-control" id="state"
                                    ng-disabled="isViewMode" name="state"
@@ -167,6 +186,7 @@
                         <div class="form-group">
                             <div class="label-input">
                                 <span class="form-text">Enter pincode</span>
+                                <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text"
                                    class="form-control" name="pincode"
@@ -182,9 +202,6 @@
                 <button type="button"
                         class="btn btn-primary"
                         ng-click="register(registrationForm)" ng-bind="actionText"></button>
-            </div>
-            <div class="col-sm-4 column col-margin-10">
-                <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </div>
     </div>

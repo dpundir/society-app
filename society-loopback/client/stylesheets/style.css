@@ -309,6 +309,9 @@ img { max-width: 100%; }
     border-radius: 0 0 4px 4px;
     text-align: left;
 }
+.form-group{
+    margin-bottom: 0;
+}
 .form-bottom .form-group{
     margin-bottom: 10px;
 }
@@ -634,5 +637,17 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
     min-width: 160px;
 }
 label{
+    font-size: 12px;
+}
+.society-form span{
+    color: #000000;
+}
+.btn span{
+    color: #ffffff;
+}
+.alert{
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 3px;
     font-size: 14px;
 }

@@ -1,4 +1,6 @@
 <div class="panel panel-primary">
+    <div class="alert alert-success" role="alert" ng-bind="successMsg" ng-show="showSuccessMsg"></div>
+    <div class="alert alert-danger" role="alert" ng-bind="errorMsg" ng-show="showErrorMsg"></div>
     <div class="panel-heading">
         <h4>Account Information</h4>
     </div>
@@ -7,13 +9,13 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Account Balance:</label>
-                    <span ng-bind="deposit.deposit"></span>
+                    <span>&#8377;</span><span ng-bind="deposit.deposit"></span>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Currency:</label>
-                    <span>INR</span>
+                    <span>Rupees</span>
                 </div>
             </div>
         </div>
@@ -22,13 +24,21 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Installment frequency:</label>
-                    <span ng-bind="deposit.installmentFreq"></span>
+                    <span ng-bind="installmentFrequency"></span>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Installment value:</label>
-                    <span ng-bind="deposit.installmentValue"></span>
+                    <span>&#8377;</span><span ng-bind="deposit.installmentValue"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Share value:</label>
+                    <span>&#8377;</span><span ng-bind="deposit.shareValue"></span>
                 </div>
             </div>
         </div>

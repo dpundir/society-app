@@ -49,6 +49,8 @@ define([
             }).when('/reset/:message', {
                 'templateUrl': 'javascripts/admin/partials/register-message.html',
                 'controller': 'registerController'
+            }).when('/loan/:id', {
+              'templateUrl': 'javascripts/loan/partials/loan-detail.html'
             }).otherwise({
                 'redirectTo': '/login'
             });

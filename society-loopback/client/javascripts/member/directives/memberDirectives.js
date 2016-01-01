@@ -63,7 +63,7 @@ define([
                 link:function(){}
             }
         }])
-        .directive('memberDeposit',['$rootScope',function ($rootScope) {
+        .directive('memberDeposit',['$rootScope', '$location', function ($rootScope, $location) {
             return{
                 restrict: 'A',
                 scope:{
@@ -75,13 +75,16 @@ define([
                 link:function(){}
             }
         }])
-        .directive('memberLoan',['$rootScope',function ($rootScope) {
+        .directive('memberLoan',['$rootScope', '$location', function ($rootScope, $location) {
             return{
                 restrict: 'A',
                 scope:{
 
                 },
                 controller: ['$scope',function($scope){
+                  $scope.showDetails = function(id){
+                    $location.url('/loan/1');
+                  }
                 }],
                 templateUrl:'javascripts/member/partials/memberLoan.html',
                 link:function(){}

@@ -1,0 +1,170 @@
+
+<form class="form-horizontal reg-form" name="registrationForm" non-validate>
+
+<div class=" form-bottom">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Loan Information:</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Loan ID:</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                    <input type="text" name="fname"
+                           class="form-control"
+                           id="fname" ng-disabled="isViewMode"
+                           required="" ng-model="member.fname">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Loan Amount</span>
+                    </div>
+                    <input type="text"
+                           class="form-control" ng-disabled="isViewMode"
+                           id="mname" ng-model="member.mname">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Remaining Amount</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                    <input type="text" name="lname"
+                           class="form-control"
+                           id="lname" ng-disabled="isViewMode"
+                           required="" ng-model="member.lname">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Loan Start</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+
+                    <input type="text" class="form-control" ng-disabled="isViewMode"
+                           datepicker-popup="{{dob.format}}"
+                           ng-model="member.dob" is-open="dob.status.opened"
+                           max-date="dob.maxDate"
+                           datepicker-options="dob.dateOptions" id="dob" name="dob"
+                           ng-required="true" close-text="Close" required=""/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="isViewMode"
+                                            class="btn btn-default btn-datepicker"
+                                            ng-click="open()">
+                                        <i class="glyphicon glyphicon-calendar"></i></button>
+                                  </span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Loan Close</span>
+                    </div>
+
+                    <input type="text" class="form-control" ng-disabled="isViewMode"
+                           datepicker-popup="{{dob.format}}"
+                           ng-model="member.dob" is-open="dob.status.opened"
+                           max-date="dob.maxDate"
+                           datepicker-options="dob.dateOptions" id="dob" name="dob"
+                           ng-required="true" close-text="Close" required=""/>
+                                  <span class="input-group-btn">
+                                    <button type="button" ng-disabled="isViewMode"
+                                            class="btn btn-default btn-datepicker"
+                                            ng-click="open()">
+                                        <i class="glyphicon glyphicon-calendar"></i></button>
+                                  </span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Reference 1</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                    <select name="gender" ng-model="member.sex"
+                            class="form-control"
+                            ng-disabled="isViewMode" required="">
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Reference 2</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                    <input type="text" class="form-control" id="phone" name="phone"
+                           ng-disabled="isViewMode" required="" ng-model="member.phone">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Loan Transactions:</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">ID</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Deposit</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Penalty</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Date</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Remarks</span>
+                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</form>

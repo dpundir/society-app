@@ -14,6 +14,7 @@ define([
                     flname: member.flname || '',
                     fmname: member.fmname || '',
                     dob: member.dob || '',
+                    sex: member.sex || '',
                     id: member.id || '',
                     addressid: member.addressid || null,
                     depositId: member.depositId || null

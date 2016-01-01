@@ -44,37 +44,44 @@ define([
                 'templateUrl': 'javascripts/admin/partials/register-message.html',
                 'controller': 'registerController'
             }).when('/reset/password', {
-              'templateUrl': 'javascripts/admin/partials/reset-password.html',
-              'controller': 'resetPassword'
+                'templateUrl': 'javascripts/admin/partials/reset-password.html',
+                'controller': 'resetPassword'
             }).when('/reset/:message', {
-              'templateUrl': 'javascripts/admin/partials/register-message.html',
-              'controller': 'registerController'
+                'templateUrl': 'javascripts/admin/partials/register-message.html',
+                'controller': 'registerController'
             }).otherwise({
                 'redirectTo': '/login'
             });
 
         }).controller("appController", ['$rootScope', '$scope', 'AuthenticationService', '$location',
             function ($rootScope, $scope, AuthenticationService, $location) {
-            $scope.heading = 'Application Heading';
-            $scope.ngViewPlaceholder = 'NG View Placeholder';
-            $scope.footer = 'Footer';
-            $scope.navBarConfig = {
-                showNavBar: false
-            };
-            $rootScope.$on('$locationChangeStart',function(event, newUrl, oldUrl, newState, oldState){
-                if(!AuthenticationService.isAuthenticated()){
-                    $scope.navBarConfig.showNavBar = false;
-                    if(newUrl.indexOf('login/reset') === -1 && newUrl.indexOf('login/register') === -1) {
-                        $location.url('/login');
+                $scope.heading = 'Application Heading';
+                $scope.ngViewPlaceholder = 'NG View Placeholder';
+                $scope.footer = 'Footer';
+                $scope.navBarConfig = {
+                    showNavBar: false
+                };
+                $scope.loader = {
+                    show: false
+                };
+                $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl, newState, oldState) {
+                    if (!AuthenticationService.isAuthenticated()) {
+                        $scope.navBarConfig.showNavBar = false;
+                        if (newUrl.indexOf('login/reset') === -1
+                            && newUrl.indexOf('login/register') === -1
+                            && newUrl.indexOf('register/') === -1
+                            && newUrl.indexOf('reset/') === -1) {
+                            $location.url('/login');
+                        }
+                        $scope.loader.show = false;
+                    } else {
+                        if (newUrl.indexOf('/login') > -1) {
+                            $location.url('/home');
+                        }
+                        $scope.navBarConfig.showNavBar = true;
                     }
-                }else{
-                    if(newUrl.indexOf('/login') > -1){
-                        $location.url('/home');
-                    }
-                    $scope.navBarConfig.showNavBar = true;
-                }
-            });
-        }]);
+                });
+            }]);
 
     angular.bootstrap(document, ["societyApp"]);
 });

@@ -1,8 +1,11 @@
 define([
     'angular',
-    'javascripts/member/services/Member'
+    'javascripts/member/services/Member',
+    'javascripts/member/directives/memberDirectives'
 ], function () {
-    angular.module("societyApp.member.controller.memberregistration", ["societyApp.member.services.member"])
+    angular.module("societyApp.member.controller.memberregistration",
+        ["societyApp.member.services.member",
+        "societyApp.member.directives"])
         .controller('memberRegistrationController',
         ['$scope', 'MemberService', '$location', '$routeParams','$filter',
             function ($scope, MemberService, $location, $routeParams, $filter) {
@@ -14,23 +17,6 @@ define([
                 };
                 /*
                  * @method
-                 * @name validateRegistrationForm
-                 * */
-                function validateRegistrationForm(form) {
-                    if(form.$invalid){
-                        var formFields = ['fname','lname','ffname','flname','phone','dob','address1','address2','city','state','pincode'];
-                        _.each(formFields,function(name){
-                            if(form[name].$invalid){
-                                form[name].$setTouched();
-                            }
-                        });
-                        return false;
-                    }else{
-                        return true;
-                    }
-                }
-                /*
-                 * @method
                  * @name updateMemberDetail
                  * to update existing member OR add new member
                  * */
@@ -39,14 +25,12 @@ define([
                         $location.url('/member');
                     }
                     function errorCB(){}
-                    if(validateRegistrationForm(form)){
-                        $scope.member.dob = $filter('date')($scope.dob.selected,'yyyy-MM-dd');
-                        if(type === 'update') {
-                            MemberService.updateMemberDetail($scope.member, $scope.address).then(successCB,errorCB);
-                        }else{
-                            $scope.member.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
-                            MemberService.addNewMemberDetail($scope.member, $scope.address).then(successCB,errorCB);
-                        }
+                    $scope.member.dob = $filter('date')($scope.member.dob,'yyyy-MM-dd');
+                    if(type === 'update') {
+                        MemberService.updateMemberDetail($scope.member, $scope.address).then(successCB,errorCB);
+                    }else{
+                        $scope.member.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
+                        MemberService.addNewMemberDetail($scope.member, $scope.address).then(successCB,errorCB);
                     }
                 }
                 /*
@@ -61,8 +45,8 @@ define([
                     $scope.address = MemberService.defaultMemberAddress();
                     //header texts
                     $scope.primaryHeaderText = 'New Member Registration';
-                    $scope.secondaryHeaderText = 'Please fill below form to add new member:';
-                    $scope.formValidationInfoText = 'Please fill all required fields.';
+                    $scope.secondaryHeaderText = '';
+                    $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
                     $scope.actionText = 'Register';
                     $scope.mode = VIEW_MODE.NEW;
                     $scope.isViewMode = false;
@@ -80,7 +64,7 @@ define([
                         $scope.actionText = 'Edit';
                         $scope.address = data.address;
                         $scope.member = MemberService.defaultMember(data);
-                        $scope.dob.selected = new Date(data.dob);
+                        $scope.member.dob = new Date(data.dob);
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.EDIT;
                     })
@@ -93,8 +77,8 @@ define([
                     $scope.mode = VIEW_MODE.UPDATE;
                     $scope.isViewMode = false;
                     $scope.primaryHeaderText = 'Edit Member Details';
-                    $scope.secondaryHeaderText = 'Please update below form to edit member';
-                    $scope.formValidationInfoText = 'Please fill all required fields.';
+                    $scope.secondaryHeaderText = '';
+                    $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
                     $scope.actionText = 'Update';
                 }
                  /*
@@ -114,25 +98,6 @@ define([
                             break;
                     }
                 }
-                /*
-                 * Default date picker config
-                 * @type object
-                 * */
-                $scope.dob = {
-                    maxDate: new Date(),
-                    dateOption: {
-                        formatYear: 'yy',
-                        startingDay: 1
-                    },
-                    format: 'dd-MM-yyyy',
-                    status: {
-                        opened: false
-                    },
-                    selected: ''
-                };
-                $scope.open = function open() {
-                    this.dob.status.opened = true;
-                };
 
                 $scope.register = function register(form) {
                     switch($scope.mode){
@@ -146,9 +111,6 @@ define([
                             updateMemberDetail(form,'update');
                             break;
                     }
-                };
-                $scope.cancel = function cancel() {
-                    $location.url('/home');
                 };
                 /*
                 * Initialize on load

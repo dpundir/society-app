@@ -1,59 +1,63 @@
-module.exports = function(Member) {
+module.exports = function (Member) {
 
   var moment = require('moment');
 
-  Member.memberTransaction = function(req, cb){
+  Member.memberTransaction = function (req, cb) {
     var TransactionHistory = req.app.models.TransactionHistory;
-    Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function(err, tx){
+    Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
       var memberid = req.body.memberId;
       var deposit = req.body.depositAmount;
 
-      TransactionHistory.create(req.body, {transaction: tx}, function(err1, data1) {
-        if(err1){
+      TransactionHistory.create(req.body, {transaction: tx}, function (err1, data1) {
+        if (err1) {
           tx.rollback();
           cb(err1, null);
         }
-        Member.findById(memberid, {transaction: tx}, function(err2, data2){
-          if(err2){
+        Member.findById(memberid, {transaction: tx}, function (err2, data2) {
+          if (err2) {
             tx.rollback();
             cb(err2, null);
           }
-          Member.update({id: memberid}, {deposit: data2.deposit+deposit}, {transaction: tx}, function(err3, data3){
-            if(err3){
+          var updatedDeposit = data2.deposit + deposit;
+          Member.update({id: memberid}, {deposit: updatedDeposit}, {transaction: tx}, function (err3, data3) {
+            if (err3) {
               tx.rollback();
               cb(err3, null);
             }
             tx.commit();
+            cb(null, {
+              deposit: updatedDeposit
+            });
           });
         });
       });
     })
   };
 
-  Member.applyInterest = function(req, cb){
+  Member.applyInterest = function (req, cb) {
     var TransactionHistory = req.app.models.TransactionHistory;
-    Member.beginTransaction(function(err, tx){
+    Member.beginTransaction(function (err, tx) {
       var memberid = req.body.member_id;
 
       var startDate = moment().startOf('month').toDate();
       var middleDate = moment().startOf('month').add(14, 'days').toDate();
 
-      TransactionHistory.find({where: {member_id: memberid, create_date:{between: [startDate,middleDate]}, type: 1}}, {transaction: tx}, function(err1, data1) {
-        if(err1){
+      TransactionHistory.find({where: {member_id: memberid, create_date: {between: [startDate, middleDate]}, type: 1}}, {transaction: tx}, function (err1, data1) {
+        if (err1) {
           cb(err1, null);
         }
-        var deposit =0;
-        for(var i =0; i<data1.length ; i++){
-          deposit+=data[i].deposit_amount;
+        var deposit = 0;
+        for (var i = 0; i < data1.length; i++) {
+          deposit += data[i].deposit_amount;
         }
         //To-Do: fetch from society-config
         var rateOfInterest = 0.06;
-        Member.findById(memberid, {transaction: tx}, function(err2, data2){
-          if(err2){
+        Member.findById(memberid, {transaction: tx}, function (err2, data2) {
+          if (err2) {
             cb(err2, null);
           }
-          Member.update({id: memberid}, {deposit: data2.deposit+deposit}, {transaction: tx}, function(err3, data3){
-            if(err3){
+          Member.update({id: memberid}, {deposit: data2.deposit + deposit}, {transaction: tx}, function (err3, data3) {
+            if (err3) {
               cb(err3, null);
             }
             tx.commit();
@@ -75,8 +79,7 @@ module.exports = function(Member) {
       ],
       returns: {
         arg: 'transaction', type: 'object',
-        description:
-          'The response body contains properties of the Transaction History'
+        description: 'The response body contains properties of the Transaction History'
       },
       http: {verb: 'post', path: '/transaction'}
     }

@@ -638,6 +638,7 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 }
 label{
     font-size: 12px;
+    line-height: 20px;
 }
 .society-form span{
     color: #000000;
@@ -650,4 +651,16 @@ label{
     border: 1px solid transparent;
     border-radius: 3px;
     font-size: 14px;
+}
+.table-header span{
+    background: #eeeeee;
+    padding: 0 0 0 10px;
+    border: 1px solid #e6e6e6;
+    border-collapse: collapse;
+}
+.table-data span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 0 0 15px;
 }

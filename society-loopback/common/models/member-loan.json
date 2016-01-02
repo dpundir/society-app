@@ -77,7 +77,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "loan": {
+      "type": "belongsTo",
+      "model": "Loan",
+      "keyFrom": "loanid"
+    }
+  },
   "acls": [],
   "methods": {}
 }

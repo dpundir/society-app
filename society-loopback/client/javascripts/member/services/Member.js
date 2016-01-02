@@ -17,7 +17,8 @@ define([
                     sex: member.sex || '',
                     id: member.id || '',
                     addressid: member.addressid || null,
-                    depositId: member.depositId || null
+                    depositId: member.depositId || null,
+                    marital_status: member.marital_status || ''
                 }
             };
             this.defaultMemberAddress = function defaultMemberAddress() {
@@ -84,6 +85,26 @@ define([
             };
             this.addNewTransaction = function(transaction){
                 return restInterface.post('api/Members/transaction',transaction);
+            };
+            this.getTransactionHistory = function(memberId, startDate, endDate){
+                var createDate;
+                var TWO_MONTH = 60 * 24 * 60 * 60 * 1000;
+                if(startDate && endDate){
+                    startDate = new Date(startDate).getTime();
+                    endDate = new Date(endDate).getTime();
+                    createDate = {between:[startDate, endDate]}
+                }else{
+                    createDate = {gt: new Date().getTime()-TWO_MONTH}
+                }
+                var filter = {
+                    "filter": {
+                        "where": {
+                            "memberId": memberId,
+                            "createDate":createDate
+                        }
+                    }
+                };
+                return restInterface.get('api/TransactionHistories',null,filter);
             }
         }])
 });

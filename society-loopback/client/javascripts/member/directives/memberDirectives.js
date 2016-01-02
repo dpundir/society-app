@@ -1,8 +1,9 @@
 define([
     'angular',
-    'lodash'
+    'lodash',
+    'javascripts/member/filters/memberFilters'
 ], function (angular, _) {
-    angular.module("societyApp.member.directives",[])
+    angular.module("societyApp.member.directives",["societyApp.member.filters"])
         .directive('memberDetails',['$rootScope',function ($rootScope) {
             return{
                 restrict: 'A',
@@ -169,6 +170,33 @@ define([
                   }
                 }],
                 templateUrl:'javascripts/member/partials/memberLoan.html',
+                link:function(){}
+            }
+        }])
+        .directive('transactionHistory',['$filter', function ($filter) {
+            return{
+                restrict: 'A',
+                scope:{
+                    memberId:'=',
+                    transactionHistory:'=',
+                    clickHandler:'&'
+                },
+                controller: ['$scope',function($scope){
+                    $scope.transactionData = {};
+                    $scope.date = {
+
+                    };
+                    $scope.transactionHistory.successCB = function(data){
+                        $scope.transactionData = data;
+                    };
+                    $scope.transactionHistory.errorCB = function(){
+
+                    };
+                    $scope.getTransactionHistoryByDateRange = function(){
+
+                    }
+                }],
+                templateUrl:'javascripts/member/partials/transactionHistory.html',
                 link:function(){}
             }
         }]

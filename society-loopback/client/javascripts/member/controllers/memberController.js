@@ -12,10 +12,23 @@ define([
 
                 var VIEW_MODE = {
                     NEW: 1,
-                    EDIT: 2,
-                    UPDATE: 3
+                    VIEW: 2,
+                    EDIT: 3
                 };
+                /*
+                * Default deposit tab object
+                * */
                 $scope.memberDeposit = {};
+                /*
+                * Default transaction history tab object
+                * */
+                $scope.transactionHistory = {
+                    data:'',
+                    dateRange: {
+                        startDate:'',
+                        endDate:''
+                    }
+                };
                 /*
                  * @method
                  * @name updateMemberDetail
@@ -69,7 +82,7 @@ define([
                         $scope.memberDeposit = angular.merge({}, $scope.memberDeposit, data.memberDeposit);
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;
-                        $scope.mode = VIEW_MODE.EDIT;
+                        $scope.mode = VIEW_MODE.VIEW;
                     })
                 }
                 /*
@@ -77,7 +90,7 @@ define([
                 * @name initRegistrationFormEditMode
                 * */
                 function initRegistrationFormEditMode(){
-                    $scope.mode = VIEW_MODE.UPDATE;
+                    $scope.mode = VIEW_MODE.EDIT;
                     $scope.isViewMode = false;
                     $scope.primaryHeaderText = 'Edit Member Details';
                     $scope.secondaryHeaderText = '';
@@ -101,9 +114,25 @@ define([
                             break;
                     }
                 }
+                /*
+                * Get all transaction history if a member based on id, start date, end data
+                * */
+                $scope.getTransactionHistory = function(){
+                    MemberService.getTransactionHistory($scope.member.id).then(function(data){
+                        $scope.transactionHistory.successCB(data);
+                    },function(error){
+                        $scope.transactionHistory.errorCB(error);
+                    });
+                };
+                /*
+                * Reset the deposit tab on change or click
+                * */
                 $scope.resetDepositTab = function(){
                     $scope.memberDeposit.reset();
                 };
+                /*
+                * Save a new deposit entry of a member
+                * */
                 $scope.saveNewDeposit = function(transaction){
                     transaction.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
                     transaction.memberId = $scope.member.id;
@@ -117,13 +146,13 @@ define([
                 };
                 $scope.register = function register(form) {
                     switch($scope.mode){
-                        case VIEW_MODE.EDIT:
+                        case VIEW_MODE.VIEW:
                             initRegistrationFormEditMode();
                             break;
                         case VIEW_MODE.NEW:
                             updateMemberDetail(form,'new');
                             break;
-                        case VIEW_MODE.UPDATE:
+                        case VIEW_MODE.EDIT:
                             updateMemberDetail(form,'update');
                             break;
                     }

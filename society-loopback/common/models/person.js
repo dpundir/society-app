@@ -87,6 +87,58 @@ module.exports = function (Person) {
     })
   };
 
+  Person.personCreateTransaction = function (req, cb) {
+    var Address = req.app.models.Address;
+    Person.beginTransaction({isolationLevel: Person.Transaction.READ_COMMITTED}, function (err, tx) {
+      var addressData = req.body.address;
+
+      Address.create(addressData, {transaction: tx}, function (err1, data1) {
+        if (err1) {
+          tx.rollback();
+          cb(err1, null);
+        }
+        var personData = req.body;
+        //delete personData.addressid;
+        Person.create(personData, {transaction: tx}, function (err2, data2) {
+          if (err2) {
+            tx.rollback();
+            cb(err2, null);
+          }
+          tx.commit();
+          cb(null, data2);
+        });
+      });
+    })
+  };
+
+  Person.personUpdateTransaction = function (req, cb) {
+    var Address = req.app.models.Address;
+    Person.beginTransaction({isolationLevel: Person.Transaction.READ_COMMITTED}, function (err, tx) {
+      var addressData = req.body.address;
+      //delete addressData.id;
+
+      Address.update({id: req.body.addressid}, addressData, {transaction: tx}, function (err1, data1) {
+        if (err1) {
+          tx.rollback();
+          cb(err1, null);
+        }
+        var personData = req.body;
+        personData.modified_date = new Date();
+        var personid = req.body.id;
+        //delete personData.address;
+        //delete personData.id;
+        Person.update({id: personid}, personData, {transaction: tx}, function (err2, data2) {
+          if (err2) {
+            tx.rollback();
+            cb(err2, null);
+          }
+          tx.commit();
+          cb(null, data2);
+        });
+      });
+    })
+  };
+
   Person.remoteMethod(
     'memberCreateTransaction',
     {
@@ -120,6 +172,42 @@ module.exports = function (Person) {
         description: 'The response body contains properties of the Person'
       },
       http: {verb: 'put', path: '/memberperson'}
+    }
+  );
+
+  Person.remoteMethod(
+    'personCreateTransaction',
+    {
+      description: 'Add person with address details.',
+      accepts: [
+        {arg: 'req', type: 'object', http: {source: 'req'},
+          description: 'Do not supply this argument, it is automatically extracted ' +
+            'from request headers.'
+        }
+      ],
+      returns: {
+        arg: 'person', type: 'object',
+        description: 'The response body contains properties of the Person'
+      },
+      http: {verb: 'post', path: '/personaddress'}
+    }
+  );
+
+  Person.remoteMethod(
+    'personUpdateTransaction',
+    {
+      description: 'Update person with address details.',
+      accepts: [
+        {arg: 'req', type: 'object', http: {source: 'req'},
+          description: 'Do not supply this argument, it is automatically extracted ' +
+            'from request headers.'
+        }
+      ],
+      returns: {
+        arg: 'person', type: 'object',
+        description: 'The response body contains properties of the Person'
+      },
+      http: {verb: 'put', path: '/personaddress'}
     }
   );
 };

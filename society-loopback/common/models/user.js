@@ -64,6 +64,23 @@ module.exports = function(user) {
     });
   };
 
+  user.fetchUser = function(req, cb){
+    var TokenModel = req.app.models.AccessToken;
+
+    TokenModel.findForRequest(req, {}, function(err, token) {
+      console.log(err);
+      if(err){
+        cb(err, null);
+      }
+      user.findById(token.userId, {fields:['id', 'email', 'username', 'memberid', 'personId']}, function(err, usermember){
+        if(err){
+          cb(err, null);
+        }
+        cb(null, usermember);
+      })
+    });
+  };
+
   user.remoteMethod(
     'fetchMember',
     {
@@ -80,6 +97,25 @@ module.exports = function(user) {
           'The response body contains properties of the User details'
       },
       http: {verb: 'get', path: '/usermember'}
+    }
+  );
+
+  user.remoteMethod(
+    'fetchUser',
+    {
+      description: 'Fetch member details for logged in user with access token.',
+      accepts: [
+        {arg: 'req', type: 'object', http: {source: 'req'},
+          description: 'Do not supply this argument, it is automatically extracted ' +
+            'from request headers.'
+        }
+      ],
+      returns: {
+        arg: 'user', type: 'object', root: true,
+        description:
+          'The response body contains properties of the User details'
+      },
+      http: {verb: 'get', path: '/detail'}
     }
   );
 };

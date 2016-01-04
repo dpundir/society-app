@@ -36,6 +36,9 @@ define([
             }).when('/member', {
                 'templateUrl': 'javascripts/member/partials/member-list.html',
                 'controller': 'memberListController'
+            }).when('/userprofile/:action/:id', {
+              'templateUrl': 'javascripts/admin/partials/user-profile.html',
+              'controller': 'userProfileController'
             }).when('/home', {
                 'templateUrl': 'javascripts/home/partials/home.html',
                 'controller': 'homeController'

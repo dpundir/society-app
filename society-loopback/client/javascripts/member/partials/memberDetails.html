@@ -17,7 +17,7 @@
                             <input type="text" name="fname"
                                    class="form-control"
                                    id="fname" ng-disabled="isViewMode"
-                                   required="" ng-model="member.fname">
+                                   required="" ng-model="person.fname">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -27,7 +27,7 @@
                             </div>
                             <input type="text"
                                    class="form-control" ng-disabled="isViewMode"
-                                   id="mname" ng-model="member.mname">
+                                   id="mname" ng-model="person.mname">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -39,7 +39,7 @@
                             <input type="text" name="lname"
                                    class="form-control"
                                    id="lname" ng-disabled="isViewMode"
-                                   required="" ng-model="member.lname">
+                                   required="" ng-model="person.lname">
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                             <input type="text"
                                    class="form-control" name="ffname"
                                    id="ffname" ng-disabled="isViewMode"
-                                   required="" ng-model="member.ffname">
+                                   required="" ng-model="person.ffname">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -63,7 +63,7 @@
                             </div>
                             <input type="text"
                                    class="form-control" ng-disabled="isViewMode"
-                                   id="fmname" ng-model="member.fmname">
+                                   id="fmname" ng-model="person.fmname">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -75,7 +75,7 @@
                             <input type="text"
                                    class="form-control" name="flname"
                                    id="flname" ng-disabled="isViewMode"
-                                   required="" ng-model="member.flname">
+                                   required="" ng-model="person.flname">
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                                 <span class="form-text">Gender</span>
                                 <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
-                            <select name="gender" ng-model="member.sex"
+                            <select name="gender" ng-model="person.sex"
                                     class="form-control"
                                     ng-disabled="isViewMode" required="">
                                 <option value="m">Male</option>
@@ -101,7 +101,7 @@
                                 <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
                             <input type="text" class="form-control" id="phone" name="phone"
-                                   ng-disabled="isViewMode" required="" ng-model="member.phone">
+                                   ng-disabled="isViewMode" required="" ng-model="person.phone">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -112,7 +112,7 @@
                         <div class="form-group input-group">
                             <input type="text" class="form-control" ng-disabled="isViewMode"
                                    datepicker-popup="{{dob.format}}"
-                                   ng-model="member.dob" is-open="dob.status.opened"
+                                   ng-model="person.dob" is-open="dob.status.opened"
                                    max-date="dob.maxDate"
                                    datepicker-options="dob.dateOptions" id="dob" name="dob"
                                    ng-required="true" close-text="Close" required=""/>
@@ -132,7 +132,7 @@
                                 <span class="form-text">Marital Status</span>
                                 <span class="text-danger" ng-show="!isViewMode">*</span>
                             </div>
-                            <select name="gender" ng-model="member.marital_status"
+                            <select name="gender" ng-model="person.marital_status"
                                     class="form-control"
                                     ng-disabled="isViewMode" required="">
                                 <option value="1">Married</option>

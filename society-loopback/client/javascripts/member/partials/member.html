@@ -14,7 +14,7 @@
                                 <div>
                                     <p class="text-danger" ng-bind="formValidationInfoText"></p>
                                 </div>
-                                <div member-details member="member"
+                                <div member-details person="member.person"
                                      address="address"
                                      is-view-mode="isViewMode"
                                      action-text="actionText"
@@ -59,6 +59,25 @@
                                      click-handler="getTransactionHistory(id, startDate, endDate)">
                                 </div>
                             </div>
+                        </div>
+                    </tab>
+                    <tab heading="Nomination">
+                        <div class="row society-form">
+                            <div class="form-top">
+                                <div>
+                                    <h3 class="text-primary" ng-bind="primaryHeaderText"></h3>
+                                    <p class="text-info" ng-bind="secondaryHeaderText"></p>
+                                </div>
+                                <div>
+                                    <p class="text-danger" ng-bind="formValidationInfoText"></p>
+                                </div>
+                                <div member-details member="member"
+                                     address="address"
+                                     is-view-mode="isViewMode"
+                                     action-text="actionText"
+                                     click-handler="register(form)"></div>
+                            </div>
+
                         </div>
                     </tab>
                 </tabset>

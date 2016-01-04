@@ -51,15 +51,15 @@
     "dataSource": "mysql-ds",
     "public": true
   },
-  "MemberLoan": {
-    "dataSource": "mysql-ds",
-    "public": true
-  },
   "Member": {
     "dataSource": "mysql-ds",
     "public": true
   },
   "MemberDeposit": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "Person": {
     "dataSource": "mysql-ds",
     "public": true
   },

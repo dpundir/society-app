@@ -8,7 +8,7 @@ define([
             return{
                 restrict: 'A',
                 scope:{
-                    member : '=',
+                    person : '=',
                     address: '=',
                     isViewMode:'=',
                     actionText:'=',

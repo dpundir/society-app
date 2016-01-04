@@ -18,8 +18,8 @@ define([
                     _.forEach(data,function(people){
                         var peopleList = {},address = people.address;
                         peopleList.fullName = join.call([people.fname,people.mname,people.lname],' ');
-                        peopleList.fullAddress = join.call([address.address1,address.address2,
-                            address.address3,address.city,address.state,address.pincode],', ');
+                        //peopleList.fullAddress = join.call([address.address1,address.address2,
+                            //address.address3,address.city,address.state,address.pincode],', ');
                         peopleList.id = people.id;
                         peopleList.phone = people.phone;
                         peopleList.img = people.img || 'image/default-emp.jpg';

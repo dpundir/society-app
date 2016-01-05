@@ -1,5 +1,5 @@
 {
-  "name": "Member",
+  "name": "Person",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
@@ -7,7 +7,7 @@
   },
   "mysql": {
     "schema": "society",
-    "table": "member"
+    "table": "person"
   },
   "properties": {
     "id": {
@@ -91,6 +91,22 @@
       },
       "_selectable": false
     },
+    "addressid": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "addressid",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
     "createDate": {
       "type": "Date",
       "required": true,
@@ -139,66 +155,114 @@
       },
       "_selectable": true
     },
-    "depositId": {
-      "type": "Number",
-      "required": false,
+    "dob": {
+      "type": "Date",
+      "required": true,
       "length": null,
-      "precision": 10,
-      "scale": 0,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "deposit_id",
-        "dataType": "int",
+        "columnName": "dob",
+        "dataType": "date",
         "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
+    "ffname": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "ffname",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "Y"
       },
       "_selectable": true
     },
-    "deposit": {
-      "type": "Number",
+    "fmname": {
+      "type": "String",
       "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
+      "length": 45,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "deposit",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
+        "columnName": "fmname",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "Y"
       },
       "_selectable": true
     },
-    "personId": {
-      "type": "Number",
+    "flname": {
+      "type": "String",
       "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
+      "length": 45,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "person_id",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
+        "columnName": "flname",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "Y"
       },
       "_selectable": true
     },
-    "nomineeId": {
-      "type": "Number",
+    "sex": {
+      "type": "String",
       "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
+      "length": 1,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "nominee_id",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
+        "columnName": "sex",
+        "dataType": "char",
+        "dataLength": 1,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      },
+      "_selectable": true
+    },
+  "marital_status": {
+    "type": "Number",
+    "required": false,
+    "length": null,
+    "precision": 10,
+    "scale": 0,
+    "mysql": {
+      "columnName": "marital_status",
+      "dataType": "int",
+      "dataLength": null,
+      "dataPrecision": 10,
+      "dataScale": 0,
+      "nullable": "Y"
+    },
+    "_selectable": true
+  },
+    "relation": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "relation",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "Y"
       },
       "_selectable": true
@@ -206,35 +270,11 @@
   },
   "validations": [],
   "relations": {
-    "person": {
+    "address": {
       "type": "hasOne",
-      "model": "Person",
+      "model": "Address",
       "foreignKey": "id",
-      "keyFrom": "personId"
-    },
-    "nominee": {
-      "type": "hasOne",
-      "model": "Person",
-      "foreignKey": "id",
-      "keyFrom": "nomineeId"
-    },
-    "memberDeposit": {
-      "type": "hasOne",
-      "model": "MemberDeposit",
-      "foreignKey": "id",
-      "keyFrom": "depositId"
-    },
-    "transactionHistory": {
-      "type": "hasMany",
-      "model": "TransactionHistory",
-      "foreignKey": "id",
-      "keyTo": "memberId"
-    },
-    "user": {
-      "type": "belongsTo",
-      "model": "User",
-      "foreignKey": "id",
-      "keyTo": "userid"
+      "keyFrom": "addressid"
     }
   },
   "acls": [],

@@ -67,6 +67,125 @@ module.exports = function (Member) {
     })
   };
 
+
+  Member.createPersonAddress = function (req, cb) {
+    var Person = req.app.models.Person;
+    var Address = req.app.models.Address;
+    Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
+      var addressData = req.body.person.address;
+
+      Address.create(addressData, {transaction: tx}, function (err1, data1) {
+        if (err1) {
+          tx.rollback();
+          cb(err1, null);
+        }
+        var personData = req.body.person;
+        personData.addressid = data1.id;
+        personData.createDate = new Date();
+        personData.modifiedDate = new Date();
+        delete personData.address;
+        Person.create(personData, {transaction: tx}, function (err2, data2) {
+          if (err2) {
+            tx.rollback();
+            cb(err2, null);
+          }
+          var memberData = req.body;
+          memberData.person_id = data2.id;
+          memberData.id = '';
+          memberData.createDate = new Date();
+          memberData.modifiedDate = new Date();
+          delete memberData.person;
+          Member.create(memberData, {transaction: tx}, function (err3, data3) {
+            if (err3) {
+              tx.rollback();
+              cb(err3, null);
+            }
+            tx.commit();
+            cb(null, data3);
+          });
+        });
+      });
+    })
+  };
+
+  Member.updatePersonAddress = function (req, cb) {
+    var Person = req.app.models.Person;
+    var Address = req.app.models.Address;
+    Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
+      var addressData = req.body.person.address;
+      var addressId = req.body.person.address.id;
+      delete addressData.id;
+
+      Address.update({id: addressId}, addressData, {transaction: tx}, function (err1, data1) {
+        if (err1) {
+          tx.rollback();
+          cb(err1, null);
+        }
+        var personData = req.body.person;
+        var personId = req.body.person.id;
+        personData.modified_date = new Date();
+        delete personData.address;
+        delete personData.id;
+        Person.update({id: personId}, personData, {transaction: tx}, function (err2, data2) {
+          if (err2) {
+            tx.rollback();
+            cb(err2, null);
+          }
+          var memberData = req.body;
+          var memberId = req.body.id;
+          memberData.modified_date = new Date();
+          delete memberData.person;
+          delete memberData.id;
+          Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
+            if (err3) {
+              tx.rollback();
+              cb(err3, null);
+            }
+            tx.commit();
+            cb(null, data3);
+          });
+        });
+      });
+    })
+  };
+
+  Member.remoteMethod(
+    'createPersonAddress',
+    {
+      description: 'Add member with person and address details.',
+      accepts: [
+        {arg: 'req', type: 'object', http: {source: 'req'},
+          description: 'Do not supply this argument, it is automatically extracted ' +
+            'from request headers.'
+        }
+      ],
+      returns: {
+        arg: 'member', type: 'object',
+        description: 'The response body contains properties of the Member'
+      },
+      http: {verb: 'post', path: '/personaddress'}
+    }
+  );
+
+  Member.remoteMethod(
+    'updatePersonAddress',
+    {
+      description: 'Update member with person and address details.',
+      accepts: [
+        {arg: 'req', type: 'object', http: {source: 'req'},
+          description: 'Do not supply this argument, it is automatically extracted ' +
+            'from request headers.'
+        }
+      ],
+      returns: {
+        arg: 'member', type: 'object',
+        description: 'The response body contains properties of the Memberr'
+      },
+      http: {verb: 'put', path: '/personaddress'}
+    }
+  );
+
+
   Member.remoteMethod(
     'memberTransaction',
     {

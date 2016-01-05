@@ -39,12 +39,12 @@ define([
                         $location.url('/member');
                     }
                     function errorCB(){}
-                    $scope.member.dob = $filter('date')($scope.member.dob,'yyyy-MM-dd');
+                    $scope.member.person.dob = $filter('date')($scope.member.person.dob,'yyyy-MM-dd');
                     if(type === 'update') {
-                        MemberService.updateMemberDetail($scope.member, $scope.address).then(successCB,errorCB);
+                        MemberService.updateMember($scope.member, $scope.address).then(successCB,errorCB);
                     }else{
                         $scope.member.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
-                        MemberService.addNewMemberDetail($scope.member, $scope.address).then(successCB,errorCB);
+                        MemberService.addMember($scope.member, $scope.address).then(successCB,errorCB);
                     }
                 }
                 /*
@@ -76,10 +76,9 @@ define([
                         $scope.secondaryHeaderText = 'To edit member details, click on edit button.';
                         $scope.formValidationInfoText = '';
                         $scope.actionText = 'Edit';
-                        $scope.address = data.address;
+                        $scope.address = data.person.address;
                         $scope.member = MemberService.defaultMember(data);
-                        $scope.memberFullName = [data.fname,data.mname,data.lname].join(' ');
-                        $scope.member.dob = new Date(data.dob);
+                        $scope.member.person.dob = new Date(data.person.dob);
                         $scope.memberDeposit = angular.merge({}, $scope.memberDeposit, data.memberDeposit);
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;

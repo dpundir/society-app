@@ -7,6 +7,7 @@ var login = function (req, res) {
   var FIVE_MINUTES = 60 * 5;
   User.login({
     email: req.body.email,
+    username: req.body.username,
     password: req.body.password,
     ttl: FIVE_MINUTES
   }, 'user', function (err, token) {
@@ -15,7 +16,8 @@ var login = function (req, res) {
     } else {
       res.send({
         email: req.body.email,
-        accessToken: token.id
+        accessToken: token.id,
+        username: token.__data.user.username
       });
     }
   });
@@ -56,7 +58,7 @@ var requestResetPassword = function (req, res, next) {
   User.resetPassword({
     email: req.body.email
   }, function (err) {
-    if (err) return res.status(401).send(err);
+    if (err) return res.status(err.statusCode || 401).send(err);
 
     res.send({
       title: 'Password reset requested',

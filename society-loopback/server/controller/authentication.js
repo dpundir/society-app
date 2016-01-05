@@ -16,7 +16,8 @@ var login = function (req, res) {
     } else {
       res.send({
         email: req.body.email,
-        accessToken: token.id
+        accessToken: token.id,
+        username: token.__data.user.username
       });
     }
   });

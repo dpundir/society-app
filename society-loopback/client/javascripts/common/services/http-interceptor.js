@@ -16,6 +16,7 @@ define([
                 console.log(rejection);
                 if (rejection && rejection.status === 401) {
                     $cookies.remove('access-token');
+                    $cookies.remove('user');
                     $location.url('/login');
                     return $q.reject(rejection);
                 }

@@ -3,6 +3,11 @@
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10 vertical-tab">
+                <div class="row member-header-name" ng-show="mode !== 1">
+                    <span ng-bind="memberFullName"></span>
+                    <span>,</span>
+                    <span ng-bind="member.id"></span>
+                </div>
                 <tabset>
                     <tab heading="Member details">
                         <div class="row society-form">

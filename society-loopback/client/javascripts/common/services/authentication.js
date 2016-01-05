@@ -21,6 +21,12 @@ define([
                         $cookies.put('access-token', data.accessToken, {
                             expires: now
                         });
+                        $cookies.putObject('user', {
+                            email: data.email,
+                            username: data.username
+                        }, {
+                            expires: now
+                        });
                         defer.resolve(data);
                     }, function (data) {
                         defer.reject(data);
@@ -30,6 +36,7 @@ define([
                 this.logout = function logout() {
                     restInterface.get('/logout').then(function (data) {
                         $cookies.remove('access-token');
+                        $cookies.remove('user');
                         $location.url('/login');
                     });
                 };
@@ -39,6 +46,7 @@ define([
                         $location.url('/register/success');
                     }, function (data) {
                         $cookies.remove('access-token');
+                        $cookies.remove('user');
                     });
                 };
                 this.requestResetPassword = function requestResetPassword(body) {
@@ -49,6 +57,7 @@ define([
                     }, function (data) {
                         console.log(data);
                         $cookies.remove('access-token');
+                        $cookies.remove('user');
                     });
                 };
                 this.resetPassword = function resetPassword(body) {
@@ -58,6 +67,7 @@ define([
                     }, function (data) {
                         console.log(data);
                         $cookies.remove('access-token');
+                        $cookies.remove('user');
                     });
                 };
             }

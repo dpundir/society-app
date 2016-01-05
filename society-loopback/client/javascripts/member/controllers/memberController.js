@@ -5,9 +5,9 @@ define([
 ], function () {
     angular.module("societyApp.member.controller.memberregistration",
         ["societyApp.member.services.member",
-        "societyApp.member.directives"])
+            "societyApp.member.directives"])
         .controller('memberRegistrationController',
-        ['$scope', 'MemberService', '$location', '$routeParams','$filter',
+        ['$scope', 'MemberService', '$location', '$routeParams', '$filter',
             function ($scope, MemberService, $location, $routeParams, $filter) {
 
                 var VIEW_MODE = {
@@ -16,17 +16,17 @@ define([
                     EDIT: 3
                 };
                 /*
-                * Default deposit tab object
-                * */
+                 * Default deposit tab object
+                 * */
                 $scope.memberDeposit = {};
                 /*
-                * Default transaction history tab object
-                * */
+                 * Default transaction history tab object
+                 * */
                 $scope.transactionHistory = {
-                    data:'',
+                    data: '',
                     dateRange: {
-                        startDate:'',
-                        endDate:''
+                        startDate: '',
+                        endDate: ''
                     }
                 };
                 /*
@@ -34,24 +34,28 @@ define([
                  * @name updateMemberDetail
                  * to update existing member OR add new member
                  * */
-                function updateMemberDetail(form, type){
-                    function successCB(){
+                function updateMemberDetail(form, type) {
+                    function successCB() {
                         $location.url('/member');
                     }
-                    function errorCB(){}
-                    $scope.member.person.dob = $filter('date')($scope.member.person.dob,'yyyy-MM-dd');
-                    if(type === 'update') {
-                        MemberService.updateMember($scope.member, $scope.address).then(successCB,errorCB);
-                    }else{
-                        $scope.member.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
-                        MemberService.addMember($scope.member, $scope.address).then(successCB,errorCB);
+
+                    function errorCB() {
+                    }
+
+                    $scope.member.person.dob = $filter('date')($scope.member.person.dob, 'yyyy-MM-dd');
+                    if (type === 'update') {
+                        MemberService.updateMember($scope.member, $scope.address).then(successCB, errorCB);
+                    } else {
+                        $scope.member.createDate = $filter('date')(new Date(), 'yyyy-MM-dd');
+                        MemberService.addMember($scope.member, $scope.address).then(successCB, errorCB);
                     }
                 }
+
                 /*
-                * @method
-                * @name resetRegistrationForm
-                * reset the form on new mode
-                * */
+                 * @method
+                 * @name resetRegistrationForm
+                 * reset the form on new mode
+                 * */
                 function initRegistrationFormNewMode() {
                     //Default member
                     $scope.member = MemberService.defaultMember({});
@@ -65,13 +69,14 @@ define([
                     $scope.mode = VIEW_MODE.NEW;
                     $scope.isViewMode = false;
                 }
+
                 /*
-                * @method
-                * @name initRegistrationFormViewMode
-                * initialize the form in view mode with all data
-                * */
-                function initRegistrationFormViewMode(memberId){
-                    MemberService.getMemberDetail(memberId).then(function(data){
+                 * @method
+                 * @name initRegistrationFormViewMode
+                 * initialize the form in view mode with all data
+                 * */
+                function initRegistrationFormViewMode(memberId) {
+                    MemberService.getMemberDetail(memberId).then(function (data) {
                         $scope.primaryHeaderText = 'Member Details';
                         $scope.secondaryHeaderText = 'To edit member details, click on edit button.';
                         $scope.formValidationInfoText = '';
@@ -85,11 +90,12 @@ define([
                         $scope.mode = VIEW_MODE.VIEW;
                     })
                 }
+
                 /*
-                * @method
-                * @name initRegistrationFormEditMode
-                * */
-                function initRegistrationFormEditMode(){
+                 * @method
+                 * @name initRegistrationFormEditMode
+                 * */
+                function initRegistrationFormEditMode() {
                     $scope.mode = VIEW_MODE.EDIT;
                     $scope.isViewMode = false;
                     $scope.primaryHeaderText = 'Edit Member Details';
@@ -97,7 +103,8 @@ define([
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
                     $scope.actionText = 'Update';
                 }
-                 /*
+
+                /*
                  * @method
                  * @name init
                  * initialization, view or new mode
@@ -114,52 +121,53 @@ define([
                             break;
                     }
                 }
+
                 /*
-                * Get all transaction history if a member based on id, start date, end data
-                * */
-                $scope.getTransactionHistory = function(){
-                    MemberService.getTransactionHistory($scope.member.id).then(function(data){
+                 * Get all transaction history if a member based on id, start date, end data
+                 * */
+                $scope.getTransactionHistory = function () {
+                    MemberService.getTransactionHistory($scope.member.id).then(function (data) {
                         $scope.transactionHistory.successCB(data);
-                    },function(error){
+                    }, function (error) {
                         $scope.transactionHistory.errorCB(error);
                     });
                 };
                 /*
-                * Reset the deposit tab on change or click
-                * */
-                $scope.resetDepositTab = function(){
+                 * Reset the deposit tab on change or click
+                 * */
+                $scope.resetDepositTab = function () {
                     $scope.memberDeposit.reset();
                 };
                 /*
-                * Save a new deposit entry of a member
-                * */
-                $scope.saveNewDeposit = function(transaction){
-                    transaction.createDate = $filter('date')(new Date(),'yyyy-MM-dd');
+                 * Save a new deposit entry of a member
+                 * */
+                $scope.saveNewDeposit = function (transaction) {
+                    transaction.createDate = $filter('date')(new Date(), 'yyyy-MM-dd');
                     transaction.memberId = $scope.member.id;
-                  transaction.depositAmount = Number(transaction.depositAmount);
-                    MemberService.addNewTransaction(transaction).then(function(data){
+                    transaction.depositAmount = Number(transaction.depositAmount);
+                    MemberService.addNewTransaction(transaction).then(function (data) {
                         $scope.memberDeposit.deposit = data.transaction.deposit;
                         $scope.memberDeposit.successCB();
-                    },function(error){
+                    }, function (error) {
                         $scope.memberDeposit.errorCB();
                     })
                 };
                 $scope.register = function register(form) {
-                    switch($scope.mode){
+                    switch ($scope.mode) {
                         case VIEW_MODE.VIEW:
                             initRegistrationFormEditMode();
                             break;
                         case VIEW_MODE.NEW:
-                            updateMemberDetail(form,'new');
+                            updateMemberDetail(form, 'new');
                             break;
                         case VIEW_MODE.EDIT:
-                            updateMemberDetail(form,'update');
+                            updateMemberDetail(form, 'update');
                             break;
                     }
                 };
                 /*
-                * Initialize on load
-                * */
+                 * Initialize on load
+                 * */
                 init();
             }]);
 });

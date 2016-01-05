@@ -15,7 +15,7 @@ var login = function (req, res) {
       res.sendStatus(err.statusCode);
     } else {
       res.send({
-        email: req.body.email,
+        email: token.__data.user.email,
         accessToken: token.id,
         username: token.__data.user.username
       });

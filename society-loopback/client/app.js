@@ -10,21 +10,25 @@ define([
     'angular-animate',
     'angular-aria',
     'angular-ui-bootstrap',
+    'angular-ui-grid',
     'ngStorage',
     'javascripts/admin',
     'javascripts/member',
     'javascripts/home',
-  'javascripts/loan'
+    'javascripts/loan'
 ], function (angular) {
     var app = angular.module("societyApp", [
         "ngRoute",
         "ngCookies",
         "ngStorage",
+        "ui.grid",
+        "ui.grid.selection",
+        "ui.grid.pagination",
         "ui.bootstrap",
         "societyApp.home",
         "societyApp.admin",
         "societyApp.member",
-      "societyApp.loan"
+        "societyApp.loan"
     ])
         .config(function ($routeProvider, $provide) {
             $provide.value('$context', {});
@@ -37,8 +41,8 @@ define([
                 'templateUrl': 'javascripts/member/partials/member-list.html',
                 'controller': 'memberListController'
             }).when('/userprofile/:action/:id', {
-              'templateUrl': 'javascripts/admin/partials/user-profile.html',
-              'controller': 'userProfileController'
+                'templateUrl': 'javascripts/admin/partials/user-profile.html',
+                'controller': 'userProfileController'
             }).when('/home', {
                 'templateUrl': 'javascripts/home/partials/home.html',
                 'controller': 'homeController'
@@ -55,8 +59,8 @@ define([
                 'templateUrl': 'javascripts/admin/partials/register-message.html',
                 'controller': 'registerController'
             }).when('/loan/:id', {
-              'templateUrl': 'javascripts/loan/partials/loan-detail.html',
-              'controller': 'loanController'
+                'templateUrl': 'javascripts/loan/partials/loan-detail.html',
+                'controller': 'loanController'
             }).otherwise({
                 'redirectTo': '/login'
             });

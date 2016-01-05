@@ -4,19 +4,13 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
                 <div class="filter-bar">
-
+                    <div style="text-align: left">
+                        <button class="btn btn-default" ng-click="toggleFilter()">Show filter</button>
+                        <button class="btn btn-primary" ng-click="showDetails()">Show details</button>
+                    </div>
                 </div>
                 <div ng-cloak class="member-list">
-                    <div ng-repeat="person in people" class="member-inner-list">
-                        <img alt="{{::person.fullName}}" ng-src="{{::person.img}}" class="society-avatar"/>
-                        <p>
-                            <span ng-bind="::person.fullName" class="text-name"></span></br>
-                            <label>Member ID:</label><span ng-bind="::person.id"></span></br>
-                            <label>Address:</label><span ng-bind="::person.fullAddress"></span></br>
-                            <label>Contact No:</label><span ng-bind="::person.phone"></span>
-                        </p>
-                        <button type="button" class="btn btn-primary" ng-click="showDetails(person.id)">View detail</button>
-                    </div>
+                    <div ui-grid="memberListGrid" ui-grid-selection ui-grid-pagination class="myGrid"></div>
                 </div>
             </div>
         </div>

@@ -3,9 +3,10 @@
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
+                <div class="alert alert-danger" role="alert" ng-bind="error.errorMsg" ng-show="error.showErrorMsg"></div>
                 <div class="filter-bar">
-                    <div style="text-align: left">
-                        <button class="btn btn-default" ng-click="toggleFilter()">Show filter</button>
+                    <div>
+                        <button class="btn btn-primary" ng-click="toggleFilter()" ng-bind="filterText"></button>
                         <button class="btn btn-primary" ng-click="showDetails()">Show details</button>
                     </div>
                 </div>

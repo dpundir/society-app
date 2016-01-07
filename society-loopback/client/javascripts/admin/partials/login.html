@@ -15,7 +15,7 @@
                         </div>
                         <hr/>
                         <div class="form-bottom">
-                            <form role="form" action="" method="post" class="login-form" name="loginForm">
+                            <form role="form" class="login-form" name="loginForm" novalidate="">
                                 <div>
                                     <p class="text-danger" ng-show="isError" ng-bind="errorLoginText"></p>
                                 </div>
@@ -40,7 +40,7 @@
                                            class="form-password form-control" required=""
                                            id="form-password" ng-model="password">
                                 </div>
-                                <button type="button"
+                                <button type="submit"
                                         class="btn btn-primary"
                                         ng-click="adminLogin(loginForm)"
                                         ng-bind="actionText"></button>

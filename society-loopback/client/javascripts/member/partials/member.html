@@ -4,18 +4,31 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-10 vertical-tab">
                 <div class="row member-header-name" ng-show="mode !== 1">
-                    <span ng-bind="memberFullName"></span>
-                    <span>,</span>
-                    <span ng-bind="member.id"></span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name:</label>
+                            <span ng-bind="memberFullName"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label>ID:</label>
+                            <span ng-bind="member.id"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Status:</label>
+                            <span ng-bind="member.status"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Active from:</label>
+                            <span ng-bind="member.createDate | date:'dd-MMM-yyyy'"></span>
+                        </div>
+                    </div>
                 </div>
                 <tabset>
                     <tab heading="Member details">
                         <div class="row society-form">
                             <div class="form-top">
-                                <div>
-                                    <h3 class="text-primary" ng-bind="primaryHeaderText"></h3>
-                                    <p class="text-info" ng-bind="secondaryHeaderText"></p>
-                                </div>
                                 <div>
                                     <p class="text-danger" ng-bind="formValidationInfoText"></p>
                                 </div>

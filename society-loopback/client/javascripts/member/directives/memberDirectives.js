@@ -58,7 +58,9 @@ define([
                         if(isFormValid) {
                             $scope.clickHandler({form: form});
                         }
-                    }
+                    };
+                    $scope.isInfoCollapsed = false;
+                    $scope.isAddressCollapsed = false;
                 }],
                 templateUrl:'javascripts/member/partials/memberDetails.html',
                 link:function(){}

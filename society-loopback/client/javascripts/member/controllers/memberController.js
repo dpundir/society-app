@@ -84,6 +84,7 @@ define([
                         $scope.address = data.person.address;
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.person.dob = new Date(data.person.dob);
+                        $scope.memberFullName = data.fname+' '+data.mname+' '+data.lname;
                         $scope.memberDeposit = angular.merge({}, $scope.memberDeposit, data.memberDeposit);
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;
@@ -149,7 +150,7 @@ define([
                         $scope.memberDeposit.deposit = data.transaction.deposit;
                         $scope.memberDeposit.successCB();
                     }, function (error) {
-                        $scope.memberDeposit.errorCB();
+                        $scope.memberDeposit.errorCB(error);
                     })
                 };
                 $scope.register = function register(form) {

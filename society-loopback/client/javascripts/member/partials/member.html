@@ -33,7 +33,7 @@
                                     <p class="text-danger" ng-bind="formValidationInfoText"></p>
                                 </div>
                                 <div member-details person="member.person"
-                                     address="address"
+                                     address="member.person.address"
                                      is-view-mode="isViewMode"
                                      action-text="actionText"
                                      click-handler="register(form)"></div>
@@ -67,6 +67,7 @@
                                     <h3 class="text-primary">Documents</h3>
                                     <p class="text-info"></p>
                                 </div>
+                                <div member-document member="member"></div>
                             </div>
                         </div>
                     </tab>

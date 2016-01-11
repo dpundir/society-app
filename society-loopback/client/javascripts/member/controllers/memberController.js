@@ -44,10 +44,10 @@ define([
 
                     $scope.member.person.dob = $filter('date')($scope.member.person.dob, 'yyyy-MM-dd');
                     if (type === 'update') {
-                        MemberService.updateMember($scope.member, $scope.address).then(successCB, errorCB);
+                        MemberService.updateMember($scope.member).then(successCB, errorCB);
                     } else {
                         $scope.member.createDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-                        MemberService.addMember($scope.member, $scope.address).then(successCB, errorCB);
+                        MemberService.addMember($scope.member).then(successCB, errorCB);
                     }
                 }
 
@@ -60,7 +60,7 @@ define([
                     //Default member
                     $scope.member = MemberService.defaultMember({});
                     //Default address
-                    $scope.address = MemberService.defaultMemberAddress();
+                    $scope.member.person.address = MemberService.defaultMemberAddress({});
                     //header texts
                     $scope.primaryHeaderText = 'New Member Registration';
                     $scope.secondaryHeaderText = '';
@@ -81,8 +81,8 @@ define([
                         $scope.secondaryHeaderText = 'To edit member details, click on edit button.';
                         $scope.formValidationInfoText = '';
                         $scope.actionText = 'Edit';
-                        $scope.address = data.person.address;
                         $scope.member = MemberService.defaultMember(data);
+                        $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
                         $scope.member.person.dob = new Date(data.person.dob);
                         $scope.memberFullName = data.fname+' '+data.mname+' '+data.lname;
                         $scope.memberDeposit = angular.merge({}, $scope.memberDeposit, data.memberDeposit);
@@ -172,7 +172,3 @@ define([
                 init();
             }]);
 });
-
-
-
-

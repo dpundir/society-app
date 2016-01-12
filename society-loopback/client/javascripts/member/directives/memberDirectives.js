@@ -233,6 +233,42 @@ define([
                 templateUrl:'javascripts/member/partials/transactionHistory.html',
                 link:function(){}
             }
+        }])
+        .directive('memberDocument',['$filter', '$parse', function ($filter, $parse) {
+            return{
+                restrict: 'A',
+                scope:{
+                    member:'=',
+                    clickHandler:'&'
+                },
+                controller: ['$scope', 'fileUpload',function($scope, fileUpload){
+                    $scope.uploadFile = function(){
+                        var file = $scope.myFile;
+
+                        console.log('file is ' );
+                        console.dir(file);
+
+                        var uploadUrl = "/document/upload";
+                        var data = {
+                            id: '',
+                            memberId: $scope.member.id,
+                            data: file
+                        }
+                        fileUpload.uploadFileToUrl(file, uploadUrl);
+                    };
+                }],
+                templateUrl:'javascripts/member/partials/memberDocument.html',
+                link:function(scope, element, attrs){
+                    var model = $parse(element.find('input').attr('file-data'));
+                    var modelSetter = model.assign;
+
+                    element.bind('change', function(){
+                        scope.$apply(function(){
+                            modelSetter(scope, element.find('input')[0].files[0]);
+                        });
+                    });
+                }
+            }
         }]
     );
 });

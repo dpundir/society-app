@@ -1,8 +1,7 @@
 <div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10 vertical-tab">
+            <div class="col-sm-12 vertical-tab member">
                 <div class="row member-header-name" ng-show="mode !== 1">
                     <div class="row">
                         <div class="col-md-6">
@@ -41,7 +40,7 @@
 
                         </div>
                     </tab>
-                    <tab heading="Deposit" disable="mode == 1" select="resetDepositTab()">
+                    <tab heading="Deposit" disable="mode == 1" select="getMemberDeposit()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div member-deposit deposit="memberDeposit"
@@ -75,7 +74,7 @@
                         <div class="row society-form">
                             <div class="form-top">
                                 <div transaction-history="transactionHistory" member-id="member.id"
-                                     click-handler="getTransactionHistory(id, startDate, endDate)">
+                                     click-handler="getTransactionHistory(startDate, endDate)">
                                 </div>
                             </div>
                         </div>

@@ -136,8 +136,8 @@
                             <select name="gender" ng-model="person.marital_status"
                                     class="form-control"
                                     ng-disabled="isViewMode" required="">
-                                <option value="1">Married</option>
-                                <option value="0">Unmarried</option>
+                                <option value='1'>Married</option>
+                                <option value='0'>Unmarried</option>
                             </select>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
             </div>
         </div>
         <div class="row btn-register">
-            <div class="col-sm-4 column">
+            <div class="col-sm-3 column">
                 <button type="button"
                         class="btn btn-primary"
                         ng-click="register(registrationForm)" ng-bind="actionText"></button>

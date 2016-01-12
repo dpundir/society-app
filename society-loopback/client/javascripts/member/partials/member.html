@@ -40,7 +40,7 @@
 
                         </div>
                     </tab>
-                    <tab heading="Deposit" disable="mode == 1" select="resetDepositTab()">
+                    <tab heading="Deposit" disable="mode == 1" select="getMemberDeposit()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div member-deposit deposit="memberDeposit"
@@ -74,7 +74,7 @@
                         <div class="row society-form">
                             <div class="form-top">
                                 <div transaction-history="transactionHistory" member-id="member.id"
-                                     click-handler="getTransactionHistory(id, startDate, endDate)">
+                                     click-handler="getTransactionHistory(startDate, endDate)">
                                 </div>
                             </div>
                         </div>

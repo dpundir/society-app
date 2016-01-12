@@ -129,28 +129,34 @@ define([
                             $scope.saveHandler({transaction: $scope.transaction});
                         }
                     };
-                    $scope.$watch('deposit',function(deposit){
-                         if(deposit.installmentValue){
-                             $scope.transaction.depositAmount = deposit.installmentValue;
-                         }
-                        if(deposit.installmentFreq){
-                            $scope.installmentFrequency = installmentFreq[deposit.installmentFreq];
+                    $scope.deposit.successCB = function(data,showSuccessMsg){
+                        if(data){
+                            if(data.installmentValue){
+                                $scope.transaction.depositAmount = data.installmentValue;
+                            }
+                            if(data.installmentFreq){
+                                $scope.installmentFrequency = installmentFreq[data.installmentFreq];
+                            }
+                            $scope.deposit.shareValue = data.shareValue;
+                            $scope.deposit.installmentValue = data.installmentValue;
+                        }else {
+                            $scope.isCollapsed = true;
+                            $scope.successMsg = 'Deposit Successful.';
+                            $scope.showSuccessMsg = true;
                         }
-                    },true);
-                    $scope.deposit.successCB = function(){
-                        $scope.isCollapsed = true;
-                        $scope.successMsg = 'Deposit Successful.';
-                        $scope.showSuccessMsg = true;
                         resetTransaction();
-                    };
-                    $scope.deposit.errorCB = function(){
-                        $scope.errorMsg = 'Error in deposit, please try again later.';
-                        $scope.showErrorMsg = true;
-                    };
-                    $scope.deposit.reset = function(){
+                        !showSuccessMsg && resetError();
                         $scope.isCollapsed = true;
-                        resetTransaction();
-                        resetError();
+                    };
+                    $scope.deposit.errorCB = function(error){
+                        if(error){
+                            resetError();
+                            $scope.errorMsg = 'No data available for default member deposit.';
+                            $scope.showErrorMsg = true;
+                        }else {
+                            $scope.errorMsg = 'Error in deposit, please try again later.';
+                            $scope.showErrorMsg = true;
+                        }
                     };
                     $scope.isCollapsed = true;
                     resetTransaction();
@@ -184,8 +190,35 @@ define([
                     clickHandler:'&'
                 },
                 controller: ['$scope',function($scope){
-                    $scope.date = {};
+                    $scope.transactionHistory = $scope.transactionHistory || {};
+                    $scope.date = {
+                        dateOption: {
+                            formatYear: 'yy',
+                            startingDay: 1
+                        },
+                        format: 'dd-MM-yyyy',
+                        status: {
+                            startDateOpened: false,
+                            endDateOpened: false
+                        },
+                        startDate:new Date(),
+                        endDate:new Date()
+                    };
+                    $scope.open = function open(type) {
+                        if(type === 'start'){
+                            this.date.status.startDateOpened = true;
+                        }else{
+                            this.date.status.endDateOpened = true;
+                        }
+                    };
+
                     $scope.isTnxHistoryCollapsed = false;
+                    $scope.isTnxHistoryByDateCollapsed = true;
+                    $scope.transactionHistoryHeaderText = 'Transaction history for last 2 month';
+                    function resetErrorMessage(){
+                        $scope.errorMsg = '';
+                        $scope.showErrorMsg = false
+                    }
                     $scope.transactionHistoryGrid = {
                         enableSorting: false,
                         enableFiltering: false,
@@ -213,7 +246,7 @@ define([
                         var transHistory = [];
                         _.forEach(data,function(transaction){
                             var history = {};
-                            history.date = $filter('date')(transaction.createDate,'dd-MM-yyyy');
+                            history.date = $filter('date')(transaction.createDate,$scope.date.format);
                             history.depositAmount = transaction.depositAmount;
                             history.penaltyAmount = transaction.penaltyAmount;
                             history.transactionType = $filter('transactionType')(transaction.type);
@@ -227,7 +260,15 @@ define([
 
                     };
                     $scope.getTransactionHistoryByDateRange = function(){
-
+                        if(!$scope.date.startDate || !$scope.date.endDate){
+                            $scope.errorMsg = 'Please select start date and end date.';
+                            $scope.showErrorMsg = true;
+                            return;
+                        }
+                        $scope.clickHandler({startDate:$scope.date.startDate,endDate:$scope.date.endDate});
+                        $scope.transactionHistoryHeaderText =
+                            'Transaction history between ' + $filter('date')($scope.date.startDate, $scope.date.format)
+                                + ' and ' + $filter('date')($scope.date.endDate, $scope.date.format);
                     }
                 }],
                 templateUrl:'javascripts/member/partials/transactionHistory.html',

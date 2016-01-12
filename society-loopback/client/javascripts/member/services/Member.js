@@ -94,6 +94,9 @@ define([
                 });
                 return defer.promise;
             };
+            this.getMemberDeposit = function(id){
+                return restInterface.get('api/MemberDeposits/' + id);
+            };
             this.addNewTransaction = function (transaction) {
                 return restInterface.post('api/Members/transaction', transaction);
             };

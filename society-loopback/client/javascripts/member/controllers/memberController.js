@@ -22,13 +22,7 @@ define([
                 /*
                  * Default transaction history tab object
                  * */
-                $scope.transactionHistory = {
-                    data: '',
-                    dateRange: {
-                        startDate: '',
-                        endDate: ''
-                    }
-                };
+                $scope.transactionHistory = {};
                 /*
                  * @method
                  * @name updateMemberDetail
@@ -84,8 +78,8 @@ define([
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
                         $scope.member.person.dob = new Date(data.person.dob);
-                        $scope.memberFullName = data.fname+' '+data.mname+' '+data.lname;
-                        $scope.memberDeposit = angular.merge({}, $scope.memberDeposit, data.memberDeposit);
+                        $scope.member.person.marital_status = data.person.marital_status+'';
+                        $scope.memberFullName = (data.fname||'')+' '+(data.mname||'')+' '+(data.lname||'');
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.VIEW;
@@ -122,22 +116,25 @@ define([
                             break;
                     }
                 }
-
                 /*
+                * Get member deposit of selected member
+                * */
+                $scope.getMemberDeposit = function(){
+                    MemberService.getMemberDeposit($scope.member.id).then(function (data) {
+                        $scope.memberDeposit.successCB(data);
+                    }, function (error) {
+                        $scope.memberDeposit.errorCB(error);
+                    });
+                };
+                 /*
                  * Get all transaction history if a member based on id, start date, end data
                  * */
-                $scope.getTransactionHistory = function () {
-                    MemberService.getTransactionHistory($scope.member.id).then(function (data) {
+                $scope.getTransactionHistory = function (startDate, endDate) {
+                    MemberService.getTransactionHistory($scope.member.id, startDate, endDate).then(function (data) {
                         $scope.transactionHistory.successCB(data);
                     }, function (error) {
                         $scope.transactionHistory.errorCB(error);
                     });
-                };
-                /*
-                 * Reset the deposit tab on change or click
-                 * */
-                $scope.resetDepositTab = function () {
-                    $scope.memberDeposit.reset();
                 };
                 /*
                  * Save a new deposit entry of a member
@@ -148,7 +145,7 @@ define([
                     transaction.depositAmount = Number(transaction.depositAmount);
                     MemberService.addNewTransaction(transaction).then(function (data) {
                         $scope.memberDeposit.deposit = data.transaction.deposit;
-                        $scope.memberDeposit.successCB();
+                        $scope.memberDeposit.successCB(undefined, true);
                     }, function (error) {
                         $scope.memberDeposit.errorCB(error);
                     })

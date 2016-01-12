@@ -23,7 +23,7 @@ define([
                         if(!$scope.username || !$scope.password){
                             $scope.isError = true;
                             $scope.errorLoginText = "Username/password required.";
-                            isFormValid = true;
+                            isFormValid = false;
                         }
                         break;
                     case 'register':
@@ -34,23 +34,24 @@ define([
                             form.email.$setTouched();
                             $scope.isError = true;
                             $scope.errorLoginText = "All fields are required.";
-                            isFormValid = true;
+                            isFormValid = false;
                         }
                         break;
                     case 'reset':
                         if(!$scope.username){
                             $scope.isError = true;
                             $scope.errorLoginText = "Username required.";
-                            isFormValid = true;
+                            isFormValid = false;
                         }
                         break;
                 }
                 return isFormValid;
             }
             $scope.adminLogin = function (form) {
-                var action = $routeParams.action;
+                var action = $routeParams.action || 'login';
                 $scope.loader.show = true;
                 if (!validateLoginForm(action, form)){
+                    $scope.loader.show = false;
                     return;
                 }
                 var authenticationData = {"password": $scope.password};

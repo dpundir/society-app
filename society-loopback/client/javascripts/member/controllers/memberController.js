@@ -83,6 +83,7 @@ define([
                         $scope.actionText = 'Edit';
                         $scope.address = data.person.address;
                         $scope.member = MemberService.defaultMember(data);
+                        $scope.member.person.marital_status = $scope.member.person.marital_status+'';
                         $scope.member.person.dob = new Date(data.person.dob);
                         $scope.memberFullName = data.fname+' '+data.mname+' '+data.lname;
                         $scope.memberDeposit = angular.merge({}, $scope.memberDeposit, data.memberDeposit);

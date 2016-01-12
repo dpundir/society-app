@@ -184,12 +184,44 @@ define([
                     clickHandler:'&'
                 },
                 controller: ['$scope',function($scope){
-                    $scope.transactionData = {};
-                    $scope.date = {
-
+                    $scope.date = {};
+                    $scope.isTnxHistoryCollapsed = false;
+                    $scope.transactionHistoryGrid = {
+                        enableSorting: false,
+                        enableFiltering: false,
+                        enableRowSelection: false,
+                        enableRowHeaderSelection: false,
+                        multiSelect : false,
+                        modifierKeysToMultiSelect : false,
+                        noUnselect : true,
+                        paginationPageSizes: [15, 30, 45],
+                        paginationPageSize: 15,
+                        enableColumnMenus: false,
+                        onRegisterApi: function(gridApi){
+                            $scope.gridApi = gridApi;
+                        },
+                        columnDefs: [
+                            {field: 'date'},
+                            {field: 'depositAmount'},
+                            {field: 'penaltyAmount'},
+                            {field: 'transactionType'},
+                            {field: 'remarks'}
+                        ],
+                        data:[]
                     };
                     $scope.transactionHistory.successCB = function(data){
-                        $scope.transactionData = data;
+                        var transHistory = [];
+                        _.forEach(data,function(transaction){
+                            var history = {};
+                            history.date = $filter('date')(transaction.createDate,'dd-MM-yyyy');
+                            history.depositAmount = transaction.depositAmount;
+                            history.penaltyAmount = transaction.penaltyAmount;
+                            history.transactionType = $filter('transactionType')(transaction.type);
+                            history.remarks = transaction.remarks;
+                            transHistory.push(history);
+                        });
+                        $scope.transactionHistoryGrid.data = transHistory;
+                        $scope.gridApi.core.handleWindowResize();
                     };
                     $scope.transactionHistory.errorCB = function(){
 

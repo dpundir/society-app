@@ -4,7 +4,7 @@
 
 var login = function (req, res) {
   var User = req.app.models.user;
-  var FIVE_MINUTES = 60 * 5;
+  var FIVE_MINUTES = 60 * 10;
   User.login({
     email: req.body.email,
     username: req.body.username,

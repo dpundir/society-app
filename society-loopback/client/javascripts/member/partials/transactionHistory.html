@@ -1,21 +1,11 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4>Transaction history for last 2 month</h4>
+        <div ng-class="{'glyphicon-minus':!isTnxHistoryCollapsed,'glyphicon-plus':isTnxHistoryCollapsed}" class="pull-right icon glyphicon" ng-click="isTnxHistoryCollapsed = !isTnxHistoryCollapsed"></div>
     </div>
-    <div class="panel-body">
-        <div class="row table-header">
-            <span class="col-sm-3"><label>Date</label></span>
-            <span class="col-sm-2"><label>Deposit amount</label></span>
-            <span class="col-sm-2"><label>Penalty amount</label></span>
-            <span class="col-sm-2"><label>Transaction type</label></span>
-            <span class="col-sm-3"><label>remarks</label></span>
-        </div>
-        <div class="row table-data" ng-repeat="data in transactionData">
-            <span class="col-sm-3" ng-bind="data.createDate | date:'dd-MM-yyyy'"></span>
-            <span class="col-sm-2" ng-bind="data.depositAmount"></span>
-            <span class="col-sm-2" ng-bind="data.penaltyAmount"></span>
-            <span class="col-sm-2" ng-bind="data.type | transactionType"></span>
-            <span class="col-sm-3" ng-bind="data.remarks"></span>
+    <div class="panel-body" collapse="isTnxHistoryCollapsed">
+        <div class="row">
+            <div ui-grid="transactionHistoryGrid" ui-grid-pagination class="transactionGrid"></div>
         </div>
     </div>
 </div>

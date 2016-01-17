@@ -55,7 +55,7 @@ module.exports = function (Document) {
                 }
             ],
             returns: {
-                arg: 'file', type: 'buffer',
+                arg: 'id', type: 'object',
                 description: 'The response body contains data of the uploaded document'
             },
             http: {verb: 'post', path: '/upload'}

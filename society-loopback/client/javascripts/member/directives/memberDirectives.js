@@ -285,17 +285,8 @@ define([
                 controller: ['$scope', 'fileUpload',function($scope, fileUpload){
                     $scope.uploadFile = function(){
                         var file = $scope.myFile;
-
-                        console.log('file is ' );
-                        console.dir(file);
-
-                        var uploadUrl = "/document/upload";
-                        var data = {
-                            id: '',
-                            memberId: $scope.member.id,
-                            data: file
-                        }
-                        fileUpload.uploadFileToUrl(file, uploadUrl);
+                        var uploadUrl = "/api/Documents/upload";
+                        fileUpload.uploadFileToUrl($scope.member.id, file, uploadUrl);
                     };
                 }],
                 templateUrl:'javascripts/member/partials/memberDocument.html',

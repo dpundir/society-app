@@ -201,7 +201,7 @@ define([
                             startDateOpened: false,
                             endDateOpened: false
                         },
-                        startDate:new Date(),
+                        startDate:new Date(new Date().setDate(new Date().getDate() - 60)),
                         endDate:new Date()
                     };
                     $scope.open = function open(type) {

@@ -122,8 +122,9 @@ define([
             }
         }])
         .service('fileUpload', ['$http', function ($http) {
-            this.uploadFileToUrl = function (file, uploadUrl) {
+            this.uploadFileToUrl = function (memberId, file, uploadUrl) {
                 var fd = new FormData();
+                fd.append('memberId', memberId);
                 fd.append('file', file);
 
                 $http.post(uploadUrl, fd, {

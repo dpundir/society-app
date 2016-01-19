@@ -87,7 +87,7 @@ CREATE TABLE `address` (
   `state` varchar(45) NOT NULL,
   `pincode` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='address details';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='address details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,8 +96,38 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101'),(16,'E-80 Munirka Village','munirka village','','Delhi','Delhi','110067');
+INSERT INTO `address` VALUES (1,'C-1431','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101'),(16,'E-80 Munirka Village','munirka village','','Delhi','Delhi','110067'),(20,'C-143','lal bagh',NULL,'loni','ghaziabad','201102'),(21,'F164, 400 E Remington Dr','Sunnyvale','','San Jose','California','94087'),(22,'E-80 Munirka Village','munirka village3','','Delhi','Delhi','110067');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `document`
+--
+
+DROP TABLE IF EXISTS `document`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `document` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `member_id` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `data` mediumblob,
+  `status` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `document_member_id_fk_idx` (`member_id`),
+  CONSTRAINT `document_member_id_fk` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='documents uploaded for identification';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `document`
+--
+
+LOCK TABLES `document` WRITE;
+/*!40000 ALTER TABLE `document` DISABLE KEYS */;
+/*!40000 ALTER TABLE `document` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -169,7 +199,7 @@ CREATE TABLE `member` (
   CONSTRAINT `member_deposit_id` FOREIGN KEY (`deposit_id`) REFERENCES `member_deposit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_nominee_id` FOREIGN KEY (`nominee_id`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_person_id` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='member details';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='member details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +265,7 @@ CREATE TABLE `person` (
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='person details';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='person details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,7 +442,7 @@ CREATE TABLE `user` (
   `memberid` int(11) DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,7 +451,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,NULL,NULL,'$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4',NULL,NULL,NULL,1,NULL),(2,NULL,NULL,'$2a$10$IRL48tyo8QlU/Ol/vqAEIOOod8JovqjMljouJS9Fn20fS3KZuNh6q',NULL,NULL,'deepak.pundir@abcd.com',1,'8fe533fe616cc9af0a2e491858a807ea7c65bace073da7128605a3ba420caa64a44a0e3a909e62de29f09a669df76426ed83abe6aed95c8761505a821395f35e',NULL,NULL,NULL,NULL,2);
+INSERT INTO `user` VALUES (1,NULL,NULL,'$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4',NULL,NULL,NULL,1,NULL),(2,NULL,NULL,'$2a$10$IRL48tyo8QlU/Ol/vqAEIOOod8JovqjMljouJS9Fn20fS3KZuNh6q',NULL,NULL,'deepak.pundir@abcd.com',1,'8fe533fe616cc9af0a2e491858a807ea7c65bace073da7128605a3ba420caa64a44a0e3a909e62de29f09a669df76426ed83abe6aed95c8761505a821395f35e',NULL,NULL,NULL,NULL,2),(3,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -434,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-04 22:40:08
+-- Dump completed on 2016-01-17 22:36:01

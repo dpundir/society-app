@@ -138,5 +138,22 @@ define([
                         console.log(error);
                 });
             }
+            this.fetchDocumentList = function (memberId) {
+
+                $http.get("/api/Documents/"+memberId+"/fetch").success(function (data) {
+                        console.log(data);
+                    })
+                    .error(function (error) {
+                        console.log(error);
+                    });
+            }
+            this.fetchDocument = function (memberId, documentId) {
+                $http.get("/api/Documents/"+memberId+"/fetch/"+documentId).success(function (data) {
+                    console.log(data);
+                })
+                    .error(function (error) {
+                        console.log(error);
+                    });
+            }
         }]);
 });

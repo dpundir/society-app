@@ -288,6 +288,12 @@ define([
                         var uploadUrl = "/api/Documents/upload";
                         fileUpload.uploadFileToUrl($scope.member.id, file, uploadUrl);
                     };
+                    $scope.fetchDocumentList = function(){
+                        fileUpload.fetchDocumentList($scope.member.id);
+                    };
+                    $scope.fetchDocument = function(){
+                        fileUpload.fetchDocument($scope.member.id, 10);
+                    };
                 }],
                 templateUrl:'javascripts/member/partials/memberDocument.html',
                 link:function(scope, element, attrs){

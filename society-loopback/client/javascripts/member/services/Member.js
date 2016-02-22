@@ -65,7 +65,7 @@ define([
                 member.lname = member.person.lname;
                 member.phone = member.person.phone;
                 member.status = member.person.status;
-                if(!member.nomineeId){
+                if (!member.nomineeId) {
                     delete member.nomineeId;
                     delete member.nominee;
                 }
@@ -94,7 +94,7 @@ define([
                 });
                 return defer.promise;
             };
-            this.getMemberDeposit = function(id){
+            this.getMemberDeposit = function (id) {
                 return restInterface.get('api/MemberDeposits/' + id);
             };
             this.addNewTransaction = function (transaction) {
@@ -121,7 +121,7 @@ define([
                 return restInterface.get('api/TransactionHistories', null, filter);
             }
         }])
-        .service('fileUpload', ['$http', function ($http) {
+        .service('fileUpload', ['$http', 'restInterface', function ($http, restInterface) {
             this.uploadFileToUrl = function (memberId, file, uploadUrl) {
                 var fd = new FormData();
                 fd.append('memberId', memberId);
@@ -131,29 +131,29 @@ define([
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })
-                .success(function (data) {
-                        console.log(data);
-                })
-                .error(function (error) {
-                        console.log(error);
-                });
-            }
-            this.fetchDocumentList = function (memberId) {
-
-                $http.get("/api/Documents/"+memberId+"/fetch").success(function (data) {
+                    .success(function (data) {
                         console.log(data);
                     })
                     .error(function (error) {
                         console.log(error);
                     });
             }
-            this.fetchDocument = function (memberId, documentId) {
-                $http.get("/api/Documents/"+memberId+"/fetch/"+documentId).success(function (data) {
+            this.fetchDocumentList = function (memberId) {
+
+                //restInterface.get("/api/Documents/" + memberId + "/fetch").then(function (data) {
+                restInterface.get("/file/" + memberId + "/download").then(function (data) {
                     console.log(data);
-                })
-                    .error(function (error) {
-                        console.log(error);
-                    });
+                }, function (error) {
+                    console.log(error);
+                });
+            }
+            this.fetchDocument = function (memberId, documentId) {
+                //restInterface.get("/api/Documents/" + memberId + "/fetch/" + documentId, null, null, {'Accept': 'image/*', responseType: 'arraybuffer'}).then(function (data) {
+                restInterface.get("/file/" + memberId + "/download/" + documentId, null, null, {'Accept': 'image/png, image/jpeg, application/pdf'}).then(function (data) {
+                    //console.log(data);
+                }, function (error) {
+                    console.log(error);
+                });
             }
         }]);
 });

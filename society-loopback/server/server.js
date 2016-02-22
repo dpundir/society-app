@@ -5,9 +5,9 @@ var path = require('path');
 var cons = require('consolidate');
 var app = module.exports = loopback();
 
-app.middleware('initial', bodyParser.urlencoded({ extended: true }));
-app.middleware('initial', bodyParser.json({ extended: true }));
-app.middleware('initial', bodyParser.raw({ extended: true }));
+//app.middleware('initial', bodyParser.urlencoded({ extended: true }));
+//app.middleware('initial', bodyParser.json({ extended: true }));
+//app.middleware('initial', bodyParser.raw({ extended: true }));
 
 app.use(loopback.token({ model: app.models.accessToken }));
 
@@ -28,6 +28,15 @@ app.start = function() {
     }
   });
 };
+
+/*var ds = loopback.createDataSource({
+    connector: require('loopback-component-storage'),
+    provider: 'filesystem',
+    root: path.join(__dirname, 'storage')
+});
+
+var container = ds.createModel('container');
+app.model(container);*/
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.

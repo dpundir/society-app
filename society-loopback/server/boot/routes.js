@@ -4,6 +4,7 @@
 module.exports = function (app) {
     var router = app.loopback.Router();
     var authentication = require("../controller/authentication");
+    var document = require("../controller/document");
 
     router.get('/app', function (req, res, next) {
         res.render('index.html');
@@ -19,6 +20,11 @@ module.exports = function (app) {
 
     //reset the user's pasword
     router.post('/reset/password', authentication.resetPassword);
+
+    router.post('/file/upload', document.uploadFile);
+
+    router.get('/file/:memberId/download', document.fileList);
+    router.get('/file/:memberId/download/:fileName', document.downloadFile);
 
     app.use(router);
 }

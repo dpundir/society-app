@@ -1,34 +1,37 @@
 {
-    "name": "society-loopback",
-    "version": "1.0.0",
-    "main": "server/server.js",
-    "scripts": {
-        "start": "node .",
-        "pretest": "jshint ."
-    },
-    "dependencies": {
-        "body-parser": "^1.10.1",
-        "compression": "^1.0.3",
-        "consolidate": "^0.13.1",
-        "cors": "^2.5.2",
-        "errorhandler": "^1.1.1",
-        "formidable": "1.0.17",
-        "lodash": "^3.10.1",
-        "loopback": "^2.22.0",
-        "loopback-boot": "^2.6.5",
-        "loopback-component-explorer": "^2.1.0",
-        "loopback-connector-mysql": "^2.2.0",
-        "loopback-datasource-juggler": "^2.39.0",
-        "moment": "2.10.6",
-        "serve-favicon": "^2.0.1"
-    },
-    "devDependencies": {
-        "jshint": "^2.5.6",
-        "tape": "^4.2.0"
-    },
-    "repository": {
-        "type": "",
-        "url": ""
-    },
-    "description": "society-loopback"
+  "name": "society-loopback",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node .",
+    "pretest": "jshint ."
+  },
+  "dependencies": {
+    "body-parser": "^1.10.1",
+    "compression": "^1.0.3",
+    "consolidate": "^0.13.1",
+    "cors": "^2.5.2",
+    "errorhandler": "^1.1.1",
+    "formidable": "1.0.17",
+    "lodash": "^3.10.1",
+    "loopback": "^2.22.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^2.1.0",
+    "loopback-component-storage": "^1.0.5",
+    "loopback-connector-mysql": "^2.2.0",
+    "loopback-datasource-juggler": "^2.39.0",
+      "mime-types": "^2.1.10",
+      "mkdirp": "^0.5.1",
+    "moment": "2.10.6",
+    "serve-favicon": "^2.0.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.6",
+    "tape": "^4.2.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "description": "society-loopback"
 }

@@ -285,14 +285,14 @@ define([
                 controller: ['$scope', 'fileUpload',function($scope, fileUpload){
                     $scope.uploadFile = function(){
                         var file = $scope.myFile;
-                        var uploadUrl = "/api/Documents/upload";
+                        var uploadUrl = "/file/upload";//"/api/Documents/upload";
                         fileUpload.uploadFileToUrl($scope.member.id, file, uploadUrl);
                     };
                     $scope.fetchDocumentList = function(){
                         fileUpload.fetchDocumentList($scope.member.id);
                     };
                     $scope.fetchDocument = function(){
-                        fileUpload.fetchDocument($scope.member.id, 10);
+                        fileUpload.fetchDocument($scope.member.id, 'Payment_Details.pdf');
                     };
                 }],
                 templateUrl:'javascripts/member/partials/memberDocument.html',

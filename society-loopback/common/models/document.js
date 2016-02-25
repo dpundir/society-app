@@ -1,6 +1,8 @@
 module.exports = function (Document) {
     var formidable = require('formidable');
     var fs = require('fs');
+    var stream = require('stream');
+    var mime = require('mime-types');
     Document.createDocument = function (req, res, cb) {
         var form = new formidable.IncomingForm({
             keepExtensions: true
@@ -42,7 +44,26 @@ module.exports = function (Document) {
             if (err) {
                 cb(err, null);
             }
-            cb(null, data.data);
+            //var bufferStream = new stream.PassThrough();
+            //res.setHeader('transfer-encoding', '');
+            console.log('data.type:'+data.type);
+            //res.send(data.data);
+            var fileBuffer = new Buffer(data.data, 'base64');
+            console.log(fileBuffer);
+            console.log(fileBuffer.length);
+            var fileName = 'tempImage_'+Date.now()+'.'+mime.extension(data.type);
+            fs.writeFileSync(fileName, fileBuffer);
+            var tempImage = fs.createReadStream(fileName);
+            //res.setHeader('Content-Disposition', 'attachment; filename=' + data.name);
+            res.setHeader('Content-Type', data.type);
+            res.setHeader('Content-Transfer-Encoding', 'base64');
+            res.setHeader("Pragma", "private");
+            res.setHeader('Content-Length', fileBuffer.length);
+
+            //bufferStream.end(fileBuffer);
+            //bufferStream.pipe(res);
+            tempImage.pipe(res);
+            //cb(null, data.data);
         });
     };
 
@@ -105,7 +126,7 @@ module.exports = function (Document) {
                 }
             ],
             returns: {
-                arg: 'file', type: 'object',
+                arg: 'file', type: 'Buffer', root: true,
                 description: 'The response body contains data of the uploaded document'
             },
             http: {verb: 'get', path: '/:memberId/fetch/:documentId'}

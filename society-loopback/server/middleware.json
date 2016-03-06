@@ -24,6 +24,11 @@
       "params": {
         "extended": true
       }
+    },
+    "body-parser#raw": {
+      "params": {
+        "extended": true
+      }
     }
   },
   "routes": {

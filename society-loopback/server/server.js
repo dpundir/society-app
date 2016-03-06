@@ -5,9 +5,9 @@ var path = require('path');
 var cons = require('consolidate');
 var app = module.exports = loopback();
 
-//app.middleware('initial', bodyParser.urlencoded({ extended: true }));
-//app.middleware('initial', bodyParser.json({ extended: true }));
-//app.middleware('initial', bodyParser.raw({ extended: true }));
+app.middleware('initial', bodyParser.urlencoded({ extended: true }));
+app.middleware('initial', bodyParser.json({ extended: true }));
+app.middleware('initial', bodyParser.raw({ extended: true }));
 
 app.use(loopback.token({ model: app.models.accessToken }));
 

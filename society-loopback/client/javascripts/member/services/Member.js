@@ -136,7 +136,7 @@ define([
                 return restInterface.get("/file/" + memberId + "/download");
             };
             this.fetchDocument = function (memberId, documentId) {
-                //restInterface.get("/api/Documents/" + memberId + "/fetch/" + documentId, null, null, {'Accept': 'image/*', responseType: 'arraybuffer'}).then(function (data) {
+                //restInterface.get("/api/Documents/" + memberId + "/fetch/" + documentId, null, null, {'Accept': 'image/jpeg, image/png, image/jpg, application/pdf'}).then(function (data) {
                 restInterface.get("/file/" + memberId + "/download/" + documentId, null, null, {'Accept': 'image/png, image/jpeg, application/pdf'}).then(function (data) {
                     //console.log(data);
                 }, function (error) {

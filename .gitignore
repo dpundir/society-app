@@ -1,3 +1,4 @@
 society/**/node_modules/
 .idea
 
+society-loopback/storage/

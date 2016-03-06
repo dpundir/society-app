@@ -1,6 +1,66 @@
-<div>
-    <input type = "file" file-data="myFile"/>
-    <button ng-click = "uploadFile()">upload me</button>
-    <button ng-click = "fetchDocumentList()">Fetch Documents</button>
-    <button ng-click = "fetchDocument()">Download Document</button>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>Documents</h4>
+
+      <div ng-class="{'glyphicon-minus':!isDocumentCollapsed,'glyphicon-plus':isDocumentCollapsed}"
+         class="pull-right icon glyphicon" ng-click="isDocumentCollapsed = !isDocumentCollapsed"></div>
+    </div>
+    <div class="panel-body" collapse="isDocumentCollapsed">
+        <div ng-if="documents.list.length === 0">
+            <div class="alert alert-success">No document available!</div>
+        </div>
+        <div class="row">
+            <div class="row upload-list" ng-repeat="document in documents.list">
+                <span class="col-md-6" ng-bind="document.name"></span>
+                <span class="col-md-2">
+                    <a class="btn btn-success btn-xs" ng-href="{{document.href}}" download>
+                        <span class="glyphicon glyphicon-download-alt"></span>
+                        <span class="upload-btns">Download</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading" ng-click="isUploadDocumentCollapsed = !isUploadDocumentCollapsed">
+        <h4>Upload new document</h4>
+
+        <div ng-class="{'glyphicon-minus':!isUploadDocumentCollapsed,'glyphicon-plus':isUploadDocumentCollapsed}"
+           class="pull-right icon glyphicon"></div>
+    </div>
+    <div class="panel-body" collapse="isUploadDocumentCollapsed">
+        <div class="alert alert-success" role="alert" ng-bind="successMsg" ng-show="showSuccessMsg"></div>
+        <div class="alert alert-danger" role="alert" ng-bind="errorMsg" ng-show="showErrorMsg"></div>
+        <fieldset>
+          <legend>Select file(s)</legend>
+            <input type="file" multiple/>
+        </fieldset>
+        <div>
+          <h4><b>Upload list(s)</b></h4>
+        </div>
+        <div class="row upload-list-heading">
+          <span class="col-md-4">Name</span>
+          <span class="col-md-2">Type</span>
+          <span class="col-md-4">Actions</span>
+        </div>
+        <div class="row upload-list" ng-repeat="files in fileQueue track by $index">
+            <span class="col-md-4" ng-bind="files.name"></span>
+            <span class="col-md-2" ng-bind="files.type"></span>
+            <span class="col-md-4">
+                <button class="btn btn-success btn-xs" ng-click="uploadFile(files)">
+                    <span class="glyphicon glyphicon-upload"></span>
+                    <span class="upload-btns">Upload</span>
+                </button>
+                <button class="btn btn-danger btn-xs" ng-click="removeFile($index)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    <span class="upload-btns">Remove</span>
+                </button>
+            </span>
+        </div>
+        <button type="button"
+              class="btn btn-primary"
+              ng-click="uploadAllFile()">Upload All</button>
+    </div>
 </div>

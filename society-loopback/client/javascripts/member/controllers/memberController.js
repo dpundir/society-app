@@ -7,8 +7,8 @@ define([
         ["societyApp.member.services.member",
             "societyApp.member.directives"])
         .controller('memberRegistrationController',
-        ['$scope', 'MemberService', '$location', '$routeParams', '$filter',
-            function ($scope, MemberService, $location, $routeParams, $filter) {
+        ['$scope', 'MemberService', '$location', '$routeParams', '$filter','fileUpload',
+            function ($scope, MemberService, $location, $routeParams, $filter, fileUpload) {
 
                 var VIEW_MODE = {
                     NEW: 1,
@@ -18,11 +18,12 @@ define([
                 /*
                  * Default deposit tab object
                  * */
-                $scope.memberDeposit = {};
+                $scope.memberDeposit = {list:[]};
                 /*
                  * Default transaction history tab object
                  * */
                 $scope.transactionHistory = {};
+                $scope.documents = {};
                 /*
                  * @method
                  * @name updateMemberDetail
@@ -126,7 +127,18 @@ define([
                         $scope.memberDeposit.errorCB(error);
                     });
                 };
-                 /*
+                /*
+                * get all documents of member
+                * */
+
+                $scope.fetchDocumentList = function(){
+                    fileUpload.fetchDocumentList($scope.member.id).then(function(data){
+                        $scope.documents.successCB(data);
+                    },function(error){
+                        $scope.documents.errorCB(error);
+                    });
+                };
+                  /*
                  * Get all transaction history if a member based on id, start date, end data
                  * */
                 $scope.getTransactionHistory = function (startDate, endDate) {

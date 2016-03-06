@@ -127,26 +127,14 @@ define([
                 fd.append('memberId', memberId);
                 fd.append('file', file);
 
-                $http.post(uploadUrl, fd, {
+                return $http.post(uploadUrl, fd, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })
-                    .success(function (data) {
-                        console.log(data);
-                    })
-                    .error(function (error) {
-                        console.log(error);
-                    });
-            }
+            };
             this.fetchDocumentList = function (memberId) {
-
-                //restInterface.get("/api/Documents/" + memberId + "/fetch").then(function (data) {
-                restInterface.get("/file/" + memberId + "/download").then(function (data) {
-                    console.log(data);
-                }, function (error) {
-                    console.log(error);
-                });
-            }
+                return restInterface.get("/file/" + memberId + "/download");
+            };
             this.fetchDocument = function (memberId, documentId) {
                 //restInterface.get("/api/Documents/" + memberId + "/fetch/" + documentId, null, null, {'Accept': 'image/jpeg, image/png, image/jpg, application/pdf'}).then(function (data) {
                 restInterface.get("/file/" + memberId + "/download/" + documentId, null, null, {'Accept': 'image/png, image/jpeg, application/pdf'}).then(function (data) {

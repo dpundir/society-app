@@ -735,3 +735,37 @@ label{
 .trnxDateRange{
     margin-bottom: 10px;
 }
+.row.upload-list-heading{
+    margin-bottom: 10px;
+}
+.upload-list-heading span{
+    font-weight: bold;
+}
+.upload-list span{
+    word-break: break-all;
+}
+.upload-list span.glyphicon{
+    color: #ffffff;
+    font-size: 12px;
+}
+.upload-list span.upload-btns{
+    color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif!important;
+}
+fieldset{
+  display: block;
+  -webkit-margin-start: 2px;
+  -webkit-margin-end: 2px;
+  -webkit-padding-before: 0.35em;
+  -webkit-padding-start: 0.75em;
+  -webkit-padding-end: 0.75em;
+  -webkit-padding-after: 0.625em;
+  min-width: -webkit-min-content;
+  border: 2px dotted threedface;
+}
+legend{
+  width: auto;
+  margin-bottom: 0;
+  border-bottom: 0;
+}

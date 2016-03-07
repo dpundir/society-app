@@ -39,6 +39,18 @@ var downloadFile = function (req, res){
     res.download(downloadFileName);
 };
 
+var deleteFile = function (req, res){
+    var fileName = req.params.fileName;
+    var memberId = req.params.memberId;
+    var fileName = path.resolve(".", "storage", memberId, fileName);
+    var img = fs.unlink(fileName, function(err){
+        if(err){
+            res.status(500).json('error in deleting file');
+        }
+        res.sendStatus(200);
+    });
+};
+
 var fileList = function (req, res){
     var memberId = req.params.memberId;
     var dirName = path.resolve(".", "storage", memberId);
@@ -53,5 +65,6 @@ var fileList = function (req, res){
 module.exports = {
     uploadFile: uploadFile,
     downloadFile: downloadFile,
+    deleteFile: deleteFile,
     fileList: fileList
 };

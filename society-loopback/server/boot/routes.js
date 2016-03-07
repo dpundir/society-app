@@ -25,6 +25,7 @@ module.exports = function (app) {
 
     router.get('/file/:memberId/download', document.fileList);
     router.get('/file/:memberId/download/:fileName', document.downloadFile);
+    router.delete('/file/:memberId/download/:fileName', document.deleteFile);
 
     app.use(router);
 }

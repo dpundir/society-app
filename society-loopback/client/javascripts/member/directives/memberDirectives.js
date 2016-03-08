@@ -166,7 +166,7 @@ define([
                 link:function(){}
             }
         }])
-        .directive('memberLoan',['$rootScope', '$location', function ($rootScope, $location) {
+        .directive('memberLoan',['$rootScope', '$location', 'restInterface', function ($rootScope, $location, restInterface) {
             return{
                 restrict: 'A',
                 scope:{
@@ -176,6 +176,33 @@ define([
                   $scope.showDetails = function(id){
                     $location.url('/loan/1');
                   }
+                    $scope.newLoan = function(id){
+                        $location.url('/loan/new');
+                    };
+                    $scope.list = function list(filter) {
+                        //default filter to include address and deposit history data in member
+                        //this relation is defined in member.json
+                        var loanAvailFilter = {
+                            "filter": {
+                                "where": {"memberid": 1}
+                            }
+                        };
+                        var loanReferredFilter = {
+                            "filter": {
+                                "where": {
+                                    "or": [
+                                        {"memberrefid1": 1},
+                                        {"memberrefid2": 1}
+                                    ]}
+                            }
+                        };
+                        if($scope.isLoanAvailedFetch){
+                            filter = angular.merge(filter || {}, loanAvailFilter);
+                        } else{
+                            filter = angular.merge(filter || {}, loanReferredFilter);
+                        }
+                        return restInterface.get('/api/Loans', null, filter);
+                    };
                 }],
                 templateUrl:'javascripts/member/partials/memberLoan.html',
                 link:function(){}

@@ -23,6 +23,7 @@ define([
                  * Default transaction history tab object
                  * */
                 $scope.transactionHistory = {};
+                $scope.memberLoans = {};
                 $scope.documents = {};
                 /*
                  * @method
@@ -146,6 +147,16 @@ define([
                         $scope.transactionHistory.successCB(data);
                     }, function (error) {
                         $scope.transactionHistory.errorCB(error);
+                    });
+                };
+                /*
+                 * Get all member loans if a member based on member id
+                 * */
+                $scope.getMemberLoans = function () {
+                    MemberService.getMemberLoans($scope.member.id, true).then(function (data) {
+                        $scope.memberLoans.successCB(data);
+                    }, function (error) {
+                        $scope.memberLoans.errorCB(error);
                     });
                 };
                 /*

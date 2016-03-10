@@ -3,61 +3,14 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h4>Loan Availed:</h4>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">ID</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Deposit</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Remaining</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Loan Date</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Loan Close</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <button type="button" class="btn btn-primary" ng-click="showDetails(person.id)">View
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <button class="btn btn-primary" ng-click="toggleFilter()" ng-bind="filterText"></button>
+                    <button class="btn btn-primary" ng-click="showDetails()">Show details</button>
                 </div>
             </div>
+            <div ng-cloak class="member-list">
+                <div ui-grid="memberLoansGrid" ui-grid-selection ui-grid-pagination class="myGrid"></div>
+            </div>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="newLoan(person.id)">New Loan
-        </button>
     </div>
 </form>

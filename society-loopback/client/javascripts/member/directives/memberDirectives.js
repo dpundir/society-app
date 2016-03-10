@@ -166,43 +166,72 @@ define([
                 link:function(){}
             }
         }])
-        .directive('memberLoan',['$rootScope', '$location', 'restInterface', function ($rootScope, $location, restInterface) {
+        .directive('memberLoans',['$location', '$filter', function ($location, $filter) {
             return{
                 restrict: 'A',
                 scope:{
-
+                    memberId:'=',
+                    memberLoans:'=',
+                    clickHandler:'&'
                 },
                 controller: ['$scope',function($scope){
-                  $scope.showDetails = function(id){
-                    $location.url('/loan/1');
-                  }
-                    $scope.newLoan = function(id){
-                        $location.url('/loan/new');
+                    $scope.memberLoans = $scope.memberLoans || {};
+                    $scope.date = {
+                        dateOption: {
+                            formatYear: 'yy',
+                            startingDay: 1
+                        },
+                        format: 'dd-MM-yyyy',
+                        status: {
+                            startDateOpened: false,
+                            endDateOpened: false
+                        },
+                        startDate:new Date(new Date().setDate(new Date().getDate() - 60)),
+                        endDate:new Date()
                     };
-                    $scope.list = function list(filter) {
-                        //default filter to include address and deposit history data in member
-                        //this relation is defined in member.json
-                        var loanAvailFilter = {
-                            "filter": {
-                                "where": {"memberid": 1}
-                            }
-                        };
-                        var loanReferredFilter = {
-                            "filter": {
-                                "where": {
-                                    "or": [
-                                        {"memberrefid1": 1},
-                                        {"memberrefid2": 1}
-                                    ]}
-                            }
-                        };
-                        if($scope.isLoanAvailedFetch){
-                            filter = angular.merge(filter || {}, loanAvailFilter);
-                        } else{
-                            filter = angular.merge(filter || {}, loanReferredFilter);
-                        }
-                        return restInterface.get('/api/Loans', null, filter);
+                    $scope.memberLoansGrid = {
+                        enableSorting: false,
+                        enableFiltering: false,
+                        enableRowSelection: false,
+                        enableRowHeaderSelection: false,
+                        multiSelect : false,
+                        modifierKeysToMultiSelect : false,
+                        noUnselect : true,
+                        paginationPageSizes: [15, 30, 45],
+                        paginationPageSize: 15,
+                        enableColumnMenus: false,
+                        onRegisterApi: function(gridApi){
+                            $scope.gridApi = gridApi;
+                        },
+                        columnDefs: [
+                            {field: 'id'},
+                            {field: 'loanAmount'},
+                            {field: 'remainingAmount'},
+                            {field: 'startDate'},
+                            {field: 'endDate'}
+                        ],
+                        data:[]
                     };
+                    $scope.memberLoans.successCB = function(data){
+                        var memberLoans = [];
+                        _.forEach(data,function(loan){
+                            var memberLoan = {};
+                            memberLoan.id = loan.id;
+                            memberLoan.loanAmount = loan.amount;
+                            memberLoan.remainingAmount = loan.amount - loan.amountPaid;
+                            memberLoan.startDate = $filter('date')(loan.createdate,$scope.date.format);
+                            memberLoan.endDate = $filter('date')(loan.closedate,$scope.date.format);
+                            memberLoans.push(memberLoan);
+                        });
+                        $scope.memberLoansGrid.data = memberLoans;
+                        $scope.gridApi.core.handleWindowResize();
+                    };
+                    $scope.memberLoans.errorCB = function(){
+
+                    };
+                    $scope.showDetails = function(id){
+                        $location.url('/loan/1');
+                    }
                 }],
                 templateUrl:'javascripts/member/partials/memberLoan.html',
                 link:function(){}

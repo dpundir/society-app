@@ -120,6 +120,29 @@ define([
                 };
                 return restInterface.get('api/TransactionHistories', null, filter);
             }
+            this.getMemberLoans = function (memberId, isLoanAvailedFetch, startDate, endDate) {
+                var loanAvailFilter = {
+                    "filter": {
+                        "where": {"memberid": memberId}
+                    }
+                };
+                var loanReferredFilter = {
+                    "filter": {
+                        "where": {
+                            "or": [
+                                {"memberrefid1": memberId},
+                                {"memberrefid2": memberId}
+                            ]}
+                    }
+                };
+                var filter;
+                if(isLoanAvailedFetch){
+                    filter = loanAvailFilter;
+                } else{
+                    filter = loanReferredFilter;
+                }
+                return restInterface.get('/api/Loans', null, filter);
+            }
         }])
         .service('fileUpload', ['$http', 'restInterface', function ($http, restInterface) {
             this.uploadFileToUrl = function (memberId, file, uploadUrl) {

@@ -1,12 +1,8 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4 ng-bind="transactionHistoryHeaderText"></h4>
-
-        <div ng-class="{'glyphicon-minus':!isTnxHistoryCollapsed,'glyphicon-plus':isTnxHistoryCollapsed}"
-             class="pull-right icon glyphicon" ng-click="isTnxHistoryCollapsed = !isTnxHistoryCollapsed"></div>
     </div>
-
-    <div class="panel-body" collapse="isTnxHistoryCollapsed">
+    <div class="panel-body">
         <label>Want to see transaction history by date range?
             <a href="" ng-click="isTnxHistoryByDateCollapsed = !isTnxHistoryByDateCollapsed">
             Filter

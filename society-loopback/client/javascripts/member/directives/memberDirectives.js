@@ -238,8 +238,6 @@ define([
                             this.date.status.endDateOpened = true;
                         }
                     };
-
-                    $scope.isTnxHistoryCollapsed = false;
                     $scope.isTnxHistoryByDateCollapsed = true;
                     $scope.transactionHistoryHeaderText = 'Transaction history for last 2 month';
                     function resetErrorMessage(){
@@ -312,14 +310,13 @@ define([
                 },
                 controller: ['$scope',function($scope, fileUpload){
                     $scope.documents = $scope.documents || {};
-                    $scope.successMsg = "Fils(s) uploaded successfully.";
+                    $scope.successMsg = "";
                     $scope.errorMsg = "";
                     $scope.showSuccessMsg = false;
                     $scope.showErrorMsg = false;
                     $scope.documents.successCB=successCB;
                     $scope.documents.errorCB=errorCB;
                     $scope.isUploadDocumentCollapsed = true;
-                    $scope.isDocumentCollapsed = false;
                     function successCB(data){
                         $scope.showSuccessMsg = false;
                         $scope.showErrorMsg = false;
@@ -356,6 +353,12 @@ define([
                                 fileInput[0].value = '';
                             }
                             scope.showSuccessMsg = true;
+                            scope.successMsg = "Fils(s) uploaded successfully.";
+                            fileUpload.fetchDocumentList(scope.member.id).then(function(data){
+                                scope.documents.successCB(data);
+                            },function(error){
+                                scope.documents.errorCB(error);
+                            });
                         },function(error){
                             scope.errorMsg = 'Error in file upload, please try again later.'
                         });
@@ -364,7 +367,34 @@ define([
                         fileUpload.fetchDocument(scope.member.id, document);
                     };
                     scope.uploadAllFile = function(){
-
+                        var i = 1;
+                        _.forEach(scope.fileQueue, function(file,index){
+                            fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index], "/file/upload").then(function(){
+                                i++;
+                                if(i === scope.fileQueue.length) {
+                                    scope.showSuccessMsg = true;
+                                    scope.successMsg = "Fils(s) uploaded successfully.";
+                                    fileInput[0].value = '';
+                                    fileUpload.fetchDocumentList(scope.member.id).then(function (data) {
+                                        scope.documents.successCB(data);
+                                        scope.fileQueue = [];
+                                    }, function (error) {
+                                        scope.documents.errorCB(error);
+                                    });
+                                }
+                            },function(error){
+                                scope.errorMsg = 'Error in file upload, please try again later.'
+                            });
+                        })
+                    };
+                    scope.deleteFile = function(document){
+                        fileUpload.deleteDocument(scope.member.id, document).then(function(){
+                            fileUpload.fetchDocumentList(scope.member.id).then(function(data){
+                                scope.documents.successCB(data);
+                            },function(error){
+                                scope.documents.errorCB(error);
+                            });
+                        });
                     };
                     scope.removeFile = function(index){
                         scope.fileQueue.splice(index,1);

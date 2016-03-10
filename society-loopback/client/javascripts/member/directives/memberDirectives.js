@@ -205,6 +205,7 @@ define([
                         },
                         columnDefs: [
                             {field: 'id'},
+                            {field: 'memberId'},
                             {field: 'loanAmount'},
                             {field: 'remainingAmount'},
                             {field: 'startDate'},
@@ -218,6 +219,7 @@ define([
                             var memberLoan = {};
                             memberLoan.id = loan.id;
                             memberLoan.loanAmount = loan.amount;
+                            memberLoan.memberId = $scope.memberId == loan.memberid? 'SELF': loan.memberid;
                             memberLoan.remainingAmount = loan.amount - loan.amountPaid;
                             memberLoan.startDate = $filter('date')(loan.createdate,$scope.date.format);
                             memberLoan.endDate = $filter('date')(loan.closedate,$scope.date.format);
@@ -230,8 +232,11 @@ define([
 
                     };
                     $scope.showDetails = function(id){
-                        $location.url('/loan/1');
-                    }
+                        //$location.url('/loan/1');
+                    };
+                    $scope.newLoan = function(){
+
+                    };
                 }],
                 templateUrl:'javascripts/member/partials/memberLoan.html',
                 link:function(){}

@@ -153,7 +153,7 @@ define([
                  * Get all member loans if a member based on member id
                  * */
                 $scope.getMemberLoans = function () {
-                    MemberService.getMemberLoans($scope.member.id, true).then(function (data) {
+                    MemberService.getMemberLoans($scope.member.id, 3).then(function (data) {
                         $scope.memberLoans.successCB(data);
                     }, function (error) {
                         $scope.memberLoans.errorCB(error);

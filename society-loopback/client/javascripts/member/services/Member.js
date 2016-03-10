@@ -120,7 +120,7 @@ define([
                 };
                 return restInterface.get('api/TransactionHistories', null, filter);
             }
-            this.getMemberLoans = function (memberId, isLoanAvailedFetch, startDate, endDate) {
+            this.getMemberLoans = function (memberId, isLoanAvailedOrRefferedOrBoth, startDate, endDate) {
                 var loanAvailFilter = {
                     "filter": {
                         "where": {"memberid": memberId}
@@ -135,11 +135,23 @@ define([
                             ]}
                     }
                 };
+                var loanAvailedOrReferredFilter = {
+                    "filter": {
+                        "where": {
+                            "or": [
+                                {"memberid": memberId},
+                                {"memberrefid1": memberId},
+                                {"memberrefid2": memberId}
+                            ]}
+                    }
+                };
                 var filter;
-                if(isLoanAvailedFetch){
+                if(isLoanAvailedOrRefferedOrBoth == 1){
                     filter = loanAvailFilter;
-                } else{
+                } else if(isLoanAvailedOrRefferedOrBoth == 2){
                     filter = loanReferredFilter;
+                } else if(isLoanAvailedOrRefferedOrBoth == 3){
+                    filter = loanAvailedOrReferredFilter;
                 }
                 return restInterface.get('/api/Loans', null, filter);
             }

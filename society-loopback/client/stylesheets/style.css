@@ -741,8 +741,11 @@ label{
 .upload-list-heading span{
     font-weight: bold;
 }
-.upload-list span{
+.upload-list span.upload-list-span{
     word-break: break-all;
+}
+.upload-all-button{
+    margin-top: 15px;
 }
 .upload-list span.glyphicon{
     color: #ffffff;

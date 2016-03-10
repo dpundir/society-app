@@ -135,6 +135,9 @@ define([
             this.fetchDocumentList = function (memberId) {
                 return restInterface.get("/file/" + memberId + "/download");
             };
+            this.deleteDocument = function (memberId, documentId) {
+                return restInterface.delete("/file/" + memberId + "/download/"+ documentId);
+            };
             this.fetchDocument = function (memberId, documentId) {
                 //restInterface.get("/api/Documents/" + memberId + "/fetch/" + documentId, null, null, {'Accept': 'image/jpeg, image/png, image/jpg, application/pdf'}).then(function (data) {
                 restInterface.get("/file/" + memberId + "/download/" + documentId, null, null, {'Accept': 'image/png, image/jpeg, application/pdf'}).then(function (data) {

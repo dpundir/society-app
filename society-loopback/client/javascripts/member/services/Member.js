@@ -157,25 +157,25 @@ define([
             }
         }])
         .service('fileUpload', ['$http', 'restInterface', function ($http, restInterface) {
-            this.uploadFileToUrl = function (memberId, file, uploadUrl) {
+            this.uploadFileToUrl = function (memberId, file) {
+                var uploadUrl = "/file/" + memberId + "/document";
                 var fd = new FormData();
-                fd.append('memberId', memberId);
                 fd.append('file', file);
-
-                return $http.post(uploadUrl, fd, {
-                    transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
-                })
+                return restInterface.post(uploadUrl, fd, undefined, {
+                    'Content-Type': undefined
+                }, {
+                    transformRequest: angular.identity
+                });
             };
             this.fetchDocumentList = function (memberId) {
-                return restInterface.get("/file/" + memberId + "/download");
+                return restInterface.get("/file/" + memberId + "/document");
             };
             this.deleteDocument = function (memberId, documentId) {
-                return restInterface.delete("/file/" + memberId + "/download/"+ documentId);
+                return restInterface.delete("/file/" + memberId + "/document/"+ documentId);
             };
             this.fetchDocument = function (memberId, documentId) {
                 //restInterface.get("/api/Documents/" + memberId + "/fetch/" + documentId, null, null, {'Accept': 'image/jpeg, image/png, image/jpg, application/pdf'}).then(function (data) {
-                restInterface.get("/file/" + memberId + "/download/" + documentId, null, null, {'Accept': 'image/png, image/jpeg, application/pdf'}).then(function (data) {
+                restInterface.get("/file/" + memberId + "/document/" + documentId, null, null, {'Accept': 'image/png, image/jpeg, application/pdf'}).then(function (data) {
                     //console.log(data);
                 }, function (error) {
                     console.log(error);

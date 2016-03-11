@@ -358,7 +358,7 @@ define([
                         _.forEach(data, function(document){
                             $scope.documents.list.push({
                                 name: document,
-                                href: "/file/" + $scope.member.id + "/download/" + document
+                                href: "/file/" + $scope.member.id + "/document/" + document
                             })
                         });
                         console.log(data);
@@ -379,7 +379,7 @@ define([
                     },maxSize = 1024*1024;
                     var fileInput = element.find('input');
                     scope.uploadFile = function(file){
-                        fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index], "/file/upload").then(function(success){
+                        fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index]).then(function(success){
                             _.remove(scope.fileQueue, function(files) {
                                 return file.index === files.index;
                             });
@@ -403,7 +403,7 @@ define([
                     scope.uploadAllFile = function(){
                         var i = 1;
                         _.forEach(scope.fileQueue, function(file,index){
-                            fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index], "/file/upload").then(function(){
+                            fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index]).then(function(){
                                 i++;
                                 if(i === scope.fileQueue.length) {
                                     scope.showSuccessMsg = true;

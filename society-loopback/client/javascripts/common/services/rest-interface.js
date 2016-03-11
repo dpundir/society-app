@@ -4,25 +4,27 @@ define([
   angular.module("societyApp.common.services.restinterface",[])
     .factory('restInterface',['$rootScope', '$http','$q',function ($rootScope, $http, $q) {
 
-      function get(url, data, param, header) {
-        return call('GET', url, data, param, header);
+      function get(url, data, param, header, config) {
+        return call('GET', url, data, param, header, config);
       }
 
-      function post(url, data, param, header) {
-        return call('POST', url, data, param, header);
+      function post(url, data, param, header, config) {
+        return call('POST', url, data, param, header, config);
       }
 
-      function destroy(url, data, param, header) {
-        return call('DELETE', url, data, param, header);
+      function destroy(url, data, param, header, config) {
+        return call('DELETE', url, data, param, header, config);
       }
 
-      function update(url, data, param, header) {
-        return call('PUT', url, data, param, header);
+      function update(url, data, param, header, config) {
+        return call('PUT', url, data, param, header, config);
       }
 
-      function call(method, url, data, param, header) {
+      function call(method, url, data, param, header, config) {
         var deferred = $q.defer();
-        $http({method: method, url: url, data: data, params: param, withCredentials: true, headers: header})
+        config = config || {};
+        config.transformRequest = config.transformRequest || $http.defaults.transformRequest;
+        $http({method: method, url: url, data: data, params: param, withCredentials: true, headers: header, transformRequest: config.transformRequest})
           .success(function (data) {
             deferred.resolve(data);
           })

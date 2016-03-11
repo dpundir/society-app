@@ -8,12 +8,13 @@ var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 
 var uploadFile = function(req, res) {
+    var memberId = req.params.memberId;
     var form = new formidable.IncomingForm({
         keepExtensions: true
     });
     form.parse(req, function(err, fields, files) {
         fs.readFile(files.file.path, function (err, data){ // readfilr from the given path
-            var dirname = path.resolve(".", "storage", fields.memberId); // path.resolve(“.”) get application directory path
+            var dirname = path.resolve(".", "storage", memberId); // path.resolve(“.”) get application directory path
             mkdirp(dirname, function(err) {
                 var newPath = path.join(dirname, files.file.name); // add the file name
                 if (!err) {

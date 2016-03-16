@@ -5,8 +5,8 @@ define([
     angular.module("societyApp.admin.controller.userprofile",
         ["societyApp.admin.services.userprofile"])
         .controller('userProfileController',
-        ['$scope', '$location', '$routeParams','$filter', 'UserProfileService',
-            function ($scope, $location, $routeParams, $filter, UserProfileService) {
+        ['$scope', '$location', '$routeParams','$filter', '$cookies', 'UserProfileService',
+            function ($scope, $location, $routeParams, $filter, $cookies, UserProfileService) {
 
                 var VIEW_MODE = {
                     NEW: 1,
@@ -86,6 +86,7 @@ define([
                  * initialization, view or new mode
                  * */
                 function init() {
+                    $scope.user = $cookies.getObject('user') || {};
                     var action = $routeParams.action,
                         id = $routeParams.id;
                     switch (action) {

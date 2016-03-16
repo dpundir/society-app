@@ -72,7 +72,7 @@ module.exports = function(user) {
       if(err){
         cb(err, null);
       }
-      user.findById(token.userId, {fields:['id', 'email', 'username', 'memberid', 'personId']}, function(err, usermember){
+      user.findById(token.userId, {fields:['id', 'email', 'username', 'memberid', 'personId', 'status', 'created']}, function(err, usermember){
         if(err){
           cb(err, null);
         }

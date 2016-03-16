@@ -13,7 +13,7 @@ define([
                         var user = $cookies.getObject('user');
                         return user? (user.username? user.username: user.email) : null;
                     }, function(newValue, oldValue) {
-                        if(newValue != oldValue) {
+                        if(newValue != oldValue || (newValue &&!$scope.username)) {
                             var user = $cookies.getObject('user');
                             $scope.username = "Welcome " + (user?(user.username || user.email) : 'User');
                         }
@@ -23,11 +23,18 @@ define([
                     };
                     $scope.userProfile = function () {
                         restInterface.get('/api/users/detail').then(function (data) {
+                            var user = $cookies.getObject('user');
+                            user.id = data.id;
+                            user.personId = data.personId;
+                            user.memberid = data.memberid;
+                            user.status = data.status;
+                            user.created = data.created;
+                            $cookies.putObject('user', user);
                             console.log(data);
-                            if (data.memberid) {
-                                $location.url('/member/view/' + data.memberid);
-                            } else if (data.personId) {
+                            if (data.personId) {
                                 $location.url('/userprofile/view/' + data.personId);
+                            } else {
+                                $location.url('/userprofile/registration/new');
                             }
                         });
                     }

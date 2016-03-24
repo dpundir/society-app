@@ -2,7 +2,7 @@ define([
     'angular'
 ], function () {
     angular.module("societyApp.home.directive.navigationbar", ['ngCookies'])
-        .directive('navBar', ['$rootScope', '$location', '$cookies', 'AuthenticationService', 'restInterface', function ($rootScope, $location, $cookies, AuthenticationService, restInterface) {
+        .directive('navBar', ['$rootScope', '$location', '$cookies', 'AuthenticationService', function ($rootScope, $location, $cookies, AuthenticationService) {
             return{
                 restrict: 'A',
                 scope: {
@@ -22,21 +22,7 @@ define([
                         AuthenticationService.logout();
                     };
                     $scope.userProfile = function () {
-                        restInterface.get('/api/users/detail').then(function (data) {
-                            var user = $cookies.getObject('user');
-                            user.id = data.id;
-                            user.personId = data.personId;
-                            user.memberid = data.memberid;
-                            user.status = data.status;
-                            user.created = data.created;
-                            $cookies.putObject('user', user);
-                            console.log(data);
-                            if (data.personId) {
-                                $location.url('/userprofile/view/' + data.personId);
-                            } else {
-                                $location.url('/userprofile/registration/new');
-                            }
-                        });
+                        $location.url('/userprofile/view');
                     }
                 }],
                 templateUrl: 'javascripts/home/partials/nav-bar.html',

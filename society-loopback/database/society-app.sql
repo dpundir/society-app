@@ -118,7 +118,7 @@ CREATE TABLE `document` (
   PRIMARY KEY (`id`),
   KEY `document_member_id_fk_idx` (`member_id`),
   CONSTRAINT `document_member_id_fk` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='documents uploaded for identification';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='documents uploaded for identification';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +199,7 @@ CREATE TABLE `member` (
   CONSTRAINT `member_deposit_id` FOREIGN KEY (`deposit_id`) REFERENCES `member_deposit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_nominee_id` FOREIGN KEY (`nominee_id`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_person_id` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='member details';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='member details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955','2015-11-13 00:00:00','2015-11-13 00:00:00',1,1,100,1,1),(2,'debashis',NULL,'mishra','8882227771','2015-11-30 00:00:00','2015-11-30 00:00:00',1,NULL,1000,2,2),(3,'neeraj','a','kumar','1287536955','2015-11-13 00:00:00','2015-11-13 00:00:00',1,2,20,3,3),(4,'usha','pundir','rawat','8287536951','2016-01-03 17:14:37','2016-01-03 17:14:37',NULL,NULL,NULL,4,3);
+INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955','2015-11-13 00:00:00','2015-11-13 00:00:00',1,1,120,1,1),(2,'debashis',NULL,'mishra','8882227771','2015-11-30 00:00:00','2015-11-30 00:00:00',1,NULL,1000,2,2),(3,'neeraj','a','kumar','1287536955','2015-11-13 00:00:00','2015-11-13 00:00:00',1,2,20,3,3),(4,'usha','pundir','rawat','8287536951','2016-01-03 17:14:37','2016-01-03 17:14:37',NULL,NULL,NULL,4,3);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +265,7 @@ CREATE TABLE `person` (
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='person details';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='person details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,7 +406,7 @@ CREATE TABLE `transaction_history` (
   KEY `dh_loan_id_idx` (`loan_id`),
   CONSTRAINT `dh_loan_id` FOREIGN KEY (`loan_id`) REFERENCES `loan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,7 +415,7 @@ CREATE TABLE `transaction_history` (
 
 LOCK TABLES `transaction_history` WRITE;
 /*!40000 ALTER TABLE `transaction_history` DISABLE KEYS */;
-INSERT INTO `transaction_history` VALUES (1,1,100,0,'2015-12-14 00:00:00',NULL,1,NULL),(2,1,10,0,'2015-12-19 00:00:00',NULL,1,NULL),(3,2,150,0,'2015-12-24 00:00:00',NULL,1,NULL),(4,1,10,0,'2016-01-01 00:00:00',NULL,1,'deposit 1'),(5,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(6,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(7,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(8,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(9,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(10,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(11,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(12,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(13,1,10,0,'2016-01-01 00:00:00',NULL,1,'deposit'),(14,1,20,0,'2016-01-01 00:00:00',NULL,1,'deposit 3'),(15,1,40,0,'2016-01-01 00:00:00',NULL,1,'deposit4'),(16,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(17,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(18,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(19,1,101,0,'2016-01-02 00:00:00',NULL,1,'saving installment');
+INSERT INTO `transaction_history` VALUES (1,1,100,0,'2015-12-14 00:00:00',NULL,1,NULL),(2,1,10,0,'2015-12-19 00:00:00',NULL,1,NULL),(3,2,150,0,'2015-12-24 00:00:00',NULL,1,NULL),(4,1,10,0,'2016-01-01 00:00:00',NULL,1,'deposit 1'),(5,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(6,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(7,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(8,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(9,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(10,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(11,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(12,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(13,1,10,0,'2016-01-01 00:00:00',NULL,1,'deposit'),(14,1,20,0,'2016-01-01 00:00:00',NULL,1,'deposit 3'),(15,1,40,0,'2016-01-01 00:00:00',NULL,1,'deposit4'),(16,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(17,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(18,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(19,1,101,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(20,1,10,0,'2016-03-08 00:00:00',NULL,2,'saving installment'),(21,1,10,0,'2016-03-08 00:00:00',NULL,1,'saving installment');
 /*!40000 ALTER TABLE `transaction_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,7 +441,9 @@ CREATE TABLE `user` (
   `lastUpdated` datetime DEFAULT NULL,
   `memberid` int(11) DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -451,7 +453,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,NULL,NULL,'$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4',NULL,NULL,NULL,1,NULL),(2,NULL,NULL,'$2a$10$IRL48tyo8QlU/Ol/vqAEIOOod8JovqjMljouJS9Fn20fS3KZuNh6q',NULL,NULL,'deepak.pundir@abcd.com',1,'8fe533fe616cc9af0a2e491858a807ea7c65bace073da7128605a3ba420caa64a44a0e3a909e62de29f09a669df76426ed83abe6aed95c8761505a821395f35e',NULL,NULL,NULL,NULL,2),(3,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,NULL,'dpundir','$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4','1',NULL,NULL,1,NULL),(2,NULL,NULL,'$2a$10$IRL48tyo8QlU/Ol/vqAEIOOod8JovqjMljouJS9Fn20fS3KZuNh6q',NULL,NULL,'deepak.pundir@abcd.com',1,'8fe533fe616cc9af0a2e491858a807ea7c65bace073da7128605a3ba420caa64a44a0e3a909e62de29f09a669df76426ed83abe6aed95c8761505a821395f35e','1',NULL,NULL,NULL,2),(3,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672','2',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -464,4 +466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-17 22:36:01
+-- Dump completed on 2016-03-24 21:52:26

@@ -1,7 +1,0 @@
-{
-  "connectionLimit": 5,
-  "host": "localhost",
-  "database": "society",
-  "user": "admin",
-  "password": "admin123"
-}

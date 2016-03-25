@@ -1,8 +1,9 @@
 define([
-    'angular'
+    'angular',
+    'javascripts/common/services/authentication'
 ], function () {
-    angular.module("societyApp.home.directive.navigationbar", ['ngCookies'])
-        .directive('navBar', ['$rootScope', '$location', '$cookies', 'AuthenticationService', 'restInterface', function ($rootScope, $location, $cookies, AuthenticationService, restInterface) {
+    angular.module("societyApp.home.directive.navigationbar", ['ngCookies', 'societyApp.common.services.authentication'])
+        .directive('navBar', ['$location', '$cookies', 'AuthenticationService', function ($location, $cookies, AuthenticationService) {
             return{
                 restrict: 'A',
                 scope: {
@@ -13,7 +14,7 @@ define([
                         var user = $cookies.getObject('user');
                         return user? (user.username? user.username: user.email) : null;
                     }, function(newValue, oldValue) {
-                        if(newValue != oldValue) {
+                        if(newValue != oldValue || (newValue &&!$scope.username)) {
                             var user = $cookies.getObject('user');
                             $scope.username = "Welcome " + (user?(user.username || user.email) : 'User');
                         }
@@ -22,14 +23,7 @@ define([
                         AuthenticationService.logout();
                     };
                     $scope.userProfile = function () {
-                        restInterface.get('/api/users/detail').then(function (data) {
-                            console.log(data);
-                            if (data.memberid) {
-                                $location.url('/member/view/' + data.memberid);
-                            } else if (data.personId) {
-                                $location.url('/userprofile/view/' + data.personId);
-                            }
-                        });
+                        $location.url('/userprofile/view');
                     }
                 }],
                 templateUrl: 'javascripts/home/partials/nav-bar.html',

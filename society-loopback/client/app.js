@@ -16,7 +16,8 @@ define([
     'javascripts/member',
     'javascripts/home',
     'javascripts/loan',
-    'javascripts/person'
+    'javascripts/person',
+    'javascripts/settings'
 ], function (angular) {
     var app = angular.module("societyApp", [
         "ngRoute",
@@ -30,7 +31,8 @@ define([
         "societyApp.admin",
         "societyApp.member",
         "societyApp.loan",
-        "societyApp.person"
+        "societyApp.person",
+        "societyApp.settings"
     ])
         .config(function ($routeProvider, $provide) {
             $provide.value('$context', {});
@@ -66,6 +68,9 @@ define([
             }).when('/loan/:id', {
                 'templateUrl': 'javascripts/loan/partials/loan-detail.html',
                 'controller': 'loanController'
+            }).when('/settings/configure', {
+                'templateUrl': 'javascripts/settings/partials/settingsConfig.html',
+                'controller': 'settingsConfigController'
             }).otherwise({
                 'redirectTo': '/login'
             });

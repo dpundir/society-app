@@ -115,7 +115,8 @@ define([
                     }
                 };
 
-                $rootScope.$on('person:created', function(event, data){
+                var personCreatedUnwatcher = $rootScope.$on('person:created', function(event, data){
+                    personCreatedUnwatcher();
                     console.log(data);
                     var personId = data.id;
                     restInterface.update('/api/users/' + $scope.user.id, {personId: personId}, function(data){

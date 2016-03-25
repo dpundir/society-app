@@ -175,11 +175,34 @@ define([
                     clickHandler:'&'
                 },
                 controller: ['$scope',function($scope){
+
+                    function initLoanDetails(){
+                        $scope.loanDetail = {
+                          id:'',
+                          amount:'',
+                          createdate:'',
+                          closedate:'',
+                          installment:'',
+                          memberrefid1:'',
+                          memberrefid2:'',
+                          memberid:''
+                        };
+                    }
+                    $scope.LOAN_MODE = {
+                        VIEW: false,
+                        NEW: false
+                    };
                     $scope.memberLoans = $scope.memberLoans || {};
                     $scope.showLoanSection = false;
                     $scope.error = {
                         errorText:'',
                         isError: false
+                    };
+                    $scope.openStartdate = function(){
+                        $scope.date.status.startDateOpened = !$scope.date.status.startDateOpened;
+                    };
+                    $scope.openEnddate = function(){
+                       $scope.date.status.endDateOpened = !$scope.date.status.endDateOpened;
                     };
                     $scope.date = {
                         dateOption: {
@@ -191,7 +214,7 @@ define([
                             startDateOpened: false,
                             endDateOpened: false
                         },
-                        startDate:new Date(new Date().setDate(new Date().getDate() - 60)),
+                        startDate:new Date(),
                         endDate:new Date()
                     };
                     $scope.memberLoansGrid = {
@@ -237,6 +260,11 @@ define([
                         });
                         $scope.memberLoansGrid.data = memberLoans;
                         $scope.gridApi.core.handleWindowResize();
+                        $scope.LOAN_MODE.NEW = false;
+                        $scope.LOAN_MODE.VIEW = false;
+                        $scope.showLoanSection = false;
+                        $scope.loanSectionHeading = '';
+                        initLoanDetails();
                     };
                     $scope.memberLoans.errorCB = function(){
 
@@ -244,20 +272,33 @@ define([
                     $scope.showDetails = function(){
                         if(!$scope.memberLoansGrid.selectedRowId){
                             $scope.error.isError = true;
-                            $scope.error.errorText = 'Please select a loan to see details.'
+                            $scope.error.errorText = 'Please select a loan to see details.';
                             return;
                         }
                         MemberService.getLoanDetails($scope.memberId, $scope.memberLoansGrid.selectedRowId).then(function(data){
-                           console.log(data);
+                            _.forOwn($scope.loanDetail, function(value, key){
+                                $scope.loanDetail[key] = data[key];
+                            });
+                            $scope.loanDetail.remainingAmount = data.amount - data.amountPaid;
                         }, function(error){
                               console.log(error);
                         });
+                        $scope.LOAN_MODE.VIEW = true;
+                        $scope.LOAN_MODE.NEW = false;
                         $scope.showLoanSection = true;
-                        $scope.loanSectionHeading = 'Loan details'
+                        $scope.loanSectionHeading = 'Loan details';
                     };
                     $scope.newLoan = function(){
+                        $scope.LOAN_MODE.NEW = true;
+                        $scope.LOAN_MODE.VIEW = false;
+                        $scope.showLoanSection = true;
+                        $scope.loanSectionHeading = 'New Loan';
+                        initLoanDetails();
+                    };
+                    $scope.addNewLoan = function(){
 
                     };
+                    initLoanDetails();
                 }],
                 templateUrl:'javascripts/member/partials/memberLoan.html',
                 link:function(){}

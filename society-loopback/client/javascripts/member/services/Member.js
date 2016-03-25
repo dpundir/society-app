@@ -119,7 +119,15 @@ define([
                     }
                 };
                 return restInterface.get('api/TransactionHistories', null, filter);
-            }
+            };
+            this.getLoanDetails = function(memberId, loanId){
+                var filter = {
+                    "filter": {
+                      "where": {"memberid": memberId}
+                    }
+                };
+                return restInterface.get('/api/Loans/'+loanId, null, filter);
+            };
             this.getMemberLoans = function (memberId, isLoanAvailedOrRefferedOrBoth, startDate, endDate) {
                 var loanAvailFilter = {
                     "filter": {

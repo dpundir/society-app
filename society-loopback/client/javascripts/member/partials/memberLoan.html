@@ -1,17 +1,145 @@
-<form class="form-horizontal reg-form" name="registrationForm" non-validate>
-    <div class=" form-bottom">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h4>Loan Availed:</h4>
-                <h4>Loan Reffered:</h4>
-                <div>
-                    <button class="btn btn-primary" ng-click="newLoan()">New Loan</button>
-                    <button class="btn btn-primary" ng-click="showDetails()">Show details</button>
-                </div>
-            </div>
-            <div ng-cloak class="member-list">
-                <div ui-grid="memberLoansGrid" ui-grid-selection ui-grid-pagination class="myGrid"></div>
-            </div>
-        </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4>Loan Information</h4>
+  </div>
+  <div class="panel-body">
+    <div class="alert alert-danger" role="alert" ng-bind="error.errorText" ng-show="error.isError">
     </div>
-</form>
+    <div>
+      <span><input type="checkbox" ng-model="loanAvailed"></span><span>Show all loan availed</span>
+      <span><input type="checkbox" ng-model="loanReferred"></span><span>Show all loan Reffered</span>
+    </div>
+    <div class="loan-buttons">
+      <button class="btn btn-primary loan-btn" ng-click="newLoan()">Add New Loan</button>
+      <button class="btn btn-primary loan-btn" ng-click="showDetails()">Show Loan details</button>
+    </div>
+    <div ui-grid="memberLoansGrid" ui-grid-selection ui-grid-pagination class="loanGrid"></div>
+  </div>
+</div>
+<div ng-show="showLoanSection">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 ng-bind="loanSectionHeading"></h4>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div class="label-input">
+              <span class="form-text">Loan ID:</span>
+              <span class="text-danger">*</span>
+            </div>
+            <input type="text" name="loanId" ng-disabled="true"
+                   class="form-control"
+                   id="loanId"
+                   required="" ng-model="loanDetail.id">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div class="label-input">
+              <span class="form-text">Loan Amount:</span>
+              <span class="text-danger">*</span>
+            </div>
+            <input type="text" name="loanAmount"
+                   class="form-control" ng-disabled="!LOAN_MODE.NEW"
+                   id="loanAmount" ng-model="loanDetail.amount">
+          </div>
+        </div>
+        <div class="col-sm-4" ng-if="!LOAN_MODE.NEW">
+          <div class="form-group">
+            <div class="label-input">
+              <span class="form-text">Remaining Amount:</span>
+              <span class="text-danger">*</span>
+            </div>
+            <input type="text" name="remAmount"
+                   class="form-control"
+                   id="remAmount" ng-disabled="true"
+                   required="" ng-model="loanDetail.remainingAmount">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="label-input">
+            <span class="form-text">Loan Start:</span>
+            <span class="text-danger">*</span>
+          </div>
+          <div class="form-group input-group">
+            <input type="text" class="form-control" ng-disabled="!LOAN_MODE.NEW"
+                   datepicker-popup="{{date.format}}"
+                   ng-model="loanDetail.createdate" is-open="date.status.startDateOpened"
+                   max-date=""
+                   datepicker-options="date.dateOption" id="loanStartDate" name="loanStartDate"
+                   ng-required="true" close-text="Close" required=""/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!LOAN_MODE.NEW"
+                              class="btn btn-default btn-datepicker"
+                              ng-click="openStartdate()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="label-input">
+            <span class="form-text">Loan Close:</span>
+            <span class="text-danger">*</span>
+          </div>
+          <div class="form-group input-group">
+            <input type="text" class="form-control" ng-disabled="LOAN_MODE.VIEW"
+                   datepicker-popup=""
+                   ng-model="loanDetail.closedate" is-open="date.status.endDateOpened"
+                   max-date=""
+                   datepicker-options="date.dateOption" id="loanCloseDate" name="loanCloseDate"
+                   ng-required="true" close-text="Close" required=""/>
+                    <span class="input-group-btn">
+                      <button type="button" ng-disabled="!LOAN_MODE.NEW"
+                              class="btn btn-default btn-datepicker"
+                              ng-click="openEnddate()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div class="label-input">
+              <span class="form-text">Loan Installment:</span>
+              <span class="text-danger">*</span>
+            </div>
+            <input type="text" name="loninstallment" ng-disabled="!LOAN_MODE.NEW"
+                   class="form-control"
+                   id="loninstallment"
+                   required="" ng-model="loanDetail.installment">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div class="label-input">
+              <span class="form-text">Reference 1:</span>
+              <span class="text-danger">*</span>
+            </div>
+            <input type="text" name="reference1" ng-disabled="!LOAN_MODE.NEW"
+                   class="form-control"
+                   id="reference1"
+                   required="" ng-model="loanDetail.memberrefid1"/>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div class="label-input">
+              <span class="form-text">Reference 2:</span>
+              <span class="text-danger">*</span>
+            </div>
+            <input type="text" class="form-control" id="reference2" name="reference2" ng-disabled="!LOAN_MODE.NEW"
+                   required="" ng-model="loanDetail.memberrefid2">
+          </div>
+        </div>
+      </div>
+      <div class="row add-loan-btn" ng-if="LOAN_MODE.NEW">
+        <button class="btn btn-primary loan-btn" ng-click="addNewLoan()">Add Loan</button>
+      </div>
+    </div>
+  </div>
+</div>

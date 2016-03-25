@@ -15,7 +15,8 @@ define([
     'javascripts/admin',
     'javascripts/member',
     'javascripts/home',
-    'javascripts/loan'
+    'javascripts/loan',
+    'javascripts/person'
 ], function (angular) {
     var app = angular.module("societyApp", [
         "ngRoute",
@@ -28,7 +29,8 @@ define([
         "societyApp.home",
         "societyApp.admin",
         "societyApp.member",
-        "societyApp.loan"
+        "societyApp.loan",
+        "societyApp.person"
     ])
         .config(function ($routeProvider, $provide) {
             $provide.value('$context', {});
@@ -40,6 +42,9 @@ define([
             }).when('/member', {
                 'templateUrl': 'javascripts/member/partials/member-list.html',
                 'controller': 'memberListController'
+            }).when('/person/:action/:id?', {
+                'templateUrl': 'javascripts/person/partials/personDetails.html',
+                'controller': 'personDetailController'
             }).when('/userprofile/:action/:id?', {
                 'templateUrl': 'javascripts/admin/partials/user-profile.html',
                 'controller': 'userProfileController'

@@ -235,7 +235,7 @@
       },
       "_selectable": true
     },
-    "marital_status": {
+    "maritalStatus": {
       "type": "Number",
       "required": false,
       "length": null,

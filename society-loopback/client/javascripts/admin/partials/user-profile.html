@@ -69,14 +69,14 @@
                     class="btn btn-primary"
                     ng-click="register(registrationForm)" ng-bind="actionText"></button>
         </div>
+        <div class="col-sm-3 column">
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-click="showPerson(registrationForm)" ng-bind="personActionText"></button>
+        </div>
     </div>
     </div>
 
     </form>
     </div>
-    <div member-details person="person" ng-show="userProfileCreated"
-         address="person.address"
-         is-view-mode="isViewMode"
-         action-text="actionText"
-         click-handler="register(form)"></div>
 </div>

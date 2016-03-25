@@ -1,8 +1,9 @@
 define([
-    'angular'
+    'angular',
+    'javascripts/common/services/authentication'
 ], function () {
-    angular.module("societyApp.home.directive.navigationbar", ['ngCookies'])
-        .directive('navBar', ['$rootScope', '$location', '$cookies', 'AuthenticationService', function ($rootScope, $location, $cookies, AuthenticationService) {
+    angular.module("societyApp.home.directive.navigationbar", ['ngCookies', 'societyApp.common.services.authentication'])
+        .directive('navBar', ['$location', '$cookies', 'AuthenticationService', function ($location, $cookies, AuthenticationService) {
             return{
                 restrict: 'A',
                 scope: {

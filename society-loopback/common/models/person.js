@@ -98,7 +98,9 @@ module.exports = function (Person) {
           cb(err1, null);
         }
         var personData = req.body;
-        //delete personData.addressid;
+        delete personData.address;
+        personData.addressid = data1.id;
+        personData.modifiedDate = new Date();
         Person.create(personData, {transaction: tx}, function (err2, data2) {
           if (err2) {
             tx.rollback();
@@ -123,9 +125,9 @@ module.exports = function (Person) {
           cb(err1, null);
         }
         var personData = req.body;
-        personData.modified_date = new Date();
+        personData.modifiedDate = new Date();
         var personid = req.body.id;
-        //delete personData.address;
+        delete personData.address;
         //delete personData.id;
         Person.update({id: personid}, personData, {transaction: tx}, function (err2, data2) {
           if (err2) {

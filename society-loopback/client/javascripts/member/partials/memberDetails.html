@@ -1,11 +1,10 @@
 
 <form class="form-horizontal reg-form" name="registrationForm" non-validate>
-
     <div class=" form-bottom">
         <div class="panel panel-primary">
-            <div class="panel-heading">
+            <div class="panel-heading clickable" ng-click="isInfoCollapsed = !isInfoCollapsed">
                 <h4>Information</h4>
-                <div ng-class="{'glyphicon-minus':!isInfoCollapsed,'glyphicon-plus':isInfoCollapsed}" class="pull-right icon glyphicon" ng-click="isInfoCollapsed = !isInfoCollapsed"></div>
+                <div ng-class="{'glyphicon-minus':!isInfoCollapsed,'glyphicon-plus':isInfoCollapsed}" class="pull-right icon glyphicon"></div>
             </div>
             <div class="panel-body" collapse="isInfoCollapsed">
                 <div class="row">
@@ -145,9 +144,9 @@
             </div>
         </div>
         <div class="panel panel-primary">
-            <div class="panel-heading">
+            <div class="panel-heading clickable" ng-click="isAddressCollapsed = !isAddressCollapsed">
                 <h4>Address</h4>
-                <div ng-class="{'glyphicon-minus':!isAddressCollapsed,'glyphicon-plus':isAddressCollapsed}" class="pull-right icon glyphicon" ng-click="isAddressCollapsed = !isAddressCollapsed"></div>
+                <div ng-class="{'glyphicon-minus':!isAddressCollapsed,'glyphicon-plus':isAddressCollapsed}" class="pull-right icon glyphicon"></div>
             </div>
             <div class="panel-body" collapse="isAddressCollapsed">
                 <div class="row">

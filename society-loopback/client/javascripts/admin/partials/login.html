@@ -9,34 +9,40 @@
                             <div class="form-top-left">
                                 <h1 class="text-primary" ng-bind="headerText"></h1>
                             </div>
-                            <div class="form-top-right">
-                                <i class="glyphicon glyphicon-log-in"></i>
-                            </div>
                         </div>
                         <hr/>
                         <div class="form-bottom">
                             <form role="form" class="login-form" name="loginForm" novalidate="">
                                 <div>
-                                    <p class="text-danger" ng-show="isError" ng-bind="errorLoginText"></p>
+                                    <div class="alert alert-danger" role="alert" ng-bind="errorLoginText" ng-show="isError"></div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Username</span>
+                                    </div>
                                     <input type="text"
                                            name="username"
-                                           placeholder="Username"
+                                           placeholder="Enter your username"
                                            class="form-username form-control" required=""
                                            id="form-username" ng-model="username">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-show="actionText === 'Register'">
+                                    <div class="label-input">
+                                        <span class="form-text">Email</span>
+                                    </div>
                                     <input type="text"
-                                           name="email" ng-show="actionText === 'Register'"
-                                           placeholder="Email"
+                                           name="email"
+                                           placeholder="Enter your email"
                                            class="form-email form-control" required=""
                                            id="form-email" ng-model="email">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-hide="actionText === 'Reset'">
+                                    <div class="label-input">
+                                        <span class="form-text">Password</span>
+                                    </div>
                                     <input type="password"
-                                           name="password" ng-hide="actionText === 'Reset'"
-                                           placeholder="Password"
+                                           name="password"
+                                           placeholder="Enter your password"
                                            class="form-password form-control" required=""
                                            id="form-password" ng-model="password">
                                 </div>

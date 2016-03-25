@@ -166,7 +166,7 @@ define([
                 link:function(){}
             }
         }])
-        .directive('memberLoans',['$location', '$filter', function ($location, $filter) {
+        .directive('memberLoans',['$location', '$filter', 'MemberService', function ($location, $filter, MemberService) {
             return{
                 restrict: 'A',
                 scope:{
@@ -176,6 +176,11 @@ define([
                 },
                 controller: ['$scope',function($scope){
                     $scope.memberLoans = $scope.memberLoans || {};
+                    $scope.showLoanSection = false;
+                    $scope.error = {
+                        errorText:'',
+                        isError: false
+                    };
                     $scope.date = {
                         dateOption: {
                             formatYear: 'yy',
@@ -192,7 +197,7 @@ define([
                     $scope.memberLoansGrid = {
                         enableSorting: false,
                         enableFiltering: false,
-                        enableRowSelection: false,
+                        enableRowSelection: true,
                         enableRowHeaderSelection: false,
                         multiSelect : false,
                         modifierKeysToMultiSelect : false,
@@ -202,6 +207,10 @@ define([
                         enableColumnMenus: false,
                         onRegisterApi: function(gridApi){
                             $scope.gridApi = gridApi;
+                            var self = this;
+                            gridApi.selection.on.rowSelectionChanged($scope,function(row){
+                              self.selectedRowId = row.entity.id;
+                            });
                         },
                         columnDefs: [
                             {field: 'id'},
@@ -211,7 +220,8 @@ define([
                             {field: 'startDate'},
                             {field: 'endDate'}
                         ],
-                        data:[]
+                        data:[],
+                        selectedRowId:null
                     };
                     $scope.memberLoans.successCB = function(data){
                         var memberLoans = [];
@@ -231,8 +241,19 @@ define([
                     $scope.memberLoans.errorCB = function(){
 
                     };
-                    $scope.showDetails = function(id){
-                        //$location.url('/loan/1');
+                    $scope.showDetails = function(){
+                        if(!$scope.memberLoansGrid.selectedRowId){
+                            $scope.error.isError = true;
+                            $scope.error.errorText = 'Please select a loan to see details.'
+                            return;
+                        }
+                        MemberService.getLoanDetails($scope.memberId, $scope.memberLoansGrid.selectedRowId).then(function(data){
+                           console.log(data);
+                        }, function(error){
+                              console.log(error);
+                        });
+                        $scope.showLoanSection = true;
+                        $scope.loanSectionHeading = 'Loan details'
                     };
                     $scope.newLoan = function(){
 
@@ -404,8 +425,7 @@ define([
                         var i = 1;
                         _.forEach(scope.fileQueue, function(file,index){
                             fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index]).then(function(){
-                                i++;
-                                if(i === scope.fileQueue.length) {
+                                if(i++ === scope.fileQueue.length) {
                                     scope.showSuccessMsg = true;
                                     scope.successMsg = "Fils(s) uploaded successfully.";
                                     fileInput[0].value = '';

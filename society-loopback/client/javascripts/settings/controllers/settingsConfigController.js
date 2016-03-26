@@ -32,11 +32,13 @@ define([
 
                     });
                 };
-                $scope.showHistory = function showHistory(type){
+                $scope.showHistory = function showHistory(name){
+                    name = name || 'maxDepositValue';
                     // pass type of the selected configuration
                     var filter = {
                         "filter": {
-                            "where": {"type": type}
+                            "where": {"name": name},
+                            "order": ["expireDate DESC"]
                         }
                     };
                     return restInterface.get('/api/SocietyConfigs', null, filter).then(function(data){

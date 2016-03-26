@@ -17,6 +17,12 @@ define([
                         DashboardService.getLoanCount().then(function(data){
                             $scope.loanCount = data.count;
                         });
+                        DashboardService.getMemberBalance().then(function(data){
+                            $scope.memberBalance = data;
+                        });
+                        DashboardService.getLoanTotal().then(function(data){
+                            $scope.loanTotal = data;
+                        });
                     }
                     init();
                 }],

@@ -12,8 +12,7 @@
         <div class="tile bg-purple">
             <h2 class="tile-title">Balance</h2>
             <p>Current balance socity have now</p>
-            <div class="tile-stat">
-                23,876,550
+            <div class="tile-stat" ng-bind="memberBalance">
             </div>
             <a href="#" class="bg-a">View details</a>
         </div>
@@ -32,7 +31,7 @@
         <div class="tile bg-blue">
             <h2 class="tile-title">Loan</h2>
             <p>Total amount of loan taken by members</p>
-            <div class="tile-stat" ng-bind="loanCount">
+            <div class="tile-stat" ng-bind="loanTotal">
             </div>
             <a href="#" class="bg-a">View loan history</a>
         </div>

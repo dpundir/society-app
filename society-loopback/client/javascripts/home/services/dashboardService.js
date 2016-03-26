@@ -15,10 +15,11 @@ define([
             this.getMemberBalance = function () {
                 var filter = {
                     "filter": {
-                        "where": {"status": 1}
+                        "where": {"status": 1},
+                        "field": ["deposit"]
                     }
                 };
-                return restInterface.get('/api/Members/balance', null, filter);
+                return restInterface.get('/api/Members/total', null, filter);
             };
             this.getMemberDeposit = function (id) {
                 return restInterface.get('api/MemberDeposits/' + id);
@@ -34,7 +35,8 @@ define([
             this.getLoanTotal = function () {
                 var filter = {
                     "filter": {
-                        "where": {"active": 1}
+                        "where": {"active": 1},
+                        "field": ["amount"]
                     }
                 };
                 return restInterface.get('/api/Loans/total', null, filter);

@@ -103,13 +103,13 @@
         <div class="col-sm-4">
           <div class="form-group">
             <div class="label-input">
-              <span class="form-text">Loan Installment:</span>
+              <span class="form-text">Loan Frequency:</span>
               <span class="text-danger">*</span>
             </div>
-            <input type="text" name="loninstallment" ng-disabled="!LOAN_MODE.NEW"
+            <input type="text" name="loanFrequency" ng-disabled="!LOAN_MODE.NEW"
                    class="form-control"
-                   id="loninstallment"
-                   required="" ng-model="loanDetail.installment">
+                   id="loanFrequency"
+                   required="" ng-model="loanDetail.frequency">
           </div>
         </div>
       </div>
@@ -136,9 +136,22 @@
                    required="" ng-model="loanDetail.memberrefid2">
           </div>
         </div>
+      <div class="col-sm-4">
+          <div class="form-group">
+              <div class="label-input">
+                  <span class="form-text">Loan Installment:</span>
+                  <span class="text-danger">*</span>
+              </div>
+              <input type="text" name="loninstallment" ng-disabled="!LOAN_MODE.NEW"
+                     class="form-control"
+                     id="loninstallment"
+                     required="" ng-model="loanDetail.installment">
+          </div>
+      </div>
       </div>
       <div class="row add-loan-btn" ng-if="LOAN_MODE.NEW">
         <button class="btn btn-primary loan-btn" ng-click="addNewLoan()">Add Loan</button>
+          <button class="btn btn-primary loan-btn" ng-click="calculateInstallment()">Calculate Installment</button>
       </div>
     </div>
   </div>

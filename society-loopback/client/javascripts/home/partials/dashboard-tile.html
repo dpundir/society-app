@@ -3,8 +3,7 @@
         <div class="tile bg-green">
             <h2 class="tile-title">Total Member</h2>
             <p>Total Member registred in the Society</p>
-            <div class="tile-stat">
-                300
+            <div class="tile-stat" ng-bind="memberCount">
             </div>
             <a href="app/#/member" class="bg-a">View all member</a>
         </div>
@@ -33,8 +32,7 @@
         <div class="tile bg-blue">
             <h2 class="tile-title">Loan</h2>
             <p>Total amount of loan taken by members</p>
-            <div class="tile-stat">
-                20,876,550
+            <div class="tile-stat" ng-bind="loanCount">
             </div>
             <a href="#" class="bg-a">View loan history</a>
         </div>

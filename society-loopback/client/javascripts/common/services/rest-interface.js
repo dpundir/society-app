@@ -1,6 +1,6 @@
 define([
   'angular'
-],function() {
+],function(angular) {
   angular.module("societyApp.common.services.restinterface",[])
     .factory('restInterface',['$rootScope', '$http','$q',function ($rootScope, $http, $q) {
 

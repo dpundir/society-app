@@ -295,8 +295,19 @@ define([
                         $scope.loanSectionHeading = 'New Loan';
                         initLoanDetails();
                     };
+                    $scope.calculateInstallment = function(){
+                        $scope.loanDetail.installment = $scope.loanDetail.amount/$scope.loanDetail.frequency;
+                    };
                     $scope.addNewLoan = function(){
-
+                        var loanDetail = angular.copy($scope.loanDetail);
+                        loanDetail.memberid = $scope.memberId;
+                        MemberService.addNewLoan(loanDetail).then(function(data){
+                            console.log(data);
+                            $scope.showLoanSection = false;
+                            initLoanDetails();
+                        }, function(error){
+                            console.log(error);
+                        });
                     };
                     initLoanDetails();
                 }],

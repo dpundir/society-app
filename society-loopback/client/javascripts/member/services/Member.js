@@ -163,6 +163,10 @@ define([
                 }
                 return restInterface.get('/api/Loans', null, filter);
             }
+
+            this.addNewLoan = function(loanDetail){
+                return restInterface.post('/api/Loans', loanDetail);
+            };
         }])
         .service('fileUpload', ['$http', 'restInterface', function ($http, restInterface) {
             this.uploadFileToUrl = function (memberId, file) {

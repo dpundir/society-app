@@ -157,7 +157,7 @@ module.exports = function (Member) {
             if (err) {
                 cb(err, null);
             }
-            var total = _.sumBy(data, function(obj){
+            var total = _.sum(data, function(obj){
                 return obj.deposit;
             });
             cb(null, total);

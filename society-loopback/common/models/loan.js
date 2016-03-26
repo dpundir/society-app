@@ -6,7 +6,7 @@ module.exports = function(Loan) {
             if (err) {
                 cb(err, null);
             }
-            var total = _.sumBy(data, function(obj){
+            var total = _.sum(data, function(obj){
                 return obj.amount;
             });
             cb(null, total);

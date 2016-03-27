@@ -5,13 +5,11 @@ define([
     'angular',
   'javascripts/common/services/authentication',
   'javascripts/common/services/http-interceptor',
-  'javascripts/common/services/rest-interface',
-  'javascripts/loan/controllers/loanController'
+  'javascripts/common/services/rest-interface'
 ], function () {
     angular.module("societyApp.loan",[
       "societyApp.common.services.authentication",
       "societyApp.common.services.httpinterceptor",
-      "societyApp.common.services.restinterface",
-      "societyApp.loan.controller.loan"
+      "societyApp.common.services.restinterface"
     ]);
 });

@@ -7,7 +7,7 @@
                 <h4>Information</h4>
                 <div ng-class="{'glyphicon-minus':!isInfoCollapsed,'glyphicon-plus':isInfoCollapsed}" class="pull-right icon glyphicon" ng-click="isInfoCollapsed = !isInfoCollapsed"></div>
             </div>
-            <div class="panel-body" collapse="isInfoCollapsed">
+            <div class="panel-body" ng-hide="isInfoCollapsed">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
@@ -148,7 +148,7 @@
                 <h4>Address</h4>
                 <div ng-class="{'glyphicon-minus':!isAddressCollapsed,'glyphicon-plus':isAddressCollapsed}" class="pull-right icon glyphicon" ng-click="isAddressCollapsed = !isAddressCollapsed"></div>
             </div>
-            <div class="panel-body" collapse="isAddressCollapsed">
+            <div class="panel-body" ng-hide="isAddressCollapsed">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">

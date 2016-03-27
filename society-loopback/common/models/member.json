@@ -1,6 +1,6 @@
 {
   "name": "Member",
-  "base": "PersistedModel",
+  "base": "SocietyBaseModel",
   "idInjection": false,
   "options": {
     "validateUpsert": true

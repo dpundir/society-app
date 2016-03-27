@@ -6,18 +6,14 @@ define([
         .service('DashboardService', ['$http', '$q', 'restInterface', function ($http, $q, restInterface) {
             this.getMemberCount = function () {
                 var filter = {
-                    "filter": {
-                        "where": {"status": 1}
-                    }
+                    "where": {"status": 1}
                 };
                 return restInterface.get('/api/Members/count', null, filter);
             };
             this.getMemberBalance = function () {
                 var filter = {
-                    "filter": {
-                        "where": {"status": 1},
-                        "field": ["deposit"]
-                    }
+                    "where": {"status": 1},
+                    "field": {"name": "deposit"}
                 };
                 return restInterface.get('/api/Members/total', null, filter);
             };
@@ -26,18 +22,14 @@ define([
             };
             this.getLoanCount = function () {
                 var filter = {
-                    "filter": {
-                        "where": {"active": 1}
-                    }
+                    "where": {"active": 1}
                 };
                 return restInterface.get('/api/Loans/count', null, filter);
             };
             this.getLoanTotal = function () {
                 var filter = {
-                    "filter": {
-                        "where": {"active": 1},
-                        "field": ["amount"]
-                    }
+                    "where": {"active": 1},
+                    "field": {"name": "amount"}
                 };
                 return restInterface.get('/api/Loans/total', null, filter);
             };

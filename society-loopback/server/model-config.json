@@ -13,6 +13,10 @@
       "./mixins"
     ]
   },
+    "SocietyBaseModel": {
+        "dataSource": "db",
+        "public": false
+    },
   "User": {
     "dataSource": "mysql-ds",
     "public": false

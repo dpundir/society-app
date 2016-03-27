@@ -169,9 +169,9 @@ define([
                  * @type object
                  * */
                 $scope.dob = {
-                    maxDate: new Date(),
                     dateOption: {
                         formatYear: 'yy',
+                        maxDate: new Date(),
                         startingDay: 1
                     },
                     format: 'dd-MM-yyyy',

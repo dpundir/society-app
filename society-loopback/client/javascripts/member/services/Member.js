@@ -47,6 +47,23 @@ define([
                 filter = angular.merge(filter || {}, defaultMemberListFilter);
                 return restInterface.get('/api/Members', null, filter);
             };
+            this.listWithSearchString = function listWithSearchString(searchString){
+              var memberListFilter = {
+                "filter": {
+                  "where": {
+                    "or": [
+                      {"fname": {"regexp": searchString}},
+                      {"lname": {"regexp": searchString}},
+                      {"mname":{"regexp": searchString}}
+                    ]}
+                }
+              };
+              if(!searchString){
+                memberListFilter = {};
+              }
+              var filter = angular.merge(filter || {}, memberListFilter);
+              return restInterface.get('/api/Members', null, filter);
+            };
             this.getMemberDetail = function getMemberDetail(id, filter) {
                 var defaultMemberFilter = {
                     "filter": {

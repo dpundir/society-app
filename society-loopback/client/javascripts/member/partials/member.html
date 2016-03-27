@@ -24,8 +24,8 @@
                         </div>
                     </div>
                 </div>
-                <tabset>
-                    <tab heading="Member details">
+                <uib-tabset>
+                    <uib-tab heading="Member details">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div>
@@ -39,31 +39,31 @@
                             </div>
 
                         </div>
-                    </tab>
-                    <tab heading="Deposit" disable="mode == 1" select="getMemberDeposit()">
+                    </uib-tab>
+                    <uib-tab heading="Deposit" disable="mode == 1" select="getMemberDeposit()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div member-deposit deposit="memberDeposit"
                                      save-handler="saveNewDeposit(transaction)"></div>
                             </div>
                         </div>
-                    </tab>
-                    <tab heading="Loan" disable="mode == 1" select="getMemberLoans()">
+                    </uib-tab>
+                    <uib-tab heading="Loan" disable="mode == 1" select="getMemberLoans()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div member-loans="memberLoans" member-id="member.id"
                                      click-handler="getMemberLoans()"></div>
                             </div>
                         </div>
-                    </tab>
-                    <tab heading="Documents" select="fetchDocumentList()">
+                    </uib-tab>
+                    <uib-tab heading="Documents" select="fetchDocumentList()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div member-document member="member" documents="documents"></div>
                             </div>
                         </div>
-                    </tab>
-                    <tab heading="Transaction history" select="getTransactionHistory()">
+                    </uib-tab>
+                    <uib-tab heading="Transaction history" select="getTransactionHistory()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div transaction-history="transactionHistory" member-id="member.id"
@@ -71,8 +71,8 @@
                                 </div>
                             </div>
                         </div>
-                    </tab>
-                    <tab heading="Nomination">
+                    </uib-tab>
+                    <uib-tab heading="Nomination">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div>
@@ -90,8 +90,8 @@
                             </div>
 
                         </div>
-                    </tab>
-                </tabset>
+                    </uib-tab>
+                </uib-tabset>
             </div>
 
         </div>

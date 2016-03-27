@@ -1,9 +1,11 @@
 define([
     'angular',
     'lodash',
-    'javascripts/member/filters/memberFilters'
+    'javascripts/member/filters/memberFilters',
+    'javascripts/member/directives/memberSearch'
 ], function (angular, _) {
-    angular.module("societyApp.member.directives",["societyApp.member.filters"])
+    angular.module("societyApp.member.directives",
+      ["societyApp.member.filters","societyApp.member.memberSearchDirective"])
         .directive('memberDetails',['$rootScope',function ($rootScope) {
             return{
                 restrict: 'A',
@@ -37,9 +39,9 @@ define([
                      * @type object
                      * */
                     $scope.dob = {
-                        maxDate: new Date(),
                         dateOption: {
                             formatYear: 'yy',
+                            maxDate: new Date(),
                             startingDay: 1
                         },
                         format: 'dd-MM-yyyy',
@@ -188,6 +190,8 @@ define([
                           memberid:''
                         };
                     }
+                    $scope.refOption1 = {};
+                    $scope.refOption2 = {};
                     $scope.LOAN_MODE = {
                         VIEW: false,
                         NEW: false
@@ -308,6 +312,18 @@ define([
                         }, function(error){
                             console.log(error);
                         });
+                    };
+                    $scope.openRef1SearchModal = function(){
+                        $scope.refOption1.openModal();
+                    };
+                    $scope.refOption1.onSelectRow = function(memberId){
+                      $scope.loanDetail.memberrefid1 = memberId;
+                    };
+                    $scope.openRef2SearchModal = function(){
+                      $scope.refOption2.openModal();
+                    };
+                    $scope.refOption2.onSelectRow = function(memberId){
+                      $scope.loanDetail.memberrefid2 = memberId;
                     };
                     initLoanDetails();
                 }],

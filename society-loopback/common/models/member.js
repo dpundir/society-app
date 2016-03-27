@@ -1,7 +1,6 @@
 module.exports = function (Member) {
 
     var moment = require('moment');
-    var _ = require('lodash');
 
     Member.memberTransaction = function (req, cb) {
         var TransactionHistory = req.app.models.TransactionHistory;
@@ -152,18 +151,6 @@ module.exports = function (Member) {
         })
     };
 
-    Member.memberTotalBalance = function (req, cb) {
-        Member.find({}, function (err, data) {
-            if (err) {
-                cb(err, null);
-            }
-            var total = _.sum(data, function(obj){
-                return obj.deposit;
-            });
-            cb(null, total);
-        });
-    };
-
     Member.remoteMethod(
         'createPersonAddress',
         {
@@ -215,24 +202,6 @@ module.exports = function (Member) {
                 description: 'The response body contains properties of the Transaction History'
             },
             http: {verb: 'post', path: '/transaction'}
-        }
-    );
-
-    Member.remoteMethod(
-        'memberTotalBalance',
-        {
-            description: 'Calculate total balance of all members.',
-            accepts: [
-                {arg: 'req', type: 'object', http: {source: 'req'},
-                    description: 'Do not supply this argument, it is automatically extracted ' +
-                        'from request headers.'
-                }
-            ],
-            returns: {
-                arg: 'total', type: 'number', root: true,
-                description: 'The response body contains total balance of all members.'
-            },
-            http: {verb: 'get', path: '/total'}
         }
     );
 };

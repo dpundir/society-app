@@ -68,7 +68,6 @@ module.exports = function(user) {
     var TokenModel = req.app.models.AccessToken;
 
     TokenModel.findForRequest(req, {}, function(err, token) {
-      console.log(err);
       if(err){
         cb(err, null);
       }

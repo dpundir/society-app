@@ -39,7 +39,7 @@
 <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">New deposit</button>
 </br>
 </br>
-<div collapse="isCollapsed">
+<div ng-hide="isCollapsed">
     <form class="form-horizontal reg-form" name="depositForm" non-validate>
         <div class="form-bottom">
             <div class="panel panel-primary">

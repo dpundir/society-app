@@ -47,6 +47,7 @@ define([
         $scope.option.openModal = function(){
           $scope.option.searchModel = '';
           $scope.error.isError = false;
+          $scope.memberListSearchGrid.data = [];
           modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'javascripts/member/partials/memberSearch.html',

@@ -182,6 +182,7 @@ define([
                         $scope.loanDetail = {
                           id:'',
                           amount:'',
+                          frequency:'',
                           createdate:'',
                           closedate:'',
                           installment:'',
@@ -189,6 +190,9 @@ define([
                           memberrefid2:'',
                           memberid:''
                         };
+                    }
+                    function validateLoanDetails(loanDetail){
+
                     }
                     $scope.refOption1 = {};
                     $scope.refOption2 = {};
@@ -211,7 +215,8 @@ define([
                     $scope.date = {
                         dateOption: {
                             formatYear: 'yy',
-                            startingDay: 1
+                            startingDay: 1,
+                            format: 'dd-MM-yyyy'
                         },
                         format: 'dd-MM-yyyy',
                         status: {
@@ -283,6 +288,8 @@ define([
                             _.forOwn($scope.loanDetail, function(value, key){
                                 $scope.loanDetail[key] = data[key];
                             });
+                            $scope.loanDetail.createdate = new Date($scope.loanDetail.createdate);
+                            $scope.loanDetail.closedate = new Date($scope.loanDetail.closedate);
                             $scope.loanDetail.remainingAmount = data.amount - data.amountPaid;
                         }, function(error){
                               console.log(error);
@@ -303,6 +310,9 @@ define([
                         $scope.loanDetail.installment = $scope.loanDetail.amount/$scope.loanDetail.frequency;
                     };
                     $scope.addNewLoan = function(){
+                        if(!validateLoanDetails($scope.loanDetail)){
+                            return;
+                        }
                         var loanDetail = angular.copy($scope.loanDetail);
                         loanDetail.memberid = $scope.memberId;
                         MemberService.addNewLoan(loanDetail).then(function(data){

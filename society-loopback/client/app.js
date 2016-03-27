@@ -22,6 +22,7 @@ define([
     var app = angular.module("societyApp", [
         "ngRoute",
         "ngCookies",
+        "ngAnimate",
         "ngStorage",
         "ui.grid",
         "ui.grid.selection",

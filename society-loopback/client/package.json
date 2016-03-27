@@ -23,7 +23,7 @@
         "angular-touch": "1.4.0",
         "angular-ui-grid": "^3.0.1",
         "angular-messages": "1.4.0",
-        "angular-ui-bootstrap": "0.13.3",
+        "angular-ui-bootstrap": "1.2.5",
         "angular-internationalization": "1.1.7",
         "bootstrap": "3.3.2",
         "jquery-ui": "1.10.5",

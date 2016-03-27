@@ -111,9 +111,8 @@
                         </div>
                         <div class="form-group input-group">
                             <input type="text" class="form-control" ng-disabled="isViewMode"
-                                   datepicker-popup="{{dob.format}}"
+                                   uib-datepicker-popup="{{dob.format}}"
                                    ng-model="person.dob" is-open="dob.status.opened"
-                                   max-date="dob.maxDate"
                                    datepicker-options="dob.dateOptions" id="dob" name="dob"
                                    ng-required="true" close-text="Close" required=""/>
                                   <span class="input-group-btn">

@@ -27,7 +27,7 @@ requirejs.config({
         // Major libraries
         'jquery': 'node_modules/jquery/dist/jquery',
         'jqueryUI': 'node_modules/jquery-ui/jquery-ui',
-        'angular-ui-bootstrap': 'node_modules/angular-ui-bootstrap/ui-bootstrap-tpls',
+        'angular-ui-bootstrap': 'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls',
         'angular-ui-grid': 'node_modules/angular-ui-grid/ui-grid',
       'ngStorage': 'node_modules/ng-storage/ngStorage'
     },

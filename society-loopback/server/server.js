@@ -10,6 +10,23 @@ app.middleware('initial', bodyParser.json({ extended: true }));
 app.middleware('initial', bodyParser.raw({ extended: true }));
 
 app.use(loopback.token({ model: app.models.accessToken }));
+app.use(function(req, res, next) {
+    var token = req.accessToken;
+    if (!token) return next();
+
+    var now = new Date();
+
+    // performance optimization:
+    // do not update the token more often than once per second
+    if (now.getTime() - token.created.getTime() < 1000){
+        return next()
+    };
+
+    // update the token and save the changes
+    req.accessToken.created = now;
+    req.accessToken.ttl = 600; /* session timeout in seconds */
+    req.accessToken.save(next);
+});
 
 app.engine('html', cons.lodash);
 app.engine('ejs', cons.ejs);

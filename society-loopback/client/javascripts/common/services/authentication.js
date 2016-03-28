@@ -16,7 +16,7 @@ define([
                     restInterface.post('/login', body).then(function (data) {
                         var now = new Date();
                         var time = now.getTime();
-                        time += (10 * 60 * 1000);
+                        time += (10000 * 60 * 1000);
                         now.setTime(time);
                         $cookies.put('access-token', data.accessToken, {
                             expires: now

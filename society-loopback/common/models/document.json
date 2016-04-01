@@ -28,14 +28,14 @@
       },
       "_selectable": false
     },
-    "memberId": {
+    "personId": {
       "type": "Number",
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
       "mysql": {
-        "columnName": "member_id",
+        "columnName": "person_id",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -127,11 +127,11 @@
   },
   "validations": [],
   "relations": {
-    "member": {
+    "person": {
       "type": "belongsTo",
-      "model": "Member",
+      "model": "Person",
       "foreignKey": "id",
-      "keyFrom": "member_id"
+      "keyFrom": "personId"
     }
   },
   "acls": [],

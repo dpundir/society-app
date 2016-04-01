@@ -266,7 +266,23 @@
         "nullable": "Y"
       },
       "_selectable": true
-    }
+    },
+      "profilePhotoName": {
+          "type": "String",
+          "required": false,
+          "length": 45,
+          "precision": null,
+          "scale": null,
+          "mysql": {
+              "columnName": "profile_photo_name",
+              "dataType": "varchar",
+              "dataLength": 45,
+              "dataPrecision": null,
+              "dataScale": null,
+              "nullable": "Y"
+          },
+          "_selectable": true
+      }
   },
   "validations": [],
   "relations": {

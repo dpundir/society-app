@@ -21,11 +21,15 @@ module.exports = function (app) {
     //reset the user's pasword
     router.post('/reset/password', authentication.resetPassword);
 
-    router.post('/file/:memberId/document', document.uploadFile);
+    router.post('/file/:personId/:document', document.uploadFile);
 
-    router.get('/file/:memberId/document', document.fileList);
-    router.get('/file/:memberId/document/:fileName', document.downloadFile);
-    router.delete('/file/:memberId/document/:fileName', document.deleteFile);
+    router.get('/file/:personId/:document', document.fileList);
+
+    router.get('/file/:personId/:document/:fileName', document.downloadFile);
+
+    router.delete('/file/:personId/:document/:fileName', document.deleteFile);
+
+    router.put('/file/:personId/:document/:fileName', document.editFile);
 
     app.use(router);
 }

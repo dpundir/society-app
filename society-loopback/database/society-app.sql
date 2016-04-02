@@ -358,7 +358,7 @@ CREATE TABLE `society_config` (
 
 LOCK TABLES `society_config` WRITE;
 /*!40000 ALTER TABLE `society_config` DISABLE KEYS */;
-INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate',''),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate',''),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value',''),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value',''),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value',''),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value',''),(7,'loanInterestRate',5,10,'2015-11-19 00:00:00',NULL,'Loan interest rate','');
+INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate',''),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate',''),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value',''),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value',''),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value',''),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value','');
 /*!40000 ALTER TABLE `society_config` ENABLE KEYS */;
 UNLOCK TABLES;
 

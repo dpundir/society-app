@@ -5,8 +5,8 @@ define([
   'angular',
   'lodash'
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.memberDeposit", [])
-    .directive('memberDeposit',function () {
+  angular.module("societyApp.member.directives.memberDeposit", ['societyApp.member.filters'])
+    .directive('memberDeposit',['frequencyFilter', function (frequencyFilter) {
       return{
         restrict: 'A',
         scope:{
@@ -14,12 +14,6 @@ define([
           saveHandler: "&"
         },
         controller: ['$scope',function($scope){
-          var installmentFreq = {
-            12: 'Monthly',
-            6: 'Half yearly',
-            3: 'Quarterly',
-            1: 'Yearly'
-          };
           function resetTransaction(){
             $scope.transaction = {
               depositAmount: $scope.deposit.installmentValue,
@@ -75,7 +69,7 @@ define([
                 $scope.transaction.depositAmount = data.installmentValue;
               }
               if(data.installmentFreq){
-                $scope.installmentFrequency = installmentFreq[data.installmentFreq];
+                $scope.installmentFrequency = frequencyFilter(data.installmentFreq);
               }
               $scope.deposit.shareValue = data.shareValue;
               $scope.deposit.installmentValue = data.installmentValue;
@@ -105,5 +99,5 @@ define([
         templateUrl:'javascripts/member/partials/memberDeposit.html',
         link:function(){}
       }
-    })
+    }])
 });

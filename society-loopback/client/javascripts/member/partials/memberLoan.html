@@ -27,12 +27,22 @@
           <div class="form-group">
             <div class="label-input">
               <span class="form-text">Loan ID:</span>
-              <span class="text-danger">*</span>
             </div>
             <input type="text" name="loanId" ng-disabled="true"
                    class="form-control"
                    id="loanId"
                    required="" ng-model="loanDetail.id">
+          </div>
+        </div>
+        <div class="col-sm-4" ng-if="LOAN_MODE.NEW">
+          <div class="form-group">
+            <div class="label-input">
+              <span class="form-text">Loan Interest rate (%):</span>
+            </div>
+            <input type="text" name="loanrate" ng-disabled="true"
+                   class="form-control"
+                   id="loanrate"
+                   required="" ng-model="defaultSocietyConfigs.shareInterestRate">
           </div>
         </div>
         <div class="col-sm-4">
@@ -50,7 +60,6 @@
           <div class="form-group">
             <div class="label-input">
               <span class="form-text">Remaining Amount:</span>
-              <span class="text-danger">*</span>
             </div>
             <input type="text" name="remAmount"
                    class="form-control"
@@ -102,12 +111,11 @@
           <div class="form-group">
             <div class="label-input">
               <span class="form-text">Loan Frequency:</span>
-              <span class="text-danger">*</span>
             </div>
-            <input type="text" name="loanFrequency" ng-disabled="!LOAN_MODE.NEW"
+            <input type="text" name="loanFrequency" ng-disabled="true"
                    class="form-control"
                    id="loanFrequency"
-                   required="" ng-model="loanDetail.frequency">
+                   required="" ng-model="loanDetail.frequency | frequency">
           </div>
         </div>
       </div>
@@ -154,9 +162,8 @@
           <div class="form-group">
               <div class="label-input">
                   <span class="form-text">Loan Installment:</span>
-                  <span class="text-danger">*</span>
               </div>
-              <input type="text" name="loninstallment" ng-disabled="!LOAN_MODE.NEW"
+              <input type="text" name="loninstallment" ng-disabled="true"
                      class="form-control"
                      id="loninstallment"
                      required="" ng-model="loanDetail.installment">

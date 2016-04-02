@@ -1,8 +1,23 @@
 define([
     'angular'
 ], function () {
-    angular.module("societyApp.member.services.member", [])
-        .service('MemberService', ['$http', '$q', 'restInterface', function ($http, $q, restInterface) {
+    angular.module("societyApp.member.services.member", ['ngStorage'])
+        .service('MemberService', ['$http', '$q', 'restInterface','$localStorage', function ($http, $q, restInterface,$localStorage) {
+            this.getSocietyConfig = function(){
+                return $localStorage.memberConfig;
+            };
+            this.setSocietyConfig = function(config){
+                $localStorage.memberConfig = config || {};
+            };
+            this.getTransformedSocietyConfig = function(){
+                if(Object.keys($localStorage.memberConfig).length > 0) {
+                    return _.transform($localStorage.memberConfig, function (result, value) {
+                      result[value.name] = value.value;
+                    }, {});
+                }else{
+                    return {};
+                }
+            };
             this.defaultMember = function defaultMember(member) {
                 member = member || {};
                 member.person = member.person || {};

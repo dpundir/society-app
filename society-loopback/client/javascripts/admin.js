@@ -5,7 +5,7 @@ define([
     'angular',
   'javascripts/common/services/authentication',
   'javascripts/common/services/http-interceptor',
-  'javascripts/common/services/rest-interface',,
+  'javascripts/common/services/rest-interface',
   'javascripts/admin/services/user-profile-service',
   'javascripts/admin/controllers/adminLoginController',
   'javascripts/admin/controllers/register-controller',

@@ -187,6 +187,28 @@ define([
                     }
                 };
                 /*
+                 * Save a new deposit entry of a member,
+                 * */
+                $scope.addEditProfilePhoto = function (personId, file, isAddProfilePhoto) {
+                    fileUpload.addEditProfilePhoto(personId, file, isAddProfilePhoto).then(function (data) {
+                        $scope.person.profilePhotoName = data.person.profilePhotoName;
+                        //$scope.memberDeposit.successCB(undefined, true);
+                    }, function (error) {
+                        //$scope.memberDeposit.errorCB(error);
+                    })
+                };
+                /*
+                 * Save a new deposit entry of a member
+                 * */
+                $scope.deleteProfilePhoto = function (form) {
+                    fileUpload.deleteProfilePhoto($scope.member.person.id, $scope.member.person.profilePhotoName).then(function (data) {
+                        $scope.member.person.profilePhotoName = undefined;
+                        //$scope.memberDeposit.successCB(undefined, true);
+                    }, function (error) {
+                        //$scope.memberDeposit.errorCB(error);
+                    })
+                };
+                /*
                  * Initialize on load
                  * */
                 init();

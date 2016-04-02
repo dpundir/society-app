@@ -26,11 +26,11 @@ var uploadFile = function(req, res) {
                 if (!err) {
                     fs.writeFile(newPath, data, function (err) { // write file in uploads folder
                         if(err){
-                            res.status(500).json("Failed to upload your file");
+                            res.status(500).json("Failed to upload your file to storage");
                         } else if(!err && isProfileFile){
                             Person.update({id: personId}, {profilePhotoName: fileName}, function (err, data) {
                                 if (err) {
-                                    res.status(500).json("Failed to upload your file");
+                                    res.status(500).json("Failed to upload your file to person");
                                 } else {
                                     res.json("Successfully uploaded your file");
                                 }
@@ -49,6 +49,7 @@ var downloadFile = function (req, res){
     var fileName = req.params.fileName;
     var personId = req.params.personId;
     var downloadFileName = path.resolve(".", "storage", personId, fileName);
+    console.log(downloadFileName);
     res.download(downloadFileName);
 };
 
@@ -58,13 +59,14 @@ var deleteFile = function (req, res){
     var personId = req.params.personId;
     var isProfileFile = req.params.document === 'profile';
     var fileName = path.resolve(".", "storage", personId, fileName);
+    console.log(fileName);
     var img = fs.unlink(fileName, function(err){
         if(err){
-            res.status(500).json('error in deleting file');
+            res.status(500).json('error in deleting file from storage');
         } else if(!err && isProfileFile){
-            Person.update({id: personId}, {profilePhotoName: undefined}, function (err, data) {
+            Person.update({id: personId}, {profilePhotoName: null}, function (err, data) {
                 if (err) {
-                    res.status(500).json("error in deleting file");
+                    res.status(500).json("error in deleting file from person");
                 } else {
                     res.sendStatus(200);
                 }

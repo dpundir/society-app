@@ -224,6 +224,22 @@ define([
                 }, function (error) {
                     console.log(error);
                 });
-            }
+            };
+
+            this.deleteProfilePhoto = function(personId, photoName){
+                return restInterface.delete("/file/" + personId + "/profile/"+ photoName);
+            };
+
+            this.addEditProfilePhoto = function (personId, file, isAddProfilePhoto) {
+                var uploadUrl = "/file/" + personId + "/profile";
+                var fd = new FormData();
+                fd.append('file', file);
+                return restInterface.post(uploadUrl, fd, undefined, {
+                    'Content-Type': undefined
+                }, {
+                    transformRequest: angular.identity
+                });
+            };
+
         }]);
 });

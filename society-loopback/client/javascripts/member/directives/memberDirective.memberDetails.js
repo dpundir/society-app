@@ -14,7 +14,8 @@ define([
           address: '=',
           isViewMode: '=',
           actionText: '=',
-          clickHandler: '&'
+          clickHandler: '&',
+          deleteProfilePhoto: '&'
         },
         controller: ['$scope', function ($scope) {
           /*
@@ -64,9 +65,16 @@ define([
           };
           $scope.isInfoCollapsed = false;
           $scope.isAddressCollapsed = false;
+            /*$scope.deleteProfilePhoto = function(form){
+                console.log("call delete /file/:personId/profile/:fileName where file name is person.profilePhotoName");
+            }*/
+            $scope.addEditProfilePhoto = function(form){
+                console.log("call for add post /file/:personId/profile and send file name as 'userProfile.<extn>'");
+                console.log("call for edit put /file/:personId/profile/:fileName where file name is person.profilePhotoName");
+            }
         }],
         templateUrl: 'javascripts/member/partials/memberDetails.html',
-        link: function () {}
+        link: function (scope) {}
       }
     });
 });

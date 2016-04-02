@@ -8,135 +8,151 @@
             </div>
             <div class="panel-body" ng-hide="isInfoCollapsed">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">First name</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">First name</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <input type="text" name="fname"
+                                           class="form-control"
+                                           id="fname" ng-disabled="isViewMode"
+                                           required="" ng-model="person.fname">
+                                </div>
                             </div>
-                            <input type="text" name="fname"
-                                   class="form-control"
-                                   id="fname" ng-disabled="isViewMode"
-                                   required="" ng-model="person.fname">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Middle name</span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control" ng-disabled="isViewMode"
+                                           id="mname" ng-model="person.mname">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Last name</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <input type="text" name="lname"
+                                           class="form-control"
+                                           id="lname" ng-disabled="isViewMode"
+                                           required="" ng-model="person.lname">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Father's first name</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control" name="ffname"
+                                           id="ffname" ng-disabled="isViewMode"
+                                           required="" ng-model="person.ffname">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Father's middle name</span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control" ng-disabled="isViewMode"
+                                           id="fmname" ng-model="person.fmname">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Father's last name</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control" name="flname"
+                                           id="flname" ng-disabled="isViewMode"
+                                           required="" ng-model="person.flname">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Gender</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <select name="gender" ng-model="person.sex"
+                                            class="form-control"
+                                            ng-disabled="isViewMode" required="">
+                                        <option value="m">Male</option>
+                                        <option value="f">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Mobile number</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                           ng-disabled="isViewMode" required="" ng-model="person.phone">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="label-input">
+                                    <span class="form-text">Date of birth</span>
+                                    <span class="text-danger" ng-show="!isViewMode">*</span>
+                                </div>
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control" ng-disabled="isViewMode"
+                                           uib-datepicker-popup="{{dob.format}}"
+                                           ng-model="person.dob" is-open="dob.status.opened"
+                                           datepicker-options="dob.dateOptions" id="dob" name="dob"
+                                           ng-required="true" close-text="Close" required=""/>
+                                          <span class="input-group-btn">
+                                            <button type="button" ng-disabled="isViewMode"
+                                                    class="btn btn-default btn-datepicker"
+                                                    ng-click="open()">
+                                                <i class="glyphicon glyphicon-calendar"></i></button>
+                                          </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Marital Status</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <select name="gender" ng-model="person.marital_status"
+                                            class="form-control"
+                                            ng-disabled="isViewMode" required="">
+                                        <option value='1'>Married</option>
+                                        <option value='0'>Unmarried</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Middle name</span>
-                            </div>
-                            <input type="text"
-                                   class="form-control" ng-disabled="isViewMode"
-                                   id="mname" ng-model="person.mname">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Last name</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                            <input type="text" name="lname"
-                                   class="form-control"
-                                   id="lname" ng-disabled="isViewMode"
-                                   required="" ng-model="person.lname">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Father's first name</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                            <input type="text"
-                                   class="form-control" name="ffname"
-                                   id="ffname" ng-disabled="isViewMode"
-                                   required="" ng-model="person.ffname">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Father's middle name</span>
-                            </div>
-                            <input type="text"
-                                   class="form-control" ng-disabled="isViewMode"
-                                   id="fmname" ng-model="person.fmname">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Father's last name</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                            <input type="text"
-                                   class="form-control" name="flname"
-                                   id="flname" ng-disabled="isViewMode"
-                                   required="" ng-model="person.flname">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Gender</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                            <select name="gender" ng-model="person.sex"
-                                    class="form-control"
-                                    ng-disabled="isViewMode" required="">
-                                <option value="m">Male</option>
-                                <option value="f">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Mobile number</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                            <input type="text" class="form-control" id="phone" name="phone"
-                                   ng-disabled="isViewMode" required="" ng-model="person.phone">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="label-input">
-                            <span class="form-text">Date of birth</span>
-                            <span class="text-danger" ng-show="!isViewMode">*</span>
-                        </div>
-                        <div class="form-group input-group">
-                            <input type="text" class="form-control" ng-disabled="isViewMode"
-                                   uib-datepicker-popup="{{dob.format}}"
-                                   ng-model="person.dob" is-open="dob.status.opened"
-                                   datepicker-options="dob.dateOptions" id="dob" name="dob"
-                                   ng-required="true" close-text="Close" required=""/>
-                                  <span class="input-group-btn">
-                                    <button type="button" ng-disabled="isViewMode"
-                                            class="btn btn-default btn-datepicker"
-                                            ng-click="open()">
-                                        <i class="glyphicon glyphicon-calendar"></i></button>
-                                  </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="label-input">
-                                <span class="form-text">Marital Status</span>
-                                <span class="text-danger" ng-show="!isViewMode">*</span>
-                            </div>
-                            <select name="gender" ng-model="person.marital_status"
-                                    class="form-control"
-                                    ng-disabled="isViewMode" required="">
-                                <option value='1'>Married</option>
-                                <option value='0'>Unmarried</option>
-                            </select>
+                            <img ng-src="/file/{{person.id}}/document/{{person.profilePhotoName}}">
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="addEditProfilePhoto(registrationForm)" >{{person.profilePhotoName? "Edit": "Add"}}</button>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="deleteProfilePhoto(registrationForm)">Delete</button>
+
                         </div>
                     </div>
                 </div>

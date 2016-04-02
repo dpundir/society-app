@@ -14,7 +14,7 @@ module.exports = function (Document) {
             }
             var input = {
                 id: '',
-                memberId: fields.memberId,
+                personId: fields.personId,
                 name: files.file.name,
                 status: 1,
                 createDate: Date.now(),
@@ -32,10 +32,10 @@ module.exports = function (Document) {
 
     Document.fetchDocument = function (req, res, cb) {
         var documentId = req.params.documentId;
-        var memberId = req.params.memberId;
+        var personId = req.params.personId;
         var filter = {
             "where" : {
-                "memberId": memberId,
+                "personId": personId,
                 "status": 1
             }
         };
@@ -68,14 +68,14 @@ module.exports = function (Document) {
     };
 
     Document.fetchDocumentList = function (req, res, cb) {
-        var memberId = req.params.memberId;
+        var personId = req.params.personId;
         var filter = {
             "where" : {
-                "memberId": memberId,
+                "personId": personId,
                 "status": 1
             },
             "fields": [
-                "id", "name", "type", "memberId", "createDate", "status"
+                "id", "name", "type", "personId", "createDate", "status"
             ]
         };
 
@@ -90,7 +90,7 @@ module.exports = function (Document) {
     Document.remoteMethod(
         'createDocument',
         {
-            description: 'Upload document for member.',
+            description: 'Upload document for person.',
             accepts: [
                 {
                     arg: 'req', type: 'object', http: {source: 'req'},
@@ -129,14 +129,14 @@ module.exports = function (Document) {
                 arg: 'file', type: 'Buffer', root: true,
                 description: 'The response body contains data of the uploaded document'
             },
-            http: {verb: 'get', path: '/:memberId/fetch/:documentId'}
+            http: {verb: 'get', path: '/:personId/fetch/:documentId'}
         }
     );
 
     Document.remoteMethod(
         'fetchDocumentList',
         {
-            description: 'Fetch document list for passed member id.',
+            description: 'Fetch document list for passed person id.',
             accepts: [
                 {
                     arg: 'req', type: 'object', http: {source: 'req'},
@@ -152,7 +152,7 @@ module.exports = function (Document) {
                 arg: 'documentList', type: 'array', root: true,
                 description: 'The response body contains data of the uploaded document'
             },
-            http: {verb: 'get', path: '/:memberId/fetch'}
+            http: {verb: 'get', path: '/:personId/fetch'}
         }
     );
 };

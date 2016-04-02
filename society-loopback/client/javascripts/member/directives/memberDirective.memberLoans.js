@@ -5,7 +5,7 @@ define([
   'angular',
   'lodash'
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.memberLoans", [])
+  angular.module("societyApp.member.directives.memberLoans", ['societyApp.member.filters'])
     .directive('memberLoans',['$location', '$filter', 'MemberService', function ($location, $filter, MemberService) {
       return{
         restrict: 'A',
@@ -17,10 +17,11 @@ define([
         controller: ['$scope',function($scope){
 
           function initLoanDetails(){
+            $scope.defaultSocietyConfigs = MemberService.getTransformedSocietyConfig();
             $scope.loanDetail = {
               id:'',
               amount:'',
-              frequency:'',
+              frequency:12,
               createdate:'',
               closedate:'',
               installment:'',
@@ -30,7 +31,7 @@ define([
             };
           }
           function validateLoanDetails(loanDetail){
-
+            return true;
           }
           $scope.refOption1 = {};
           $scope.refOption2 = {};
@@ -146,6 +147,7 @@ define([
           };
           $scope.calculateInstallment = function(){
             $scope.loanDetail.installment = $scope.loanDetail.amount/$scope.loanDetail.frequency;
+            var interest = $scope.defaultSocietyConfigs.shareInterestRate/1200;
           };
           $scope.addNewLoan = function(){
             if(!validateLoanDetails($scope.loanDetail)){

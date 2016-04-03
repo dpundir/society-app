@@ -110,6 +110,48 @@ module.exports = function (Member) {
         })
     };
 
+    Member.createNominationPersonAddress = function (req, cb) {
+        var Person = req.app.models.Person;
+        var Address = req.app.models.Address;
+        Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
+            var addressData = req.body.nominee.address;
+            addressData.id = '';
+
+            Address.create(addressData, {transaction: tx}, function (err1, data1) {
+                if (err1) {
+                    tx.rollback();
+                    cb(err1, null);
+                }
+                var personData = req.body.nominee;
+                personData.id = '';
+                personData.addressid = data1.id;
+                personData.createDate = new Date();
+                personData.modifiedDate = new Date();
+                delete personData.address;
+                Person.create(personData, {transaction: tx}, function (err2, data2) {
+                    if (err2) {
+                        tx.rollback();
+                        cb(err2, null);
+                    }
+                    var memberData = req.body;
+                    var memberId = req.body.id;
+                    memberData.nomineeId = data2.id;
+                    memberData.modifiedDate = new Date();
+                    delete memberData.nominee;
+                    delete memberData.person;
+                    Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
+                        if (err3) {
+                            tx.rollback();
+                            cb(err3, null);
+                        }
+                        tx.commit();
+                        cb(null, data3);
+                    });
+                });
+            });
+        })
+    };
+
     Member.updatePersonAddress = function (req, cb) {
         var Person = req.app.models.Person;
         var Address = req.app.models.Address;
@@ -151,6 +193,47 @@ module.exports = function (Member) {
         })
     };
 
+    Member.updateNominationPersonAddress = function (req, cb) {
+        var Person = req.app.models.Person;
+        var Address = req.app.models.Address;
+        Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
+            var addressData = req.body.nominee.address;
+            var addressId = req.body.nominee.address.id;
+            delete addressData.id;
+
+            Address.update({id: addressId}, addressData, {transaction: tx}, function (err1, data1) {
+                if (err1) {
+                    tx.rollback();
+                    cb(err1, null);
+                }
+                var personData = req.body.nominee;
+                var personId = req.body.nominee.id;
+                personData.modifiedDate = new Date();
+                delete personData.address;
+                delete personData.id;
+                Person.update({id: personId}, personData, {transaction: tx}, function (err2, data2) {
+                    if (err2) {
+                        tx.rollback();
+                        cb(err2, null);
+                    }
+                    var memberData = req.body;
+                    var memberId = req.body.id;
+                    memberData.modifiedDate = new Date();
+                    delete memberData.nominee;
+                    delete memberData.id;
+                    Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
+                        if (err3) {
+                            tx.rollback();
+                            cb(err3, null);
+                        }
+                        tx.commit();
+                        cb(null, data3);
+                    });
+                });
+            });
+        })
+    };
+
     Member.remoteMethod(
         'createPersonAddress',
         {
@@ -170,6 +253,42 @@ module.exports = function (Member) {
     );
 
     Member.remoteMethod(
+        'createNominationPersonAddress',
+        {
+            description: 'Add nominee with person and address details.',
+            accepts: [
+                {arg: 'req', type: 'object', http: {source: 'req'},
+                    description: 'Do not supply this argument, it is automatically extracted ' +
+                        'from request headers.'
+                }
+            ],
+            returns: {
+                arg: 'member', type: 'object',
+                description: 'The response body contains properties of the Member'
+            },
+            http: {verb: 'post', path: '/nominee/personaddress'}
+        }
+    );
+
+    Member.remoteMethod(
+        'updateNominationPersonAddress',
+        {
+            description: 'Update member with person and address details.',
+            accepts: [
+                {arg: 'req', type: 'object', http: {source: 'req'},
+                    description: 'Do not supply this argument, it is automatically extracted ' +
+                        'from request headers.'
+                }
+            ],
+            returns: {
+                arg: 'member', type: 'object',
+                description: 'The response body contains properties of the Member'
+            },
+            http: {verb: 'put', path: '/nominee/personaddress'}
+        }
+    );
+
+    Member.remoteMethod(
         'updatePersonAddress',
         {
             description: 'Update member with person and address details.',
@@ -181,7 +300,7 @@ module.exports = function (Member) {
             ],
             returns: {
                 arg: 'member', type: 'object',
-                description: 'The response body contains properties of the Memberr'
+                description: 'The response body contains properties of the Member'
             },
             http: {verb: 'put', path: '/personaddress'}
         }

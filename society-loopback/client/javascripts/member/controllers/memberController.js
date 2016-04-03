@@ -25,6 +25,7 @@ define([
                 $scope.transactionHistory = {};
                 $scope.memberLoans = {};
                 $scope.documents = {};
+                $scope.nomineeDetail = {};
                 /*
                  * @method
                  * @name updateMemberDetail
@@ -79,6 +80,7 @@ define([
                         $scope.actionText = 'Edit';
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
+                        $scope.member.nominee = data.nominee;
                         $scope.member.person.dob = new Date(data.person.dob);
                         $scope.member.person.marital_status = data.person.marital_status+'';
                         $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
@@ -157,6 +159,16 @@ define([
                         $scope.memberLoans.successCB(data);
                     }, function (error) {
                         $scope.memberLoans.errorCB(error);
+                    });
+                };
+                /*
+                 * Get member nominee if a member based on member id
+                 * */
+                $scope.getMemberNomineeDetail = function () {
+                    MemberService.getMemberNomineeDetail($scope.member.id).then(function (data) {
+                        $scope.nomineeDetail.successCB(data);
+                    }, function (error) {
+                        $scope.nomineeDetail.errorCB(error);
                     });
                 };
                 /*

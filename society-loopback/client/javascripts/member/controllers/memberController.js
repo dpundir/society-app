@@ -81,7 +81,7 @@ define([
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
                         $scope.member.person.dob = new Date(data.person.dob);
                         $scope.member.person.marital_status = data.person.marital_status+'';
-                        $scope.memberFullName = (data.fname||'')+' '+(data.mname||'')+' '+(data.lname||'');
+                        $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.VIEW;

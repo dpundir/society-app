@@ -27,6 +27,7 @@ define([
                     mname: member.mname || '',
                     lname: member.lname || '',
                     phone: member.phone || '',
+                    status: member.status || 0,
                     createDate: member.createDate || '',
                     modifiedDate: member.modifiedDate || '',
                     id: member.id || '',

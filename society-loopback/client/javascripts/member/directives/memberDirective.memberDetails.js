@@ -5,8 +5,8 @@ define([
   'angular',
   'lodash'
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.memberDetails",[])
-    .directive('memberDetails', function () {
+  angular.module("societyApp.member.directives.memberDetails",["societyApp.member.services.member"])
+    .directive('memberDetails', ['fileUpload', function (fileUpload) {
       return {
         restrict: 'A',
         scope: {
@@ -14,8 +14,7 @@ define([
           address: '=',
           isViewMode: '=',
           actionText: '=',
-          clickHandler: '&',
-          deleteProfilePhoto: '&'
+          clickHandler: '&'
         },
         controller: ['$scope', function ($scope) {
           /*
@@ -65,16 +64,36 @@ define([
           };
           $scope.isInfoCollapsed = false;
           $scope.isAddressCollapsed = false;
-            /*$scope.deleteProfilePhoto = function(form){
-                console.log("call delete /file/:personId/profile/:fileName where file name is person.profilePhotoName");
-            }*/
-            $scope.addEditProfilePhoto = function(form){
-                console.log("call for add post /file/:personId/profile and send file name as 'userProfile.<extn>'");
-                console.log("call for edit put /file/:personId/profile/:fileName where file name is person.profilePhotoName");
-            }
+            /*
+             * Save a new deposit entry of a member,
+             * */
+            $scope.addEditProfilePhoto = function () {
+                var isAddProfilePhoto = !!$scope.person.profilePhotoName;
+                fileUpload.addEditProfilePhoto($scope.person.id, $scope.file, isAddProfilePhoto).then(function (data) {
+                    $scope.person.profilePhotoName = data.fileName;
+                }, function (error) {
+                    console.log(error);
+                })
+            };
+            /*
+             * Save a new deposit entry of a member
+             * */
+            $scope.deleteProfilePhoto = function () {
+                fileUpload.deleteProfilePhoto($scope.person.id, $scope.person.profilePhotoName).then(function (data) {
+                    $scope.person.profilePhotoName = undefined;
+                }, function (error) {
+                    console.log(error);
+                })
+            };
         }],
         templateUrl: 'javascripts/member/partials/memberDetails.html',
-        link: function (scope) {}
+        link: function (scope, element) {
+            var fileInput = element.find('input#profilePhotoUpload');
+
+            fileInput.bind('change', function() {
+                scope.file = fileInput[0].files[0];
+            });
+        }
       }
-    });
+    }]);
 });

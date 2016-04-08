@@ -33,5 +33,19 @@ define([
                 };
                 return restInterface.get('/api/Loans/total', null, filter);
             };
+            this.getExpenseTotal = function () {
+                var filter = {
+                    "where": {"debitAmount": {"neq": null}},
+                    "field": {"name": "debitAmount"}
+                };
+                return restInterface.get('/api/SocietyExpenses/total', null, filter);
+            };
+            this.getIncomeTotal = function () {
+                var filter = {
+                    "where": {"creditAmount": {"neq": null}},
+                    "field": {"name": "creditAmount"}
+                };
+                return restInterface.get('/api/SocietyExpenses/total', null, filter);
+            };
         }]);
 });

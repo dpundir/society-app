@@ -1,6 +1,6 @@
 {
   "name": "SocietyExpense",
-  "base": "PersistedModel",
+  "base": "SocietyBaseModel",
   "idInjection": false,
   "options": {
     "validateUpsert": true
@@ -16,6 +16,7 @@
       "required": true,
       "length": null,
       "precision": 10,
+        "generated": true,
       "scale": 0,
       "mysql": {
         "columnName": "id",
@@ -27,27 +28,44 @@
       },
       "_selectable": false
     },
-    "amount": {
+    "debitAmount": {
       "type": "Number",
-      "required": true,
+      "required": false,
       "length": null,
       "precision": 22,
       "scale": null,
       "mysql": {
-        "columnName": "amount",
+        "columnName": "debit_amount",
         "dataType": "double",
         "dataLength": null,
         "dataPrecision": 22,
         "dataScale": null,
-        "nullable": "N"
+        "nullable": "Y"
       },
       "_selectable": false
     },
+      "creditAmount": {
+          "type": "Number",
+          "required": false,
+          "length": null,
+          "precision": 22,
+          "scale": null,
+          "mysql": {
+              "columnName": "credit_amount",
+              "dataType": "double",
+              "dataLength": null,
+              "dataPrecision": 22,
+              "dataScale": null,
+              "nullable": "Y"
+          },
+          "_selectable": false
+      },
     "description": {
       "type": "String",
       "required": false,
       "length": 50,
       "precision": null,
+        "required": true,
       "scale": null,
       "mysql": {
         "columnName": "description",
@@ -55,7 +73,7 @@
         "dataLength": 50,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "Y"
+        "nullable": "N"
       },
       "_selectable": true
     },

@@ -20,7 +20,8 @@ define([
                     maritalStatus: person.maritalStatus || '',
                     createDate: person.createDate || '',
                     modifiedDate: person.modifiedDate || '',
-                    id: person.id || ''
+                    id: person.id || '',
+                    address: person.address || {}
                 }
             };
             this.defaultPersonAddress = function defaultPersonAddress(address) {

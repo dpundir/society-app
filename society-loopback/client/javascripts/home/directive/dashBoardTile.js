@@ -23,6 +23,12 @@ define([
                         DashboardService.getLoanTotal().then(function(data){
                             $scope.loanTotal = data.total;
                         });
+                        DashboardService.getExpenseTotal().then(function(data){
+                            $scope.societyExpense = data.total;
+                        });
+                        DashboardService.getIncomeTotal().then(function(data){
+                            $scope.societyIncome = data.total;
+                        });
                     }
                     init();
                 }],

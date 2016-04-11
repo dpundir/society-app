@@ -17,6 +17,7 @@ define([
     'javascripts/home',
     'javascripts/loan',
     'javascripts/person',
+    'javascripts/expense',
     'javascripts/settings'
 ], function (angular) {
     var app = angular.module("societyApp", [
@@ -33,6 +34,7 @@ define([
         "societyApp.member",
         "societyApp.loan",
         "societyApp.person",
+        "societyApp.expense",
         "societyApp.settings"
     ])
         .config(function ($routeProvider, $provide) {
@@ -69,6 +71,9 @@ define([
             }).when('/settings/configure', {
                 'templateUrl': 'javascripts/settings/partials/settingsConfig.html',
                 'controller': 'settingsConfigController'
+            }).when('/expense', {
+                'templateUrl': 'javascripts/expense/partials/expense-list.html',
+                'controller': 'expenseListController'
             }).otherwise({
                 'redirectTo': '/login'
             });

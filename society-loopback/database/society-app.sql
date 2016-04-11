@@ -96,7 +96,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-143','lal bag','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101'),(16,'E-80 Munirka Village','munirka village','','Delhi','Delhi','110067'),(20,'C-143','lal bagh',NULL,'loni','ghaziabad','201102'),(21,'F164, 400 E Remington Dr','Sunnyvale','','San Jose','California','94087'),(22,'E-80 Munirka Village','munirka village3','','Delhi','Delhi','110067'),(26,'c','143','','lal','up','201102'),(27,'c','143','','lal','up','201102'),(28,'c','143','','l','l','201102'),(29,'c','143','','ll','up','201012'),(30,'c','143','','ll','bp','100201'),(31,'c','143','','ll','up','201011'),(32,'c','001','','lala','up','201012');
+INSERT INTO `address` VALUES (1,'C-1431','lal bag1','loni','ghaziabad1','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101'),(16,'E-80 Munirka Village','munirka village','','Delhi','Delhi','110067'),(20,'C-143','lal bagh',NULL,'loni','ghaziabad','201102'),(21,'F164, 400 E Remington Dr','Sunnyvale','','San Jose','California','94087'),(22,'E-80 Munirka Village','munirka village3','','Delhi','Delhi','110067'),(26,'c','143','','lal','up','201102'),(27,'c','143','','lal','up','201102'),(28,'c','143','','l','l','201102'),(29,'c','143','','ll','up','201012'),(30,'c','143','','ll','bp','100201'),(31,'c','143','','ll','up','201011'),(32,'c','001','','lala','up','201012');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `loan` (
   CONSTRAINT `loan_member_id` FOREIGN KEY (`memberid`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id1` FOREIGN KEY (`memberrefid1`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id2` FOREIGN KEY (`memberrefid2`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `loan` (
 
 LOCK TABLES `loan` WRITE;
 /*!40000 ALTER TABLE `loan` DISABLE KEYS */;
-INSERT INTO `loan` VALUES (1,1,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',10000,0,5400,NULL,2,3,NULL,0,0),(2,1,0,'2015-12-01 00:00:00','2016-02-28 00:00:00',20000,0,1900,NULL,3,2,NULL,0,0),(3,2,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',15000,0,1400,NULL,1,3,NULL,0,0);
+INSERT INTO `loan` VALUES (1,1,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',10000,0,5400,NULL,2,3,NULL,0,0),(2,1,0,'2015-12-01 00:00:00','2016-02-28 00:00:00',20000,0,1900,NULL,3,2,NULL,0,0),(3,2,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',15000,0,1400,NULL,1,3,NULL,0,0),(4,1,NULL,'2016-04-02 18:30:00','2016-12-01 18:30:00',10000,0,NULL,NULL,1,2,NULL,12,833.3333333333334);
 /*!40000 ALTER TABLE `loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +266,7 @@ CREATE TABLE `person` (
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='person details';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='person details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +275,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'deepak','singh','pundir','8287536951',1,1,'2015-11-13 00:00:00','2016-03-25 07:21:25','1983-11-14','surbir','singh','pundir','m',1,NULL,'userProfile.jpg'),(2,'debashis','s','mishra','8882227771',1,2,'2015-11-30 00:00:00','2015-11-30 00:00:00','1981-11-01','d','e','mishra','m',1,NULL,NULL),(3,'neeraj','a','kumar','1287536955',1,9,'2015-11-13 00:00:00','2015-11-13 00:00:00','1981-11-14',NULL,NULL,NULL,'m',NULL,NULL,NULL),(4,'usha','rawat','pundir','8287536951',NULL,16,'2016-01-03 17:14:35','2016-01-03 17:14:36','1988-01-15','deepak','singh','pundir','f',1,NULL,NULL),(5,'dee','','pun','8282',0,26,'2016-03-25 00:00:00','2016-03-25 07:34:34','2001-01-10','sur','','pun','m',0,NULL,NULL),(6,'dee','','pun','82828',0,27,'2016-03-25 00:00:00','2016-03-25 07:48:13','2001-09-15','sur','','pun','m',0,NULL,NULL),(7,'dee','','pun','828282',0,28,'2016-03-25 00:00:00','2016-03-25 07:51:22','2002-02-05','sur','','pun','m',0,NULL,NULL),(8,'dee','','pun','981918',0,29,'2016-03-25 00:00:00','2016-03-25 07:53:10','2016-03-08','sur','','pun','m',0,NULL,NULL),(9,'dee','','pun','91',0,30,'2016-03-25 00:00:00','2016-03-25 07:55:07','2016-03-01','sur','','pun','m',0,NULL,NULL),(10,'dee','','pun','18191',0,31,'2016-03-25 00:00:00','2016-03-25 08:01:05','2016-03-02','sur','','pun','m',0,NULL,NULL),(11,'dee','','pun','82828',0,32,'2016-03-25 00:00:00','2016-03-25 08:04:44','2016-03-03','sur','','pun','m',0,NULL,NULL);
+INSERT INTO `person` VALUES (1,'deepak','singh1','pundir','8287536951',1,1,'2015-11-13 00:00:00','2016-04-03 08:31:31','1983-11-14','surbir','singh1','pundir','m',1,NULL,NULL),(2,'debashis','s','mishra','8882227771',1,2,'2015-11-30 00:00:00','2015-11-30 00:00:00','1981-11-01','d','e','mishra','m',1,NULL,NULL),(3,'neeraj','a','kumar','1287536955',1,9,'2015-11-13 00:00:00','2015-11-13 00:00:00','1981-11-14',NULL,NULL,NULL,'m',NULL,NULL,NULL),(4,'usha','rawat','pundir','8287536951',NULL,16,'2016-01-03 17:14:35','2016-01-03 17:14:36','1988-01-15','deepak','singh','pundir','f',1,NULL,NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,7 +358,7 @@ CREATE TABLE `society_config` (
 
 LOCK TABLES `society_config` WRITE;
 /*!40000 ALTER TABLE `society_config` DISABLE KEYS */;
-INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate',''),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate',''),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value',''),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value',''),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value',''),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value','');
+INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate',''),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate',''),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value',''),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value',''),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value',''),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value',''),(7,'loanInterestRate',5,10,'2015-11-19 00:00:00',NULL,'Loan interest rate','');
 /*!40000 ALTER TABLE `society_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,11 +371,12 @@ DROP TABLE IF EXISTS `society_expense`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `society_expense` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `amount` double NOT NULL,
-  `description` varchar(50) DEFAULT NULL,
+  `debit_amount` double DEFAULT NULL,
+  `credit_amount` double DEFAULT NULL,
+  `description` varchar(50) NOT NULL,
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='society expense details';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='society expense details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,6 +385,7 @@ CREATE TABLE `society_expense` (
 
 LOCK TABLES `society_expense` WRITE;
 /*!40000 ALTER TABLE `society_expense` DISABLE KEYS */;
+INSERT INTO `society_expense` VALUES (1,10,NULL,'expense 1','2016-04-08 00:00:00'),(2,NULL,10,'income 1','2016-04-08 00:00:00'),(3,NULL,10,'income 1','2016-04-08 00:00:00'),(4,NULL,100,'income 1','2016-04-08 00:00:00'),(5,NULL,110,'income 2','2016-04-08 00:00:00'),(6,103,NULL,'expense 3','2016-04-08 00:00:00');
 /*!40000 ALTER TABLE `society_expense` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,7 +457,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,NULL,'dpundir','$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4','1',NULL,NULL,1,11),(2,NULL,NULL,'$2a$10$IRL48tyo8QlU/Ol/vqAEIOOod8JovqjMljouJS9Fn20fS3KZuNh6q',NULL,NULL,'deepak.pundir@abcd.com',1,'8fe533fe616cc9af0a2e491858a807ea7c65bace073da7128605a3ba420caa64a44a0e3a909e62de29f09a669df76426ed83abe6aed95c8761505a821395f35e','1',NULL,NULL,NULL,2),(3,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672','2',NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,NULL,'dpundir','$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4','1',NULL,NULL,1,1),(2,NULL,NULL,'$2a$10$IRL48tyo8QlU/Ol/vqAEIOOod8JovqjMljouJS9Fn20fS3KZuNh6q',NULL,NULL,'deepak.pundir@abcd.com',1,'8fe533fe616cc9af0a2e491858a807ea7c65bace073da7128605a3ba420caa64a44a0e3a909e62de29f09a669df76426ed83abe6aed95c8761505a821395f35e','1',NULL,NULL,NULL,2),(3,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672','2',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -468,4 +470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-01 23:24:24
+-- Dump completed on 2016-04-08 23:53:09

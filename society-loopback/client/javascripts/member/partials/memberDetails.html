@@ -145,13 +145,14 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <img ng-src="/file/{{person.id}}/document/{{person.profilePhotoName}}">
+                            <img ng-src="/file/{{person.id}}/document/{{person.profilePhotoName}}" ng-show="person.profilePhotoName">
+                            <input type="file" id="profilePhotoUpload"/>
                             <button type="button"
                                     class="btn btn-primary"
-                                    ng-click="addEditProfilePhoto(registrationForm)" >{{person.profilePhotoName? "Edit": "Add"}}</button>
+                                    ng-click="addEditProfilePhoto()" >{{person.profilePhotoName? "Edit": "Add"}}</button>
                             <button type="button"
                                     class="btn btn-primary"
-                                    ng-click="deleteProfilePhoto(registrationForm)">Delete</button>
+                                    ng-click="deleteProfilePhoto()">Delete</button>
 
                         </div>
                     </div>

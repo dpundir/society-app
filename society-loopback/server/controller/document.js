@@ -32,7 +32,7 @@ var uploadFile = function(req, res) {
                                 if (err) {
                                     res.status(500).json("Failed to upload your file to person");
                                 } else {
-                                    res.json("Successfully uploaded your file");
+                                    res.json({fileName: fileName});
                                 }
                             });
                         }
@@ -67,7 +67,7 @@ var deleteFile = function (req, res){
             Person.update({id: personId}, {profilePhotoName: null}, function (err, data) {
                 if (err) {
                     res.status(500).json("error in deleting file from person");
-                } else {
+                } else if(req.method === 'DELETE'){
                     res.sendStatus(200);
                 }
             });
@@ -79,19 +79,22 @@ var deleteFile = function (req, res){
 var fileList = function (req, res){
     var personId = req.params.personId;
     var dirName = path.resolve(".", "storage", personId);
+    var files;
     var img = fs.readdir(dirName, function(err, files){
         if(err){
-            res.status(500).json('error in fetching download file list');
+            files = [];
+        } else {
+            files = _.remove(files, function (file) {
+                return !_.startsWith(file, "userProfile");
+            });
         }
-        files = _.remove(files, function(file){
-            return !_.startsWith(file, "userProfile");
-        });
         res.json(files);
     });
 };
 
 var editFile = function(req, res){
-
+    deleteFile(req, res);
+    uploadFile(req, res);
 }
 
 module.exports = {

@@ -27,6 +27,7 @@ define([
                     mname: member.mname || '',
                     lname: member.lname || '',
                     phone: member.phone || '',
+                    status: member.status || 0,
                     createDate: member.createDate || '',
                     modifiedDate: member.modifiedDate || '',
                     id: member.id || '',
@@ -83,7 +84,18 @@ define([
                 var defaultMemberFilter = {
                     "filter": {
                         "include": [
-                            {"person": ["address"]}
+                            {"person": ["address"]},
+                            {"nominee": ["address"]}
+                        ]}
+                };
+                filter = angular.merge(filter || {}, defaultMemberFilter);
+                return restInterface.get('/api/Members/' + id, null, filter);
+            };
+            this.getMemberNomineeDetail = function getMemberNomineeDetail(id, filter) {
+                var defaultMemberFilter = {
+                    "filter": {
+                        "include": [
+                            {"nominee": ["address"]}
                         ]}
                 };
                 filter = angular.merge(filter || {}, defaultMemberFilter);

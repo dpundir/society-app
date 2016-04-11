@@ -25,6 +25,7 @@ define([
                 $scope.transactionHistory = {};
                 $scope.memberLoans = {};
                 $scope.documents = {};
+                $scope.nomineeDetail = {};
                 /*
                  * @method
                  * @name updateMemberDetail
@@ -79,9 +80,10 @@ define([
                         $scope.actionText = 'Edit';
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
+                        $scope.member.nominee = data.nominee;
                         $scope.member.person.dob = new Date(data.person.dob);
                         $scope.member.person.marital_status = data.person.marital_status+'';
-                        $scope.memberFullName = (data.fname||'')+' '+(data.mname||'')+' '+(data.lname||'');
+                        $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.VIEW;
@@ -160,6 +162,16 @@ define([
                     });
                 };
                 /*
+                 * Get member nominee if a member based on member id
+                 * */
+                $scope.getMemberNomineeDetail = function () {
+                    MemberService.getMemberNomineeDetail($scope.member.id).then(function (data) {
+                        $scope.nomineeDetail.successCB(data);
+                    }, function (error) {
+                        $scope.nomineeDetail.errorCB(error);
+                    });
+                };
+                /*
                  * Save a new deposit entry of a member
                  * */
                 $scope.saveNewDeposit = function (transaction) {
@@ -185,28 +197,6 @@ define([
                             updateMemberDetail(form, 'update');
                             break;
                     }
-                };
-                /*
-                 * Save a new deposit entry of a member,
-                 * */
-                $scope.addEditProfilePhoto = function (personId, file, isAddProfilePhoto) {
-                    fileUpload.addEditProfilePhoto(personId, file, isAddProfilePhoto).then(function (data) {
-                        $scope.person.profilePhotoName = data.person.profilePhotoName;
-                        //$scope.memberDeposit.successCB(undefined, true);
-                    }, function (error) {
-                        //$scope.memberDeposit.errorCB(error);
-                    })
-                };
-                /*
-                 * Save a new deposit entry of a member
-                 * */
-                $scope.deleteProfilePhoto = function (form) {
-                    fileUpload.deleteProfilePhoto($scope.member.person.id, $scope.member.person.profilePhotoName).then(function (data) {
-                        $scope.member.person.profilePhotoName = undefined;
-                        //$scope.memberDeposit.successCB(undefined, true);
-                    }, function (error) {
-                        //$scope.memberDeposit.errorCB(error);
-                    })
                 };
                 /*
                  * Initialize on load

@@ -51,7 +51,7 @@ define([
           },maxSize = 1024*1024;
           var fileInput = element.find('input');
           scope.uploadFile = function(file){
-            fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index]).then(function(success){
+            fileUpload.uploadFileToUrl(scope.member.person.id, scope.files[file.index]).then(function(success){
               _.remove(scope.fileQueue, function(files) {
                 return file.index === files.index;
               });
@@ -60,7 +60,7 @@ define([
               }
               scope.showSuccessMsg = true;
               scope.successMsg = "Fils(s) uploaded successfully.";
-              fileUpload.fetchDocumentList(scope.member.id).then(function(data){
+              fileUpload.fetchDocumentList(scope.member.person.id).then(function(data){
                 scope.documents.successCB(data);
               },function(error){
                 scope.documents.errorCB(error);
@@ -70,17 +70,17 @@ define([
             });
           };
           scope.fetchDocument = function(document){
-            fileUpload.fetchDocument(scope.member.id, document);
+            fileUpload.fetchDocument(scope.member.person.id, document);
           };
           scope.uploadAllFile = function(){
             var i = 1;
             _.forEach(scope.fileQueue, function(file,index){
-              fileUpload.uploadFileToUrl(scope.member.id, scope.files[file.index]).then(function(){
+              fileUpload.uploadFileToUrl(scope.member.person.id, scope.files[file.index]).then(function(){
                 if(i++ === scope.fileQueue.length) {
                   scope.showSuccessMsg = true;
                   scope.successMsg = "Fils(s) uploaded successfully.";
                   fileInput[0].value = '';
-                  fileUpload.fetchDocumentList(scope.member.id).then(function (data) {
+                  fileUpload.fetchDocumentList(scope.member.person.id).then(function (data) {
                     scope.documents.successCB(data);
                     scope.fileQueue = [];
                   }, function (error) {
@@ -93,8 +93,8 @@ define([
             })
           };
           scope.deleteFile = function(document){
-            fileUpload.deleteDocument(scope.member.id, document).then(function(){
-              fileUpload.fetchDocumentList(scope.member.id).then(function(data){
+            fileUpload.deleteDocument(scope.member.person.id, document).then(function(){
+              fileUpload.fetchDocumentList(scope.member.person.id).then(function(data){
                 scope.documents.successCB(data);
               },function(error){
                 scope.documents.errorCB(error);

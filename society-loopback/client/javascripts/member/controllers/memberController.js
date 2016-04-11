@@ -135,7 +135,7 @@ define([
                 * */
 
                 $scope.fetchDocumentList = function(){
-                    fileUpload.fetchDocumentList($scope.member.id).then(function(data){
+                    fileUpload.fetchDocumentList($scope.member.person.id).then(function(data){
                         $scope.documents.successCB(data);
                     },function(error){
                         $scope.documents.errorCB(error);

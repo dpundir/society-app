@@ -813,3 +813,7 @@ legend{
 .search-popup{
   text-align: left;
 }
+.profile-photo{
+    height: 100px;
+    width: 100px;
+}

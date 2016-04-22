@@ -6,7 +6,7 @@ define([
     'lodash'
 ], function (angular, _) {
     angular.module("societyApp.member.directives.memberLoans", ['societyApp.member.filters'])
-        .directive('memberLoans', ['$location', '$filter', 'MemberService', function ($location, $filter, MemberService) {
+        .directive('memberLoans', ['$location', '$filter', 'MemberService', 'uiGridConstants', function ($location, $filter, MemberService, uiGridConstants) {
             return {
                 restrict: 'A',
                 scope: {
@@ -17,6 +17,7 @@ define([
                 controller: ['$scope', function ($scope) {
 
                     function initLoanDetails() {
+                        $scope.MEMBER_CONTEXT = $scope.memberId? true : false;
                         $scope.defaultSocietyConfigs = MemberService.getTransformedSocietyConfig();
                         $scope.loanDetail = {
                             id: '',
@@ -37,11 +38,13 @@ define([
 
                     $scope.refOption1 = {};
                     $scope.refOption2 = {};
+                    $scope.memberIdOption = {};
                     $scope.LOAN_MODE = {
                         VIEW: false,
                         NEW: false
                     };
                     $scope.memberLoans = $scope.memberLoans || {};
+                    $scope.filterText = 'Show filter';
                     $scope.showLoanSection = false;
                     $scope.error = {
                         errorText: '',
@@ -119,6 +122,15 @@ define([
                     $scope.memberLoans.errorCB = function () {
 
                     };
+                    $scope.showFilter = function(){
+                        $scope.memberLoansGrid.enableFiltering = !$scope.memberLoansGrid.enableFiltering;
+                        if($scope.memberLoansGrid.enableFiltering){
+                            $scope.filterText = 'Hide filter';
+                        }else{
+                            $scope.filterText = 'Show filter';
+                        }
+                        $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+                    };
                     $scope.showDetails = function () {
                         if (!$scope.memberLoansGrid.selectedRowId) {
                             $scope.error.isError = true;
@@ -156,7 +168,7 @@ define([
                             return;
                         }
                         var loanDetail = angular.copy($scope.loanDetail);
-                        loanDetail.memberid = $scope.memberId;
+                        loanDetail.memberid = $scope.LOAN_MODE.NEW? $scope.loanDetail.memberid: $scope.memberId;
                         MemberService.addNewLoan(loanDetail).then(function (data) {
                             console.log(data);
                             $scope.showLoanSection = false;
@@ -164,6 +176,12 @@ define([
                         }, function (error) {
                             console.log(error);
                         });
+                    };
+                    $scope.openMemberIdSearchModal = function () {
+                        $scope.memberIdOption.openModal();
+                    };
+                    $scope.memberIdOption.onSelectRow = function (memberId) {
+                        $scope.loanDetail.memberid = memberId;
                     };
                     $scope.openRef1SearchModal = function () {
                         $scope.refOption1.openModal();

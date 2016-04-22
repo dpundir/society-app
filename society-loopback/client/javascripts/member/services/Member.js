@@ -2,19 +2,19 @@ define([
     'angular'
 ], function () {
     angular.module("societyApp.member.services.member", ['ngStorage'])
-        .service('MemberService', ['$http', '$q', 'restInterface','$localStorage', function ($http, $q, restInterface,$localStorage) {
-            this.getSocietyConfig = function(){
+        .service('MemberService', ['$http', '$q', 'restInterface', '$localStorage', function ($http, $q, restInterface, $localStorage) {
+            this.getSocietyConfig = function () {
                 return $localStorage.memberConfig;
             };
-            this.setSocietyConfig = function(config){
+            this.setSocietyConfig = function (config) {
                 $localStorage.memberConfig = config || {};
             };
-            this.getTransformedSocietyConfig = function(){
-                if(Object.keys($localStorage.memberConfig).length > 0) {
+            this.getTransformedSocietyConfig = function () {
+                if (Object.keys($localStorage.memberConfig).length > 0) {
                     return _.transform($localStorage.memberConfig, function (result, value) {
-                      result[value.name] = value.value;
+                        result[value.name] = value.value;
                     }, {});
-                }else{
+                } else {
                     return {};
                 }
             };
@@ -63,22 +63,22 @@ define([
                 filter = angular.merge(filter || {}, defaultMemberListFilter);
                 return restInterface.get('/api/Members', null, filter);
             };
-            this.listWithSearchString = function listWithSearchString(searchString){
-              var memberListFilter = {
-                "filter": {
-                  "where": {
-                    "or": [
-                      {"fname": {"regexp": searchString}},
-                      {"lname": {"regexp": searchString}},
-                      {"mname":{"regexp": searchString}}
-                    ]}
+            this.listWithSearchString = function listWithSearchString(searchString) {
+                var memberListFilter = {
+                    "filter": {
+                        "where": {
+                            "or": [
+                                {"fname": {"regexp": searchString}},
+                                {"lname": {"regexp": searchString}},
+                                {"mname": {"regexp": searchString}}
+                            ]}
+                    }
+                };
+                if (!searchString) {
+                    memberListFilter = {};
                 }
-              };
-              if(!searchString){
-                memberListFilter = {};
-              }
-              var filter = angular.merge(filter || {}, memberListFilter);
-              return restInterface.get('/api/Members', null, filter);
+                var filter = angular.merge(filter || {}, memberListFilter);
+                return restInterface.get('/api/Members', null, filter);
             };
             this.getMemberDetail = function getMemberDetail(id, filter) {
                 var defaultMemberFilter = {
@@ -164,13 +164,16 @@ define([
                 };
                 return restInterface.get('api/TransactionHistories', null, filter);
             };
-            this.getLoanDetails = function(memberId, loanId){
-                var filter = {
-                    "filter": {
-                      "where": {"memberid": memberId}
+            this.getLoanDetails = function (memberId, loanId) {
+                var filter = {};
+                if (memberId) {
+                    filter = {
+                        "filter": {
+                            "where": {"memberid": memberId}
+                        }
                     }
                 };
-                return restInterface.get('/api/Loans/'+loanId, null, filter);
+                return restInterface.get('/api/Loans/' + loanId, null, filter);
             };
             this.getMemberLoans = function (memberId, isLoanAvailedOrRefferedOrBoth, startDate, endDate) {
                 var loanAvailFilter = {
@@ -198,17 +201,20 @@ define([
                     }
                 };
                 var filter;
-                if(isLoanAvailedOrRefferedOrBoth == 1){
+                if (isLoanAvailedOrRefferedOrBoth == 1) {
                     filter = loanAvailFilter;
-                } else if(isLoanAvailedOrRefferedOrBoth == 2){
+                } else if (isLoanAvailedOrRefferedOrBoth == 2) {
                     filter = loanReferredFilter;
-                } else if(isLoanAvailedOrRefferedOrBoth == 3){
+                } else if (isLoanAvailedOrRefferedOrBoth == 3) {
                     filter = loanAvailedOrReferredFilter;
                 }
                 return restInterface.get('/api/Loans', null, filter);
-            }
+            };
+            this.getAllMemberLoans = function () {
+                return restInterface.get('/api/Loans');
+            };
 
-            this.addNewLoan = function(loanDetail){
+            this.addNewLoan = function (loanDetail) {
                 return restInterface.post('/api/Loans', loanDetail);
             };
         }])
@@ -227,7 +233,7 @@ define([
                 return restInterface.get("/file/" + memberId + "/document");
             };
             this.deleteDocument = function (memberId, documentId) {
-                return restInterface.delete("/file/" + memberId + "/document/"+ documentId);
+                return restInterface.delete("/file/" + memberId + "/document/" + documentId);
             };
             this.fetchDocument = function (memberId, documentId) {
                 //restInterface.get("/api/Documents/" + memberId + "/fetch/" + documentId, null, null, {'Accept': 'image/jpeg, image/png, image/jpg, application/pdf'}).then(function (data) {
@@ -238,8 +244,8 @@ define([
                 });
             };
 
-            this.deleteProfilePhoto = function(personId, photoName){
-                return restInterface.delete("/file/" + personId + "/profile/"+ photoName);
+            this.deleteProfilePhoto = function (personId, photoName) {
+                return restInterface.delete("/file/" + personId + "/profile/" + photoName);
             };
 
             this.addEditProfilePhoto = function (personId, file, isAddProfilePhoto) {

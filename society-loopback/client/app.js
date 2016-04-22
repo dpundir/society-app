@@ -74,6 +74,9 @@ define([
             }).when('/expense', {
                 'templateUrl': 'javascripts/expense/partials/expense-list.html',
                 'controller': 'expenseListController'
+            }).when('/loan', {
+                'templateUrl': 'javascripts/loan/partials/loanSearch.html',
+                'controller': 'loanSearchController'
             }).otherwise({
                 'redirectTo': '/login'
             });

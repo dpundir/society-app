@@ -52,14 +52,6 @@ define([
                     }
                     $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
                 };
-                $scope.showDetails = function () {
-                    if(!$scope.memberListGrid.selectedRowId){
-                        $scope.error.showErrorMsg = true;
-                        $scope.error.errorMsg = 'Please select a member to see details.'
-                        return;
-                    }
-                    $location.url('/member/view/'+$scope.memberListGrid.selectedRowId);
-                };
                 MemberService.list().then(function (data) {
                     var join = Array.prototype.join,
                         peopleList = null;

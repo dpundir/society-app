@@ -47,6 +47,9 @@ define([
             }).when('/member', {
                 'templateUrl': 'javascripts/member/partials/member-list.html',
                 'controller': 'memberListController'
+            }).when('/balance', {
+                'templateUrl': 'javascripts/member/partials/balance-list.html',
+                'controller': 'memberBalanceController'
             }).when('/person/:action/:id?', {
                 'templateUrl': 'javascripts/person/partials/personDetails.html',
                 'controller': 'personDetailController'

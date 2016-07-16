@@ -22,7 +22,9 @@ define([
                 /*
                  * Default transaction history tab object
                  * */
-                $scope.transactionHistory = {};
+                $scope.transactionHistory = {
+                    transactionMode: 'single'
+                };
                 $scope.memberLoans = {};
                 $scope.documents = {};
                 $scope.nomineeDetail = {};
@@ -82,7 +84,7 @@ define([
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
                         $scope.member.nominee = data.nominee;
                         $scope.member.person.dob = new Date(data.person.dob);
-                        $scope.member.person.marital_status = data.person.marital_status+'';
+                        $scope.member.person.maritalStatus = data.person.maritalStatus+'';
                         $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.isViewMode = true;

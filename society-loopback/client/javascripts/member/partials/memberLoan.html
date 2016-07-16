@@ -68,7 +68,7 @@
                                required="" ng-model="loanDetail.remainingAmount">
                     </div>
                 </div>
-                <div class="col-sm-4" ng-if="LOAN_MODE.NEW">
+                <div class="col-sm-4" ng-if="LOAN_MODE.NEW && !memberId">
                     <div class="form-group">
                         <div class="label-input">
                             <span class="form-text">Member Id:</span>
@@ -136,7 +136,7 @@
                         <input type="text" name="loanFrequency" ng-disabled="true"
                                class="form-control"
                                id="loanFrequency"
-                               ng-model="loanDetail.frequency | frequency">
+                               ng-value="loanDetail.frequency | frequency">
                     </div>
                 </div>
             </div>

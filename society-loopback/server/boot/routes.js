@@ -6,7 +6,7 @@ module.exports = function (app) {
     var authentication = require("../controller/authentication");
     var document = require("../controller/document");
 
-    router.get('/app', function (req, res, next) {
+    router.get('/app', function (req, res) {
         res.render('index.html');
     });
 

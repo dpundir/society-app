@@ -742,7 +742,7 @@ label{
 }
 .filter-bar button{
     font-size: 12px;
-    width: 100px;
+    min-width: 100px;
     border-radius: 2px;
 }
 .trnx-history{

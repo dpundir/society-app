@@ -15,9 +15,11 @@ define([
           clickHandler:'&'
         },
         controller: ['$scope',function($scope){
-          $scope.transactionHistory = $scope.transactionHistory || {};
+          $scope.transactionHistory = $scope.transactionHistory || {
+              transactionMode: 'single'
+          };
           $scope.date = {
-            dateOption: {
+            dateOptions: {
               formatYear: 'yy',
               startingDay: 1
             },
@@ -65,10 +67,16 @@ define([
             ],
             data:[]
           };
+          if($scope.transactionHistory.transactionMode == 'all'){
+              $scope.transactionHistoryGrid.columnDefs.unshift({field: 'memberId'});
+          }
           $scope.transactionHistory.successCB = function(data){
             var transHistory = [];
             _.forEach(data,function(transaction){
               var history = {};
+                if($scope.transactionHistory.transactionMode == 'all'){
+                    history.memberId = transaction.memberId;
+                }
               history.date = $filter('date')(transaction.createDate,$scope.date.format);
               history.depositAmount = transaction.depositAmount;
               history.penaltyAmount = transaction.penaltyAmount;

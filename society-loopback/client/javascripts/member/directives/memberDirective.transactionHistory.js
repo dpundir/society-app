@@ -3,10 +3,11 @@
  */
 define([
   'angular',
-  'lodash'
+  'lodash',
+
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.transactionHistory", [])
-    .directive('transactionHistory',['$filter', function ($filter) {
+  angular.module("societyApp.member.directives.transactionHistory", ['societyApp.common.services.printService'])
+    .directive('transactionHistory',['$filter', 'printService', function ($filter, printService) {
       return{
         restrict: 'A',
         scope:{
@@ -67,6 +68,7 @@ define([
             ],
             data:[]
           };
+            $scope.transactionHistoryGrid =  $.extend(true, $scope.transactionHistoryGrid, printService.getDefaultPrintConfig());
           if($scope.transactionHistory.transactionMode == 'all'){
               $scope.transactionHistoryGrid.columnDefs.unshift({field: 'memberId'});
           }
@@ -102,7 +104,7 @@ define([
               + ' and ' + $filter('date')($scope.date.endDate, $scope.date.format);
           }
         }],
-        templateUrl:'javascripts/member/partials/transactionHistory.html',
+        templateUrl:'javascripts/member/partials/memberTransactionHistory.html',
         link:function(){}
       }
     }])

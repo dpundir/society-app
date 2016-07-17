@@ -29,6 +29,7 @@ define([
         "ui.grid",
         "ui.grid.selection",
         "ui.grid.pagination",
+        "ui.grid.exporter",
         "ui.bootstrap",
         "societyApp.home",
         "societyApp.admin",

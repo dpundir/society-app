@@ -5,7 +5,13 @@ define([
     'angular',
     'lodash'
 ], function (angular, _) {
-    angular.module("societyApp.member.directives.memberLoans", ['societyApp.member.filters'])
+    angular.module("societyApp.member.directives.memberLoans", [
+        "ui.grid",
+        "ui.grid.selection",
+        "ui.grid.pagination",
+        "ui.grid.exporter",
+        'societyApp.member.filters',
+        'societyApp.common.services.printService'])
         .directive('memberLoans', ['$location', '$filter', 'MemberService', 'uiGridConstants', function ($location, $filter, MemberService, uiGridConstants) {
             return {
                 restrict: 'A',
@@ -14,7 +20,7 @@ define([
                     memberLoans: '=',
                     clickHandler: '&'
                 },
-                controller: ['$scope', function ($scope) {
+                controller: ['$scope', 'printService', function ($scope, printService) {
 
                     function initLoanDetails() {
                         $scope.MEMBER_CONTEXT = $scope.memberId? true : false;
@@ -99,6 +105,7 @@ define([
                         data: [],
                         selectedRowId: null
                     };
+                    $scope.memberLoansGrid =  $.extend(true, $scope.memberLoansGrid, printService.getDefaultPrintConfig());
                     $scope.memberLoans.successCB = function (data) {
                         var memberLoans = [];
                         _.forEach(data, function (loan) {

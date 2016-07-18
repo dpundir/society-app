@@ -2,3 +2,4 @@ society/**/node_modules/
 .idea
 
 society-loopback/storage/
+society-loopback/client/bower_components/

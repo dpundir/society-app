@@ -5,7 +5,7 @@ define([
     angular.module("societyApp.common.services.dateService", [])
         .service('dateService', function () {
             this.dateConfig = function dateConfig(){
-                var date = {
+                var dateConfiguration = {
                     dateOption: {
                         formatYear: 'yy',
                         startingDay: 1,
@@ -19,7 +19,7 @@ define([
                     startDate:new Date(),
                     endDate:new Date()
                 };
-                return $.extend(true, {},date);
+                return $.extend(true, {}, dateConfiguration);
             }
         });
 });

@@ -20,7 +20,7 @@ define([
               transactionMode: 'single'
           };
           $scope.date = {
-            dateOptions: {
+            dateOption: {
               formatYear: 'yy',
               startingDay: 1
             },

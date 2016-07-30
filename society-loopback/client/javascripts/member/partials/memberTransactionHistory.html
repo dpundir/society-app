@@ -19,7 +19,7 @@
                         <input type="text" class="form-control"
                                uib-datepicker-popup="{{date.format}}"
                                ng-model="date.startDate" is-open="date.status.startDateOpened"
-                               datepicker-options="date.dateOptions" id="startDate" name="startDate"
+                               datepicker-options="date.dateOption" id="startDate" name="startDate"
                                ng-required="true" close-text="Close" required=""/>
                           <span class="input-group-btn">
                                 <button type="button"
@@ -37,7 +37,7 @@
                         <input type="text" class="form-control"
                                uib-datepicker-popup="{{date.format}}"
                                ng-model="date.endDate" is-open="date.status.endDateOpened"
-                               datepicker-options="date.dateOptions" id="endDate" name="endDate"
+                               datepicker-options="date.dateOption" id="endDate" name="endDate"
                                ng-required="true" close-text="Close" required=""/>
                           <span class="input-group-btn">
                                 <button type="button"

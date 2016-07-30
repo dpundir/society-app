@@ -1,48 +1,36 @@
 define([
     'angular',
     'lodash',
+    'javascripts/common/services/grid-service',
     'javascripts/member/services/Member'
 ], function (angular,_) {
     angular
-        .module("societyApp.member.controller.balancelist", ["societyApp.member.services.member"])
+        .module("societyApp.member.controller.balancelist", ["societyApp.common.services.gridService", "societyApp.member.services.member"])
         .controller('memberBalanceController',
-        ['$scope', 'MemberService','$location','uiGridConstants',
-            function ($scope, MemberService, $location, uiGridConstants) {
+        ['$scope', 'MemberService','$location','uiGridConstants', 'gridService',
+            function ($scope, MemberService, $location, uiGridConstants, gridService) {
                 var member = [];
                 $scope.error = {
                     showErrorMsg: false,
                     errorMsg:''
                 };
                 $scope.filterText = 'Show filter';
-                $scope.memberListGrid = {
-                    enableSorting: false,
-                    enableFiltering: false,
-                    enableRowSelection: true,
-                    enableRowHeaderSelection: false,
-                    multiSelect : false,
-                    modifierKeysToMultiSelect : false,
-                    noUnselect : true,
-                    paginationPageSizes: [25, 50, 75],
-                    paginationPageSize: 25,
-                    enableColumnMenus: false,
+                $scope.memberListGrid = gridService.getDefaultGridConfig([
+                    {field: 'id', enableHiding: false},
+                    {field: 'firstName', enableHiding: false},
+                    {field: 'middleName', enableHiding: false},
+                    {field: 'lastName', enableHiding: false},
+                    {field: 'phoneNo', enableHiding: false},
+                    {field: 'deposit', enableHiding: false}
+                ], true, {
                     onRegisterApi: function(gridApi){
                         $scope.gridApi = gridApi;
                         var that = this;
                         gridApi.selection.on.rowSelectionChanged($scope,function(row){
                             that.selectedRowId = row.entity.id;
                         });
-                    },
-                    columnDefs: [
-                        {field: 'id'},
-                        {field: 'firstName'},
-                        {field: 'middleName'},
-                        {field: 'lastName'},
-                        {field: 'phoneNo'},
-                        {field: 'deposit'}
-                    ],
-                    data:[],
-                    selectedRowId:null
-                };
+                    }
+                });
                 $scope.toggleFilter = function(){
                     $scope.memberListGrid.enableFiltering = !$scope.memberListGrid.enableFiltering;
                     if($scope.memberListGrid.enableFiltering){

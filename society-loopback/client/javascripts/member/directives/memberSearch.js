@@ -1,9 +1,10 @@
 define([
   'angular',
-  'lodash'
+  'lodash',
+    'javascripts/common/services/grid-service'
 ], function (angular, _) {
-  angular.module("societyApp.member.memberSearchDirective",[])
-    .directive('memberSearch',['MemberService','$uibModal',function (MemberService,$uibModal) {
+  angular.module("societyApp.member.memberSearchDirective",["societyApp.common.services.gridService"])
+    .directive('memberSearch',['MemberService','$uibModal', 'gridService', function (MemberService,$uibModal, gridService) {
       return{
         restrict: 'EA',
         scope:{
@@ -18,31 +19,20 @@ define([
           errorText:'',
           isError:false
         };
-        $scope.memberListSearchGrid = {
-          enableSorting: false,
-          enableFiltering: true,
-          enableRowSelection: true,
-          enableRowHeaderSelection: false,
-          multiSelect : false,
-          modifierKeysToMultiSelect : false,
-          noUnselect : true,
-          enableColumnMenus: false,
+        $scope.memberListSearchGrid = gridService.getDefaultGridConfig([
+            {field: 'id'},
+            {field: 'firstName'},
+            {field: 'middleName'},
+            {field: 'lastName'}
+        ], false, {
           onRegisterApi: function(gridApi){
             $scope.gridApi = gridApi;
             var that = this;
             gridApi.selection.on.rowSelectionChanged($scope,function(row){
               that.selectedRowId = row.entity.id;
             });
-          },
-          columnDefs: [
-            {field: 'id'},
-            {field: 'firstName'},
-            {field: 'middleName'},
-            {field: 'lastName'}
-          ],
-          data:[],
-          selectedRowId:null
-        };
+          }
+        });
         var modalInstance;
         $scope.option.openModal = function(){
           $scope.option.searchModel = '';

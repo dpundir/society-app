@@ -4,10 +4,10 @@
 define([
   'angular',
   'lodash',
-
+    'javascripts/common/services/grid-service'
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.transactionHistory", ['societyApp.common.services.printService'])
-    .directive('transactionHistory',['$filter', 'printService', function ($filter, printService) {
+  angular.module("societyApp.member.directives.transactionHistory", ['societyApp.common.services.gridService'])
+    .directive('transactionHistory',['$filter', 'gridService', function ($filter, gridService) {
       return{
         restrict: 'A',
         scope:{
@@ -45,32 +45,19 @@ define([
             $scope.errorMsg = '';
             $scope.showErrorMsg = false
           }
-          $scope.transactionHistoryGrid = {
-            enableSorting: false,
-            enableFiltering: false,
-            enableRowSelection: false,
-            enableRowHeaderSelection: false,
-            multiSelect : false,
-            modifierKeysToMultiSelect : false,
-            noUnselect : true,
-            paginationPageSizes: [15, 30, 45],
-            paginationPageSize: 15,
-            enableColumnMenus: false,
+          $scope.transactionHistoryGrid = gridService.getDefaultGridConfig([
+              {field: 'date', enableHiding: false},
+              {field: 'depositAmount', enableHiding: false},
+              {field: 'penaltyAmount', enableHiding: false},
+              {field: 'transactionType', enableHiding: false},
+              {field: 'remarks', enableHiding: false}
+          ], true, {
             onRegisterApi: function(gridApi){
               $scope.gridApi = gridApi;
-            },
-            columnDefs: [
-              {field: 'date'},
-              {field: 'depositAmount'},
-              {field: 'penaltyAmount'},
-              {field: 'transactionType'},
-              {field: 'remarks'}
-            ],
-            data:[]
-          };
-            $scope.transactionHistoryGrid =  $.extend(true, $scope.transactionHistoryGrid, printService.getDefaultPrintConfig());
+            }
+          });
           if($scope.transactionHistory.transactionMode == 'all'){
-              $scope.transactionHistoryGrid.columnDefs.unshift({field: 'memberId'});
+              $scope.transactionHistoryGrid.columnDefs.unshift({field: 'memberId', enableHiding: false});
           }
           $scope.transactionHistory.successCB = function(data){
             var transHistory = [];

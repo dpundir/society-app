@@ -3,7 +3,8 @@
  */
 define([
     'angular',
-    'lodash'
+    'lodash',
+    'javascripts/common/services/grid-service'
 ], function (angular, _) {
     angular.module("societyApp.member.directives.memberLoans", [
         "ui.grid",
@@ -11,8 +12,8 @@ define([
         "ui.grid.pagination",
         "ui.grid.exporter",
         'societyApp.member.filters',
-        'societyApp.common.services.printService'])
-        .directive('memberLoans', ['$location', '$filter', 'MemberService', 'uiGridConstants', function ($location, $filter, MemberService, uiGridConstants) {
+        'societyApp.common.services.gridService'])
+        .directive('memberLoans', ['$location', '$filter', 'MemberService', 'uiGridConstants', 'gridService', function ($location, $filter, MemberService, uiGridConstants, gridService) {
             return {
                 restrict: 'A',
                 scope: {
@@ -20,10 +21,10 @@ define([
                     memberLoans: '=',
                     clickHandler: '&'
                 },
-                controller: ['$scope', 'printService', function ($scope, printService) {
+                controller: ['$scope', 'gridService', function ($scope, gridService) {
 
                     function initLoanDetails() {
-                        $scope.MEMBER_CONTEXT = $scope.memberId? true : false;
+                        $scope.MEMBER_CONTEXT = $scope.memberId ? true : false;
                         $scope.defaultSocietyConfigs = MemberService.getTransformedSocietyConfig();
                         $scope.loanDetail = {
                             id: '',
@@ -76,36 +77,23 @@ define([
                         startDate: new Date(),
                         endDate: new Date()
                     };
-                    $scope.memberLoansGrid = {
-                        enableSorting: false,
-                        enableFiltering: false,
-                        enableRowSelection: true,
-                        enableRowHeaderSelection: false,
-                        multiSelect: false,
-                        modifierKeysToMultiSelect: false,
-                        noUnselect: true,
-                        paginationPageSizes: [15, 30, 45],
-                        paginationPageSize: 15,
-                        enableColumnMenus: false,
-                        onRegisterApi: function (gridApi) {
-                            $scope.gridApi = gridApi;
-                            var self = this;
-                            gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-                                self.selectedRowId = row.entity.id;
-                            });
-                        },
-                        columnDefs: [
-                            {field: 'id'},
-                            {field: 'memberId'},
-                            {field: 'loanAmount'},
-                            {field: 'remainingAmount'},
-                            {field: 'startDate'},
-                            {field: 'endDate'}
-                        ],
-                        data: [],
-                        selectedRowId: null
-                    };
-                    $scope.memberLoansGrid =  $.extend(true, $scope.memberLoansGrid, printService.getDefaultPrintConfig());
+                    $scope.memberLoansGrid = gridService.getDefaultGridConfig(
+                        [
+                            {field: 'id', enableHiding: false},
+                            {field: 'memberId', enableHiding: false},
+                            {field: 'loanAmount', enableHiding: false},
+                            {field: 'remainingAmount', enableHiding: false},
+                            {field: 'startDate', enableHiding: false},
+                            {field: 'endDate', enableHiding: false}
+                        ], true, {
+                            onRegisterApi: function (gridApi) {
+                                $scope.gridApi = gridApi;
+                                var self = this;
+                                gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+                                    self.selectedRowId = row.entity.id;
+                                });
+                            }
+                        });
                     $scope.memberLoans.successCB = function (data) {
                         var memberLoans = [];
                         _.forEach(data, function (loan) {
@@ -129,14 +117,14 @@ define([
                     $scope.memberLoans.errorCB = function () {
 
                     };
-                    $scope.showFilter = function(){
+                    $scope.showFilter = function () {
                         $scope.memberLoansGrid.enableFiltering = !$scope.memberLoansGrid.enableFiltering;
-                        if($scope.memberLoansGrid.enableFiltering){
+                        if ($scope.memberLoansGrid.enableFiltering) {
                             $scope.filterText = 'Hide filter';
-                        }else{
+                        } else {
                             $scope.filterText = 'Show filter';
                         }
-                        $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+                        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
                     };
                     $scope.showDetails = function () {
                         if (!$scope.memberLoansGrid.selectedRowId) {
@@ -175,7 +163,7 @@ define([
                             return;
                         }
                         var loanDetail = angular.copy($scope.loanDetail);
-                        loanDetail.memberid = $scope.LOAN_MODE.NEW? $scope.loanDetail.memberid: $scope.memberId;
+                        loanDetail.memberid = $scope.LOAN_MODE.NEW ? $scope.loanDetail.memberid : $scope.memberId;
                         MemberService.addNewLoan(loanDetail).then(function (data) {
                             console.log(data);
                             $scope.showLoanSection = false;

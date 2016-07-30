@@ -15,6 +15,13 @@ define([
                     VIEW: 2,
                     EDIT: 3
                 };
+
+                var ACTION_TEXT = {
+                    EDIT: 'Edit',
+                    REGISTER: 'Register',
+                    UPDATE: 'Update'
+                };
+
                 /*
                  * Default deposit tab object
                  * */
@@ -33,7 +40,7 @@ define([
                  * @name updateMemberDetail
                  * to update existing member OR add new member
                  * */
-                function updateMemberDetail(form, type) {
+                function updateMemberDetail(type, entity) {
                     function successCB() {
                         $location.url('/member');
                     }
@@ -41,12 +48,13 @@ define([
                     function errorCB() {
                     }
 
-                    $scope.member.person.dob = $filter('date')($scope.member.person.dob, 'yyyy-MM-dd');
+                    var memberRequest = $.extend(true, {}, $scope.member);
+                    memberRequest.dob = $filter('date')(memberRequest[entity].dob, 'yyyy-MM-dd');
                     if (type === 'update') {
-                        MemberService.updateMember($scope.member).then(successCB, errorCB);
+                        MemberService.updateMember(memberRequest, entity).then(successCB, errorCB);
                     } else {
-                        $scope.member.createDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-                        MemberService.addMember($scope.member).then(successCB, errorCB);
+                        //$scope.member.createDate = $filter('date')(new Date(), 'yyyy-MM-dd');
+                        MemberService.addMember(memberRequest, entity).then(successCB, errorCB);
                     }
                 }
 
@@ -64,9 +72,14 @@ define([
                     $scope.primaryHeaderText = 'New Member Registration';
                     $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
-                    $scope.actionText = 'Register';
-                    $scope.mode = VIEW_MODE.NEW;
+
+                    $scope.actionText = ACTION_TEXT.REGISTER;
                     $scope.isViewMode = false;
+                    $scope.mode = VIEW_MODE.NEW;
+
+                    $scope.nomineeActionText = ACTION_TEXT.REGISTER;
+                    $scope.isNomineeViewMode = false;
+                    $scope.nomineeMode = VIEW_MODE.NEW;
                 }
 
                 /*
@@ -79,16 +92,25 @@ define([
                         $scope.primaryHeaderText = 'Member Details';
                         $scope.secondaryHeaderText = 'To edit member details, click on edit button.';
                         $scope.formValidationInfoText = '';
-                        $scope.actionText = 'Edit';
-                        $scope.member = MemberService.defaultMember(data);
-                        $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
-                        $scope.member.nominee = data.nominee;
-                        $scope.member.person.dob = new Date(data.person.dob);
-                        $scope.member.person.maritalStatus = data.person.maritalStatus+'';
-                        $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
-                        $scope.memberDeposit.deposit = data.deposit;
+                        $scope.actionText = ACTION_TEXT.EDIT;
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.VIEW;
+
+                        $scope.nomineeActionText = data.nominee? ACTION_TEXT.EDIT : ACTION_TEXT.REGISTER;
+                        $scope.isNomineeViewMode = !!data.nominee;
+                        $scope.nomineeMode = data.nominee? VIEW_MODE.VIEW : VIEW_MODE.NEW;
+
+                        $scope.member = MemberService.defaultMember(data);
+                        $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
+                        $scope.member.nominee.address = MemberService.defaultMemberAddress(data.nominee.address);
+
+                        $scope.member.person.dob = new Date(data.person.dob);
+                        $scope.member.person.maritalStatus = data.person.maritalStatus+'';
+                        $scope.member.nominee.dob = new Date(data.nominee.dob);
+                        $scope.member.nominee.maritalStatus = data.nominee.maritalStatus+'';
+
+                        $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
+                        $scope.memberDeposit.deposit = data.deposit;
                     })
                 }
 
@@ -96,13 +118,20 @@ define([
                  * @method
                  * @name initRegistrationFormEditMode
                  * */
-                function initRegistrationFormEditMode() {
-                    $scope.mode = VIEW_MODE.EDIT;
-                    $scope.isViewMode = false;
+                function initRegistrationFormEditMode(entity) {
                     $scope.primaryHeaderText = 'Edit Member Details';
                     $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
-                    $scope.actionText = 'Update';
+
+                    if(entity == 'person'){
+                        $scope.isViewMode = false;
+                        $scope.mode = VIEW_MODE.EDIT;
+                        $scope.actionText = ACTION_TEXT.UPDATE;
+                    } else{
+                        $scope.isNomineeViewMode = false;
+                        $scope.nomineeMode = VIEW_MODE.EDIT;
+                        $scope.nomineeActionText = ACTION_TEXT.UPDATE;
+                    }
                 }
 
                 /*
@@ -187,16 +216,17 @@ define([
                         $scope.memberDeposit.errorCB(error);
                     })
                 };
-                $scope.register = function register(form) {
-                    switch ($scope.mode) {
+                $scope.register = function register(form, entity) {
+                    var mode = entity == 'person'? $scope.mode : $scope.nomineeMode;
+                    switch (mode) {
                         case VIEW_MODE.VIEW:
-                            initRegistrationFormEditMode();
+                            initRegistrationFormEditMode(entity);
                             break;
                         case VIEW_MODE.NEW:
-                            updateMemberDetail(form, 'new');
+                            updateMemberDetail('new', entity);
                             break;
                         case VIEW_MODE.EDIT:
-                            updateMemberDetail(form, 'update');
+                            updateMemberDetail('update', entity);
                             break;
                     }
                 };

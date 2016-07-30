@@ -101,41 +101,49 @@ define([
                 filter = angular.merge(filter || {}, defaultMemberFilter);
                 return restInterface.get('/api/Members/' + id, null, filter);
             };
-            this.updateMember = function updateMember(member, address) {
+            this.updateMember = function updateMember(member, entity) {
                 var defer = $q.defer();
-
-                member.fname = member.person.fname;
-                member.mname = member.person.mname;
-                member.lname = member.person.lname;
-                member.phone = member.person.phone;
-                member.status = member.person.status;
-                if (!member.nomineeId) {
-                    delete member.nomineeId;
-                    delete member.nominee;
+                var memberRequest = {
+                    id: member.id
+                };
+                if(entity == 'person') {
+                    memberRequest.fname = member.person.fname;
+                    memberRequest.mname = member.person.lname;
+                    memberRequest.lname = member.person.mname;
+                    memberRequest.phone = member.person.phone;
+                    memberRequest.status = member.person.status;
                 }
+                memberRequest[entity] = member[entity];
 
-                restInterface.update('/api/Members/personaddress', member).then(function (data) {
+                restInterface.update('/api/Members/'+entity, memberRequest).then(function (data) {
                     defer.resolve(data);
                 }, function () {
                     defer.reject();
                 });
                 return defer.promise;
             };
-            this.addMember = function addMember(member) {
+            this.addMember = function addMember(member, entity) {
                 var defer = $q.defer();
-                var member = {
-                    'fname': member.person.fname,
-                    'mname': member.person.lname,
-                    'lname': member.person.mname,
-                    'phone': member.person.phone,
-                    'status': 1,
-                    'person': member.person
+                var memberRequest = {
+                    status: 1
                 };
-                restInterface.post('/api/Members/personaddress', member).then(function (data) {
+                if(entity == 'person') {
+                    memberRequest.fname = member.person.fname;
+                    memberRequest.mname = member.person.lname;
+                    memberRequest.lname = member.person.mname;
+                    memberRequest.phone = member.person.phone;
+                } else{
+                    memberRequest.id = member.id;
+                }
+                memberRequest[entity] = member[entity];
+                memberRequest[entity].status = 1;
+
+                restInterface.post('/api/Members/'+entity, memberRequest).then(function (data) {
                     defer.resolve(data);
                 }, function () {
                     defer.reject();
                 });
+
                 return defer.promise;
             };
             this.getMemberDeposit = function (id) {

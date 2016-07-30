@@ -11,6 +11,7 @@ define([
         restrict: 'A',
         scope: {
           person: '=',
+          entity: '@',
           address: '=',
           isViewMode: '=',
           actionText: '=',
@@ -23,7 +24,7 @@ define([
            * */
           function validateRegistrationForm(form) {
             if (form.$invalid) {
-              var formFields = ['fname', 'lname', 'ffname', 'flname', 'phone', 'dob', 'address1', 'address2', 'city', 'state', 'pincode'];
+              var formFields = ['fname', 'lname', 'ffname', 'flname', 'gender', 'maritalStatus', 'phone', 'dob', 'address1', 'address2', 'city', 'state', 'pincode'];
               _.each(formFields, function (name) {
                 if (form[name].$invalid) {
                   form[name].$setTouched();
@@ -59,7 +60,7 @@ define([
               isFormValid = validateRegistrationForm(form)
             }
             if (isFormValid) {
-              $scope.clickHandler({form: form});
+              $scope.clickHandler({form: form, entity: $scope.entity});
             }
           };
           $scope.isInfoCollapsed = false;

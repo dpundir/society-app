@@ -133,12 +133,12 @@ module.exports = function (Member) {
                         tx.rollback();
                         cb(err2, null);
                     }
-                    var memberData = req.body;
+                    var memberData = {};
                     var memberId = req.body.id;
                     memberData.nomineeId = data2.id;
                     memberData.modifiedDate = new Date();
                     delete memberData.nominee;
-                    delete memberData.person;
+                    //delete memberData.person;
                     Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
                         if (err3) {
                             tx.rollback();
@@ -216,11 +216,9 @@ module.exports = function (Member) {
                         tx.rollback();
                         cb(err2, null);
                     }
-                    var memberData = req.body;
+                    var memberData = {};
                     var memberId = req.body.id;
                     memberData.modifiedDate = new Date();
-                    delete memberData.nominee;
-                    delete memberData.id;
                     Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
                         if (err3) {
                             tx.rollback();
@@ -248,7 +246,7 @@ module.exports = function (Member) {
                 arg: 'member', type: 'object',
                 description: 'The response body contains properties of the Member'
             },
-            http: {verb: 'post', path: '/personaddress'}
+            http: {verb: 'post', path: '/person'}
         }
     );
 
@@ -266,7 +264,7 @@ module.exports = function (Member) {
                 arg: 'member', type: 'object',
                 description: 'The response body contains properties of the Member'
             },
-            http: {verb: 'post', path: '/nominee/personaddress'}
+            http: {verb: 'post', path: '/nominee'}
         }
     );
 
@@ -284,7 +282,7 @@ module.exports = function (Member) {
                 arg: 'member', type: 'object',
                 description: 'The response body contains properties of the Member'
             },
-            http: {verb: 'put', path: '/nominee/personaddress'}
+            http: {verb: 'put', path: '/nominee'}
         }
     );
 
@@ -302,7 +300,7 @@ module.exports = function (Member) {
                 arg: 'member', type: 'object',
                 description: 'The response body contains properties of the Member'
             },
-            http: {verb: 'put', path: '/personaddress'}
+            http: {verb: 'put', path: '/person'}
         }
     );
 

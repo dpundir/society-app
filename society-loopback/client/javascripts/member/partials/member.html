@@ -29,15 +29,19 @@
                         <div class="row society-form">
                             <div class="form-top">
                                 <div>
+                                    <h3 class="text-primary" ng-bind="primaryHeaderText"></h3>
+                                    <p class="text-info" ng-bind="secondaryHeaderText"></p>
+                                </div>
+                                <div>
                                     <p class="text-danger" ng-bind="formValidationInfoText"></p>
                                 </div>
                                 <div member-details person="member.person"
+                                     entity="person"
                                      address="member.person.address"
                                      is-view-mode="isViewMode"
                                      action-text="actionText"
-                                     click-handler="register(form)"></div>
+                                     click-handler="register(form, entity)"></div>
                             </div>
-
                         </div>
                     </uib-tab>
                     <uib-tab heading="Deposit" disable="mode == 1" select="getMemberDeposit()">
@@ -56,7 +60,7 @@
                             </div>
                         </div>
                     </uib-tab>
-                    <uib-tab heading="Documents" select="fetchDocumentList()">
+                    <uib-tab heading="Documents" disable="mode == 1" select="fetchDocumentList()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div member-document member="member" documents="documents"></div>
@@ -72,7 +76,7 @@
                             </div>
                         </div>
                     </uib-tab>
-                    <uib-tab heading="Nomination">
+                    <uib-tab heading="Nomination" disable="mode == 1">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div>
@@ -83,10 +87,11 @@
                                     <p class="text-danger" ng-bind="formValidationInfoText"></p>
                                 </div>
                                 <div member-details person="member.nominee"
+                                     entity="nominee"
                                      address="member.nominee.address"
-                                     is-view-mode="isViewMode"
-                                     action-text="actionText"
-                                     click-handler="register(form)"></div>
+                                     is-view-mode="isNomineeViewMode"
+                                     action-text="nomineeActionText"
+                                     click-handler="register(form, entity)"></div>
                             </div>
 
                         </div>

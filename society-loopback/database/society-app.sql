@@ -261,12 +261,12 @@ CREATE TABLE `person` (
   `flname` varchar(45) DEFAULT NULL,
   `sex` char(1) NOT NULL,
   `marital_status` int(1) DEFAULT NULL,
-  `relation` varchar(45) DEFAULT NULL,
+  `relation` int(1) DEFAULT NULL,
   `profile_photo_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='person details';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='person details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -470,4 +470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-08 23:53:09
+-- Dump completed on 2016-07-31 20:41:42

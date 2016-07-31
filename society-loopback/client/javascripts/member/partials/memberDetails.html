@@ -149,14 +149,8 @@
                                     </div>
                                     <select name="relation" ng-model="person.relation"
                                             class="form-control"
-                                            ng-disabled="isViewMode">
-                                        <option value='0'>Father</option>
-                                        <option value='1'>Mother</option>
-                                        <option value='2'>Husband</option>
-                                        <option value='3'>Wife</option>
-                                        <option value='4'>Children</option>
-                                        <option value='5'>Brother</option>
-                                        <option value='6'>Sister</option>
+                                            ng-disabled="isViewMode"
+                                            ng-options="relation.id as relation.label for relation in nomineeRelations">
                                     </select>
                                 </div>
                             </div>

@@ -106,7 +106,7 @@ define([
                 var memberRequest = {
                     id: member.id
                 };
-                if(entity == 'person') {
+                if (entity === 'person') {
                     memberRequest.fname = member.person.fname;
                     memberRequest.mname = member.person.lname;
                     memberRequest.lname = member.person.mname;
@@ -115,7 +115,7 @@ define([
                 }
                 memberRequest[entity] = member[entity];
 
-                restInterface.update('/api/Members/'+entity, memberRequest).then(function (data) {
+                restInterface.update('/api/Members/' + entity, memberRequest).then(function (data) {
                     defer.resolve(data);
                 }, function () {
                     defer.reject();
@@ -127,18 +127,18 @@ define([
                 var memberRequest = {
                     status: 1
                 };
-                if(entity == 'person') {
+                if (entity === 'person') {
                     memberRequest.fname = member.person.fname;
                     memberRequest.mname = member.person.lname;
                     memberRequest.lname = member.person.mname;
                     memberRequest.phone = member.person.phone;
-                } else{
+                } else {
                     memberRequest.id = member.id;
                 }
                 memberRequest[entity] = member[entity];
                 memberRequest[entity].status = 1;
 
-                restInterface.post('/api/Members/'+entity, memberRequest).then(function (data) {
+                restInterface.post('/api/Members/' + entity, memberRequest).then(function (data) {
                     defer.resolve(data);
                 }, function () {
                     defer.reject();
@@ -266,6 +266,18 @@ define([
                     transformRequest: angular.identity
                 });
             };
-
-        }]);
+        }])
+        .service('SelectOptions', function () {
+            this.getRelations = function () {
+                return [
+                    {id: 0, label: 'Father'},
+                    {id: 1, label: 'Mother'},
+                    {id: 2, label: 'Husband'},
+                    {id: 3, label: 'Wife'},
+                    {id: 4, label: 'Children'},
+                    {id: 5, label: 'Brother'},
+                    {id: 6, label: 'Sister'}
+                ];
+            }
+        });
 });

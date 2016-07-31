@@ -6,11 +6,13 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div ui-grid="settingsConfigGrid" ui-grid-pagination class="settingsConfigGrid"></div>
+                    <div ui-grid="settingsConfigGrid" ui-grid-selection ui-grid-pagination class="settingsConfigGrid"></div>
                 </div>
                 <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
-                <button type="button" class="btn btn-primary" ng-click="showHistory()">Show History</button>
+                <button type="button" class="btn btn-primary" ng-click="showHistory(settingsConfigGrid.selectedRowName)"
+                        ng-disabled="!settingsConfigGrid.selectedRowId">Show History</button>
             </div>
         </div>
     </div>
 </form>
+<settings-config-history options="settingsConfigHistoryGrid.options" history="settingsConfigHistoryGrid.history"></settings-config-history>

@@ -27,6 +27,7 @@ define([
         "ngAnimate",
         "ngStorage",
         "ui.grid",
+        "ui.grid.edit",
         "ui.grid.selection",
         "ui.grid.pagination",
         "ui.grid.exporter",

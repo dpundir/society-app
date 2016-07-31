@@ -10,9 +10,11 @@ define([
                     options: {},
                     history: []
                 };
+                $scope.msg = {isCellEdited: false};
+
                 $scope.settingsConfigGrid = gridService.getDefaultGridConfig([
                         {field: 'name'},
-                        {field: 'value'},
+                        {field: 'value', enableCellEdit: true, type: 'number'},
                         {field: 'description'}
                     ],
                     false,
@@ -20,6 +22,11 @@ define([
                         onRegisterApi: function (gridApi) {
                             $scope.gridApi = gridApi;
                             var that = this;
+                            gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue){
+                                $scope.msg.lastCellEdited = 'edited setting:' + rowEntity.name + ' newValue:' + newValue + ' oldValue:' + oldValue ;
+                                $scope.msg.isCellEdited = true;
+                                $scope.$apply();
+                            });
                             gridApi.selection.on.rowSelectionChanged($scope, function (row) {
                                 that.selectedRowId = row.entity.id;
                                 that.selectedRowName = row.entity.name;
@@ -56,7 +63,6 @@ define([
                         }
                     };
                     return restInterface.get('/api/SocietyConfigs', null, filter).then(function (data) {
-                        console.log(data);
                         $scope.settingsConfigGrid.data = data;
                         $scope.gridApi.core.handleWindowResize();
                     });

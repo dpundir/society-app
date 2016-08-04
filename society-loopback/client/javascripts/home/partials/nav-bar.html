@@ -87,9 +87,9 @@
             </div>
         </div>
         <div class="collapse navbar-collapse navbar-search navbar-right">
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" ng-submit="searchMemberById()">
                 <div class="form-group">
-                    <input type="text" class="form-control search-input" placeholder="Search member...">
+                    <input type="text" class="form-control search-input" ng-model="memberId" placeholder="Search member...">
                 </div>
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
             </form>
@@ -97,3 +97,4 @@
 
     </div>
 </nav>
+<message-modal message="message"></message-modal>

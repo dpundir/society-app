@@ -59,7 +59,7 @@ p{
     top: 50px;
 }
 .dropdown-menu li.header:hover{
-    cursor: none;
+    cursor: default;
     background-color: #ffffff;
 }
 .dropdown li {

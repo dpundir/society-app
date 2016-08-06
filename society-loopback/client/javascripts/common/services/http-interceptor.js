@@ -5,7 +5,7 @@ define([
     'angular'
 ], function () {
     var MyHttpInterceptor = angular.module("societyApp.common.services.httpinterceptor", ["ngCookies"]);
-    MyHttpInterceptor.factory('MyHttpInterceptor', ['$cookies', '$location', '$q', function ($cookies, $location, $q) {
+    MyHttpInterceptor.factory('MyHttpInterceptor', ['$rootScope', '$cookies', '$location', '$q', function ($rootScope, $cookies, $location, $q) {
         return {
             'request': function (config) {
                 config.headers['Authorization'] = $cookies.get('access-token');
@@ -19,6 +19,8 @@ define([
                     $cookies.remove('user');
                     $location.url('/login');
                     return $q.reject(rejection);
+                } else if(rejection && rejection.status === 422){
+                    $rootScope.$broadcast('global:error', rejection.data.error);
                 }
                 return $q.reject(rejection);
             }

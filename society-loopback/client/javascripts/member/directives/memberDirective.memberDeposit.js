@@ -3,17 +3,38 @@
  */
 define([
   'angular',
-  'lodash'
+  'lodash',
+    'javascripts/member/services/Member'
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.memberDeposit", ['societyApp.member.filters'])
-    .directive('memberDeposit',['frequencyFilter', function (frequencyFilter) {
+  angular.module("societyApp.member.directives.memberDeposit", ["societyApp.member.services.member"])
+    .directive('memberDeposit',['MemberService', 'SelectOptions', function (MemberService, SelectOptions) {
       return{
         restrict: 'A',
         scope:{
+            memberId: '=',
           deposit: "=",
           saveHandler: "&"
         },
         controller: ['$scope',function($scope){
+            $scope.isViewMode = !!$scope.deposit.id;
+            $scope.actionText = getActionText();
+            $scope.depositFrequencyOptions = SelectOptions.getDepositFrequencyOptions();
+
+            $scope.$watch('deposit', function(newvalue, oldvalue){
+                if(newvalue !== oldvalue){
+                    $scope.isViewMode = !!$scope.deposit.id;
+                    $scope.actionText = getActionText();
+                }
+            });
+
+            function getActionText(){
+                if($scope.isViewMode){
+                    $scope.actionText = 'Edit';
+                    $scope.isViewMode = false;
+                } else{
+                    $scope.actionText = $scope.deposit.id? 'Update' : 'Configure'
+                }
+            }
           function resetTransaction(){
             $scope.transaction = {
               depositAmount: $scope.deposit.installmentValue,
@@ -56,6 +77,32 @@ define([
             }
             return true;
           }
+            $scope.configureDeposit = function(){
+                if($scope.isViewMode){
+                    $scope.isViewMode = false;
+                    $scope.actionText = getActionText();
+                } else {
+                    var depositRequest = {
+                        installmentFreq: $scope.deposit.installmentFreq,
+                        installmentValue: $scope.deposit.installmentValue,
+                        shareValue: $scope.deposit.shareValue
+                    };
+                    if ($scope.deposit.id) {
+                        MemberService.updateMemberDeposit($scope.deposit.id, depositRequest).then(function (data) {
+                            $scope.isViewMode = true;
+                            $scope.actionText = getActionText();
+                        });
+                    } else {
+                        depositRequest.id = '';
+                        MemberService.createMemberDeposit(depositRequest).then(function (data) {
+                            MemberService.updateMemberDepositId(data.id, $scope.memberId).then(function (data1) {
+                                $scope.isViewMode = true;
+                                $scope.actionText = getActionText();
+                            });
+                        });
+                    }
+                }
+            }
           $scope.saveNewDeposit = function(form){
             var isValidDepositForm = validateDepositForm(form);
             if(isValidDepositForm){
@@ -68,9 +115,8 @@ define([
               if(data.installmentValue){
                 $scope.transaction.depositAmount = data.installmentValue;
               }
-              if(data.installmentFreq){
-                $scope.installmentFrequency = frequencyFilter(data.installmentFreq);
-              }
+
+              $scope.deposit.installmentFreq = data.installmentFreq;
               $scope.deposit.shareValue = data.shareValue;
               $scope.deposit.installmentValue = data.installmentValue;
             }else {

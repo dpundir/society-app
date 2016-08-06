@@ -10,16 +10,5 @@ define([
                     return 'Loan'
                 }
             }
-        })
-        .filter('frequency',function(){
-            return function(value){
-                var installmentFreq = {
-                  12: 'Monthly',
-                  6: 'Half yearly',
-                  3: 'Quarterly',
-                  1: 'Yearly'
-                };
-                return installmentFreq[value];
-            }
-        })
+        });
 });

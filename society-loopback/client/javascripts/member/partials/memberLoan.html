@@ -133,10 +133,12 @@
                         <div class="label-input">
                             <span class="form-text">Loan Frequency:</span>
                         </div>
-                        <input type="text" name="loanFrequency" ng-disabled="true"
-                               class="form-control"
-                               id="loanFrequency"
-                               ng-value="loanDetail.frequency | frequency">
+                        <select name="loanFrequency" ng-model="loanDetail.frequency"
+                                class="form-control"
+                                id="loanFrequency"
+                                ng-disabled="true"
+                                ng-options="depositOption.id as depositOption.label for depositOption in depositFrequencyOptions">
+                        </select>
                     </div>
                 </div>
             </div>

@@ -93,6 +93,10 @@ define([
 
         }).controller("appController", ['$rootScope', '$scope', 'AuthenticationService', '$location',
             function ($rootScope, $scope, AuthenticationService, $location) {
+                $rootScope.$on('global:error', function(event, error){
+                    $scope.globalMessage.message = error.message;
+                    $scope.globalMessage.openModal();
+                });
                 $scope.heading = 'Application Heading';
                 $scope.ngViewPlaceholder = 'NG View Placeholder';
                 $scope.footer = 'Footer';

@@ -111,6 +111,7 @@ define([
 
                         $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
                         $scope.memberDeposit.deposit = data.deposit;
+                        $scope.memberDeposit.id = data.depositId;
                     })
                 }
 
@@ -155,11 +156,15 @@ define([
                 * Get member deposit of selected member
                 * */
                 $scope.getMemberDeposit = function(){
-                    MemberService.getMemberDeposit($scope.member.id).then(function (data) {
-                        $scope.memberDeposit.successCB(data);
-                    }, function (error) {
-                        $scope.memberDeposit.errorCB(error);
-                    });
+                    if($scope.member.depositId) {
+                        MemberService.getMemberDeposit($scope.member.depositId).then(function (data) {
+                            $scope.memberDeposit.successCB(data);
+                        }, function (error) {
+                            $scope.memberDeposit.errorCB(error);
+                        });
+                    } else{
+                        $scope.memberDeposit.successCB({});
+                    }
                 };
                 /*
                 * get all documents of member

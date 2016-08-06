@@ -9,13 +9,21 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Account Balance:</label>
-                    <span>&#8377;</span><span ng-bind="deposit.deposit"></span>
+                    <span>&#8377;</span>
+                    <input type="text"
+                           class="form-control" name="deposit"
+                           id="deposit" ng-disabled="isViewMode"
+                           required="" ng-model="deposit.deposit">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Share value:</label>
-                    <span>&#8377;</span><span ng-bind="deposit.shareValue"></span>
+                    <span>&#8377;</span>
+                    <input type="text"
+                           class="form-control" name="shareValue"
+                           id="shareValue" ng-disabled="isViewMode"
+                           required="" ng-model="deposit.shareValue">
                 </div>
             </div>
         </div>
@@ -24,19 +32,38 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Installment frequency:</label>
-                    <span ng-bind="installmentFrequency"></span>
+                    <select name="installmentFrequency" id="installmentFrequency" ng-model="deposit.installmentFreq"
+                            class="form-control"
+                            ng-disabled="isViewMode"
+                            required=""
+                            ng-options="depositOption.id as depositOption.label for depositOption in depositFrequencyOptions">
+                    </select>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label>Installment value:</label>
-                    <span>&#8377;</span><span ng-bind="deposit.installmentValue"></span>
+                    <span>&#8377;</span>
+                    <input type="text"
+                           class="form-control" name="installmentValue"
+                           id="installmentValue" ng-disabled="isViewMode"
+                           required="" ng-model="deposit.installmentValue">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">New deposit</button>
+<div class="row btn-register">
+    <div class="col-sm-3 column">
+        <button type="button"
+                class="btn btn-secondary"
+                ng-click="configureDeposit()" ng-bind="actionText"></button>
+    </div>
+    <div class="col-sm-3 column">
+        <button type="button" class="btn btn-primary" ng-click="isCollapsed = !isCollapsed">New deposit</button>
+    </div>
+</div>
+
 </br>
 </br>
 <div ng-hide="isCollapsed">

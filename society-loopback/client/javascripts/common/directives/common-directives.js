@@ -22,7 +22,8 @@ define(['angular', 'bootstrap'], function(angular){
                         showSecondary: true,
                         textHeader: 'Message',
                         textPrimary: 'Ok',
-                        textSecondary: 'Cancel'
+                        textSecondary: 'Cancel',
+                        size: 'sm'
                     }, $scope.message);
 
                     $scope.message.showPrimary = !!$scope.message.showPrimary;
@@ -37,7 +38,7 @@ define(['angular', 'bootstrap'], function(angular){
                             animation: true,
                             templateUrl: 'javascripts/common/partials/message-modal.html',
                             backdrop:'true',
-                            size:'lg',
+                            size: $scope.message.size,
                             scope:$scope
                         });
                     };

@@ -149,6 +149,15 @@ define([
             this.getMemberDeposit = function (id) {
                 return restInterface.get('api/MemberDeposits/' + id);
             };
+            this.updateMemberDeposit = function (id, data) {
+                return restInterface.update('api/MemberDeposits/' + id, data);
+            };
+            this.updateMemberDepositId = function (id, memberId) {
+                return restInterface.update('api/Members/' + memberId, {depositId: id});
+            };
+            this.createMemberDeposit = function (data) {
+                return restInterface.post('api/MemberDeposits', data);
+            };
             this.addNewTransaction = function (transaction) {
                 return restInterface.post('api/Members/transaction', transaction);
             };
@@ -277,6 +286,14 @@ define([
                     {id: 4, label: 'Children'},
                     {id: 5, label: 'Brother'},
                     {id: 6, label: 'Sister'}
+                ];
+            };
+            this.getDepositFrequencyOptions = function(){
+                return [
+                    {id: 1, label: 'Monthly'},
+                    {id: 3, label: 'Quaterly'},
+                    {id: 6, label: 'Half-Yearly'},
+                    {id: 12, label: 'Yearly'}
                 ];
             }
         });

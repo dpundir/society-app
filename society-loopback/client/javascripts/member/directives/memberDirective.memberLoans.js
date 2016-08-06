@@ -11,9 +11,8 @@ define([
         "ui.grid.selection",
         "ui.grid.pagination",
         "ui.grid.exporter",
-        'societyApp.member.filters',
         'societyApp.common.services.gridService'])
-        .directive('memberLoans', ['$location', '$filter', 'MemberService', 'uiGridConstants', 'gridService', function ($location, $filter, MemberService, uiGridConstants, gridService) {
+        .directive('memberLoans', ['$location', '$filter', 'MemberService', 'SelectOptions', 'uiGridConstants', 'gridService', function ($location, $filter, MemberService, SelectOptions, uiGridConstants, gridService) {
             return {
                 restrict: 'A',
                 scope: {
@@ -26,6 +25,7 @@ define([
                     function initLoanDetails() {
                         $scope.MEMBER_CONTEXT = $scope.memberId ? true : false;
                         $scope.defaultSocietyConfigs = MemberService.getTransformedSocietyConfig();
+                        $scope.depositFrequencyOptions = SelectOptions.getDepositFrequencyOptions();
                         $scope.loanDetail = {
                             id: '',
                             amount: '',

@@ -24,7 +24,7 @@ define([
                      * */
                     function validateRegistrationForm(form) {
                         if (form.$invalid) {
-                            var formFields = ['fname', 'lname', 'ffname', 'flname', 'gender', 'maritalStatus', 'phone', 'dob', 'address1', 'address2', 'city', 'state', 'pincode','guardian'];
+                            var formFields = ['fname', 'lname', 'ffname', 'flname', 'gender', 'maritalStatus', 'phone', 'dob', 'address1', 'address2', 'city', 'state', 'pincode','guardianType'];
                             _.each(formFields, function (name) {
                                 if (form[name].$invalid) {
                                     form[name].$setTouched();
@@ -39,6 +39,9 @@ define([
                     $scope.isInfoCollapsed = false;
                     $scope.isAddressCollapsed = false;
                     $scope.nomineeRelations = SelectOptions.getRelations();
+                    $scope.maritalStatuses = SelectOptions.getMaritalStatusOptions();
+                    $scope.genderOptions = SelectOptions.getGenderOptions();
+                    $scope.statusOptions = SelectOptions.getPersonStatusOptions();
 
                     /*
                      * Default date picker config
@@ -88,6 +91,10 @@ define([
                             console.log(error);
                         })
                     };
+                    $scope.setGuardianType = function(type){
+                        $scope.person.guardianType = Number(type);
+                    }
+
                 }],
                 templateUrl: 'javascripts/member/partials/memberDetails.html',
                 link: function (scope, element) {

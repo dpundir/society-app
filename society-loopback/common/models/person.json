@@ -220,20 +220,20 @@
       "_selectable": true
     },
     "sex": {
-      "type": "String",
-      "required": false,
-      "length": 1,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "sex",
-        "dataType": "char",
-        "dataLength": 1,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      },
-      "_selectable": true
+        "type": "Number",
+        "required": false,
+        "length": null,
+        "precision": 10,
+        "scale": 0,
+        "mysql": {
+            "columnName": "sex",
+            "dataType": "int",
+            "dataLength": null,
+            "dataPrecision": 10,
+            "dataScale": 0,
+            "nullable": "Y"
+        },
+        "_selectable": true
     },
     "maritalStatus": {
       "type": "Number",
@@ -284,18 +284,18 @@
           "_selectable": true
       },
       "guardianType": {
-          "type": "String",
+          "type": "Number",
           "required": false,
-          "length": 1,
-          "precision": null,
-          "scale": null,
+          "length": null,
+          "precision": 10,
+          "scale": 0,
           "mysql": {
               "columnName": "guardian_type",
-              "dataType": "char",
-              "dataLength": 1,
-              "dataPrecision": null,
-              "dataScale": null,
-              "nullable": "N"
+              "dataType": "int",
+              "dataLength": null,
+              "dataPrecision": 10,
+              "dataScale": 0,
+              "nullable": "Y"
           },
           "_selectable": true
       }

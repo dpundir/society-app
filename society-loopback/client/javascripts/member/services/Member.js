@@ -20,8 +20,8 @@ define([
             };
             this.defaultMember = function defaultMember(member) {
                 member = member || {};
-                member.person = member.person || {};
-                member.nominee = member.nominee || {};
+                member.person = member.person || {guardianType: 1};
+                member.nominee = member.nominee || {guardianType: 1};
                 return {
                     fname: member.fname || '',
                     mname: member.mname || '',
@@ -295,6 +295,28 @@ define([
                     {id: 6, label: 'Half-Yearly'},
                     {id: 12, label: 'Yearly'}
                 ];
-            }
+            };
+            this.getPersonStatusOptions = function(){
+                return [
+                    {id: 0, label: 'Inactive'},
+                    {id: 1, label: 'Active'},
+                    {id: 2, label: 'Dormant'},
+                    {id: 3, label: 'Expired'}
+                ];
+            };
+            this.getMaritalStatusOptions = function(){
+                return [
+                    {id: 0, label: 'Unmarried'},
+                    {id: 1, label: 'Married'},
+                    {id: 2, label: 'Divorcee'},
+                    {id: 3, label: 'Widowed'}
+                ];
+            };
+            this.getGenderOptions = function(){
+                return [
+                    {id: 1, label: 'Male'},
+                    {id: 2, label: 'Female'}
+                ];
+            };
         });
 });

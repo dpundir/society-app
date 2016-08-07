@@ -7,8 +7,8 @@ define([
         ["societyApp.member.services.member",
             "societyApp.member.directives"])
         .controller('memberRegistrationController',
-        ['$scope', 'MemberService', '$location', '$routeParams', '$filter','fileUpload',
-            function ($scope, MemberService, $location, $routeParams, $filter, fileUpload) {
+        ['$scope', 'MemberService', '$location', '$routeParams', '$filter','fileUpload', 'SelectOptions',
+            function ($scope, MemberService, $location, $routeParams, $filter, fileUpload, SelectOptions) {
 
                 var VIEW_MODE = {
                     NEW: 1,
@@ -88,6 +88,7 @@ define([
                  * initialize the form in view mode with all data
                  * */
                 function initRegistrationFormViewMode(memberId) {
+                    $scope.member = MemberService.defaultMember({});
                     MemberService.getMemberDetail(memberId).then(function (data) {
                         $scope.primaryHeaderText = 'Member Details';
                         $scope.secondaryHeaderText = 'To edit details, click on edit button.';
@@ -106,11 +107,7 @@ define([
 
                         $scope.member.person.dob = new Date(data.person.dob);
                         //todo change to db value
-                        $scope.member.person.guardian = 'father';
-                        $scope.member.person.status = data.person.status+'';
-                        $scope.member.person.maritalStatus = data.person.maritalStatus+'';
                         $scope.member.nominee.dob = new Date(data.nominee.dob);
-                        $scope.member.nominee.maritalStatus = data.nominee.maritalStatus+'';
 
                         $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
                         $scope.memberDeposit.deposit = data.deposit;
@@ -238,6 +235,11 @@ define([
                             break;
                     }
                 };
+                $scope.getStatusText = function(){
+                    var personStatuses = SelectOptions.getPersonStatusOptions();
+                    var personStatus = personStatuses[$scope.member.status];
+                    return personStatus? personStatus.label : '';
+                }
                 /*
                  * Initialize on load
                  * */

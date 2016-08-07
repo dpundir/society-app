@@ -263,6 +263,7 @@ CREATE TABLE `person` (
   `marital_status` int(1) DEFAULT NULL,
   `relation` int(1) DEFAULT NULL,
   `profile_photo_name` varchar(45) DEFAULT NULL,
+  `guardian_type` char(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -470,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-31 20:41:42
+-- Dump completed on 2016-08-07 20:37:57

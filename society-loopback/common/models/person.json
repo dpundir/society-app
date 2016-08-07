@@ -282,6 +282,22 @@
               "nullable": "Y"
           },
           "_selectable": true
+      },
+      "guardianType": {
+          "type": "String",
+          "required": false,
+          "length": 1,
+          "precision": null,
+          "scale": null,
+          "mysql": {
+              "columnName": "guardian_type",
+              "dataType": "char",
+              "dataLength": 1,
+              "dataPrecision": null,
+              "dataScale": null,
+              "nullable": "N"
+          },
+          "_selectable": true
       }
   },
   "validations": [],

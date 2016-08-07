@@ -24,7 +24,7 @@ define([
                      * */
                     function validateRegistrationForm(form) {
                         if (form.$invalid) {
-                            var formFields = ['fname', 'lname', 'ffname', 'flname', 'gender', 'maritalStatus', 'phone', 'dob', 'address1', 'address2', 'city', 'state', 'pincode'];
+                            var formFields = ['fname', 'lname', 'ffname', 'flname', 'gender', 'maritalStatus', 'phone', 'dob', 'address1', 'address2', 'city', 'state', 'pincode','guardian'];
                             _.each(formFields, function (name) {
                                 if (form[name].$invalid) {
                                     form[name].$setTouched();

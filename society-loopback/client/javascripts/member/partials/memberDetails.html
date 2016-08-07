@@ -49,7 +49,39 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <div class="label-input">
-                                        <span class="form-text">Father's first name</span>
+                                        <span class="form-text">Relationship:</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <input type="radio" name="isFather"
+                                               id="isFather" ng-disabled="isViewMode"
+                                               required="" ng-model="person.guardian" value="father">
+                                        <span class="form-text">Father</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <input type="radio" name="isHusband"
+                                               id="isHusband" ng-disabled="isViewMode"
+                                               required="" ng-model="person.guardian" value="husband">
+                                        <span class="form-text">Husband</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text" ng-if="person.guardian === 'father'">Father's first name</span>
+                                        <span class="form-text" ng-if="person.guardian === 'husband'">Husband's first name</span>
                                         <span class="text-danger" ng-show="!isViewMode">*</span>
                                     </div>
                                     <input type="text"
@@ -61,7 +93,8 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <div class="label-input">
-                                        <span class="form-text">Father's middle name</span>
+                                        <span class="form-text" ng-if="person.guardian === 'father'">Father's middle name</span>
+                                        <span class="form-text" ng-if="person.guardian === 'husband'">Husband's middle name</span>
                                     </div>
                                     <input type="text"
                                            class="form-control" ng-disabled="isViewMode"
@@ -71,7 +104,8 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <div class="label-input">
-                                        <span class="form-text">Father's last name</span>
+                                        <span class="form-text" ng-if="person.guardian === 'father'">Father's last name</span>
+                                        <span class="form-text" ng-if="person.guardian === 'husband'">Husband's last name</span>
                                         <span class="text-danger" ng-show="!isViewMode">*</span>
                                     </div>
                                     <input type="text"
@@ -138,6 +172,20 @@
                                             ng-disabled="isViewMode" required="">
                                         <option value='1'>Married</option>
                                         <option value='0'>Unmarried</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" ng-show="entity == 'person'">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Member Status</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <select name="memeberStatus" ng-model="person.status"
+                                            class="form-control"
+                                            ng-disabled="isViewMode" required="">
+                                        <option value='1'>Active</option>
+                                        <option value='0'>Inactive</option>
                                     </select>
                                 </div>
                             </div>

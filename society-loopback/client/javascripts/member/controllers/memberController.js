@@ -90,7 +90,7 @@ define([
                 function initRegistrationFormViewMode(memberId) {
                     MemberService.getMemberDetail(memberId).then(function (data) {
                         $scope.primaryHeaderText = 'Member Details';
-                        $scope.secondaryHeaderText = 'To edit member details, click on edit button.';
+                        $scope.secondaryHeaderText = 'To edit details, click on edit button.';
                         $scope.formValidationInfoText = '';
                         $scope.actionText = ACTION_TEXT.EDIT;
                         $scope.isViewMode = true;
@@ -105,6 +105,9 @@ define([
                         $scope.member.nominee.address = MemberService.defaultMemberAddress(data.nominee.address);
 
                         $scope.member.person.dob = new Date(data.person.dob);
+                        //todo change to db value
+                        $scope.member.person.guardian = 'father';
+                        $scope.member.person.status = data.person.status+'';
                         $scope.member.person.maritalStatus = data.person.maritalStatus+'';
                         $scope.member.nominee.dob = new Date(data.nominee.dob);
                         $scope.member.nominee.maritalStatus = data.nominee.maritalStatus+'';

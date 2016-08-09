@@ -6,6 +6,7 @@ requirejs.config({
         'angular': 'node_modules/angular/angular',
         'angular-animate': 'node_modules/angular-animate/angular-animate',
         'angular-aria': 'node_modules/angular-aria/angular-aria',
+        'angular-bootstrap-lightbox': 'node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox',
         'angular-lodash': 'node_modules/angular-lodash/angular-lodash',
         'angular-resource': 'node_modules/angular-resource/angular-resource',
         'angular-route': 'node_modules/angular-route/angular-route',
@@ -41,6 +42,9 @@ requirejs.config({
             exports: "angular"
         },
         'angular-aria': {
+            deps: ["angular"]
+        },
+        'angular-bootstrap-lightbox': {
             deps: ["angular"]
         },
         'angular-route': {

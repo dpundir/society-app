@@ -3,10 +3,11 @@
  */
 define([
     'angular',
-    'lodash'
+    'lodash',
+    'angular-bootstrap-lightbox'
 ], function (angular, _) {
-    angular.module("societyApp.member.directives.memberDetails", ["societyApp.member.services.member"])
-        .directive('memberDetails', ['fileUpload', 'SelectOptions', function (fileUpload, SelectOptions) {
+    angular.module("societyApp.member.directives.memberDetails", ['bootstrapLightbox', "societyApp.member.services.member"])
+        .directive('memberDetails', ['fileUpload', 'SelectOptions', 'Lightbox', function (fileUpload, SelectOptions, Lightbox) {
             return {
                 restrict: 'A',
                 scope: {
@@ -93,6 +94,18 @@ define([
                     };
                     $scope.setGuardianType = function(type){
                         $scope.person.guardianType = Number(type);
+                    };
+
+                    $scope.openLightboxModal = function(){
+                        if($scope.person.profilePhotoName){
+                            var imageArray = [
+                                {
+                                    'url': '/file/'+ $scope.person.id + '/document/' + $scope.person.profilePhotoName,
+                                    'thumbUrl': '/file/'+ $scope.person.id + '/document/' + $scope.person.profilePhotoName
+                                }
+                            ];
+                            Lightbox.openModal(imageArray, 0);
+                        }
                     }
 
                 }],

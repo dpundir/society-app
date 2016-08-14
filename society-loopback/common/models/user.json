@@ -62,18 +62,18 @@
           "property": "updateAttributes"
       },
       {
-          "accessType": "WRITE",
+          "accessType": "EXECUTE",
           "principalType": "ROLE",
           "principalId": "admin",
           "permission": "ALLOW",
-          "property": "__update__role"
+          "property": "insertRole"
       },
       {
-          "accessType": "WRITE",
+          "accessType": "EXECUTE",
           "principalType": "ROLE",
           "principalId": "admin",
           "permission": "ALLOW",
-          "property": "__create__role"
+          "property": "updateRole"
       }
   ],
   "methods": []

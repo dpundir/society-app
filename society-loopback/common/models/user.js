@@ -113,6 +113,40 @@ module.exports = function(user) {
         });
     };
 
+    user.updateRole = function(req, cb){
+        var TokenModel = req.app.models.AccessToken;
+        var RoleMappingModel = req.app.models.RoleMapping;
+
+        TokenModel.findForRequest(req, {}, function(err, token) {
+            if(err){
+                cb(err, null);
+            }
+            RoleMappingModel.update({'principalId': req.body.userId},{'roleId': req.body.roleId}, function(err, rolemapping){
+                if(err){
+                    cb(err, null);
+                }
+                cb(null, rolemapping);
+            });
+        });
+    };
+
+    user.insertRole = function(req, cb){
+        var TokenModel = req.app.models.AccessToken;
+        var RoleMappingModel = req.app.models.RoleMapping;
+
+        TokenModel.findForRequest(req, {}, function(err, token) {
+            if(err){
+                cb(err, null);
+            }
+            RoleMappingModel.create({'id': '', 'principalType': 'USER', 'principalId': req.body.userId, 'roleId': req.body.roleId}, function(err, rolemapping){
+                if(err){
+                    cb(err, null);
+                }
+                cb(null, rolemapping);
+            });
+        });
+    };
+
   user.remoteMethod(
     'fetchMember',
     {
@@ -167,6 +201,44 @@ module.exports = function(user) {
                     'The response body contains properties of the User details with their roles'
             },
             http: {verb: 'get', path: '/list'}
+        }
+    );
+
+    user.remoteMethod(
+        'updateRole',
+        {
+            description: 'Update user role details for logged in user with access token.',
+            accepts: [
+                {arg: 'req', type: 'object', http: {source: 'req'},
+                    description: 'Do not supply this argument, it is automatically extracted ' +
+                        'from request headers.'
+                }
+            ],
+            returns: {
+                arg: 'users', type: 'object', root: true,
+                description:
+                    'The response body contains properties of the User details with their roles'
+            },
+            http: {verb: 'put', path: '/change-role'}
+        }
+    );
+
+    user.remoteMethod(
+        'insertRole',
+        {
+            description: 'Insert role for logged in user with access token.',
+            accepts: [
+                {arg: 'req', type: 'object', http: {source: 'req'},
+                    description: 'Do not supply this argument, it is automatically extracted ' +
+                        'from request headers.'
+                }
+            ],
+            returns: {
+                arg: 'users', type: 'object', root: true,
+                description:
+                    'The response body contains properties of the User details with their roles'
+            },
+            http: {verb: 'post', path: '/change-role'}
         }
     );
 };

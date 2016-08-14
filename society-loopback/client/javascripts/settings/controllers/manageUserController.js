@@ -56,11 +56,17 @@ define([
                         }
                         if (!(request[0].role && changedUserData.role) || (request[0].role && changedUserData.role && request[0].role.role.id !== changedUserData.role.role.id)) {
                             if(changedUserData.role){
-                                restInterface.update('/api/users/' + changedUserData.id+'/role', {roleId: request[0].role.role.id}).then(function (data) {
+                                restInterface.update('/api/users/change-role', {
+                                    roleId: request[0].role.role.id,
+                                    userId: changedUserData.id
+                                }).then(function (data) {
                                     console.log(data);
                                 });
                             } else{
-                                restInterface.post('/api/users/' + changedUserData.id+'/role', {id:'', principalType: 'USER', principalId: changedUserData.id, roleId: request[0].role.role.id}).then(function (data) {
+                                restInterface.post('/api/users/change-role', {
+                                    roleId: request[0].role.role.id,
+                                    userId: changedUserData.id
+                                }).then(function (data) {
                                     console.log(data);
                                 });
                             }

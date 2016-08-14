@@ -251,7 +251,7 @@ CREATE TABLE `person` (
   `mname` varchar(45) DEFAULT NULL,
   `lname` varchar(45) DEFAULT NULL,
   `phone` varchar(10) NOT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
   `addressid` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
   `modified_date` datetime DEFAULT NULL,
@@ -259,11 +259,11 @@ CREATE TABLE `person` (
   `ffname` varchar(45) DEFAULT NULL,
   `fmname` varchar(45) DEFAULT NULL,
   `flname` varchar(45) DEFAULT NULL,
-  `sex` char(1) NOT NULL,
+  `sex` int(1) DEFAULT NULL,
   `marital_status` int(1) DEFAULT NULL,
   `relation` int(1) DEFAULT NULL,
   `profile_photo_name` varchar(45) DEFAULT NULL,
-  `guardian_type` char(1) NOT NULL,
+  `guardian_type` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -276,7 +276,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'deepak','singh1','pundir','8287536951',1,1,'2015-11-13 00:00:00','2016-04-03 08:31:31','1983-11-14','surbir','singh1','pundir','m',1,NULL,NULL),(2,'debashis','s','mishra','8882227771',1,2,'2015-11-30 00:00:00','2015-11-30 00:00:00','1981-11-01','d','e','mishra','m',1,NULL,NULL),(3,'neeraj','a','kumar','1287536955',1,9,'2015-11-13 00:00:00','2015-11-13 00:00:00','1981-11-14',NULL,NULL,NULL,'m',NULL,NULL,NULL),(4,'usha','rawat','pundir','8287536951',NULL,16,'2016-01-03 17:14:35','2016-01-03 17:14:36','1988-01-15','deepak','singh','pundir','f',1,NULL,NULL);
+INSERT INTO `person` VALUES (1,'deepak','singh','pundir','9910995165',1,1,'2015-11-13 00:00:00','2016-08-07 17:23:33','1983-06-17','surbir','singh','pundir',1,1,NULL,'userProfile.jpeg',1),(2,'Usha','Deepak','pundir','9910995165',1,2,'2015-11-30 00:00:00','2016-08-07 17:23:13','1983-06-17','Deepak','singh','pundir',2,1,2,'userProfile.jpeg',1),(3,'Neeraj','A','Kumar','9910995165',1,9,'2015-11-13 00:00:00','2016-07-31 15:21:16','1983-06-17','Neeraj','J','Kumar',1,1,NULL,NULL,1),(4,'priti','rawat','pundir','9910995165',0,16,'2016-01-03 17:14:35','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,NULL,1),(5,'priti','singh','pundir','9910995165',0,33,'2016-07-30 07:53:39','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,NULL,1),(8,'purna',NULL,'devi','9823036955',1,36,'2016-07-30 15:20:15','2016-07-30 15:20:15','1953-06-17','surbir','Singh','Pundir',2,1,NULL,NULL,1),(9,'surbir','singh','pundir','9823036955',1,37,'2016-07-30 15:21:36','2016-07-31 15:02:46','1954-05-17','narayan','singh','pundir',1,1,2,NULL,1);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,7 +411,7 @@ CREATE TABLE `transaction_history` (
   KEY `dh_loan_id_idx` (`loan_id`),
   CONSTRAINT `dh_loan_id` FOREIGN KEY (`loan_id`) REFERENCES `loan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -471,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-07 20:37:57
+-- Dump completed on 2016-08-14 17:49:26

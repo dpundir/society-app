@@ -39,7 +39,13 @@
       "model": "Member",
       "foreignKey": "id",
       "keyFrom": "memberid"
-    }
+    },
+      "role": {
+          "type": "hasOne",
+          "model": "RoleMapping",
+          "foreignKey": "principalId",
+          "keyFrom": "id"
+      }
   },
   "acls": [
     {
@@ -47,7 +53,28 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
-    }
+    },
+      {
+          "accessType": "WRITE",
+          "principalType": "ROLE",
+          "principalId": "admin",
+          "permission": "ALLOW",
+          "property": "updateAttributes"
+      },
+      {
+          "accessType": "WRITE",
+          "principalType": "ROLE",
+          "principalId": "admin",
+          "permission": "ALLOW",
+          "property": "__update__role"
+      },
+      {
+          "accessType": "WRITE",
+          "principalType": "ROLE",
+          "principalId": "admin",
+          "permission": "ALLOW",
+          "property": "__create__role"
+      }
   ],
   "methods": []
 }

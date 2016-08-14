@@ -18,7 +18,7 @@ requirejs.config({
         'require': 'node_modules/requirejs/require',
         'rx': 'node_modules/rx/dist/rx.all',
         'rxjquery': 'node_modules/rxjs-jquery/rx.jquery',
-        'lodash': 'node_modules/lodash/index',
+        'lodash': 'node_modules/lodash/lodash',
         'i18n': 'node_modules/angular-internationalization/index',
 
         'bootstrap': 'node_modules/bootstrap/dist/js/bootstrap',

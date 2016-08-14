@@ -7,26 +7,26 @@
     "pretest": "jshint ."
   },
   "dependencies": {
-    "body-parser": "^1.10.1",
-    "compression": "^1.0.3",
-    "consolidate": "^0.13.1",
-    "cors": "^2.5.2",
-    "errorhandler": "^1.1.1",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "consolidate": "^0.14.1",
+    "cors": "^2.7.1",
+    "errorhandler": "^1.4.3",
     "formidable": "1.0.17",
     "lodash": "^3.10.1",
-    "loopback": "^2.22.0",
-    "loopback-boot": "^2.6.5",
-    "loopback-component-explorer": "^2.1.0",
-    "loopback-connector-mysql": "^2.2.0",
-    "loopback-datasource-juggler": "^2.39.0",
-      "mime-types": "^2.1.10",
+    "loopback": "^2.29.1",
+    "loopback-boot": "^2.21.0",
+    "loopback-component-explorer": "^2.5.0",
+    "loopback-connector-mysql": "^2.3.0",
+    "loopback-datasource-juggler": "^2.48.0",
+      "mime-types": "^2.1.11",
       "mkdirp": "^0.5.1",
-    "moment": "2.10.6",
-    "serve-favicon": "^2.0.1"
+    "moment": "2.14.1",
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
-    "jshint": "^2.5.6",
-    "tape": "^4.2.0"
+    "jshint": "^2.9.2",
+    "tape": "^4.6.0"
   },
   "repository": {
     "type": "",

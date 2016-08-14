@@ -68,4 +68,52 @@ define([
         return defer.promise;
       };
     }])
+      .service('SelectOptions', function () {
+          this.getUserStatusOptions = function(){
+              return [
+                  {id: '0', label: 'Inactive'},
+                  {id: '1', label: 'Active'},
+                  {id: '2', label: 'Dormant'},
+                  {id: '3', label: 'Expired'}
+              ];
+          };
+          this.getUserRoleOptions = function(){
+              return [
+                  {id: 1, label: 'Admin'},
+                  {id: 2, label: 'Employee'},
+                  {id: 3, label: 'Member'}
+              ];
+          };
+      })
+      .filter('mapUserStatus', function() {
+          var statusHash = {
+              0: 'Inactive',
+              1: 'Active',
+              2: 'Dormant',
+              3: 'Expired'
+          };
+
+          return function(input) {
+              if (!input){
+                  return '';
+              } else {
+                  return statusHash[input];
+              }
+          };
+      })
+      .filter('mapUserRole', function() {
+        var roleHash = {
+            1: 'Admin',
+            2: 'Employee',
+            3: 'Member'
+        };
+
+        return function(input) {
+            if (!input){
+                return '';
+            } else {
+                return roleHash[input];
+            }
+        };
+    });
 });

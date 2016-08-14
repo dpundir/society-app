@@ -78,6 +78,9 @@ define([
             }).when('/settings/configure', {
                 'templateUrl': 'javascripts/settings/partials/settingsConfig.html',
                 'controller': 'settingsConfigController'
+            }).when('/settings/manage-user', {
+                'templateUrl': 'javascripts/settings/partials/manageUser.html',
+                'controller': 'manageUserController'
             }).when('/expense', {
                 'templateUrl': 'javascripts/expense/partials/expense-list.html',
                 'controller': 'expenseListController'

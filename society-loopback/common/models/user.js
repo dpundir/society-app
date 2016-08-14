@@ -1,5 +1,6 @@
 var config = require('../../server/config.json');
 var path = require('path');
+var _ = require('lodash');
 
 module.exports = function(user) {
   //send verification email after registration
@@ -80,6 +81,38 @@ module.exports = function(user) {
     });
   };
 
+    user.fetchUserList = function(req, cb){
+        var TokenModel = req.app.models.AccessToken;
+        TokenModel.findForRequest(req, {}, function(err, token) {
+            if(err){
+                cb(err, null);
+            }
+            var filter1 = JSON.parse(req.query.filter);
+            var filter2 = {
+                fields:['id', 'email', 'username', 'memberid', 'personId', 'status', 'created'],
+                    include: {
+                    "relation": "role",
+                        "scope": {
+                        "fields": ["principalId", "roleId"],
+                            "include": {
+                            "relation": "role",
+                                "scope": {
+                                "fields": ["id", "name"]
+                            }
+                        }
+                    }
+                }
+            };
+            var filter = _.extend({}, filter2, filter1);
+            user.find(filter, function(err, users){
+                if(err){
+                    cb(err, null);
+                }
+                cb(null, users);
+            })
+        });
+    };
+
   user.remoteMethod(
     'fetchMember',
     {
@@ -110,11 +143,30 @@ module.exports = function(user) {
         }
       ],
       returns: {
-        arg: 'user', type: 'object', root: true,
+        arg: 'users', type: 'array', root: true,
         description:
           'The response body contains properties of the User details'
       },
       http: {verb: 'get', path: '/detail'}
     }
   );
+
+    user.remoteMethod(
+        'fetchUserList',
+        {
+            description: 'Fetch member details for logged in user with access token.',
+            accepts: [
+                {arg: 'req', type: 'object', http: {source: 'req'},
+                    description: 'Do not supply this argument, it is automatically extracted ' +
+                        'from request headers.'
+                }
+            ],
+            returns: {
+                arg: 'users', type: 'object', root: true,
+                description:
+                    'The response body contains properties of the User details with their roles'
+            },
+            http: {verb: 'get', path: '/list'}
+        }
+    );
 };

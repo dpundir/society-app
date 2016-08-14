@@ -1,0 +1,17 @@
+<div ng-if="!showDetails">
+    <div>
+        <h4 class="text-info">Add new nominee details:</h4>
+        <hr/>
+    </div>
+    <button class="btn btn-primary loan-btn" ng-click="searchMember()">Search Existing Member</button>
+    <button class="btn btn-primary loan-btn" ng-click="newNominee()">Enter New</button>
+</div>
+<div ng-if="showDetails">
+    <div member-details person="member.nominee"
+         entity="nominee"
+         address="member.nominee.address"
+         is-view-mode="isNomineeViewMode"
+         action-text="actionText"
+         click-handler="register(form, entity)"></div>
+</div>
+<member-search option="existingMember"></member-search>

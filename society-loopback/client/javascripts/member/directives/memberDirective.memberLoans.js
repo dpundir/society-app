@@ -91,6 +91,7 @@ define([
                                 var self = this;
                                 gridApi.selection.on.rowSelectionChanged($scope, function (row) {
                                     self.selectedRowId = row.entity.id;
+                                    self.selectedRowMemberId = row.entity.memberId;
                                 });
                             }
                         });
@@ -132,7 +133,8 @@ define([
                             $scope.error.errorText = 'Please select a loan to see details.';
                             return;
                         }
-                        MemberService.getLoanDetails($scope.memberId, $scope.memberLoansGrid.selectedRowId).then(function (data) {
+                        var memberId = $scope.MEMBER_CONTEXT? ($scope.memberLoansGrid.selectedRowMemberId === 'SELF'? $scope.memberId: $scope.memberLoansGrid.selectedRowMemberId) : $scope.memberLoansGrid.selectedRowMemberId;
+                        MemberService.getLoanDetails(memberId, $scope.memberLoansGrid.selectedRowId).then(function (data) {
                             _.forOwn($scope.loanDetail, function (value, key) {
                                 $scope.loanDetail[key] = data[key];
                             });
@@ -163,7 +165,7 @@ define([
                             return;
                         }
                         var loanDetail = angular.copy($scope.loanDetail);
-                        loanDetail.memberid = $scope.LOAN_MODE.NEW ? $scope.loanDetail.memberid : $scope.memberId;
+                        loanDetail.memberid = $scope.MEMBER_CONTEXT? $scope.memberId : $scope.loanDetail.memberid;
                         MemberService.addNewLoan(loanDetail).then(function (data) {
                             console.log(data);
                             $scope.showLoanSection = false;

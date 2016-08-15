@@ -10,8 +10,8 @@ define([
         'societyApp.common.services.restinterface',
         'societyApp.admin.services.userprofile'
     ])
-        .controller('manageUserController', ['$scope', '$location', '$q', '$routeParams', '$filter', 'restInterface', 'gridService', 'SelectOptions',
-            function ($scope, $location, $q, $routeParams, $filter, restInterface, gridService, SelectOptions) {
+        .controller('manageUserController', ['$scope', '$location', '$q', '$routeParams', '$filter', 'restInterface', 'gridService', 'UserSelectOptions',
+            function ($scope, $location, $q, $routeParams, $filter, restInterface, gridService, UserSelectOptions) {
                 function resetController(){
                     $scope.msg.isCellEdited = false;
                     $scope.msg.lastCellEdited = '';
@@ -28,9 +28,9 @@ define([
                         {field: 'username'},
                         {field: 'email'},
                         {field: 'status', enableCellEdit: true, editableCellTemplate: 'ui-grid/dropdownEditor', cellFilter: 'mapUserStatus',
-                            editDropdownValueLabel: 'label', editDropdownOptionsArray: SelectOptions.getUserStatusOptions()},
+                            editDropdownValueLabel: 'label', editDropdownOptionsArray: UserSelectOptions.getUserStatusOptions()},
                         {field: 'role.role.id', displayName: 'Role', type: 'number', enableCellEdit: true, editableCellTemplate: 'ui-grid/dropdownEditor', cellFilter: 'mapUserRole',
-                            editDropdownValueLabel: 'label', editDropdownOptionsArray: SelectOptions.getUserRoleOptions()}
+                            editDropdownValueLabel: 'label', editDropdownOptionsArray: UserSelectOptions.getUserRoleOptions()}
                     ],
                     false,
                     {

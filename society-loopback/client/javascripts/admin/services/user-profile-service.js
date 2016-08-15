@@ -68,7 +68,7 @@ define([
         return defer.promise;
       };
     }])
-      .service('SelectOptions', function () {
+      .service('UserSelectOptions', function () {
           this.getUserStatusOptions = function(){
               return [
                   {id: '0', label: 'Inactive'},

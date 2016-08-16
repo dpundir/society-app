@@ -14,10 +14,12 @@ define([
                     member: '=',
                     isNomineeViewMode: '=',
                     actionText: '=',
-                    clickHandler: '&'
+                    clickHandler: '&',
+                    callbacks: '='
                 },
                 controller: ['$scope', function ($scope) {
                     $scope.existingMember = {};
+                    $scope.editable = false;
                     $scope.showDetails = false;
                     $scope.register = function(form, entity){
                         $scope.clickHandler({form: form, entity: entity});
@@ -36,10 +38,17 @@ define([
                             $scope.member.nominee = angular.copy(data.person);
                             $scope.member.nominee.dob = new Date(data.person.dob);
                             $scope.showDetails = true;
+                            $scope.editable = true;
+                            $scope.isNomineeViewMode = true;
+                            $scope.member.nomineeId=data.person.id;
                         });
                     };
                     $scope.newNominee = function(){
                         $scope.showDetails = true;
+                        $scope.editable = true;
+                    };
+                    $scope.callbacks.tabClicked = function(){
+                        $scope.showDetails = $scope.member.nominee && $scope.member.nominee.id
                     }
                 }],
                 templateUrl: 'javascripts/member/partials/memberNominee.html',

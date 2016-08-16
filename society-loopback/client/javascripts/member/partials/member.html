@@ -24,8 +24,8 @@
                         </div>
                     </div>
                 </div>
-                <uib-tabset>
-                    <uib-tab heading="Member details">
+                <uib-tabset active="activeTab">
+                    <uib-tab heading="Member details" select="memberDetailsClicked()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div>
@@ -39,7 +39,8 @@
                                      address="member.person.address"
                                      is-view-mode="isViewMode"
                                      action-text="actionText"
-                                     click-handler="register(form, entity)"></div>
+                                     click-handler="register(form, entity)"
+                                     editable="isMemeberEditable"></div>
                             </div>
                         </div>
                     </uib-tab>
@@ -75,7 +76,7 @@
                             </div>
                         </div>
                     </uib-tab>
-                    <uib-tab heading="Nomination" disable="mode == 1">
+                    <uib-tab heading="Nomination" disable="mode == 1" select="nominationClicked()">
                         <div class="row society-form">
                             <div class="form-top">
                                 <div>
@@ -87,7 +88,8 @@
                                 <div member-nominee member="member"
                                      is-nominee-view-mode="isNomineeViewMode"
                                      action-text="nomineeActionText"
-                                     click-handler="register(form, entity)"></div>
+                                     click-handler="register(form, entity)"
+                                     callbacks="nomineeCallbacks"></div>
                             </div>
                         </div>
                     </uib-tab>

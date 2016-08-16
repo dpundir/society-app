@@ -16,7 +16,8 @@ define([
                     address: '=',
                     isViewMode: '=',
                     actionText: '=',
-                    clickHandler: '&'
+                    clickHandler: '&',
+                    editable: '='
                 },
                 controller: ['$scope', function ($scope) {
                     /*

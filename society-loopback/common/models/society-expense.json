@@ -13,10 +13,10 @@
     "id": {
       "type": "Number",
       "id": true,
+      "generated": true,
       "required": true,
       "length": null,
       "precision": 10,
-        "generated": true,
       "scale": 0,
       "mysql": {
         "columnName": "id",
@@ -44,28 +44,27 @@
       },
       "_selectable": false
     },
-      "creditAmount": {
-          "type": "Number",
-          "required": false,
-          "length": null,
-          "precision": 22,
-          "scale": null,
-          "mysql": {
-              "columnName": "credit_amount",
-              "dataType": "double",
-              "dataLength": null,
-              "dataPrecision": 22,
-              "dataScale": null,
-              "nullable": "Y"
-          },
-          "_selectable": false
+    "creditAmount": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "credit_amount",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
       },
+      "_selectable": false
+    },
     "description": {
       "type": "String",
-      "required": false,
+      "required": true,
       "length": 50,
       "precision": null,
-        "required": true,
       "scale": null,
       "mysql": {
         "columnName": "description",

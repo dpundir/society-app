@@ -1,4 +1,9 @@
 {
-    "name": "SocietyBaseModel",
-    "base": "PersistedModel"
+  "name": "SocietyBaseModel",
+  "base": "PersistedModel",
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }

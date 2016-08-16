@@ -28,20 +28,20 @@
       "_selectable": false
     },
     "name": {
-        "type": "String",
-        "required": true,
-        "length": 45,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-            "columnName": "name",
-            "dataType": "varchar",
-            "dataLength": 50,
-            "dataPrecision": null,
-            "dataScale": null,
-            "nullable": "N"
-        },
-        "_selectable": true
+      "type": "String",
+      "required": true,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "name",
+        "dataType": "varchar",
+        "dataLength": 50,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      },
+      "_selectable": true
     },
     "type": {
       "type": "Number",
@@ -123,22 +123,22 @@
       },
       "_selectable": true
     },
-      "historyRemark": {
-          "type": "String",
-          "required": false,
-          "length": 50,
-          "precision": null,
-          "scale": null,
-          "mysql": {
-              "columnName": "history_remark",
-              "dataType": "varchar",
-              "dataLength": 50,
-              "dataPrecision": null,
-              "dataScale": null,
-              "nullable": "Y"
-          },
-          "_selectable": true
-      }
+    "historyRemark": {
+      "type": "String",
+      "required": false,
+      "length": 50,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "history_remark",
+        "dataType": "varchar",
+        "dataLength": 50,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    }
   },
   "validations": [],
   "relations": {},

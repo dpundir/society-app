@@ -21,7 +21,7 @@ define([
             this.defaultMember = function defaultMember(member) {
                 member = member || {};
                 member.person = member.person || {guardianType: 1};
-                member.nominee = member.nominee || {guardianType: 1};
+                member.memberNominee = (member.memberNominee && member.memberNominee.length >0)? member.memberNominee : [{nominee: {guardianType: 1}}];
                 return {
                     fname: member.fname || '',
                     mname: member.mname || '',
@@ -32,9 +32,8 @@ define([
                     modifiedDate: member.modifiedDate || '',
                     id: member.id || '',
                     person: member.person,
-                    nominee: member.nominee,
+                    memberNominee: member.memberNominee,
                     personId: member.personId || '',
-                    nomineeId: member.nomineeId || '',
                     depositId: member.depositId || null
                 }
             };
@@ -85,11 +84,19 @@ define([
                     "filter": {
                         "include": [
                             {"person": ["address"]},
-                            {"nominee": ["address"]}
+                            {"memberNominee": [{"nominee": ["address"]}]}
                         ]}
                 };
                 filter = angular.merge(filter || {}, defaultMemberFilter);
                 return restInterface.get('/api/Members/' + id, null, filter);
+            };
+            this.isPersonExistingMember = function isPersonExistingMember(personId) {
+                var defaultMemberFilter = {
+                        "where": {
+                            "nomineeId": personId
+                        }
+                };
+                return restInterface.get('/api/Members/count', null, defaultMemberFilter);
             };
             this.getMemberNomineeDetail = function getMemberNomineeDetail(id, filter) {
                 var defaultMemberFilter = {
@@ -113,7 +120,16 @@ define([
                     memberRequest.phone = member.person.phone;
                     memberRequest.status = member.person.status;
                 }
-                memberRequest[entity] = member[entity];
+                if(entity == 'person') {
+                    memberRequest[entity] = member[entity];
+                } else{
+                    var nominee = {nominee: {}};
+                    nominee.memberId = member.id;
+                    nominee.relation = member['memberNominee'][0][entity].relation;
+                    delete member['memberNominee'][0][entity].relation;
+                    nominee[entity] = member['memberNominee'][0][entity];
+                    memberRequest['memberNominee'] = [nominee];
+                }
 
                 restInterface.update('/api/Members/' + entity, memberRequest).then(function (data) {
                     defer.resolve(data);
@@ -135,8 +151,18 @@ define([
                 } else {
                     memberRequest.id = member.id;
                 }
-                memberRequest[entity] = member[entity];
-                memberRequest[entity].status = 1;
+                if(entity == 'person') {
+                    memberRequest[entity] = member[entity];
+                    memberRequest[entity].status = 1;
+                } else{
+                    var nominee = {nominee: {}};
+                    nominee.memberId = member.id;
+                    nominee.relation = member['memberNominee'][0][entity].relation;
+                    delete member['memberNominee'][0][entity].relation;
+                    nominee[entity] = member['memberNominee'][0][entity];
+                    nominee[entity].status = 1;
+                    memberRequest['memberNominee'] = [nominee];
+                }
 
                 restInterface.post('/api/Members/' + entity, memberRequest).then(function (data) {
                     defer.resolve(data);

@@ -13,11 +13,11 @@
     "id": {
       "type": "Number",
       "id": true,
+      "generated": true,
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
-      "generated": true,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -187,22 +187,6 @@
         "nullable": "Y"
       },
       "_selectable": true
-    },
-    "nomineeId": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "nominee_id",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
-      "_selectable": true
     }
   },
   "validations": [],
@@ -213,12 +197,12 @@
       "foreignKey": "id",
       "keyFrom": "personId"
     },
-    "nominee": {
-      "type": "hasOne",
-      "model": "Person",
-      "foreignKey": "id",
-      "keyFrom": "nomineeId"
-    },
+      "memberNominee": {
+          "type": "hasMany",
+          "model": "MemberNominee",
+          "foreignKey": "memberId",
+          "keyFrom": "id"
+      },
     "memberDeposit": {
       "type": "hasOne",
       "model": "MemberDeposit",

@@ -40,12 +40,12 @@
       "foreignKey": "id",
       "keyFrom": "memberid"
     },
-      "role": {
-          "type": "hasOne",
-          "model": "RoleMapping",
-          "foreignKey": "principalId",
-          "keyFrom": "id"
-      }
+    "role": {
+      "type": "hasOne",
+      "model": "RoleMapping",
+      "foreignKey": "principalId",
+      "keyFrom": "id"
+    }
   },
   "acls": [
     {
@@ -54,27 +54,27 @@
       "principalId": "$everyone",
       "permission": "ALLOW"
     },
-      {
-          "accessType": "WRITE",
-          "principalType": "ROLE",
-          "principalId": "admin",
-          "permission": "ALLOW",
-          "property": "updateAttributes"
-      },
-      {
-          "accessType": "EXECUTE",
-          "principalType": "ROLE",
-          "principalId": "admin",
-          "permission": "ALLOW",
-          "property": "insertRole"
-      },
-      {
-          "accessType": "EXECUTE",
-          "principalType": "ROLE",
-          "principalId": "admin",
-          "permission": "ALLOW",
-          "property": "updateRole"
-      }
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "insertRole"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "updateRole"
+    }
   ],
-  "methods": []
+  "methods": {}
 }

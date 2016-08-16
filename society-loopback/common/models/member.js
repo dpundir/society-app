@@ -113,42 +113,59 @@ module.exports = function (Member) {
     Member.createNominationPersonAddress = function (req, cb) {
         var Person = req.app.models.Person;
         var Address = req.app.models.Address;
+        var MemberNominee = req.app.models.MemberNominee;
+
         Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
-            var addressData = req.body.nominee.address;
+            var nomineeData = req.body.memberNominee[0].nominee;
+            var addressData = nomineeData.address;
             addressData.id = '';
 
-            Address.create(addressData, {transaction: tx}, function (err1, data1) {
-                if (err1) {
-                    tx.rollback();
-                    cb(err1, null);
-                }
-                var personData = req.body.nominee;
-                personData.id = '';
-                personData.addressid = data1.id;
-                personData.createDate = new Date();
-                personData.modifiedDate = new Date();
-                delete personData.address;
-                Person.create(personData, {transaction: tx}, function (err2, data2) {
-                    if (err2) {
+            var existingPersonId = nomineeData.id;
+
+            if(!existingPersonId) {
+                Address.create(addressData, {transaction: tx}, function (err1, data1) {
+                    if (err1) {
                         tx.rollback();
-                        cb(err2, null);
+                        cb(err1, null);
                     }
-                    var memberData = {};
-                    var memberId = req.body.id;
-                    memberData.nomineeId = data2.id;
-                    memberData.modifiedDate = new Date();
-                    delete memberData.nominee;
-                    //delete memberData.person;
-                    Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
-                        if (err3) {
+                    nomineeData.id = '';
+                    nomineeData.addressid = data1.id;
+                    nomineeData.createDate = new Date();
+                    nomineeData.modifiedDate = new Date();
+                    delete nomineeData.address;
+                    Person.create(nomineeData, {transaction: tx}, function (err2, data2) {
+                        if (err2) {
                             tx.rollback();
-                            cb(err3, null);
+                            cb(err2, null);
                         }
-                        tx.commit();
-                        cb(null, data3);
+                        var memberNomineeData = { id: ''};
+                        memberNomineeData.memberId = req.body.memberNominee[0].memberId;
+                        memberNomineeData.nomineeId = data2.id;
+                        memberNomineeData.relation = req.body.memberNominee[0].relation;
+                        MemberNominee.create(memberNomineeData, {transaction: tx}, function(err3, data3){
+                            if (err3) {
+                                tx.rollback();
+                                cb(err3, null);
+                            }
+                            tx.commit();
+                            cb(null, data3);
+                        });
                     });
                 });
-            });
+            } else{
+                var memberNomineeData = { id: ''};
+                memberNomineeData.memberId = req.body.memberNominee[0].memberId;
+                memberNomineeData.nomineeId = existingPersonId;
+                memberNomineeData.relation = req.body.memberNominee[0].relation;
+                MemberNominee.create(memberNomineeData, {transaction: tx}, function(err3, data3){
+                    if (err3) {
+                        tx.rollback();
+                        cb(err3, null);
+                    }
+                    tx.commit();
+                    cb(null, data3);
+                });
+            }
         })
     };
 
@@ -197,8 +214,9 @@ module.exports = function (Member) {
         var Person = req.app.models.Person;
         var Address = req.app.models.Address;
         Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
-            var addressData = req.body.nominee.address;
-            var addressId = req.body.nominee.address.id;
+            var nomineeData = req.body.memberNominee[0].nominee;
+            var addressData = nomineeData.address;
+            var addressId = nomineeData.address.id;
             delete addressData.id;
 
             Address.update({id: addressId}, addressData, {transaction: tx}, function (err1, data1) {
@@ -206,27 +224,17 @@ module.exports = function (Member) {
                     tx.rollback();
                     cb(err1, null);
                 }
-                var personData = req.body.nominee;
-                var personId = req.body.nominee.id;
-                personData.modifiedDate = new Date();
-                delete personData.address;
-                delete personData.id;
-                Person.update({id: personId}, personData, {transaction: tx}, function (err2, data2) {
+                var personId = nomineeData.id;
+                nomineeData.modifiedDate = new Date();
+                delete nomineeData.address;
+                delete nomineeData.id;
+                Person.update({id: personId}, nomineeData, {transaction: tx}, function (err2, data2) {
                     if (err2) {
                         tx.rollback();
                         cb(err2, null);
                     }
-                    var memberData = {};
-                    var memberId = req.body.id;
-                    memberData.modifiedDate = new Date();
-                    Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
-                        if (err3) {
-                            tx.rollback();
-                            cb(err3, null);
-                        }
-                        tx.commit();
-                        cb(null, data3);
-                    });
+                    tx.commit();
+                    cb(null, data2);
                 });
             });
         })

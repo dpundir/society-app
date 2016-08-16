@@ -13,10 +13,10 @@
       "./mixins"
     ]
   },
-    "SocietyBaseModel": {
-        "dataSource": "db",
-        "public": false
-    },
+  "SocietyBaseModel": {
+    "dataSource": "db",
+    "public": false
+  },
   "User": {
     "dataSource": "mysql-ds",
     "public": false
@@ -80,6 +80,10 @@
     "public": true
   },
   "TransactionHistory": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "MemberNominee": {
     "dataSource": "mysql-ds",
     "public": true
   }

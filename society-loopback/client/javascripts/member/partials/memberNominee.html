@@ -7,9 +7,9 @@
     <button class="btn btn-primary loan-btn" ng-click="newNominee()">Enter New</button>
 </div>
 <div ng-if="showDetails">
-    <div member-details person="member.nominee"
+    <div member-details person="member.memberNominee[0].nominee"
          entity="nominee"
-         address="member.nominee.address"
+         address="member.memberNominee[0].nominee.address"
          is-view-mode="isNomineeViewMode"
          action-text="actionText"
          click-handler="register(form, entity)"

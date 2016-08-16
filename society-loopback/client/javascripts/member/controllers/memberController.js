@@ -1,8 +1,9 @@
 define([
     'angular',
+    'lodash',
     'javascripts/member/services/Member',
     'javascripts/member/directives/memberDirectives'
-], function () {
+], function (angular, _) {
     angular.module("societyApp.member.controller.memberregistration",
         ["societyApp.member.services.member",
             "societyApp.member.directives"])
@@ -54,7 +55,11 @@ define([
                     }
 
                     var memberRequest = $.extend(true, {}, $scope.member);
-                    memberRequest.dob = $filter('date')(memberRequest[entity].dob, 'yyyy-MM-dd');
+                    if(entity == 'nominee') {
+                        memberRequest['memberNominee'][0][entity].dob = $filter('date')(memberRequest['memberNominee'][0][entity].dob, 'yyyy-MM-dd');
+                    } else{
+                        memberRequest[entity].dob = $filter('date')(memberRequest[entity].dob, 'yyyy-MM-dd');
+                    }
                     if (type === 'update') {
                         MemberService.updateMember(memberRequest, entity).then(successCB, errorCB);
                     } else {
@@ -100,17 +105,18 @@ define([
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.VIEW;
 
-                        $scope.nomineeActionText = data.nominee? ACTION_TEXT.EDIT : ACTION_TEXT.REGISTER;
-                        $scope.isNomineeViewMode = !!data.nominee;
-                        $scope.nomineeMode = data.nominee? VIEW_MODE.VIEW : VIEW_MODE.NEW;
+                        $scope.nomineeActionText = data.memberNominee? ACTION_TEXT.EDIT : ACTION_TEXT.REGISTER;
+                        $scope.isNomineeViewMode = !!data.memberNominee;
+                        $scope.nomineeMode = data.memberNominee? VIEW_MODE.VIEW : VIEW_MODE.NEW;
 
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
-                        $scope.member.nominee.address = MemberService.defaultMemberAddress(data.nominee.address);
-
                         $scope.member.person.dob = new Date(data.person.dob);
                         //todo change to db value
-                        $scope.member.nominee.dob = new Date(data.nominee.dob);
+                        _.forEach($scope.member.memberNominee, function(memberNominee){
+                            memberNominee.nominee.address = MemberService.defaultMemberAddress(memberNominee.nominee.address);
+                            memberNominee.nominee.dob = new Date(memberNominee.nominee.dob);
+                        });
 
                         $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
                         $scope.memberDeposit.deposit = data.deposit;

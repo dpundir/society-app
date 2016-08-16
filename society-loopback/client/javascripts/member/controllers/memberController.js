@@ -21,6 +21,8 @@ define([
                     REGISTER: 'Register',
                     UPDATE: 'Update'
                 };
+                $scope.activeTab = 0;
+                $scope.isMemeberEditable = true;
 
                 /*
                  * Default deposit tab object
@@ -35,6 +37,9 @@ define([
                 $scope.memberLoans = {};
                 $scope.documents = {};
                 $scope.nomineeDetail = {};
+                $scope.nomineeCallbacks = {
+                    tabClicked: angular.noop
+                };
                 /*
                  * @method
                  * @name updateMemberDetail
@@ -69,7 +74,6 @@ define([
                     //Default address
                     $scope.member.person.address = MemberService.defaultMemberAddress({});
                     //header texts
-                    $scope.primaryHeaderText = 'New Member Registration';
                     $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
 
@@ -90,7 +94,6 @@ define([
                 function initRegistrationFormViewMode(memberId) {
                     $scope.member = MemberService.defaultMember({});
                     MemberService.getMemberDetail(memberId).then(function (data) {
-                        $scope.primaryHeaderText = 'Member Details';
                         $scope.secondaryHeaderText = 'To edit details, click on edit button.';
                         $scope.formValidationInfoText = '';
                         $scope.actionText = ACTION_TEXT.EDIT;
@@ -120,7 +123,6 @@ define([
                  * @name initRegistrationFormEditMode
                  * */
                 function initRegistrationFormEditMode(entity) {
-                    $scope.primaryHeaderText = 'Edit Member Details';
                     $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
 
@@ -239,7 +241,28 @@ define([
                     var personStatuses = SelectOptions.getPersonStatusOptions();
                     var personStatus = personStatuses[$scope.member.status];
                     return personStatus? personStatus.label : '';
-                }
+                };
+
+                $scope.nominationClicked = function(){
+                    if($scope.activeTab === 5){
+                        return;
+                    }
+                    $scope.actionText = ACTION_TEXT.UPDATE;
+                    $scope.secondaryHeaderText = '';
+                    $scope.nomineeCallbacks.tabClicked();
+                };
+
+                $scope.memberDetailsClicked = function(){
+                    if($scope.activeTab === 0){
+                        return;
+                    }
+                    $scope.isMemeberEditable = true;
+                    $scope.actionText = ACTION_TEXT.EDIT;
+                    $scope.isViewMode = true;
+                    $scope.mode = VIEW_MODE.VIEW;
+                    $scope.secondaryHeaderText = 'To edit details, click on edit button.';
+                    $scope.formValidationInfoText = '';
+                };
                 /*
                  * Initialize on load
                  * */

@@ -234,8 +234,38 @@ CREATE TABLE `member_deposit` (
 
 LOCK TABLES `member_deposit` WRITE;
 /*!40000 ALTER TABLE `member_deposit` DISABLE KEYS */;
-INSERT INTO `member_deposit` VALUES (1,100,10,12);
+INSERT INTO `member_deposit` VALUES (1,1000,100,12);
 /*!40000 ALTER TABLE `member_deposit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `member_nominee`
+--
+
+DROP TABLE IF EXISTS `member_nominee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `member_nominee` (
+  `id` int(11) NOT NULL,
+  `memberId` int(11) DEFAULT NULL,
+  `nomineeId` int(11) DEFAULT NULL,
+  `relation` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nominee_memberId_idx` (`memberId`),
+  KEY `nominee_nomineeId_idx` (`nomineeId`),
+  CONSTRAINT `nominee_memberId` FOREIGN KEY (`memberId`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `nominee_nomineeId` FOREIGN KEY (`nomineeId`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='member nominee relations';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `member_nominee`
+--
+
+LOCK TABLES `member_nominee` WRITE;
+/*!40000 ALTER TABLE `member_nominee` DISABLE KEYS */;
+INSERT INTO `member_nominee` VALUES (1,1,2,1);
+/*!40000 ALTER TABLE `member_nominee` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -471,4 +501,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-15 20:09:59
+-- Dump completed on 2016-08-18 21:05:55

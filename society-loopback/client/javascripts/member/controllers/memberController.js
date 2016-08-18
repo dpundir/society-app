@@ -105,9 +105,9 @@ define([
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.VIEW;
 
-                        $scope.nomineeActionText = data.memberNominee? ACTION_TEXT.EDIT : ACTION_TEXT.REGISTER;
-                        $scope.isNomineeViewMode = !!data.memberNominee;
-                        $scope.nomineeMode = data.memberNominee? VIEW_MODE.VIEW : VIEW_MODE.NEW;
+                        $scope.nomineeActionText = data.memberNominee && data.memberNominee.length > 0? ACTION_TEXT.EDIT : ACTION_TEXT.REGISTER;
+                        $scope.isNomineeViewMode = data.memberNominee && !!data.memberNominee > 0;
+                        $scope.nomineeMode = data.memberNominee && data.memberNominee.length > 0? VIEW_MODE.VIEW : VIEW_MODE.NEW;
 
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);

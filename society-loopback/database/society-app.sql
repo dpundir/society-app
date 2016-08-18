@@ -216,7 +216,7 @@ DROP TABLE IF EXISTS `member_nominee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `member_nominee` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `memberId` int(11) DEFAULT NULL,
   `nomineeId` int(11) DEFAULT NULL,
   `relation` int(11) DEFAULT NULL,
@@ -225,7 +225,7 @@ CREATE TABLE `member_nominee` (
   KEY `nominee_nomineeId_idx` (`nomineeId`),
   CONSTRAINT `nominee_memberId` FOREIGN KEY (`memberId`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `nominee_nomineeId` FOREIGN KEY (`nomineeId`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='member nominee relations';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='member nominee relations';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +234,7 @@ CREATE TABLE `member_nominee` (
 
 LOCK TABLES `member_nominee` WRITE;
 /*!40000 ALTER TABLE `member_nominee` DISABLE KEYS */;
-INSERT INTO `member_nominee` VALUES (1,1,2,1);
+INSERT INTO `member_nominee` VALUES (3,1,2,2);
 /*!40000 ALTER TABLE `member_nominee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,13 +261,12 @@ CREATE TABLE `person` (
   `flname` varchar(45) DEFAULT NULL,
   `sex` int(1) DEFAULT NULL,
   `marital_status` int(1) DEFAULT NULL,
-  `relation` int(1) DEFAULT NULL,
   `profile_photo_name` varchar(45) DEFAULT NULL,
   `guardian_type` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='person details';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='person details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,7 +275,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'deepak','singh','pundir','9910995165',1,1,'2015-11-13 00:00:00','2016-08-07 17:23:33','1983-06-17','surbir','singh','pundir',1,1,NULL,'userProfile.jpeg',1),(2,'Usha','Deepak','pundir','9910995165',1,2,'2015-11-30 00:00:00','2016-08-07 17:23:13','1983-06-17','Deepak','singh','pundir',2,1,2,'userProfile.jpeg',1),(3,'Neeraj','A','Kumar','9910995165',1,9,'2015-11-13 00:00:00','2016-07-31 15:21:16','1983-06-17','Neeraj','J','Kumar',1,1,NULL,NULL,1),(4,'priti','rawat','pundir','9910995165',0,16,'2016-01-03 17:14:35','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,NULL,1),(5,'priti','singh','pundir','9910995165',0,33,'2016-07-30 07:53:39','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,NULL,1),(8,'purna',NULL,'devi','9823036955',1,36,'2016-07-30 15:20:15','2016-07-30 15:20:15','1953-06-17','surbir','Singh','Pundir',2,1,NULL,NULL,1),(9,'surbir','singh','pundir','9823036955',1,37,'2016-07-30 15:21:36','2016-07-31 15:02:46','1954-05-17','narayan','singh','pundir',1,1,2,NULL,1);
+INSERT INTO `person` VALUES (1,'deepak','singh','pundir','9910995165',1,1,'2015-11-13 00:00:00','2016-08-07 17:23:33','1983-06-17','surbir','singh','pundir',1,1,'userProfile.jpeg',1),(2,'Usha','Deepak','pundir','9910995165',1,2,'2015-11-30 00:00:00','2016-08-07 17:23:13','1983-06-17','Deepak','singh','pundir',2,1,'userProfile.jpeg',1),(3,'Neeraj','A','Kumar','9910995165',1,9,'2015-11-13 00:00:00','2016-07-31 15:21:16','1983-06-17','Neeraj','J','Kumar',1,1,NULL,1),(4,'priti','rawat','pundir','9910995165',0,16,'2016-01-03 17:14:35','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,1),(5,'priti','singh','pundir','9910995165',0,33,'2016-07-30 07:53:39','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,1),(8,'purna',NULL,'devi','9823036955',1,36,'2016-07-30 15:20:15','2016-07-30 15:20:15','1953-06-17','surbir','Singh','Pundir',2,1,NULL,1),(9,'surbir','singh','pundir','9823036955',1,37,'2016-07-30 15:21:36','2016-07-31 15:02:46','1954-05-17','narayan','singh','pundir',1,1,NULL,1),(10,'surbir','singh','pundir','9899223880',1,38,'2016-08-15 14:29:21','2016-08-16 19:36:11','1947-11-14','narayan','singh','pundir',1,1,NULL,1),(11,'Usha','Deepak','pundir','9910995165',1,39,'2016-08-15 14:38:42','2016-08-15 14:38:42','1983-06-17','Deepak','singh','pundir',2,1,'userProfile.jpeg',1),(12,'deepak','singh','pundir','9910995165',1,40,'2016-08-16 18:09:37','2016-08-16 18:09:37','1983-06-17','surbir','singh','pundir',1,1,'userProfile.jpeg',1);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -471,4 +470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-18 21:21:13
+-- Dump completed on 2016-08-18 23:09:33

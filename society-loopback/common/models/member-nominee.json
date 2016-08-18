@@ -81,14 +81,14 @@
       "nominee": {
           "type": "belongsTo",
           "model": "Person",
-          "foreignKey": "id",
-          "keyFrom": "nomineeId"
+          "foreignKey": "nomineeId",
+          "keyFrom": "id"
       },
       "member": {
           "type": "belongsTo",
           "model": "Member",
-          "foreignKey": "id",
-          "keyFrom": "memberId"
+          "foreignKey": "memberId",
+          "keyFrom": "id"
       }
   },
   "acls": [],

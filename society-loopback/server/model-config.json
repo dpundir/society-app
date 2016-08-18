@@ -51,10 +51,6 @@
     "dataSource": "mysql-ds",
     "public": true
   },
-  "Document": {
-    "dataSource": "mysql-ds",
-    "public": true
-  },
   "Loan": {
     "dataSource": "mysql-ds",
     "public": true

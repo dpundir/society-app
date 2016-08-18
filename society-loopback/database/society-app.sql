@@ -96,38 +96,8 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-1431','lal bag1','loni','ghaziabad1','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','lal bagh','loni','ghaziabad','uttar pradesh','201102'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101'),(16,'E-80 Munirka Village','munirka village','','Delhi','Delhi','110067'),(20,'C-143','lal bagh',NULL,'loni','ghaziabad','201102'),(21,'F164, 400 E Remington Dr','Sunnyvale','','San Jose','California','94087'),(22,'E-80 Munirka Village','munirka village3','','Delhi','Delhi','110067'),(26,'c','143','','lal','up','201102'),(27,'c','143','','lal','up','201102'),(28,'c','143','','l','l','201102'),(29,'c','143','','ll','up','201012'),(30,'c','143','','ll','bp','100201'),(31,'c','143','','ll','up','201011'),(32,'c','001','','lala','up','201012');
+INSERT INTO `address` VALUES (1,'C-143','lal bag','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','Crossing replublic','loni','ghaziabad','uttar pradesh','201100'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101'),(16,'E-80 Munirka Village','munirka village','','Delhi','Delhi','110067'),(20,'C-143','lal bagh',NULL,'loni','ghaziabad','201102'),(21,'F164, 400 E Remington Dr','Sunnyvale','','San Jose','California','94087'),(22,'E-80 Munirka Village','munirka village3','','Delhi','Delhi','110067'),(26,'c','143','','lal','up','201102'),(27,'c','143','','lal','up','201102'),(28,'c','143','','l','l','201102'),(29,'c','143','','ll','up','201012'),(30,'c','143','','ll','bp','100201'),(31,'c','143','','ll','up','201011'),(32,'c','001','','lala','up','201012');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `document`
---
-
-DROP TABLE IF EXISTS `document`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `document` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `person_id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `data` mediumblob,
-  `status` int(11) DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `document_member_id_fk_idx` (`person_id`),
-  CONSTRAINT `document_member_id_fk` FOREIGN KEY (`person_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='documents uploaded for identification';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `document`
---
-
-LOCK TABLES `document` WRITE;
-/*!40000 ALTER TABLE `document` DISABLE KEYS */;
-/*!40000 ALTER TABLE `document` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -501,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-18 21:05:55
+-- Dump completed on 2016-08-18 21:21:13

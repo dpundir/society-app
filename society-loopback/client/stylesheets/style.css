@@ -176,8 +176,11 @@ img { max-width: 100%; }
 .col-margin-10{
     margin-left: 10px;
 }
+section>div[ng-view]{
+    padding: 30px;
+    padding-top: 0px;
+}
 .home{
-    padding: 30px 15px;
     margin-bottom: 30px;
 }
 .home .tile:hover{
@@ -303,7 +306,7 @@ img { max-width: 100%; }
 }
 .society-form .form-control[disabled]{
     cursor: default;
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     border: 1px solid #e6e6e6;
 }
 .society-form .form-control{
@@ -598,9 +601,6 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 }
 .header-img{
     width: 50px;
-}
-.vertical-tab.member{
-    padding: 0 45px 0 45px;
 }
 .vertical-tab .nav-tabs{
     float: left;

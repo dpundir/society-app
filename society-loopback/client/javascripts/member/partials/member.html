@@ -1,101 +1,99 @@
 <div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 vertical-tab member">
-                <div class="row member-header-name" ng-show="mode !== 1">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Name:</label>
-                            <span ng-bind="memberFullName"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <label>ID:</label>
-                            <span ng-bind="member.id"></span>
-                        </div>
+    <div class="row">
+        <div class="col-sm-12 vertical-tab member">
+            <div class="row member-header-name" ng-show="mode !== 1">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Name:</label>
+                        <span ng-bind="memberFullName"></span>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Status:</label>
-                            <span ng-bind="getStatusText()"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Active from:</label>
-                            <span ng-bind="member.createDate | date:'dd-MMM-yyyy'"></span>
-                        </div>
+                    <div class="col-md-6">
+                        <label>ID:</label>
+                        <span ng-bind="member.id"></span>
                     </div>
                 </div>
-                <uib-tabset active="activeTab">
-                    <uib-tab heading="Member details" select="memberDetailsClicked()">
-                        <div class="row society-form">
-                            <div class="form-top">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Status:</label>
+                        <span ng-bind="getStatusText()"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Active from:</label>
+                        <span ng-bind="member.createDate | date:'dd-MMM-yyyy'"></span>
+                    </div>
+                </div>
+            </div>
+            <uib-tabset active="activeTab">
+                <uib-tab heading="Member details" select="memberDetailsClicked()">
+                    <div class="row society-form">
+                        <div class="form-top">
+                            <div>
+                                <p class="text-info" ng-bind="secondaryHeaderText"></p>
+                            </div>
+                            <div>
+                                <p class="text-danger" ng-bind="formValidationInfoText"></p>
+                            </div>
+                            <div member-details person="member.person"
+                                 entity="person"
+                                 address="member.person.address"
+                                 is-view-mode="isViewMode"
+                                 action-text="actionText"
+                                 click-handler="register(form, entity)"
+                                 editable="isMemeberEditable"></div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Deposit" disable="mode == 1" select="getMemberDeposit()">
+                    <div class="row society-form">
+                        <div class="form-top">
+                            <div member-deposit member-id="member.id" deposit="memberDeposit"
+                                 save-handler="saveNewDeposit(transaction)"></div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Loan" disable="mode == 1" select="getMemberLoans()">
+                    <div class="row society-form">
+                        <div class="form-top">
+                            <div member-loans="memberLoans" member-id="member.id"
+                                 click-handler="getMemberLoans()"></div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Documents" disable="mode == 1" select="fetchDocumentList()">
+                    <div class="row society-form">
+                        <div class="form-top">
+                            <div member-document member="member" documents="documents"></div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Transaction history" disable="mode == 1" select="getTransactionHistory()">
+                    <div class="row society-form">
+                        <div class="form-top">
+                            <div transaction-history="transactionHistory" member-id="member.id"
+                                 click-handler="getTransactionHistory(startDate, endDate)">
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Nomination" disable="mode == 1" select="nominationClicked()">
+                    <div class="row society-form">
+                        <div class="form-top">
+                            <div>
                                 <div>
                                     <p class="text-info" ng-bind="secondaryHeaderText"></p>
                                 </div>
-                                <div>
-                                    <p class="text-danger" ng-bind="formValidationInfoText"></p>
-                                </div>
-                                <div member-details person="member.person"
-                                     entity="person"
-                                     address="member.person.address"
-                                     is-view-mode="isViewMode"
-                                     action-text="actionText"
-                                     click-handler="register(form, entity)"
-                                     editable="isMemeberEditable"></div>
+                                <p class="text-danger" ng-bind="formValidationInfoText"></p>
                             </div>
+                            <div member-nominee member="member"
+                                 is-nominee-view-mode="isNomineeViewMode"
+                                 action-text="nomineeActionText"
+                                 click-handler="register(form, entity)"
+                                 callbacks="nomineeCallbacks"></div>
                         </div>
-                    </uib-tab>
-                    <uib-tab heading="Deposit" disable="mode == 1" select="getMemberDeposit()">
-                        <div class="row society-form">
-                            <div class="form-top">
-                                <div member-deposit member-id="member.id" deposit="memberDeposit"
-                                     save-handler="saveNewDeposit(transaction)"></div>
-                            </div>
-                        </div>
-                    </uib-tab>
-                    <uib-tab heading="Loan" disable="mode == 1" select="getMemberLoans()">
-                        <div class="row society-form">
-                            <div class="form-top">
-                                <div member-loans="memberLoans" member-id="member.id"
-                                     click-handler="getMemberLoans()"></div>
-                            </div>
-                        </div>
-                    </uib-tab>
-                    <uib-tab heading="Documents" disable="mode == 1" select="fetchDocumentList()">
-                        <div class="row society-form">
-                            <div class="form-top">
-                                <div member-document member="member" documents="documents"></div>
-                            </div>
-                        </div>
-                    </uib-tab>
-                    <uib-tab heading="Transaction history" disable="mode == 1" select="getTransactionHistory()">
-                        <div class="row society-form">
-                            <div class="form-top">
-                                <div transaction-history="transactionHistory" member-id="member.id"
-                                     click-handler="getTransactionHistory(startDate, endDate)">
-                                </div>
-                            </div>
-                        </div>
-                    </uib-tab>
-                    <uib-tab heading="Nomination" disable="mode == 1" select="nominationClicked()">
-                        <div class="row society-form">
-                            <div class="form-top">
-                                <div>
-                                    <div>
-                                        <p class="text-info" ng-bind="secondaryHeaderText"></p>
-                                    </div>
-                                    <p class="text-danger" ng-bind="formValidationInfoText"></p>
-                                </div>
-                                <div member-nominee member="member"
-                                     is-nominee-view-mode="isNomineeViewMode"
-                                     action-text="nomineeActionText"
-                                     click-handler="register(form, entity)"
-                                     callbacks="nomineeCallbacks"></div>
-                            </div>
-                        </div>
-                    </uib-tab>
-                </uib-tabset>
-            </div>
-
+                    </div>
+                </uib-tab>
+            </uib-tabset>
         </div>
+
     </div>
 </div>

@@ -84,7 +84,7 @@ define([
                     "filter": {
                         "include": [
                             {"person": ["address"]},
-                            {"memberNominee": [{"nominee": ["address"]}]}
+                            {"memberNominee": [{"nominee": ["address", "member"]}]}
                         ]}
                 };
                 filter = angular.merge(filter || {}, defaultMemberFilter);

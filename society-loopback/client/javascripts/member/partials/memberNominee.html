@@ -11,7 +11,7 @@
                     </div>
                     <select name="relation" ng-model="member.memberNominee[0].relation"
                             class="form-control"
-                            ng-disabled="!editable"
+                            ng-disabled="!editRelation"
                             ng-options="relation.id as relation.label for relation in nomineeRelations">
                     </select>
                 </div>

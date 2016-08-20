@@ -126,8 +126,7 @@ define([
                     var nominee = {nominee: {}};
                     nominee.memberId = member.id;
                     nominee.nomineeId = member['memberNominee'][0][entity].id;
-                    nominee.relation = member['memberNominee'][0][entity].relation;
-                    delete member['memberNominee'][0][entity].relation;
+                    nominee.relation = member['memberNominee'][0].relation;
                     nominee[entity] = member['memberNominee'][0][entity];
                     memberRequest['memberNominee'] = [nominee];
                 }
@@ -159,8 +158,7 @@ define([
                     var nominee = {nominee: {}};
                     nominee.memberId = member.id;
                     nominee.nomineeId = member['memberNominee'][0][entity].id;
-                    nominee.relation = member['memberNominee'][0][entity].relation;
-                    delete member['memberNominee'][0][entity].relation;
+                    nominee.relation = member['memberNominee'][0].relation;
                     nominee[entity] = member['memberNominee'][0][entity];
                     nominee[entity].status = 1;
                     memberRequest['memberNominee'] = [nominee];

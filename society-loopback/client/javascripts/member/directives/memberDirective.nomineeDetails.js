@@ -21,8 +21,10 @@ define([
                     $scope.existingMember = {};
                     $scope.editable = false;
                     $scope.showDetails = false;
+                    $scope.editRelation = false;
                     $scope.nomineeRelations = SelectOptions.getRelations();
                     $scope.register = function(form, entity){
+                        $scope.editRelation = true;
                         $scope.clickHandler({form: form, entity: entity});
                     };
                     $scope.searchMember = function(){
@@ -43,11 +45,15 @@ define([
                     $scope.newNominee = function(){
                         $scope.showDetails = true;
                         $scope.editable = true;
+                        $scope.editRelation = true;
                     };
                     $scope.callbacks.tabClicked = function(){
                         if($scope.member.memberNominee && $scope.member.memberNominee.length > 0 &&
                             $scope.member.memberNominee[0].nominee && $scope.member.memberNominee[0].nominee.id){
                             $scope.showDetails = true;
+                            if(!$scope.member.memberNominee[0].nominee.member){
+                                $scope.editable = true;
+                            }
                         }
                     }
                 }],

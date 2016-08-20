@@ -57,7 +57,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <div class="label-input">
-                                        <input type="radio" name="isFather"
+                                        <input type="radio" name="guardianType"
                                                id="isFather" ng-disabled="isViewMode"
                                                required="" ng-model="person.guardianType" value="1" ng-click="setGuardianType(1)">
                                         <span class="form-text">Father</span>
@@ -67,7 +67,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <div class="label-input">
-                                        <input type="radio" name="isHusband"
+                                        <input type="radio" name="guardianType"
                                                id="isHusband" ng-disabled="isViewMode"
                                                required="" ng-model="person.guardianType" value="2" ng-click="setGuardianType(2)">
                                         <span class="form-text">Husband</span>
@@ -173,7 +173,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4" ng-show="entity == 'person'">
+                            <div class="col-sm-4" ng-if="entity == 'person'">
                                 <div class="form-group">
                                     <div class="label-input">
                                         <span class="form-text">Member Status</span>

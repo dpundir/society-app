@@ -186,19 +186,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4" ng-show="entity == 'nominee'">
-                                <div class="form-group">
-                                    <div class="label-input">
-                                        <span class="form-text">Nominee Relation</span>
-                                        <span class="text-danger" ng-show="!isViewMode">*</span>
-                                    </div>
-                                    <select name="relation" ng-model="person.relation"
-                                            class="form-control"
-                                            ng-disabled="isViewMode"
-                                            ng-options="relation.id as relation.label for relation in nomineeRelations">
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2">

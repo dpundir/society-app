@@ -40,7 +40,6 @@ define([
 
                     $scope.isInfoCollapsed = false;
                     $scope.isAddressCollapsed = false;
-                    $scope.nomineeRelations = SelectOptions.getRelations();
                     $scope.maritalStatuses = SelectOptions.getMaritalStatusOptions();
                     $scope.genderOptions = SelectOptions.getGenderOptions();
                     $scope.statusOptions = SelectOptions.getPersonStatusOptions();

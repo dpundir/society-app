@@ -21,7 +21,7 @@ define([
             this.defaultMember = function defaultMember(member) {
                 member = member || {};
                 member.person = member.person || {guardianType: 1};
-                member.memberNominee = (member.memberNominee && member.memberNominee.length >0)? member.memberNominee : [{nominee: {guardianType: 1}}];
+                member.memberNominee = (member.memberNominee && member.memberNominee.length >0)? member.memberNominee : [{relation: 0, nominee: {guardianType: 1}}];
                 return {
                     fname: member.fname || '',
                     mname: member.mname || '',

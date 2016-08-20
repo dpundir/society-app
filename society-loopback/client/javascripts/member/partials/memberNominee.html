@@ -1,3 +1,25 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Nominee Relation</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Nominee Relation</span>
+                    </div>
+                    <select name="relation" ng-model="member.memberNominee[0].relation"
+                            class="form-control"
+                            ng-disabled="!editable"
+                            ng-options="relation.id as relation.label for relation in nomineeRelations">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div ng-if="!showDetails">
     <div>
         <h4 class="text-info">Add new nominee details:</h4>

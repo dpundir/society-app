@@ -105,14 +105,19 @@ define([
                         $scope.isViewMode = true;
                         $scope.mode = VIEW_MODE.VIEW;
 
-                        $scope.nomineeActionText = data.memberNominee && data.memberNominee.length > 0? ACTION_TEXT.EDIT : ACTION_TEXT.REGISTER;
-                        $scope.isNomineeViewMode = data.memberNominee && !!data.memberNominee > 0;
-                        $scope.nomineeMode = data.memberNominee && data.memberNominee.length > 0? VIEW_MODE.VIEW : VIEW_MODE.NEW;
+                        if(data.memberNominee && data.memberNominee.length > 0){
+                            $scope.nomineeActionText = ACTION_TEXT.EDIT;
+                            $scope.nomineeMode = VIEW_MODE.VIEW;
+                            $scope.isNomineeViewMode = true;
+                        }else{
+                            $scope.nomineeActionText = ACTION_TEXT.REGISTER;
+                            $scope.nomineeMode = VIEW_MODE.NEW;
+                            $scope.isNomineeViewMode = false;
+                        }
 
                         $scope.member = MemberService.defaultMember(data);
                         $scope.member.person.address = MemberService.defaultMemberAddress(data.person.address);
                         $scope.member.person.dob = new Date(data.person.dob);
-                        //todo change to db value
                         _.forEach($scope.member.memberNominee, function(memberNominee){
                             memberNominee.nominee.address = MemberService.defaultMemberAddress(memberNominee.nominee.address);
                             memberNominee.nominee.dob = new Date(memberNominee.nominee.dob);

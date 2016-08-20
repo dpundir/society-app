@@ -5,10 +5,6 @@
     <div class="panel-body">
         <div class="alert alert-danger" role="alert" ng-bind="error.errorText" ng-show="error.isError">
         </div>
-        <div ng-if="MEMBER_CONTEXT">
-            <span><input type="checkbox" ng-model="loanAvailed"></span><span>Show all loan availed</span>
-            <span><input type="checkbox" ng-model="loanReferred"></span><span>Show all loan Reffered</span>
-        </div>
         <div class="loan-buttons">
             <button class="btn btn-primary loan-btn" ng-click="showFilter()" ng-bind="filterText"></button>
             <button class="btn btn-primary loan-btn" ng-click="newLoan()">Add New Loan</button>

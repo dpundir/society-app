@@ -158,6 +158,7 @@ define([
                 } else{
                     var nominee = {nominee: {}};
                     nominee.memberId = member.id;
+                    nominee.nomineeId = member['memberNominee'][0][entity].id;
                     nominee.relation = member['memberNominee'][0][entity].relation;
                     delete member['memberNominee'][0][entity].relation;
                     nominee[entity] = member['memberNominee'][0][entity];

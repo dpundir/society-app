@@ -123,12 +123,8 @@ define([
                 if(entity == 'person') {
                     memberRequest[entity] = member[entity];
                 } else{
-                    var nominee = {nominee: {}};
-                    nominee.memberId = member.id;
-                    nominee.nomineeId = member['memberNominee'][0][entity].id;
-                    nominee.relation = member['memberNominee'][0].relation;
-                    nominee[entity] = member['memberNominee'][0][entity];
-                    memberRequest['memberNominee'] = [nominee];
+                    memberRequest['memberNominee'] = member['memberNominee'];
+                    delete memberRequest['memberNominee'][0].nominee.member;
                 }
 
                 restInterface.update('/api/Members/' + entity, memberRequest).then(function (data) {
@@ -155,13 +151,11 @@ define([
                     memberRequest[entity] = member[entity];
                     memberRequest[entity].status = 1;
                 } else{
-                    var nominee = {nominee: {}};
-                    nominee.memberId = member.id;
-                    nominee.nomineeId = member['memberNominee'][0][entity].id;
-                    nominee.relation = member['memberNominee'][0].relation;
-                    nominee[entity] = member['memberNominee'][0][entity];
-                    nominee[entity].status = 1;
-                    memberRequest['memberNominee'] = [nominee];
+                    member['memberNominee'][0].memberId = member.id;
+                    member['memberNominee'][0].nomineeId = member['memberNominee'][0][entity].id;
+                    member['memberNominee'][0].nominee.status = 1;
+                    memberRequest['memberNominee'] = member['memberNominee'];
+                    delete memberRequest['memberNominee'][0].nominee.member;
                 }
 
                 restInterface.post('/api/Members/' + entity, memberRequest).then(function (data) {

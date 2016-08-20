@@ -213,6 +213,8 @@ module.exports = function (Member) {
     Member.updateNominationPersonAddress = function (req, cb) {
         var Person = req.app.models.Person;
         var Address = req.app.models.Address;
+        var MemberNominee = req.app.models.MemberNominee;
+
         Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
             var nomineeData = req.body.memberNominee[0].nominee;
             var addressData = nomineeData.address;
@@ -233,8 +235,18 @@ module.exports = function (Member) {
                         tx.rollback();
                         cb(err2, null);
                     }
-                    tx.commit();
-                    cb(null, data2);
+                    var memberNominee = req.body.memberNominee[0];
+                    var memberNomineeId = memberNominee.id;
+                    delete memberNominee.nominee;
+                    delete memberNominee.id;
+                    MemberNominee.update({id: memberNomineeId}, memberNominee, {transaction: tx}, function (err3, data3) {
+                        if (err3) {
+                            tx.rollback();
+                            cb(err3, null);
+                        }
+                        tx.commit();
+                        cb(null, data3);
+                    });
                 });
             });
         })

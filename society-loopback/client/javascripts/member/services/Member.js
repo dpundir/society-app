@@ -23,10 +23,6 @@ define([
                 member.person = member.person || {guardianType: 1};
                 member.memberNominee = (member.memberNominee && member.memberNominee.length >0)? member.memberNominee : [{relation: 0, nominee: {guardianType: 1}}];
                 return {
-                    fname: member.fname || '',
-                    mname: member.mname || '',
-                    lname: member.lname || '',
-                    phone: member.phone || '',
                     status: member.status || 0,
                     createDate: member.createDate || '',
                     modifiedDate: member.modifiedDate || '',
@@ -57,6 +53,7 @@ define([
                 //this relation is defined in member.json
                 var defaultMemberListFilter = {
                     "filter": {
+                        "include": ["person"]
                     }
                 };
                 filter = angular.merge(filter || {}, defaultMemberListFilter);
@@ -114,10 +111,6 @@ define([
                     id: member.id
                 };
                 if (entity === 'person') {
-                    memberRequest.fname = member.person.fname;
-                    memberRequest.mname = member.person.lname;
-                    memberRequest.lname = member.person.mname;
-                    memberRequest.phone = member.person.phone;
                     memberRequest.status = member.person.status;
                 }
                 if(entity == 'person') {
@@ -137,16 +130,9 @@ define([
             this.addMember = function addMember(member, entity) {
                 var defer = $q.defer();
                 var memberRequest = {
+                    id: member.id,
                     status: 1
                 };
-                if (entity === 'person') {
-                    memberRequest.fname = member.person.fname;
-                    memberRequest.mname = member.person.lname;
-                    memberRequest.lname = member.person.mname;
-                    memberRequest.phone = member.person.phone;
-                } else {
-                    memberRequest.id = member.id;
-                }
                 if(entity == 'person') {
                     memberRequest[entity] = member[entity];
                     memberRequest[entity].status = 1;

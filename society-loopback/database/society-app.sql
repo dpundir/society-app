@@ -151,25 +151,18 @@ DROP TABLE IF EXISTS `member`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fname` varchar(45) DEFAULT NULL,
-  `mname` varchar(45) DEFAULT NULL,
-  `lname` varchar(45) DEFAULT NULL,
-  `phone` varchar(10) NOT NULL,
   `create_date` datetime NOT NULL,
   `modified_date` datetime DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `deposit_id` int(11) DEFAULT NULL,
   `deposit` int(11) DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
-  `nominee_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `member_deposit_id_idx` (`deposit_id`),
   KEY `member_person_id_idx` (`person_id`),
-  KEY `member_nominee_id_idx` (`nominee_id`),
   CONSTRAINT `member_deposit_id` FOREIGN KEY (`deposit_id`) REFERENCES `member_deposit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `member_nominee_id` FOREIGN KEY (`nominee_id`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_person_id` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='member details';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='member details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +171,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'deepak','singh1','pundir','8287536955','2015-11-13 00:00:00','2015-11-13 00:00:00',1,1,120,1,1),(2,'debashis',NULL,'mishra','8882227771','2015-11-30 00:00:00','2015-11-30 00:00:00',1,NULL,1000,2,2),(3,'neeraj','a','kumar','1287536955','2015-11-13 00:00:00','2015-11-13 00:00:00',1,2,20,3,3),(4,'usha','pundir','rawat','8287536951','2016-01-03 17:14:37','2016-01-03 17:14:37',NULL,NULL,NULL,4,3);
+INSERT INTO `member` VALUES (1,'2015-11-13 00:00:00','2016-08-07 17:23:33',1,1,120,1),(2,'2015-11-30 00:00:00','2016-08-05 17:31:47',1,3,1000,2),(3,'2015-11-13 00:00:00','2016-08-16 18:09:37',1,2,30,3),(4,'2016-01-03 17:14:37','2016-01-03 17:14:37',NULL,NULL,NULL,4);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +321,7 @@ CREATE TABLE `rolemapping` (
 
 LOCK TABLES `rolemapping` WRITE;
 /*!40000 ALTER TABLE `rolemapping` DISABLE KEYS */;
-INSERT INTO `rolemapping` VALUES (1,'USER','1',1);
+INSERT INTO `rolemapping` VALUES (1,'USER','1',1),(11,'USER','3',2);
 /*!40000 ALTER TABLE `rolemapping` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,4 +463,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-18 23:09:33
+-- Dump completed on 2016-08-21 12:33:42

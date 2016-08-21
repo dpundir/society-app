@@ -17,10 +17,10 @@ define([
                 $scope.filterText = 'Show filter';
                 $scope.memberListGrid = gridService.getDefaultGridConfig([
                     {field: 'id', enableHiding: false},
-                    {field: 'firstName', enableHiding: false},
-                    {field: 'middleName', enableHiding: false},
-                    {field: 'lastName', enableHiding: false},
-                    {field: 'phoneNo', enableHiding: false}
+                    {field: 'person.fname', displayName: 'First Name', enableHiding: false},
+                    {field: 'person.mname', displayName: 'Middle Name', enableHiding: false},
+                    {field: 'person.lname', displayName: 'Last Name', enableHiding: false},
+                    {field: 'person.phone', displayName: 'Phone', enableHiding: false}
                 ], true, {
                     onRegisterApi: function(gridApi){
                         $scope.gridApi = gridApi;
@@ -49,19 +49,7 @@ define([
                     $location.url('/member/view/'+$scope.memberListGrid.selectedRowId);
                 };
                 MemberService.list().then(function (data) {
-                    var join = Array.prototype.join,
-                        peopleList = null;
-                    _.forEach(data,function(people){
-                        peopleList = {};
-                        peopleList.id = people.id;
-                        peopleList.firstName = people.fname;
-                        peopleList.middleName = people.mname;
-                        peopleList.lastName = people.lname;
-                        peopleList.phoneNo = people.phone;
-                        member.push(peopleList);
-                    });
-                    $scope.memberListGrid.data  = member;
-                    peopleList = null;
+                    $scope.memberListGrid.data  = data;
                 });
             }]);
 });

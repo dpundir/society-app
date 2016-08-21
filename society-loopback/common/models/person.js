@@ -19,10 +19,6 @@ module.exports = function (Person) {
             cb(err2, null);
           }
           var memberData = {
-            'fname': personData.fname,
-            'mname': personData.mname,
-            'lname': personData.lname,
-            'phone': personData.phone,
             'create_date': new Date(),
             'modified_date': new Date(),
             'status': personData.status,
@@ -67,10 +63,6 @@ module.exports = function (Person) {
             cb(err2, null);
           }
           var memberData = {
-            'fname': personData.fname,
-            'mname': personData.mname,
-            'lname': personData.lname,
-            'phone': personData.phone,
             'modified_date': new Date(),
             'status': personData.status
           };

@@ -54,10 +54,11 @@
                             <span class="form-text">Status</span>
                             <span class="text-danger" ng-show="!isViewMode">*</span>
                         </div>
-                        <input type="text"
-                               class="form-control" name="status"
-                               id="status" ng-disabled="isViewMode"
-                               required="" ng-model="user.status">
+                        <select name="status" ng-model="user.status"
+                                class="form-control"
+                                ng-disabled="isViewMode" required=""
+                                ng-options="status.id as status.label for status in statusOptions">
+                        </select>
                     </div>
                 </div>
             </div>

@@ -6,8 +6,8 @@ define([
     angular.module("societyApp.admin.controller.userprofile",
         ["societyApp.admin.services.userprofile", "societyApp.common.services.restinterface"])
         .controller('userProfileController',
-        ['$scope', '$rootScope', '$location', '$routeParams', '$filter', '$cookies', 'restInterface',
-            function ($scope, $rootScope, $location, $routeParams, $filter, $cookies, restInterface) {
+        ['$scope', '$rootScope', '$location', '$routeParams', '$filter', '$cookies', 'restInterface', 'UserSelectOptions',
+            function ($scope, $rootScope, $location, $routeParams, $filter, $cookies, restInterface, UserSelectOptions) {
 
                 var VIEW_MODE = {
                     NEW: 1,
@@ -95,6 +95,8 @@ define([
                     $scope.personActionText = 'Register Person';
                     initRegistrationFormViewMode();
                 }
+
+                $scope.statusOptions = UserSelectOptions.getUserStatusOptions();
 
                 $scope.register = function register(form) {
                     switch ($scope.mode) {

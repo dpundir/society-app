@@ -58,7 +58,7 @@ CREATE TABLE `acl` (
   `principalType` varchar(512) DEFAULT NULL,
   `principalId` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `address` (
   `state` varchar(45) NOT NULL,
   `pincode` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='address details';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='address details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'C-143','lal bag','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301'),(9,'C-143','Crossing replublic','loni','ghaziabad','uttar pradesh','201100'),(12,'flat-1101','crossing replublic',NULL,'ghaziabad','uttar pradesh','201101'),(13,'C-143 LAL BAGH','LONI','','op','UTTAR PRADESH','201102'),(14,'b-301','bhood bharat nagar','','vijaynagar','UTTAR PRADESH','201101'),(15,'B-201','sec-91','','faridabad','haryana','400101'),(16,'E-80 Munirka Village','munirka village','','Delhi','Delhi','110067'),(20,'C-143','lal bagh',NULL,'loni','ghaziabad','201102'),(21,'F164, 400 E Remington Dr','Sunnyvale','','San Jose','California','94087'),(22,'E-80 Munirka Village','munirka village3','','Delhi','Delhi','110067'),(26,'c','143','','lal','up','201102'),(27,'c','143','','lal','up','201102'),(28,'c','143','','l','l','201102'),(29,'c','143','','ll','up','201012'),(30,'c','143','','ll','bp','100201'),(31,'c','143','','ll','up','201011'),(32,'c','001','','lala','up','201012');
+INSERT INTO `address` VALUES (1,'C-143','lal bag','loni','ghaziabad','uttar pradesh','201102'),(2,'C-12','lal bagh1111','loni','ghaziabad','uttar pradesh','201102'),(3,'B-5','kronos development center, okaya center','sector 62','noida','uttar pradesh','201301');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `loan` (
   CONSTRAINT `loan_member_id` FOREIGN KEY (`memberid`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id1` FOREIGN KEY (`memberrefid1`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id2` FOREIGN KEY (`memberrefid2`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `loan` (
 
 LOCK TABLES `loan` WRITE;
 /*!40000 ALTER TABLE `loan` DISABLE KEYS */;
-INSERT INTO `loan` VALUES (1,1,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',10000,0,5400,NULL,2,3,NULL,0,0),(2,1,0,'2015-12-01 00:00:00','2016-02-28 00:00:00',20000,0,1900,NULL,3,2,NULL,0,0),(3,2,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',15000,0,1400,NULL,1,3,NULL,0,0),(4,1,NULL,'2016-04-02 18:30:00','2016-12-01 18:30:00',10000,0,NULL,NULL,1,2,NULL,12,833.3333333333334);
+INSERT INTO `loan` VALUES (1,1,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',10000,0,5400,NULL,2,3,NULL,1,0),(2,1,0,'2015-12-01 00:00:00','2016-02-28 00:00:00',20000,0,1900,NULL,3,2,NULL,6,0),(3,2,1,'2016-01-01 00:00:00','2016-01-31 00:00:00',15000,0,1400,NULL,1,3,NULL,3,0),(4,1,NULL,'2016-04-02 18:30:00','2016-12-01 18:30:00',10000,0,NULL,NULL,1,2,NULL,12,833.3333333333334),(5,1,NULL,'2016-04-21 18:30:00','2016-10-07 18:30:00',1800,0,NULL,NULL,2,3,NULL,12,150),(6,2,NULL,'2016-07-15 18:30:00','2016-09-09 18:30:00',190,0,NULL,NULL,3,1,NULL,12,15.833333333333334);
 /*!40000 ALTER TABLE `loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +162,7 @@ CREATE TABLE `member` (
   KEY `member_person_id_idx` (`person_id`),
   CONSTRAINT `member_deposit_id` FOREIGN KEY (`deposit_id`) REFERENCES `member_deposit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_person_id` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='member details';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='member details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +171,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'2015-11-13 00:00:00','2016-08-07 17:23:33',1,1,120,1),(2,'2015-11-30 00:00:00','2016-08-05 17:31:47',1,3,1000,2),(3,'2015-11-13 00:00:00','2016-08-16 18:09:37',1,2,30,3),(4,'2016-01-03 17:14:37','2016-01-03 17:14:37',NULL,NULL,NULL,4);
+INSERT INTO `member` VALUES (1,'2015-11-13 00:00:00','2016-08-21 08:07:00',1,1,120,1),(2,'2015-11-30 00:00:00','2016-08-21 08:07:42',1,3,1000,2),(3,'2015-11-13 00:00:00','2016-08-16 18:09:37',1,2,30,3);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +188,7 @@ CREATE TABLE `member_deposit` (
   `installment_value` double DEFAULT NULL,
   `installment_freq` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='member deposit configuration';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='member deposit configuration';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +197,7 @@ CREATE TABLE `member_deposit` (
 
 LOCK TABLES `member_deposit` WRITE;
 /*!40000 ALTER TABLE `member_deposit` DISABLE KEYS */;
-INSERT INTO `member_deposit` VALUES (1,1000,100,12);
+INSERT INTO `member_deposit` VALUES (1,1000,100,12),(2,1000,100,3),(3,100,100,1),(4,1000,100,1);
 /*!40000 ALTER TABLE `member_deposit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +218,7 @@ CREATE TABLE `member_nominee` (
   KEY `nominee_nomineeId_idx` (`nomineeId`),
   CONSTRAINT `nominee_memberId` FOREIGN KEY (`memberId`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `nominee_nomineeId` FOREIGN KEY (`nomineeId`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='member nominee relations';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='member nominee relations';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +227,7 @@ CREATE TABLE `member_nominee` (
 
 LOCK TABLES `member_nominee` WRITE;
 /*!40000 ALTER TABLE `member_nominee` DISABLE KEYS */;
-INSERT INTO `member_nominee` VALUES (3,1,2,2);
+INSERT INTO `member_nominee` VALUES (1,1,2,3),(2,2,1,2);
 /*!40000 ALTER TABLE `member_nominee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +259,7 @@ CREATE TABLE `person` (
   PRIMARY KEY (`id`),
   KEY `person_address_id_idx` (`addressid`),
   CONSTRAINT `person_address_id` FOREIGN KEY (`addressid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='person details';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='person details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +268,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'deepak','singh','pundir','9910995165',1,1,'2015-11-13 00:00:00','2016-08-07 17:23:33','1983-06-17','surbir','singh','pundir',1,1,'userProfile.jpeg',1),(2,'Usha','Deepak','pundir','9910995165',1,2,'2015-11-30 00:00:00','2016-08-07 17:23:13','1983-06-17','Deepak','singh','pundir',2,1,'userProfile.jpeg',1),(3,'Neeraj','A','Kumar','9910995165',1,9,'2015-11-13 00:00:00','2016-07-31 15:21:16','1983-06-17','Neeraj','J','Kumar',1,1,NULL,1),(4,'priti','rawat','pundir','9910995165',0,16,'2016-01-03 17:14:35','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,1),(5,'priti','singh','pundir','9910995165',0,33,'2016-07-30 07:53:39','2016-07-30 14:25:54','1983-06-17','sanjay','singh','pundir',2,1,NULL,1),(8,'purna',NULL,'devi','9823036955',1,36,'2016-07-30 15:20:15','2016-07-30 15:20:15','1953-06-17','surbir','Singh','Pundir',2,1,NULL,1),(9,'surbir','singh','pundir','9823036955',1,37,'2016-07-30 15:21:36','2016-07-31 15:02:46','1954-05-17','narayan','singh','pundir',1,1,NULL,1),(10,'surbir','singh','pundir','9899223880',1,38,'2016-08-15 14:29:21','2016-08-16 19:36:11','1947-11-14','narayan','singh','pundir',1,1,NULL,1),(11,'Usha','Deepak','pundir','9910995165',1,39,'2016-08-15 14:38:42','2016-08-15 14:38:42','1983-06-17','Deepak','singh','pundir',2,1,'userProfile.jpeg',1),(12,'deepak','singh','pundir','9910995165',1,40,'2016-08-16 18:09:37','2016-08-16 18:09:37','1983-06-17','surbir','singh','pundir',1,1,'userProfile.jpeg',1);
+INSERT INTO `person` VALUES (1,'deepak','singh','pundir','9910995165',1,1,'2015-11-13 00:00:00','2016-08-21 08:07:00','1983-06-17','surbir','singh','pundir',0,1,'userProfile.jpeg',1),(2,'Usha','Deepak','pundir','9910995165',1,2,'2015-11-30 00:00:00','2016-08-21 08:07:42','1983-06-17','Deepak','singh','pundir',1,1,'userProfile.jpeg',2),(3,'Neeraj','A','Kumar','9910995165',1,3,'2015-11-13 00:00:00','2016-07-31 15:21:16','1983-06-17','Neeraj','J','Kumar',1,1,NULL,1);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +286,7 @@ CREATE TABLE `role` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -312,7 +312,7 @@ CREATE TABLE `rolemapping` (
   `principalId` varchar(512) DEFAULT NULL,
   `roleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +321,7 @@ CREATE TABLE `rolemapping` (
 
 LOCK TABLES `rolemapping` WRITE;
 /*!40000 ALTER TABLE `rolemapping` DISABLE KEYS */;
-INSERT INTO `rolemapping` VALUES (1,'USER','1',1),(11,'USER','3',2);
+INSERT INTO `rolemapping` VALUES (1,'USER','1',1),(2,'USER','2',2);
 /*!40000 ALTER TABLE `rolemapping` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,7 +412,7 @@ CREATE TABLE `transaction_history` (
 
 LOCK TABLES `transaction_history` WRITE;
 /*!40000 ALTER TABLE `transaction_history` DISABLE KEYS */;
-INSERT INTO `transaction_history` VALUES (1,1,100,0,'2015-12-14 00:00:00',NULL,1,NULL),(2,1,10,0,'2015-12-19 00:00:00',NULL,1,NULL),(3,2,150,0,'2015-12-24 00:00:00',NULL,1,NULL),(4,1,10,0,'2016-01-01 00:00:00',NULL,1,'deposit 1'),(5,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(6,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(7,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(8,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(9,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(10,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(11,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(12,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(13,1,10,0,'2016-01-01 00:00:00',NULL,1,'deposit'),(14,1,20,0,'2016-01-01 00:00:00',NULL,1,'deposit 3'),(15,1,40,0,'2016-01-01 00:00:00',NULL,1,'deposit4'),(16,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(17,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(18,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(19,1,101,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(20,1,10,0,'2016-03-08 00:00:00',NULL,2,'saving installment'),(21,1,10,0,'2016-03-08 00:00:00',NULL,1,'saving installment');
+INSERT INTO `transaction_history` VALUES (1,1,100,0,'2015-12-14 00:00:00',NULL,1,NULL),(2,1,10,0,'2015-12-19 00:00:00',NULL,1,NULL),(3,2,150,0,'2015-12-24 00:00:00',NULL,1,NULL),(4,2,10,0,'2016-01-01 00:00:00',NULL,1,'deposit 1'),(5,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(6,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(7,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(8,1,11,0,'2016-01-01 00:00:00',NULL,1,'deposit 11'),(9,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(10,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(11,1,100,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(12,1,1000,0,'2016-01-01 00:00:00',NULL,1,'deposit amount'),(13,1,10,0,'2016-01-01 00:00:00',NULL,1,'deposit'),(14,1,20,0,'2016-01-01 00:00:00',NULL,1,'deposit 3'),(15,1,40,0,'2016-01-01 00:00:00',NULL,1,'deposit4'),(16,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(17,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(18,1,100,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(19,1,101,0,'2016-01-02 00:00:00',NULL,1,'saving installment'),(20,1,10,0,'2016-03-08 00:00:00',NULL,2,'saving installment'),(21,1,10,0,'2016-03-08 00:00:00',NULL,1,'saving installment'),(22,3,10,1,'2016-07-31 00:00:00',NULL,1,'saving installment');
 /*!40000 ALTER TABLE `transaction_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,7 +441,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -450,7 +450,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,NULL,'dpundir','$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4','1',NULL,NULL,1,1),(3,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672','1',NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,NULL,'dpundir','$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4','1',NULL,NULL,1,1),(2,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672','1',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -463,4 +463,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-21 12:33:42
+-- Dump completed on 2016-08-21 23:07:59

@@ -10,18 +10,20 @@ define([
                     mname: person.mname || '',
                     lname: person.lname || '',
                     phone: person.phone || '',
-                    status: person.status || '',
-                    addressid: person.addressid || '',
+                    status: person.status || 0,
+                    addressid: person.addressid || -1,
                     dob: person.dob || '',
                     ffname: person.ffname || '',
                     fmname: person.fmname || '',
                     flname: person.flname || '',
-                    sex: person.sex || '',
-                    maritalStatus: person.maritalStatus || '',
+                    guardianType:  person.guardianType || 1,
+                    sex: person.sex || 0,
+                    maritalStatus: person.maritalStatus || 0,
                     createDate: person.createDate || '',
                     modifiedDate: person.modifiedDate || '',
                     id: person.id || '',
-                    address: person.address || {}
+                    address: person.address || {},
+                    profilePhotoName: person.profilePhotoName || ''
                 }
             };
             this.defaultPersonAddress = function defaultPersonAddress(address) {

@@ -320,8 +320,8 @@ define([
             };
             this.getGenderOptions = function(){
                 return [
-                    {id: 1, label: 'Male'},
-                    {id: 2, label: 'Female'}
+                    {id: 0, label: 'Male'},
+                    {id: 1, label: 'Female'}
                 ];
             };
         });

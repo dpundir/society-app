@@ -64,7 +64,7 @@ define([
                     };
                     $scope.register = function (form) {
                         var isFormValid = true;
-                        if (this.$parent.mode !== 2) {
+                        if (this.$parent.mode !== 2 && this.$parent.$parent.mode !== 2) {
                             isFormValid = validateRegistrationForm(form)
                         }
                         if (isFormValid) {

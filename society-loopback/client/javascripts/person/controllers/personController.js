@@ -47,12 +47,12 @@ define([
                         updateFormView('edit');
                     }
 
-                    $scope.person.dob = $filter('date')($scope.person.dob, 'yyyy-MM-dd');
+                    var personRequest = $.extend(true, {}, $scope.person);
+                    personRequest.dob = $filter('date')(personRequest.dob, 'yyyy-MM-dd');
                     if (type === 'update') {
-                        PersonService.updatePerson($scope.person).then(successCB, errorCB);
+                        PersonService.updatePerson(personRequest).then(successCB, errorCB);
                     } else {
-                        $scope.person.createDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-                        PersonService.addPerson($scope.person).then(function(data){
+                        PersonService.addPerson(personRequest).then(function(data){
                             $rootScope.$broadcast('person:created', data.person);
                             successCB(data);
                         }, errorCB);
@@ -89,7 +89,6 @@ define([
                         $scope.person = PersonService.defaultPerson(data);
                         $scope.person.address = PersonService.defaultPersonAddress(data.address);
                         $scope.person.dob = new Date(data.dob);
-                        $scope.person.maritalStatus = data.maritalStatus+'';
                         updateFormView(action);
                     })
                 }
@@ -122,18 +121,8 @@ define([
                             break;
                     }
                 };
-                /*
-                * get all documents of member
-                * */
 
-                $scope.fetchProfilePhoto = function(){
-                    fileUpload.fetchProfilePhoto($scope.person.id).then(function(data){
-                        $scope.profilePhoto.successCB(data);
-                    },function(error){
-                        $scope.profilePhoto.errorCB(error);
-                    });
-                };
-
+                $scope.isUserEditable = true;
                 $scope.register = function register(form) {
                     switch ($scope.mode) {
                         case VIEW_MODE.VIEW:

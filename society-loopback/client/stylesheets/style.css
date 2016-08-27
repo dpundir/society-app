@@ -1,4 +1,6 @@
-
+html{
+    overflow-y: scroll;
+}
 body {
     font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif!important;
     font-size: 14px;
@@ -6,7 +8,6 @@ body {
     color: #000;
     line-height: 30px;
     text-align: center;
-    overflow-y: scroll;
 }
 .modal-open{
   overflow: auto;
@@ -816,4 +817,15 @@ legend{
 .profile-photo{
     height: 100px;
     width: 100px;
+}
+.navbar-nav .open .dropdown-menu.profile-menu{
+    width: 200px;
+}
+.btn-setting{
+    margin-top: 15px;
+}
+.modal-backdrop.in{
+    height: 100%;
+    width: 100%;
+    position: fixed;
 }

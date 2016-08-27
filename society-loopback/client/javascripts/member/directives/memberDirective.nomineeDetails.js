@@ -38,6 +38,7 @@ define([
                             $scope.showDetails = true;
                             $scope.editable = true;
                             $scope.isNomineeViewMode = true;
+                            $scope.editRelation = true;
                             $scope.member.memberNominee[0].nomineeId = data.person.id;
                             $scope.member.memberNominee[0].memberId = memberId;
                         });
@@ -46,8 +47,10 @@ define([
                         $scope.showDetails = true;
                         $scope.editable = true;
                         $scope.editRelation = true;
+                        $scope.member.memberNominee[0].nominee.dob = '';
                     };
                     $scope.callbacks.tabClicked = function(){
+                        $scope.existingMember.memberId = $scope.member.id;
                         if($scope.member.memberNominee && $scope.member.memberNominee.length > 0 &&
                             $scope.member.memberNominee[0].nominee && $scope.member.memberNominee[0].nominee.id){
                             $scope.showDetails = true;

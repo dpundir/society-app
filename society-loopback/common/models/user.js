@@ -56,7 +56,7 @@ module.exports = function(user) {
       if(err){
         cb(err, null);
       }
-      user.findById(token.userId, {include:"member", fields:['id', 'email', 'username', 'member', 'memberid']}, function(err, usermember){
+      user.findById(token.userId, {include:"member", fields:['id', 'email', 'username', 'member', 'memberId']}, function(err, usermember){
         if(err){
           cb(err, null);
         }
@@ -72,7 +72,7 @@ module.exports = function(user) {
       if(err){
         cb(err, null);
       }
-      user.findById(token.userId, {fields:['id', 'email', 'username', 'memberid', 'personId', 'status', 'created']}, function(err, usermember){
+      user.findById(token.userId, {fields:['id', 'email', 'username', 'memberId', 'personId', 'status', 'created']}, function(err, usermember){
         if(err){
           cb(err, null);
         }
@@ -89,7 +89,7 @@ module.exports = function(user) {
             }
             var filter1 = JSON.parse(req.query.filter);
             var filter2 = {
-                fields:['id', 'email', 'username', 'memberid', 'personId', 'status', 'created'],
+                fields:['id', 'email', 'username', 'memberId', 'personId', 'status', 'created'],
                     include: {
                     "relation": "role",
                         "scope": {

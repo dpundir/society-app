@@ -122,7 +122,7 @@ define([
                     }
                 };
 
-                $scope.isUserEditable = true;
+                $scope.isUserEditable = false;
                 $scope.register = function register(form) {
                     switch ($scope.mode) {
                         case VIEW_MODE.VIEW:

@@ -3,13 +3,13 @@
   "base": "User",
   "idInjection": true,
   "properties": {
-    "memberid": {
+    "memberId": {
       "type": "Number",
       "length": null,
       "precision": 10,
       "scale": 0,
       "mysql": {
-        "columnName": "memberid",
+        "columnName": "member_id",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -38,7 +38,7 @@
       "type": "hasOne",
       "model": "Member",
       "foreignKey": "id",
-      "keyFrom": "memberid"
+      "keyFrom": "memberId"
     },
     "role": {
       "type": "hasOne",

@@ -1,83 +1,86 @@
 <div>
-
     <div>
+        <form class="form-horizontal reg-form" name="registrationForm" validate>
 
-    <form class="form-horizontal reg-form" name="registrationForm" non-validate>
+            <div class=" form-bottom">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>User Information</h4>
 
-    <div class=" form-bottom">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h4>User Information</h4>
-            <div ng-class="{'glyphicon-minus':!isInfoCollapsed,'glyphicon-plus':isInfoCollapsed}" class="pull-right icon glyphicon" ng-click="isInfoCollapsed = !isInfoCollapsed"></div>
-        </div>
-        <div class="panel-body" ng-hide="isInfoCollapsed">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <div class="label-input">
-                            <span class="form-text">User ID</span>
-                            <span class="text-danger" ng-show="!isViewMode">*</span>
+                        <div ng-class="{'glyphicon-minus':!isInfoCollapsed,'glyphicon-plus':isInfoCollapsed}"
+                             class="pull-right icon glyphicon" ng-click="isInfoCollapsed = !isInfoCollapsed"></div>
+                    </div>
+                    <div class="panel-body" ng-hide="isInfoCollapsed">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">User ID</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <input type="text" name="id"
+                                           class="form-control"
+                                           id="id" disabled="true"
+                                           required="" ng-model="user.id">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Username</span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control" ng-disabled="isViewMode"
+                                           ng-pattern="/[a-zA-Z0-9^ ]/"
+                                           required=""
+                                           id="username" ng-model="user.username">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Email</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <input type="email" name="email"
+                                           class="form-control"
+                                           id="email" ng-disabled="isViewMode"
+                                           required="" ng-model="user.email">
+                                </div>
+                            </div>
                         </div>
-                        <input type="text" name="id"
-                               class="form-control"
-                               id="id" disabled="true"
-                               required="" ng-model="user.id">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Status</span>
+                                        <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    </div>
+                                    <select name="status" ng-model="user.status"
+                                            class="form-control"
+                                            disabled="true" required=""
+                                            ng-options="status.id as status.label for status in statusOptions">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <div class="label-input">
-                            <span class="form-text">Username</span>
-                        </div>
-                        <input type="text"
-                               class="form-control" ng-disabled="isViewMode"
-                               id="username" ng-model="user.username">
+                <div class="row btn-register">
+                    <div class="col-sm-3 column">
+                        <input type="submit"
+                                class="btn btn-primary"
+                                ng-click="register(registrationForm)" ng-value="actionText"/>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <div class="label-input">
-                            <span class="form-text">Email</span>
-                            <span class="text-danger" ng-show="!isViewMode">*</span>
-                        </div>
-                        <input type="text" name="email"
-                               class="form-control"
-                               id="email" ng-disabled="isViewMode"
-                               required="" ng-model="user.email">
+                    <div class="col-sm-3 column">
+                        <button type="button"
+                                class="btn btn-primary"
+                                ng-show="personActionVisible"
+                                ng-click="showPerson(registrationForm)" ng-bind="personActionText"></button>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <div class="label-input">
-                            <span class="form-text">Status</span>
-                            <span class="text-danger" ng-show="!isViewMode">*</span>
-                        </div>
-                        <select name="status" ng-model="user.status"
-                                class="form-control"
-                                ng-disabled="isViewMode" required=""
-                                ng-options="status.id as status.label for status in statusOptions">
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row btn-register">
-        <div class="col-sm-3 column">
-            <button type="button"
-                    class="btn btn-primary"
-                    ng-click="register(registrationForm)" ng-bind="actionText"></button>
-        </div>
-        <div class="col-sm-3 column">
-            <button type="button"
-                    class="btn btn-primary"
-                    ng-click="showPerson(registrationForm)" ng-bind="personActionText"></button>
-        </div>
-    </div>
-    </div>
 
-    </form>
+        </form>
     </div>
 </div>

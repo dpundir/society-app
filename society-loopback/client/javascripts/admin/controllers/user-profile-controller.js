@@ -35,21 +35,27 @@ define([
                  * to update existing member OR add new member
                  * */
                 function updateUserProfile(form, type) {
+                    if(form.$valid) {
+                        restInterface.update('/api/users/' + $scope.user.id, {
+                            username: $scope.user.username,
+                            email: $scope.user.email
+                        }).then(function (data) {
+                            var user = $cookies.getObject('user');
+                            user.username = data.username;
+                            user.email = data.email;
+                            user.status = data.status;
+                            $cookies.putObject('user', user);
 
-                    restInterface.update('/api/users/' + $scope.user.id, {
-                        username: $scope.user.username,
-                        email: $scope.user.email,
-                        status: $scope.user.status
-                    }).then(function (data) {
-                        var user = $cookies.getObject('user');
-                        user.username = data.username;
-                        user.email = data.email;
-                        user.status = data.status;
-                        $cookies.putObject('user', user);
-
-                        updateFormView('view');
-                    });
-
+                            updateFormView('view');
+                        });
+                    } else{
+                        var formFields = ['username', 'email'];
+                        _.each(formFields, function (name) {
+                            if (form[name].$invalid) {
+                                form[name].$setTouched();
+                            }
+                        });
+                    }
                 }
 
                 /*
@@ -63,15 +69,15 @@ define([
                         var user = $cookies.getObject('user');
                         user.id = data.id;
                         user.personId = data.personId;
-                        user.memberid = data.memberid;
+                        user.memberId = data.memberId;
                         user.status = data.status;
                         user.created = data.created;
                         $scope.user = user;
                         $cookies.putObject('user', user);
-                        if(!user.personId){
-                            $scope.personActionText = 'Register Person';
-                        } else{
-                            $scope.personActionText = 'View Person';
+
+                        if(user.memberId || user.personId){
+                            $scope.personActionText = user.memberId? 'View Member':'View Person';
+                            $scope.personActionVisible = true;
                         }
                     });
                 }
@@ -82,7 +88,6 @@ define([
                  * */
                 function initRegistrationFormEditMode() {
                     updateFormView('edit');
-                    $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
                 }
 
                 /*
@@ -93,6 +98,7 @@ define([
                 function init() {
                     $scope.user = $cookies.getObject('user') || {};
                     $scope.personActionText = 'Register Person';
+                    $scope.personActionVisible = false;
                     initRegistrationFormViewMode();
                 }
 
@@ -110,10 +116,10 @@ define([
                 };
 
                 $scope.showPerson = function showPerson(form) {
-                    if($scope.user.personId){
+                    if($scope.user.memberId){
+                        $location.url('/member/view/'+$scope.user.memberId);
+                    } else if($scope.user.personId){
                         $location.url('/person/view/'+$scope.user.personId);
-                    } else{
-                        $location.url('/person/registration');
                     }
                 };
 

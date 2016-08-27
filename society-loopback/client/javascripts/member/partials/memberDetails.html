@@ -194,11 +194,11 @@
                                 <img class="profile-photo" ng-src="/file/{{person.id}}/document/{{person.profilePhotoName}}" ng-show="person.profilePhotoName">
                                 <img class="profile-photo" ng-src="image/default-emp.jpg" ng-hide="person.profilePhotoName">
                             </a>
-                            <input type="file" id="profilePhotoUpload"/>
-                            <button type="button"
+                            <input type="file" id="profilePhotoUpload" ng-disabled="isViewMode"/>
+                            <button type="button"  ng-disabled="isViewMode"
                                     class="btn btn-primary loan-btn"
                                     ng-click="addEditProfilePhoto()" >{{person.profilePhotoName? "Edit": "Add"}}</button>
-                            <button type="button"
+                            <button type="button" ng-disabled="isViewMode"
                                     class="btn btn-primary loan-btn"
                                     ng-click="deleteProfilePhoto()">Delete</button>
 

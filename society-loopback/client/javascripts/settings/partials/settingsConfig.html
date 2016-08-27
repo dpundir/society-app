@@ -1,22 +1,61 @@
-<form class="form-horizontal reg-form" name="registrationForm" non-validate>
+<div class="form-horizontal reg-form" name="registrationForm" non-validate>
     <div class=" form-bottom">
+        <div class="alert alert-success" role="alert" ng-bind="successMsg" ng-show="showSuccessMessage"></div>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div><h4>Settings Configuration</h4></div>
-                <div class="alert alert-danger" role="alert" ng-bind="msg.lastCellEdited" ng-show="msg.isCellEdited"></div>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div ui-grid="settingsConfigGrid" ui-grid-edit ui-grid-selection ui-grid-pagination class="settingsConfigGrid"></div>
                 </div>
                 <div class="row btn-setting">
-                    <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
-                    <button type="button" class="btn btn-primary" ng-click="showHistory(settingsConfigGrid.selectedRowName)"
-                            ng-disabled="!settingsConfigGrid.selectedRowId">Show History</button>
+                    <button type="button" class="btn btn-primary" ng-click="edit()"
+                            ng-disabled="!settingsConfigGrid.selectedRowObject.id">Edit</button>
+                    <button type="button" class="btn btn-primary" ng-click="showHistory(settingsConfigGrid.selectedRowObject.name)"
+                            ng-disabled="!settingsConfigGrid.selectedRowObject.id">Show History</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-primary" ng-show="settingsConfigGrid.isEditClicked">
+            <div class="panel-heading">
+                <div><h4>Edit Configuration</h4></div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Name:</label>
+                        <span ng-bind="settingsConfigGrid.selectedRowObject.name"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Description:</label>
+                        <span ng-bind="settingsConfigGrid.selectedRowObject.description"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label for="value">Old Value:</label>
+                        <span ng-bind="settingsConfigGrid.selectedRowObject.value"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="value">New Value:</label>
+                        <input type="text" id="value" name="value"
+                               required="" ng-model="settingsConfigGrid.selectedRowObject.newValue">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="historyRemark">Remarks:</label>
+                        <input type="text" id="historyRemark" name="historyRemark"
+                               required="" ng-model="settingsConfigGrid.selectedRowObject.historyRemark">
+                    </div>
+                </div>
+                <div class="row btn-setting">
+                    <button type="button" class="btn btn-primary" ng-click="save()"
+                            ng-disabled="!settingsConfigGrid.selectedRowObject.id">Save</button>
                 </div>
 
             </div>
         </div>
     </div>
-</form>
+</div>
 <settings-config-history options="settingsConfigHistoryGrid.options" history="settingsConfigHistoryGrid.history"></settings-config-history>

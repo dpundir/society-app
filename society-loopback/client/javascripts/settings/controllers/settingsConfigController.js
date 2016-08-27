@@ -10,11 +10,10 @@ define([
                     options: {},
                     history: []
                 };
-                $scope.msg = {isCellEdited: false};
-
+                $scope.successMsg = 'Configuration value saved successfully.';
                 $scope.settingsConfigGrid = gridService.getDefaultGridConfig([
                         {field: 'name'},
-                        {field: 'value', enableCellEdit: true, type: 'number'},
+                        {field: 'value'},
                         {field: 'description'}
                     ],
                     false,
@@ -22,25 +21,33 @@ define([
                         onRegisterApi: function (gridApi) {
                             $scope.gridApi = gridApi;
                             var that = this;
-                            gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue){
-                                $scope.msg.lastCellEdited = 'edited setting:' + rowEntity.name + ' newValue:' + newValue + ' oldValue:' + oldValue ;
-                                $scope.msg.isCellEdited = true;
-                                $scope.$apply();
-                            });
+
                             gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-                                that.selectedRowId = row.entity.id;
-                                that.selectedRowName = row.entity.name;
+                                that.isEditClicked = false;
+                                $scope.showSuccessMessage = false;
+                                that.selectedRowObject = row.entity;
                             });
                         }
                     });
+                $scope.settingsConfigGrid.isEditClicked = false;
+                $scope.settingsConfigGrid.selectedRowObject = {};
 
                 $scope.save = function save() {
-                    return restInterface.get('/api/SocietyConfigs').then(function () {
-
+                    var configObject = _.cloneDeep(_.find($scope.settingsConfigGrid.data, {id: $scope.settingsConfigGrid.selectedRowObject.id}));
+                    configObject.value = $scope.settingsConfigGrid.selectedRowObject.newValue;
+                    configObject.historyRemark = $scope.settingsConfigGrid.selectedRowObject.historyRemark;
+                    return restInterface.update('/api/SocietyConfigs', configObject).then(function (data) {
+                        $scope.showSuccessMessage = true;
+                        $scope.settingsConfigGrid.isEditClicked = false;
+                        $scope.settingsConfigGrid.selectedRowObject = {};
+                        init();
                     });
                 };
+                $scope.edit = function(){
+                    this.settingsConfigGrid.isEditClicked = true;
+                };
                 $scope.showHistory = function showHistory(name) {
-                    if(!$scope.settingsConfigGrid.selectedRowId){
+                    if (!this.settingsConfigGrid.selectedRowObject.id) {
                         return;
                     }
                     // pass type of the selected configuration
@@ -55,8 +62,8 @@ define([
                         $scope.settingsConfigHistoryGrid.history = data;
                         $scope.settingsConfigHistoryGrid.options.openModal();
                     });
-                }
-                $scope.list = function list() {
+                };
+                function init() {
                     var filter = {
                         "filter": {
                             "where": {"expireDate": null}
@@ -66,7 +73,7 @@ define([
                         $scope.settingsConfigGrid.data = data;
                         $scope.gridApi.core.handleWindowResize();
                     });
-                };
-                $scope.list();
+                }
+                init();
             }]);
 });

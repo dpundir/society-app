@@ -341,7 +341,8 @@ CREATE TABLE `society_config` (
   `expire_date` datetime DEFAULT NULL,
   `description` varchar(50) DEFAULT NULL,
   `history_remark` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='society rules configuration details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -436,7 +437,7 @@ CREATE TABLE `user` (
   `status` varchar(512) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `lastUpdated` datetime DEFAULT NULL,
-  `memberid` int(11) DEFAULT NULL,
+  `member_id` int(11) DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -450,7 +451,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,NULL,'dpundir','$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4','1',NULL,NULL,1,1),(2,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672','1',NULL,NULL,NULL,NULL),(3,NULL,'dmishra','$2a$10$Env9w6ZgIvCoJbUPY7EKYOheQ//Hcy1a5edeUiIuEIGi944szwBMC',NULL,NULL,'jitu.debashis@gmail.com',1,'a360d1b1b6ce67bf962e0222251c959a1b1a6b0d9140eda776b8246176f717fcdfab147c79674c340c34f1ad66f9234745fa4086f204e7c69bbd0426e317e89b',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,NULL,'dpundir','$2a$10$JpdOdM461ByX.ximEuTyh.hPZydVw3JyKT26qdYbG/3VPXvojqB9C','null','null','pundir.friend@gmail.com',1,'1f7258a4216b44af66797aa6fc0553a7a32be8412ea50ea7746a344a756671431daf6bb41575c3b73bedab936ac8e10ada26beb4e9a88af3137f9a9d329500c4','1',NULL,NULL,1,1),(2,NULL,'irawat','$2a$10$chnrD2/JMeex4XxxX2blCudoG1EefqrvL/D6DAfunweqDSwHAQ2F6',NULL,NULL,'isharawat88@gmail.com',1,'48d5bbb5ff0bcb82d9caee8d78c0dee8f0baf43c873be3dd9be3d253f5c2d5503ef9156b608026fa8da158b33986b24a866181d21212786c38a0b0b04a325672','1',NULL,NULL,NULL,2),(3,NULL,'dmishra','$2a$10$Env9w6ZgIvCoJbUPY7EKYOheQ//Hcy1a5edeUiIuEIGi944szwBMC',NULL,NULL,'jitu.debashis@gmail.com',1,'a360d1b1b6ce67bf962e0222251c959a1b1a6b0d9140eda776b8246176f717fcdfab147c79674c340c34f1ad66f9234745fa4086f204e7c69bbd0426e317e89b',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -463,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-22  0:06:40
+-- Dump completed on 2016-08-27 17:16:49

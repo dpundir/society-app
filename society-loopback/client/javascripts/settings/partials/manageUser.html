@@ -9,7 +9,9 @@
                 <div class="row">
                     <div ui-grid="manageUserGrid" ui-grid-edit ui-grid-selection ui-grid-pagination class="settingsConfigGrid"></div>
                 </div>
-                <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="!(manageUserGrid.selectedRowId || msg.isCellEdited)">Save</button>
+                <div class="row btn-setting">
+                    <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="!(manageUserGrid.selectedRowId || msg.isCellEdited)">Save</button>
+                </div>
             </div>
         </div>
     </div>

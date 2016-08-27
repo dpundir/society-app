@@ -62,19 +62,20 @@ define([
             this.listWithSearchString = function listWithSearchString(searchString) {
                 var memberListFilter = {
                     "filter": {
-                        "where": {
+                        "fields": ['id','fname', 'lname', 'mname'],
+                        "where": searchString ? {
                             "or": [
                                 {"fname": {"regexp": searchString}},
                                 {"lname": {"regexp": searchString}},
                                 {"mname": {"regexp": searchString}}
-                            ]}
+                            ]}:{},
+                        "include": {
+                            relation: 'member'
+                        }
                     }
                 };
-                if (!searchString) {
-                    memberListFilter = {};
-                }
                 var filter = angular.merge(filter || {}, memberListFilter);
-                return restInterface.get('/api/Members', null, filter);
+                return restInterface.get('/api/People', null, filter);
             };
             this.getMemberDetail = function getMemberDetail(id, filter) {
                 var defaultMemberFilter = {

@@ -1,15 +1,16 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4>Loan Information</h4>
-    </div>
-    <div class="panel-body">
-        <div class="alert alert-danger" role="alert" ng-bind="error.errorText" ng-show="error.isError">
-        </div>
-        <div class="loan-buttons">
+        <div class="loan-buttons btn-setting pull-right">
             <button class="btn btn-primary loan-btn" ng-click="showFilter()" ng-bind="filterText"></button>
             <button class="btn btn-primary loan-btn" ng-click="newLoan()">Add New Loan</button>
             <button class="btn btn-primary loan-btn" ng-click="showDetails()">Show Loan details</button>
         </div>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-danger" role="alert" ng-bind="error.errorText" ng-show="error.isError">
+        </div>
+
         <div ui-grid="memberLoansGrid" ui-grid-selection ui-grid-pagination ui-grid-exporter class="loanGrid"></div>
     </div>
 </div>
@@ -17,6 +18,11 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h4 ng-bind="loanSectionHeading"></h4>
+            <div class="row add-loan-btn btn-setting pull-right" ng-if="LOAN_MODE.NEW">
+                <button class="btn btn-primary loan-btn" ng-click="addNewLoan()">Add Loan</button>
+                <button class="btn btn-primary loan-btn" ng-click="calculateInstallment()">Calculate Installment
+                </button>
+            </div>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -188,11 +194,6 @@
                                required="" ng-model="loanDetail.installment">
                     </div>
                 </div>
-            </div>
-            <div class="row add-loan-btn" ng-if="LOAN_MODE.NEW">
-                <button class="btn btn-primary loan-btn" ng-click="addNewLoan()">Add Loan</button>
-                <button class="btn btn-primary loan-btn" ng-click="calculateInstallment()">Calculate Installment
-                </button>
             </div>
         </div>
     </div>

@@ -26,11 +26,8 @@
 </div>
 
 <div class="panel panel-primary">
-    <div class="panel-heading clickable" ng-click="isUploadDocumentCollapsed = !isUploadDocumentCollapsed">
+    <div class="panel-heading">
         <h4>Upload new document</h4>
-
-        <div ng-class="{'glyphicon-minus':!isUploadDocumentCollapsed,'glyphicon-plus':isUploadDocumentCollapsed}"
-           class="pull-right icon glyphicon"></div>
     </div>
     <div class="panel-body" collapse="isUploadDocumentCollapsed">
         <div class="alert alert-success" role="alert" ng-bind="successMsg" ng-show="showSuccessMsg"></div>

@@ -24,7 +24,7 @@ define([
 
                 $scope.manageUserGrid = gridService.getDefaultGridConfig([
                         {field: 'id'},
-                        {field: 'memberid'},
+                        {field: 'memberId'},
                         {field: 'username'},
                         {field: 'email'},
                         {field: 'status', enableCellEdit: true, editableCellTemplate: 'ui-grid/dropdownEditor', cellFilter: 'mapUserStatus',

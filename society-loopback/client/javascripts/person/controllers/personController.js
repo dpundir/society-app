@@ -17,11 +17,6 @@ define([
                 function updateFormView(action){
                     switch(action) {
                         case 'view':
-                            $scope.mode = VIEW_MODE.VIEW;
-                            $scope.isViewMode = true;
-                            $scope.actionText = 'Edit';
-                            break;
-                        case 'edit':
                             $scope.mode = VIEW_MODE.EDIT;
                             $scope.isViewMode = false;
                             $scope.actionText = 'Update';
@@ -29,7 +24,7 @@ define([
                         case 'registration':
                             $scope.mode = VIEW_MODE.NEW;
                             $scope.isViewMode = false;
-                            $scope.actionText = 'Registration';
+                            $scope.actionText = 'Register';
                     }
                 }
 
@@ -40,11 +35,11 @@ define([
                  * */
                 function updatePersonDetail(form, type) {
                     function successCB() {
-                        updateFormView('view');
+                        $location.url('/settings/manage-user');
                     }
 
                     function errorCB() {
-                        updateFormView('edit');
+                        //show message.
                     }
 
                     var personRequest = $.extend(true, {}, $scope.person);
@@ -121,13 +116,9 @@ define([
                             break;
                     }
                 }
-
-                $scope.isUserEditable = false;
+                $scope.isUserEditable = true;
                 $scope.register = function register(form) {
                     switch ($scope.mode) {
-                        case VIEW_MODE.VIEW:
-                            initRegistrationFormEditMode('edit');
-                            break;
                         case VIEW_MODE.NEW:
                             updatePersonDetail(form, 'new');
                             break;
@@ -135,42 +126,6 @@ define([
                             updatePersonDetail(form, 'update');
                             break;
                     }
-                };
-                /*
-                 * @method
-                 * @name validateRegistrationForm
-                 * */
-                function validateRegistrationForm(form) {
-                    if(form.$invalid){
-                        var formFields = ['fname','lname','ffname','flname','phone','dob','address1','address2','city','state','pincode'];
-                        _.each(formFields,function(name){
-                            if(form[name].$invalid){
-                                form[name].$setTouched();
-                            }
-                        });
-                        return false;
-                    }else{
-                        return true;
-                    }
-                }
-                /*
-                 * Default date picker config
-                 * @type object
-                 * */
-                $scope.dob = {
-                    dateOption: {
-                        formatYear: 'yy',
-                        maxDate: new Date(),
-                        startingDay: 1
-                    },
-                    format: 'dd-MM-yyyy',
-                    status: {
-                        opened: false
-                    }
-                };
-
-                $scope.open = function open() {
-                    $scope.dob.status.opened = true;
                 };
                 /*
                  * Initialize on load

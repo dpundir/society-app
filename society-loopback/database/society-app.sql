@@ -101,6 +101,60 @@ INSERT INTO `address` VALUES (1,'C-143','lal bag','loni','ghaziabad','uttar prad
 UNLOCK TABLES;
 
 --
+-- Table structure for table `audit`
+--
+
+DROP TABLE IF EXISTS `audit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `audit` (
+  `id` int(11) NOT NULL,
+  `entity` int(11) DEFAULT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `entityId` int(11) DEFAULT NULL,
+  `oldValue` varchar(45) DEFAULT NULL,
+  `newValue` varchar(45) DEFAULT NULL,
+  `fieldName` varchar(45) DEFAULT NULL,
+  `createDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='audit information for all entities';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `audit`
+--
+
+LOCK TABLES `audit` WRITE;
+/*!40000 ALTER TABLE `audit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `audit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `entities`
+--
+
+DROP TABLE IF EXISTS `entities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `entities` (
+  `id` int(11) NOT NULL,
+  `entityId` int(11) DEFAULT NULL,
+  `entityName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='entity information';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entities`
+--
+
+LOCK TABLES `entities` WRITE;
+/*!40000 ALTER TABLE `entities` DISABLE KEYS */;
+INSERT INTO `entities` VALUES (1,NULL,NULL),(2,NULL,NULL),(3,NULL,NULL),(4,NULL,NULL),(5,NULL,NULL),(6,NULL,NULL),(7,NULL,NULL),(8,NULL,NULL),(9,NULL,NULL),(10,NULL,NULL);
+/*!40000 ALTER TABLE `entities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `loan`
 --
 
@@ -464,4 +518,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-27 17:16:49
+-- Dump completed on 2016-09-24 21:53:40

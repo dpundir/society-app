@@ -82,5 +82,15 @@
   "MemberNominee": {
     "dataSource": "mysql-ds",
     "public": true
+  },
+  "Audit": {
+    "dataSource": "mysql-ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Entities": {
+    "dataSource": "mysql-ds",
+    "public": true
   }
 }

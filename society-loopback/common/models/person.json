@@ -292,18 +292,18 @@
       "foreignKey": "id",
       "keyFrom": "addressid"
     },
-      "member": {
-          "type": "belongsTo",
-          "model": "Member",
-          "foreignKey": "id",
-          "keyFrom": "personId"
-      },
-      "memberNominee": {
-          "type": "hasMany",
-          "model": "MemberNominee",
-          "foreignKey": "nomineeId",
-          "keyFrom": "id"
-      }
+    "member": {
+      "type": "belongsTo",
+      "model": "Member",
+      "foreignKey": "id",
+      "keyFrom": "personId"
+    },
+    "memberNominee": {
+      "type": "hasMany",
+      "model": "MemberNominee",
+      "foreignKey": "nomineeId",
+      "keyFrom": "id"
+    }
   },
   "acls": [],
   "methods": {}

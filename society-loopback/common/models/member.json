@@ -133,12 +133,12 @@
       "foreignKey": "id",
       "keyFrom": "personId"
     },
-      "memberNominee": {
-          "type": "hasMany",
-          "model": "MemberNominee",
-          "foreignKey": "memberId",
-          "keyFrom": "id"
-      },
+    "memberNominee": {
+      "type": "hasMany",
+      "model": "MemberNominee",
+      "foreignKey": "memberId",
+      "keyFrom": "id"
+    },
     "memberDeposit": {
       "type": "hasOne",
       "model": "MemberDeposit",

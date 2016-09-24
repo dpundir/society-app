@@ -78,18 +78,18 @@
   },
   "validations": [],
   "relations": {
-      "nominee": {
-          "type": "belongsTo",
-          "model": "Person",
-          "foreignKey": "nomineeId",
-          "keyFrom": "id"
-      },
-      "member": {
-          "type": "belongsTo",
-          "model": "Member",
-          "foreignKey": "memberId",
-          "keyFrom": "id"
-      }
+    "nominee": {
+      "type": "belongsTo",
+      "model": "Person",
+      "foreignKey": "nomineeId",
+      "keyFrom": "id"
+    },
+    "member": {
+      "type": "belongsTo",
+      "model": "Member",
+      "foreignKey": "memberId",
+      "keyFrom": "id"
+    }
   },
   "acls": [],
   "methods": {}

@@ -4,23 +4,26 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div><h4>Settings Configuration</h4></div>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div ui-grid="settingsConfigGrid" ui-grid-edit ui-grid-selection ui-grid-pagination class="settingsConfigGrid"></div>
-                </div>
-                <div class="row btn-setting">
+                <div class="row btn-setting pull-right">
                     <button type="button" class="btn btn-primary" ng-click="edit()"
                             ng-disabled="!settingsConfigGrid.selectedRowObject.id">Edit</button>
                     <button type="button" class="btn btn-primary" ng-click="showHistory(settingsConfigGrid.selectedRowObject.name)"
                             ng-disabled="!settingsConfigGrid.selectedRowObject.id">Show History</button>
                 </div>
-
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div ui-grid="settingsConfigGrid" ui-grid-edit ui-grid-selection ui-grid-pagination class="settingsConfigGrid"></div>
+                </div>
             </div>
         </div>
         <div class="panel panel-primary" ng-show="settingsConfigGrid.isEditClicked">
             <div class="panel-heading">
                 <div><h4>Edit Configuration</h4></div>
+                <div class="row btn-setting pull-right">
+                    <button type="button" class="btn btn-primary" ng-click="save()"
+                            ng-disabled="!settingsConfigGrid.selectedRowObject.id">Save</button>
+                </div>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -49,11 +52,6 @@
                                required="" ng-model="settingsConfigGrid.selectedRowObject.historyRemark">
                     </div>
                 </div>
-                <div class="row btn-setting">
-                    <button type="button" class="btn btn-primary" ng-click="save()"
-                            ng-disabled="!settingsConfigGrid.selectedRowObject.id">Save</button>
-                </div>
-
             </div>
         </div>
     </div>

@@ -13,8 +13,6 @@ define([
         .controller('manageUserController', ['$scope', '$location', '$q', '$routeParams', '$filter', 'restInterface', 'gridService', 'UserSelectOptions',
             function ($scope, $location, $q, $routeParams, $filter, restInterface, gridService, UserSelectOptions) {
                 function resetController(){
-                    $scope.msg.isCellEdited = false;
-                    $scope.msg.lastCellEdited = '';
                     $scope.editedUserData = [];
                     $scope.manageUserGrid.selectedRowId = 0;
                     $scope.manageUserGrid.selectedRowName = '';
@@ -39,8 +37,6 @@ define([
                             var that = this;
                             gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
                                 if(newValue !== oldValue) {
-                                    $scope.msg.lastCellEdited = 'edited setting:' + rowEntity.username + ' newValue:' + newValue + ' oldValue:' + oldValue;
-                                    $scope.msg.isCellEdited = true;
                                     $scope.editedUserData = $scope.editedUserData || [];
                                     $scope.editedUserData.push(rowEntity);
                                     $scope.$apply();
@@ -88,7 +84,12 @@ define([
                         });
                     }
                 };
-
+                $scope.addUserDetail = function(){
+                    if(this.manageUserGrid.selectedRowId) {
+                        var selectedPersonId = this.userData[this.manageUserGrid.selectedRowId-1].id;
+                        $location.url('person/view/' + selectedPersonId);
+                    }
+                };
                 $scope.list = function list() {
                     var filter = {
                         "filter": {

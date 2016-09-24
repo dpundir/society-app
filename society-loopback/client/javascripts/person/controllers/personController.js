@@ -31,7 +31,7 @@ define([
                             $scope.isViewMode = false;
                             $scope.actionText = 'Registration';
                     }
-                };
+                }
 
                 /*
                  * @method
@@ -120,7 +120,7 @@ define([
                             initRegistrationFormNewMode(action);
                             break;
                     }
-                };
+                }
 
                 $scope.isUserEditable = false;
                 $scope.register = function register(form) {

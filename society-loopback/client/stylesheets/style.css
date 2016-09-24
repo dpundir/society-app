@@ -284,6 +284,7 @@ section>div[ng-view]{
     color: #000;
     border: 0;
     box-shadow: 1px 1px 1px 0 #999999;
+    text-align: left;
 }
 .top-content .text h1 { color: #fff; }
 
@@ -330,6 +331,9 @@ section>div[ng-view]{
     color: #ddd;
     line-height: 66px;
     text-align: right;
+}
+.panel-body{
+    text-align: left;
 }
 .panel{
     padding: 10px;

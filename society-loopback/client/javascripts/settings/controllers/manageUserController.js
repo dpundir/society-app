@@ -17,9 +17,6 @@ define([
                     $scope.manageUserGrid.selectedRowId = 0;
                     $scope.manageUserGrid.selectedRowName = '';
                 }
-
-                $scope.msg = {};
-
                 $scope.manageUserGrid = gridService.getDefaultGridConfig([
                         {field: 'id'},
                         {field: 'memberId'},
@@ -86,8 +83,14 @@ define([
                 };
                 $scope.addUserDetail = function(){
                     if(this.manageUserGrid.selectedRowId) {
-                        var selectedPersonId = this.userData[this.manageUserGrid.selectedRowId-1].id;
-                        $location.url('person/view/' + selectedPersonId);
+                        var selectedPerson = this.userData[this.manageUserGrid.selectedRowId-1];
+                        if(selectedPerson.memberId){
+                            $location.url('member/view/' + selectedPerson.memberId);
+                        }else if(selectedPerson.personId) {
+                            $location.url('person/view/' + selectedPerson.personId);
+                        }else{
+                            $location.url('person/registration');
+                        }
                     }
                 };
                 $scope.list = function list() {

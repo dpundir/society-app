@@ -14,11 +14,34 @@ var login = function (req, res) {
     if (err) {
       res.sendStatus(err.statusCode);
     } else {
-      res.send({
-        email: token.__data.user.email,
-        accessToken: token.id,
-        username: token.__data.user.username
-      });
+        var filter = {
+            where: {
+                userId: token.userId
+            },
+            include: {
+                "relation": "role",
+                "scope": {
+                    "fields": ["principalId", "roleId"],
+                    "include": {
+                        "relation": "role",
+                        "scope": {
+                            "fields": ["id", "name"]
+                        }
+                    }
+                }
+            }
+        };
+        User.findOne(filter, function(err, user){
+            if(err){
+                res.sendStatus(err.statusCode);
+            }
+            res.send({
+                email: token.__data.user.email,
+                accessToken: token.id,
+                username: token.__data.user.username,
+                roleName: user.role().role().name
+            });
+        })
     }
   });
 };

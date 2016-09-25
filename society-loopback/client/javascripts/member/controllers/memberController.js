@@ -137,7 +137,7 @@ define([
                     $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
 
-                    if(entity == 'person'){
+                    if(entity == 'person' || entity == 'member'){
                         $scope.isViewMode = false;
                         $scope.mode = VIEW_MODE.EDIT;
                         $scope.actionText = ACTION_TEXT.UPDATE;

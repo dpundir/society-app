@@ -3,6 +3,14 @@
     <div class="alert alert-danger" role="alert" ng-bind="errorMsg" ng-show="showErrorMsg"></div>
     <div class="panel-heading">
         <h4>Account Information</h4>
+        <div class="row btn-setting pull-right">
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-click="configureDeposit()" ng-bind="actionText"></button>
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-click="isCollapsed = !isCollapsed">New deposit</button>
+        </div>
     </div>
     <div class="panel-body">
         <div class="row">
@@ -12,7 +20,7 @@
                     <span>&#8377;</span>
                     <input type="text"
                            class="form-control" name="deposit"
-                           id="deposit" ng-disabled="isViewMode"
+                           id="deposit" ng-disabled="deposit.isViewMode"
                            required="" ng-model="deposit.deposit">
                 </div>
             </div>
@@ -22,7 +30,7 @@
                     <span>&#8377;</span>
                     <input type="text"
                            class="form-control" name="shareValue"
-                           id="shareValue" ng-disabled="isViewMode"
+                           id="shareValue" ng-disabled="deposit.isViewMode"
                            required="" ng-model="deposit.shareValue">
                 </div>
             </div>
@@ -34,7 +42,7 @@
                     <label>Installment frequency:</label>
                     <select name="installmentFrequency" id="installmentFrequency" ng-model="deposit.installmentFreq"
                             class="form-control"
-                            ng-disabled="isViewMode"
+                            ng-disabled="deposit.isViewMode"
                             required=""
                             ng-options="depositOption.id as depositOption.label for depositOption in depositFrequencyOptions">
                     </select>
@@ -46,24 +54,13 @@
                     <span>&#8377;</span>
                     <input type="text"
                            class="form-control" name="installmentValue"
-                           id="installmentValue" ng-disabled="isViewMode"
+                           id="installmentValue" ng-disabled="deposit.isViewMode"
                            required="" ng-model="deposit.installmentValue">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row btn-register">
-    <div class="col-sm-3 column">
-        <button type="button"
-                class="btn btn-secondary"
-                ng-click="configureDeposit()" ng-bind="actionText"></button>
-    </div>
-    <div class="col-sm-3 column">
-        <button type="button" class="btn btn-primary" ng-click="isCollapsed = !isCollapsed">New deposit</button>
-    </div>
-</div>
-
 </br>
 </br>
 <div ng-hide="isCollapsed">
@@ -72,6 +69,11 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4>New Deposit Information</h4>
+                    <div class="row btn-setting pull-right">
+                        <button type="button"
+                                class="btn btn-primary"
+                                ng-click="saveNewDeposit(depositForm)">Save</button>
+                    </div>
                 </div>
                 <div class="panel-body">
                   <div class="alert alert-danger" role="alert" ng-bind="error.errorText" ng-show="error.isError">
@@ -106,7 +108,7 @@
                             <div class="form-group">
                                 <div class="label-input">
                                     <span class="form-text">Type</span>
-                                    <span class="text-danger" ng-show="!isViewMode">*</span>
+                                    <span class="text-danger" ng-show="!deposit.isViewMode">*</span>
                                 </div>
                                 <select name="gender" ng-model="transaction.type"
                                         class="form-control"
@@ -129,13 +131,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row deposit-form">
-                <div class="col-sm-2">
-                    <button type="button"
-                            class="btn btn-primary"
-                            ng-click="saveNewDeposit(depositForm)">Save</button>
                 </div>
             </div>
         </div>

@@ -235,7 +235,10 @@ define([
                     })
                 };
                 $scope.register = function register(form, entity) {
-                    var mode = entity == 'person'? $scope.mode : $scope.nomineeMode;
+                    var mode = entity == 'person' || entity == 'member'? $scope.mode : $scope.nomineeMode;
+                    if(entity == 'member'){
+                        entity = 'person';
+                    }
                     switch (mode) {
                         case VIEW_MODE.VIEW:
                             initRegistrationFormEditMode(entity);

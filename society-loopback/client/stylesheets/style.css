@@ -836,3 +836,15 @@ legend{
     width: 100%;
     position: fixed;
 }
+#profilePhotoUpload{
+    cursor: pointer;
+    opacity: 0;
+    top: 0;
+    height: 1px;
+    width: 1px;
+    z-index: -1;
+}
+.btn-setting.photo-upload .btn{
+    font-size: 10px;
+}
+

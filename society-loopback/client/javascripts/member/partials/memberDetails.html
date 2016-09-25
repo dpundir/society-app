@@ -193,23 +193,23 @@
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <div class="form-group">
+                        <div class="form-group btn-setting photo-upload">
                             <a ng-click="openLightboxModal()">
                                 <img class="profile-photo" ng-src="/file/{{person.id}}/document/{{person.profilePhotoName}}" ng-show="person.profilePhotoName">
                                 <img class="profile-photo" ng-src="image/default-emp.jpg" ng-hide="person.profilePhotoName">
                             </a>
                             <input type="file" id="profilePhotoUpload" ng-disabled="isViewMode"/>
-                            <button type="button"  ng-disabled="isViewMode"
-                                    class="btn btn-primary loan-btn"
-                                    ng-click="addEditProfilePhoto()" >{{person.profilePhotoName? "Edit": "Add"}}</button>
+                            <label role="button"  for="profilePhotoUpload" ng-disabled="isViewMode"
+                                    class="btn btn-primary"
+                                    ng-click="addEditProfilePhoto()" >{{person.profilePhotoName? "Edit": "Add"}}</label>
                             <button type="button" ng-disabled="isViewMode"
-                                    class="btn btn-primary loan-btn"
+                                    class="btn btn-primary"
                                     ng-click="deleteProfilePhoto()">Delete</button>
 
                         </div>
                     </div>
                 </div>
-                <h4>Address</h4>
+                <h4><b>Address:</b></h4>
                 <hr/>
                 <div class="row">
                     <div class="col-sm-6">

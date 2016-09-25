@@ -89,7 +89,7 @@
     "$promise": {},
     "$resolved": true
   },
-  "Entities": {
+  "Entity": {
     "dataSource": "mysql-ds",
     "public": true
   }

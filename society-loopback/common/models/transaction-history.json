@@ -1,6 +1,6 @@
 {
   "name": "TransactionHistory",
-  "base": "PersistedModel",
+  "base": "SocietyBaseModel",
   "idInjection": false,
   "options": {
     "validateUpsert": true

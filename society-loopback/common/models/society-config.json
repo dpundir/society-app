@@ -1,9 +1,10 @@
 {
   "name": "SocietyConfig",
-  "base": "PersistedModel",
+  "base": "SocietyBaseModel",
   "idInjection": false,
   "options": {
-    "validateUpsert": true
+    "validateUpsert": true,
+    "auditable":true
   },
   "mysql": {
     "schema": "society",
@@ -115,22 +116,6 @@
       "scale": null,
       "mysql": {
         "columnName": "description",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
-      "_selectable": true
-    },
-    "historyRemark": {
-      "type": "String",
-      "required": false,
-      "length": 50,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "history_remark",
         "dataType": "varchar",
         "dataLength": 50,
         "dataPrecision": null,

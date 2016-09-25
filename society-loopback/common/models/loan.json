@@ -3,7 +3,8 @@
   "base": "SocietyBaseModel",
   "idInjection": false,
   "options": {
-    "validateUpsert": true
+    "validateUpsert": true,
+      "auditable":true
   },
   "mysql": {
     "schema": "society",

@@ -18,12 +18,10 @@ define([
             function settingsConfigHistoryController($scope) {
                 $scope.options = $scope.options || {};
                 $scope.settingsConfigHistoryGrid = gridService.getDefaultGridConfig([
-                    {field: 'name'},
-                    {field: 'value'},
+                    {field: 'oldValue'},
+                    {field: 'newValue'},
                     {field: 'description'},
-                    {field: 'createDate'},
-                    {field: 'expireDate'},
-                    {field: 'historyRemark'}
+                    {field: 'createDate'}
                 ], false, {
                     onRegisterApi: function (gridApi) {
                         $scope.gridApi = gridApi;

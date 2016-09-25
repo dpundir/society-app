@@ -35,7 +35,8 @@ define([
                 $scope.save = function save() {
                     var configObject = _.cloneDeep(_.find($scope.settingsConfigGrid.data, {id: $scope.settingsConfigGrid.selectedRowObject.id}));
                     configObject.value = $scope.settingsConfigGrid.selectedRowObject.newValue;
-                    configObject.historyRemark = $scope.settingsConfigGrid.selectedRowObject.historyRemark;
+                    configObject.audit = $scope.settingsConfigGrid.selectedRowObject.audit;
+                    delete configObject.newValue;
                     return restInterface.update('/api/SocietyConfigs', configObject).then(function (data) {
                         $scope.showSuccessMessage = true;
                         $scope.settingsConfigGrid.isEditClicked = false;
@@ -53,11 +54,14 @@ define([
                     // pass type of the selected configuration
                     var filter = {
                         "filter": {
-                            "where": {"name": name},
+                            "where": {
+                                "entityId": 9,
+                                "contextId": this.settingsConfigGrid.selectedRowObject.id
+                            },
                             "order": ["createDate DESC"]
                         }
                     };
-                    return restInterface.get('/api/SocietyConfigs', null, filter).then(function (data) {
+                    return restInterface.get('/api/Audits', null, filter).then(function (data) {
                         //data will be sorted in descending order of expire date
                         $scope.settingsConfigHistoryGrid.history = data;
                         $scope.settingsConfigHistoryGrid.options.openModal();

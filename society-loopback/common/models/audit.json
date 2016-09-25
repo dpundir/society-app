@@ -27,22 +27,6 @@
       },
       "_selectable": false
     },
-    "entity": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "entity",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
-      "_selectable": true
-    },
     "entityId": {
       "type": "Number",
       "required": false,
@@ -51,6 +35,22 @@
       "scale": 0,
       "mysql": {
         "columnName": "entity_id",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "contextId": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "context_id",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -141,7 +141,14 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+      "entity": {
+          "type": "hasOne",
+          "model": "Entity",
+          "foreignKey": "id",
+          "keyFrom": "entityId"
+      }
+  },
   "acls": [],
   "methods": {}
 }

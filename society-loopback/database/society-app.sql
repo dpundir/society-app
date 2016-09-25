@@ -58,7 +58,7 @@ CREATE TABLE `acl` (
   `principalType` varchar(512) DEFAULT NULL,
   `principalId` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `acl` (
 
 LOCK TABLES `acl` WRITE;
 /*!40000 ALTER TABLE `acl` DISABLE KEYS */;
-INSERT INTO `acl` VALUES (1,'Member','*','*','DENY','ROLE','$unauthenticated'),(2,'MemberDeposit','*','*','DENY','ROLE','$unauthenticated'),(3,'Address','*','*','DENY','ROLE','$unauthenticated'),(4,'TransactionHistory','*','*','DENY','ROLE','$unauthenticated'),(5,'Loan','*','*','DENY','ROLE','$unauthenticated'),(6,'MemberLoan','*','*','DENY','ROLE','$unauthenticated'),(7,'SocietyConfig','*','*','DENY','ROLE','$unauthenticated'),(8,'SocietyExpense','*','*','DENY','ROLE','$unauthenticated'),(9,'Member','*','*','DENY','ROLE','$everyone'),(10,'Member','*','*','ALLOW','ROLE','admin'),(11,'Member','*','*','ALLOW','ROLE','employee'),(12,'Member','count','*','ALLOW','ROLE','member'),(13,'Member','total','*','ALLOW','ROLE','member'),(14,'SocietyConfig','*','*','DENY','ROLE','$everyone'),(15,'SocietyConfig','*','*','ALLOW','ROLE','admin'),(16,'SocietyExpense','*','*','DENY','ROLE','$everyone'),(17,'SocietyExpense','*','*','ALLOW','ROLE','admin'),(18,'SocietyExpense','*','*','ALLOW','ROLE','employee'),(19,'SocietyConfig','*','READ','ALLOW','ROLE','employee');
+INSERT INTO `acl` VALUES (1,'Member','*','*','DENY','ROLE','$unauthenticated'),(2,'MemberDeposit','*','*','DENY','ROLE','$unauthenticated'),(3,'Address','*','*','DENY','ROLE','$unauthenticated'),(4,'TransactionHistory','*','*','DENY','ROLE','$unauthenticated'),(5,'Loan','*','*','DENY','ROLE','$unauthenticated'),(6,'MemberNominee','*','*','DENY','ROLE','$unauthenticated'),(7,'SocietyConfig','*','*','DENY','ROLE','$unauthenticated'),(8,'SocietyExpense','*','*','DENY','ROLE','$unauthenticated'),(9,'Member','*','*','DENY','ROLE','$everyone'),(10,'Member','*','*','ALLOW','ROLE','admin'),(11,'Member','*','*','ALLOW','ROLE','employee'),(12,'Member','count','*','ALLOW','ROLE','member'),(13,'Member','total','*','ALLOW','ROLE','member'),(14,'SocietyConfig','*','*','DENY','ROLE','$everyone'),(15,'SocietyConfig','*','*','ALLOW','ROLE','admin'),(16,'SocietyExpense','*','*','DENY','ROLE','$everyone'),(17,'SocietyExpense','*','*','ALLOW','ROLE','admin'),(18,'SocietyExpense','*','*','ALLOW','ROLE','employee'),(19,'SocietyConfig','*','READ','ALLOW','ROLE','employee'),(20,'Audit','*','*','DENY','ROLE','$unauthenticated'),(21,'Entity','*','*','DENY','ROLE','$everyone'),(22,'Entity','*','*','ALLOW','ROLE','admin'),(23,'Person','*','*','DENY','ROLE','$unauthenticated'),(24,'Role','*','*','DENY','ROLE','$unauthenticated'),(25,'RoleMapping','*','*','DENY','ROLE','$unauthenticated');
 /*!40000 ALTER TABLE `acl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -519,4 +519,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-25 18:43:15
+-- Dump completed on 2016-09-25 22:14:53

@@ -8,7 +8,7 @@ define([
             function ($scope, $location, $routeParams, $filter, restInterface, gridService) {
                 $scope.settingsConfigHistoryGrid = {
                     options: {},
-                    history: []
+                    context: {}
                 };
                 $scope.successMsg = 'Configuration value saved successfully.';
                 $scope.settingsConfigGrid = gridService.getDefaultGridConfig([
@@ -51,21 +51,9 @@ define([
                     if (!this.settingsConfigGrid.selectedRowObject.id) {
                         return;
                     }
-                    // pass type of the selected configuration
-                    var filter = {
-                        "filter": {
-                            "where": {
-                                "entityId": 9,
-                                "contextId": this.settingsConfigGrid.selectedRowObject.id
-                            },
-                            "order": ["createDate DESC"]
-                        }
-                    };
-                    return restInterface.get('/api/Audits', null, filter).then(function (data) {
-                        //data will be sorted in descending order of expire date
-                        $scope.settingsConfigHistoryGrid.history = data;
-                        $scope.settingsConfigHistoryGrid.options.openModal();
-                    });
+                    $scope.settingsConfigHistoryGrid.context.entityId = 9;
+                    $scope.settingsConfigHistoryGrid.context.contextId = this.settingsConfigGrid.selectedRowObject.id;
+                    $scope.settingsConfigHistoryGrid.options.openModal();
                 };
                 function init() {
                     var filter = {

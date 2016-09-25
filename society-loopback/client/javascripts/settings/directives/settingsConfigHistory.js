@@ -2,21 +2,23 @@ define([
     'angular',
     'lodash',
     'javascripts/common/services/dateService',
-    'javascripts/common/services/grid-service'
+    'javascripts/common/services/grid-service',
+    'javascripts/common/services/rest-interface'
 ], function (angular, _) {
-    angular.module("societyApp.settings.directives.settingsConfigHistory", ["societyApp.common.services.dateService", "societyApp.common.services.gridService"])
-        .directive('settingsConfigHistory', ['$uibModal', 'gridService', 'dateService', function ($uibModal, gridService, dateService) {
+    angular.module("societyApp.settings.directives.settingsConfigHistory", ["societyApp.common.services.dateService", "societyApp.common.services.gridService", "societyApp.common.services.restinterface"])
+        .directive('settingsConfigHistory', ['$uibModal', 'gridService', 'dateService', 'restInterface', function ($uibModal, gridService, dateService, restInterface) {
             return{
                 restrict: 'EA',
                 scope: {
                     options: '=',
-                    history: '='
+                    context: '='
                 },
                 controller: ['$scope', settingsConfigHistoryController],
                 link: function () {
                 }
             };
             function settingsConfigHistoryController($scope) {
+                $scope.context = $scope.context || {};
                 $scope.options = $scope.options || {};
                 $scope.settingsConfigHistoryGrid = gridService.getDefaultGridConfig([
                     {field: 'oldValue'},
@@ -43,13 +45,28 @@ define([
                         size: 'lg',
                         scope: $scope
                     });
+                    $scope.getData();
                 };
                 $scope.ok = function () {
                     modalInstance.close();
                 };
-                $scope.$watch('history', function(newValue){
-                    $scope.settingsConfigHistoryGrid.data = $scope.history;
-                });
+
+                $scope.getData = function(){
+                    // pass type of the selected configuration
+                    var filter = {
+                        "filter": {
+                            "where": {
+                                "entityId": $scope.context.entityId,
+                                "contextId": $scope.context.contextId
+                            },
+                            "order": ["createDate DESC"]
+                        }
+                    };
+                    return restInterface.get('/api/Audits', null, filter).then(function (data) {
+                        //data will be sorted in descending order of expire date
+                        $scope.settingsConfigHistoryGrid.data = data;
+                    });
+                }
             }
         }]);
 });

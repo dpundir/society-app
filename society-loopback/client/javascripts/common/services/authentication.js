@@ -24,7 +24,9 @@ define([
                         $cookies.putObject('user', {
                             email: data.email,
                             username: data.username,
-                            roleName: data.roleName
+                            roleName: data.roleName,
+                            memberId: data.memberId,
+                            personId: data.personId
                         }, {
                             expires: now
                         });

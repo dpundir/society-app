@@ -39,7 +39,9 @@ var login = function (req, res) {
                 email: token.__data.user.email,
                 accessToken: token.id,
                 username: token.__data.user.username,
-                roleName: user.role().role().name
+                roleName: user.role().role().name,
+                memberId: user.memberId,
+                personId: user.personId
             });
         })
     }

@@ -34,32 +34,30 @@ module.exports = function(SocietyBaseModel, app) {
                 return newModelInstance.__data[k] === v;
             });
             newValue = _.omit(newValue, function (v, k) {
-                return k.includes('Date')
+                return k.includes('Date') || k.includes('date');
             });
             oldValue = _.omit(oldValue, function (v, k) {
-                return k.includes('Date')
+                return k.includes('Date') || k.includes('date');
             });
             var entityName = _.snakeCase(ctx.Model.modelName);
             ctx.Model.app.models.Entity.findOne({where: {entityName: entityName}}, function (err, data) {
                 if (err) {
                     next();
-                }
-                var auditData = {
-                    id: '',
-                    oldValue: JSON.stringify(oldValue),
-                    newValue: JSON.stringify(newValue),
-                    entityId: data.entityId,
-                    contextId: ctx.instance.id,
-                    fieldName: _.keys(newValue).join(','),
-                    createDate: new Date(),
-                    description: auditMessage
-                }
-                ctx.Model.app.models.Audit.create(auditData, function (err, data) {
-                    if (err) {
-                        next();
+                } else {
+                    var auditData = {
+                        id: '',
+                        oldValue: JSON.stringify(oldValue),
+                        newValue: JSON.stringify(newValue),
+                        entityId: data.entityId,
+                        contextId: ctx.instance.id,
+                        fieldName: _.keys(newValue).join(','),
+                        createDate: new Date(),
+                        description: auditMessage
                     }
-                    next();
-                });
+                    ctx.Model.app.models.Audit.create(auditData, function (err, data) {
+                        next();
+                    });
+                }
             });
         } else{
             next();

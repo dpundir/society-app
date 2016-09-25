@@ -108,16 +108,18 @@ DROP TABLE IF EXISTS `audit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `audit` (
-  `id` int(11) NOT NULL,
-  `entity` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `entity_id` int(11) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
-  `entityId` int(11) DEFAULT NULL,
-  `oldValue` varchar(45) DEFAULT NULL,
-  `newValue` varchar(45) DEFAULT NULL,
-  `fieldName` varchar(45) DEFAULT NULL,
-  `createDate` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='audit information for all entities';
+  `context_id` int(11) DEFAULT NULL,
+  `old_value` varchar(100) DEFAULT NULL,
+  `new_value` varchar(100) DEFAULT NULL,
+  `field_name` varchar(45) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `entity_idx` (`entity_id`),
+  CONSTRAINT `entity` FOREIGN KEY (`entity_id`) REFERENCES `entity` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='audit information for all entities';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,28 +132,28 @@ LOCK TABLES `audit` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `entities`
+-- Table structure for table `entity`
 --
 
-DROP TABLE IF EXISTS `entities`;
+DROP TABLE IF EXISTS `entity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `entities` (
+CREATE TABLE `entity` (
   `id` int(11) NOT NULL,
-  `entityId` int(11) DEFAULT NULL,
-  `entityName` varchar(45) DEFAULT NULL,
+  `entity_id` int(11) DEFAULT NULL,
+  `entity_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='entity information';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `entities`
+-- Dumping data for table `entity`
 --
 
-LOCK TABLES `entities` WRITE;
-/*!40000 ALTER TABLE `entities` DISABLE KEYS */;
-INSERT INTO `entities` VALUES (1,NULL,NULL),(2,NULL,NULL),(3,NULL,NULL),(4,NULL,NULL),(5,NULL,NULL),(6,NULL,NULL),(7,NULL,NULL),(8,NULL,NULL),(9,NULL,NULL),(10,NULL,NULL);
-/*!40000 ALTER TABLE `entities` ENABLE KEYS */;
+LOCK TABLES `entity` WRITE;
+/*!40000 ALTER TABLE `entity` DISABLE KEYS */;
+INSERT INTO `entity` VALUES (1,1,'address'),(2,2,'loan'),(3,3,'member'),(4,4,'member_deposit'),(5,5,'member_nominee'),(6,6,'person'),(7,7,'role'),(8,8,'rolemapping'),(9,9,'society_config'),(10,10,'society_expense');
+/*!40000 ALTER TABLE `entity` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -394,7 +396,6 @@ CREATE TABLE `society_config` (
   `create_date` datetime NOT NULL,
   `expire_date` datetime DEFAULT NULL,
   `description` varchar(50) DEFAULT NULL,
-  `history_remark` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='society rules configuration details';
@@ -406,7 +407,7 @@ CREATE TABLE `society_config` (
 
 LOCK TABLES `society_config` WRITE;
 /*!40000 ALTER TABLE `society_config` DISABLE KEYS */;
-INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate',''),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate',''),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value',''),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value',''),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value',''),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value',''),(7,'loanInterestRate',5,10,'2015-11-19 00:00:00',NULL,'Loan interest rate','');
+INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,10,'2015-11-19 00:00:00',NULL,'share value interest rate'),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate'),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value'),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value'),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value'),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value'),(7,'loanInterestRate',5,10,'2015-11-19 00:00:00',NULL,'Loan interest rate');
 /*!40000 ALTER TABLE `society_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -518,4 +519,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-24 21:53:40
+-- Dump completed on 2016-09-25 18:43:15

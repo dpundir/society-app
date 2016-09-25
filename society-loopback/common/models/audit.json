@@ -62,13 +62,13 @@
     "oldValue": {
       "type": "String",
       "required": false,
-      "length": 45,
+      "length": 100,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "old_value",
         "dataType": "varchar",
-        "dataLength": 45,
+        "dataLength": 100,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
@@ -78,13 +78,13 @@
     "newValue": {
       "type": "String",
       "required": false,
-      "length": 45,
+      "length": 100,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "new_value",
         "dataType": "varchar",
-        "dataLength": 45,
+        "dataLength": 100,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"

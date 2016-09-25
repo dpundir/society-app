@@ -1,10 +1,11 @@
 define([
     'angular',
     'lodash',
+    'javascripts/common/services/dateService',
     'javascripts/common/services/grid-service'
 ], function (angular, _) {
-    angular.module("societyApp.settings.directives.settingsConfigHistory", ["societyApp.common.services.gridService"])
-        .directive('settingsConfigHistory', ['$uibModal', 'gridService', function ($uibModal, gridService) {
+    angular.module("societyApp.settings.directives.settingsConfigHistory", ["societyApp.common.services.dateService", "societyApp.common.services.gridService"])
+        .directive('settingsConfigHistory', ['$uibModal', 'gridService', 'dateService', function ($uibModal, gridService, dateService) {
             return{
                 restrict: 'EA',
                 scope: {
@@ -21,7 +22,8 @@ define([
                     {field: 'oldValue'},
                     {field: 'newValue'},
                     {field: 'description'},
-                    {field: 'createDate'}
+                    {field: 'fieldName', displayName: 'Attributes Changed'},
+                    {field: 'createDate', displayName: 'Activity Date', type: 'date', cellFilter: 'date:"'+dateService.dateConfig().format+'"'}
                 ], false, {
                     onRegisterApi: function (gridApi) {
                         $scope.gridApi = gridApi;

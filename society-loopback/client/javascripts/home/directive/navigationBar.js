@@ -14,6 +14,7 @@ define([
                 },
                 controller: ['$scope', function ($scope) {
                     $scope.message = {};
+                    $scope.roleName = $cookies.getObject('user').roleName;
                     $scope.$watch(function() {
                         var user = $cookies.getObject('user');
                         return user? (user.username? user.username: user.email) : null;

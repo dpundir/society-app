@@ -23,7 +23,8 @@ define([
                         });
                         $cookies.putObject('user', {
                             email: data.email,
-                            username: data.username
+                            username: data.username,
+                            roleName: data.roleName
                         }, {
                             expires: now
                         });

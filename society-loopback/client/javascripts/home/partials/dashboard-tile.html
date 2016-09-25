@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3 col-sm-6">
+    <div class="col-md-3 col-sm-6" ng-if="roleName != 'member'">
         <div class="tile bg-green">
             <h2 class="tile-title">Total Member</h2>
             <p>Total Member registred in the Society</p>
@@ -8,7 +8,7 @@
             <a href="app/#/member" class="bg-a">View all member</a>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6">
+    <div class="col-md-3 col-sm-6" ng-if="roleName != 'member'">
         <div class="tile bg-purple">
             <h2 class="tile-title">Balance</h2>
             <p>Current balance socity have now</p>
@@ -17,7 +17,7 @@
             <a href="app#/balance" class="bg-a">View details</a>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6">
+    <div class="col-md-3 col-sm-6" ng-if="roleName != 'member'">
         <div class="tile bg-black">
             <h2 class="tile-title">Income/Expense</h2>
             <p>Total Income/Expense Society have till date</p>
@@ -26,7 +26,7 @@
             <a href="app#/expense" class="bg-a">View earning history</a>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6">
+    <div class="col-md-3 col-sm-6" ng-if="roleName != 'member'">
         <div class="tile bg-blue">
             <h2 class="tile-title">Loan</h2>
             <p>Total amount of <b>{{loanCount}}</b> loan(s) taken by members</p>

@@ -9,26 +9,29 @@ define([
                 scope:{
                     tileConfig : '=config'
                 },
-                controller: ['$scope',function($scope){
+                controller: ['$scope', '$cookies', function($scope, $cookies){
                     function init(){
-                        DashboardService.getMemberCount().then(function(data){
-                            $scope.memberCount = data.count;
-                        });
-                        DashboardService.getLoanCount().then(function(data){
-                            $scope.loanCount = data.count;
-                        });
-                        DashboardService.getMemberBalance().then(function(data){
-                            $scope.memberBalance = data.total;
-                        });
-                        DashboardService.getLoanTotal().then(function(data){
-                            $scope.loanTotal = data.total;
-                        });
-                        DashboardService.getExpenseTotal().then(function(data){
-                            $scope.societyExpense = data.total;
-                        });
-                        DashboardService.getIncomeTotal().then(function(data){
-                            $scope.societyIncome = data.total;
-                        });
+                        $scope.roleName = $cookies.getObject('user').roleName;
+                        if($scope.roleName != 'member') {
+                            DashboardService.getMemberCount().then(function (data) {
+                                $scope.memberCount = data.count;
+                            });
+                            DashboardService.getLoanCount().then(function(data){
+                                $scope.loanCount = data.count;
+                            });
+                            DashboardService.getMemberBalance().then(function(data){
+                                $scope.memberBalance = data.total;
+                            });
+                            DashboardService.getLoanTotal().then(function(data){
+                                $scope.loanTotal = data.total;
+                            });
+                            DashboardService.getExpenseTotal().then(function(data){
+                                $scope.societyExpense = data.total;
+                            });
+                            DashboardService.getIncomeTotal().then(function(data){
+                                $scope.societyIncome = data.total;
+                            });
+                        }
                     }
                     init();
                 }],

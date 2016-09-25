@@ -16,7 +16,7 @@ var login = function (req, res) {
     } else {
         var filter = {
             where: {
-                userId: token.userId
+                id: token.userId
             },
             include: {
                 "relation": "role",

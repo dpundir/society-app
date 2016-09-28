@@ -5,22 +5,22 @@ define([
     'javascripts/common/services/grid-service',
     'javascripts/common/services/rest-interface'
 ], function (angular, _) {
-    angular.module("societyApp.settings.directives.settingsConfigHistory", ["societyApp.common.services.dateService", "societyApp.common.services.gridService", "societyApp.common.services.restinterface"])
-        .directive('settingsConfigHistory', ['$uibModal', 'gridService', 'dateService', 'restInterface', function ($uibModal, gridService, dateService, restInterface) {
+    angular.module("societyApp.common.directives.audit", ["societyApp.common.services.dateService", "societyApp.common.services.gridService", "societyApp.common.services.restinterface"])
+        .directive('audit', ['$uibModal', 'gridService', 'dateService', 'restInterface', function ($uibModal, gridService, dateService, restInterface) {
             return{
                 restrict: 'EA',
                 scope: {
                     options: '=',
                     context: '='
                 },
-                controller: ['$scope', settingsConfigHistoryController],
+                controller: ['$scope', auditController],
                 link: function () {
                 }
             };
-            function settingsConfigHistoryController($scope) {
+            function auditController($scope) {
                 $scope.context = $scope.context || {};
                 $scope.options = $scope.options || {};
-                $scope.settingsConfigHistoryGrid = gridService.getDefaultGridConfig([
+                $scope.auditGrid = gridService.getDefaultGridConfig([
                     {field: 'oldValue'},
                     {field: 'newValue'},
                     {field: 'description'},
@@ -40,7 +40,7 @@ define([
                     $scope.options.searchModel = '';
                     modalInstance = $uibModal.open({
                         animation: true,
-                        templateUrl: 'javascripts/settings/partials/settingsConfigHistory.html',
+                        templateUrl: 'javascripts/common/partials/audit.html',
                         backdrop: 'true',
                         size: 'lg',
                         scope: $scope
@@ -64,7 +64,7 @@ define([
                     };
                     return restInterface.get('/api/Audits', null, filter).then(function (data) {
                         //data will be sorted in descending order of expire date
-                        $scope.settingsConfigHistoryGrid.data = data;
+                        $scope.auditGrid.data = data;
                     });
                 }
             }

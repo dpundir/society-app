@@ -3,7 +3,7 @@ define([
     'javascripts/common/services/grid-service',
     'javascripts/common/services/rest-interface'
 ], function () {
-    angular.module("societyApp.settings.controller.settingsConfig", ["societyApp.common.services.gridService", 'societyApp.common.services.restinterface'])
+    angular.module("societyApp.settings.controller.settingsConfig", ["societyApp.common.directives.audit", "societyApp.common.services.gridService", 'societyApp.common.services.restinterface'])
         .controller('settingsConfigController', ['$scope', '$location', '$routeParams', '$filter', 'restInterface', 'gridService',
             function ($scope, $location, $routeParams, $filter, restInterface, gridService) {
                 $scope.settingsConfigHistoryGrid = {

@@ -7,7 +7,7 @@ module.exports = function(SocietyBaseModel, app) {
 
     SocietyBaseModel.observe('before save', function filterProperties(ctx, next) {
         var isAuditable = ctx.Model.settings.auditable;
-        if(isAuditable) {
+        if(isAuditable && !ctx.options.transaction.id) {
             auditMessage = ctx.data.audit;
             delete ctx.data.audit;
             var filter = {where: ctx.where};
@@ -25,7 +25,7 @@ module.exports = function(SocietyBaseModel, app) {
 
     SocietyBaseModel.observe('after save', function filterProperties(ctx, next) {
         var isAuditable = ctx.Model.settings.auditable;
-        if(isAuditable) {
+        if(isAuditable && !ctx.options.transaction.id) {
             var newModelInstance = ctx.instance;
             var newValue = _.omit(newModelInstance.__data, function (v, k) {
                 return oldModelInstance[k] === v;

@@ -35,6 +35,8 @@ var uploadFile = function(req, res) {
                                     res.json({fileName: fileName});
                                 }
                             });
+                        } else{
+                            res.sendStatus(200);
                         }
                     });
                 } else {
@@ -71,6 +73,8 @@ var deleteFile = function (req, res){
                     res.sendStatus(200);
                 }
             });
+        } else{
+            res.sendStatus(200);
         }
 
     });

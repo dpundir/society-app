@@ -6,7 +6,8 @@
         <div class="row btn-setting pull-right">
             <button type="button"
                     class="btn btn-primary"
-                    ng-click="configureDeposit()" ng-bind="actionText"></button>
+                    ng-click="configureDeposit()" ng-bind="actionText"
+                    ng-hide="deposit.configureHidden"></button>
             <button type="button"
                     class="btn btn-primary"
                     ng-click="isCollapsed = !isCollapsed">New deposit</button>

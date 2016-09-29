@@ -2,7 +2,7 @@ define([
     'angular',
     'javascripts/home/services/dashboardService'
 ], function (angular) {
-    angular.module("societyApp.home.directive.dashboardtitle", ['societyApp.home.services.dashboard'])
+    angular.module("societyApp.home.directive.dashboardtile", ['societyApp.home.services.dashboard'])
         .directive('dashboardTile',['DashboardService',function (DashboardService) {
             return{
                 restrict: 'A',

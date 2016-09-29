@@ -90,6 +90,9 @@ define([
             }).when('/deposit/view', {
                 'templateUrl': 'javascripts/transaction/partials/transactionHistory.html',
                 'controller': 'transactionHistoryController'
+            }).when('/deposit/new', {
+                'templateUrl': 'javascripts/transaction/partials/transactionAdd.html',
+                'controller': 'transactionAddController'
             }).otherwise({
                 'redirectTo': '/login'
             });

@@ -11,7 +11,7 @@ define([
     angular.module("societyApp.home", [
       "societyApp.home.controller.home",
       "societyApp.home.directive.accounttab",
-      "societyApp.home.directive.dashboardtitle",
+      "societyApp.home.directive.dashboardtile",
       "societyApp.home.directive.navigationbar"
     ]);
 });

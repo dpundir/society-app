@@ -56,7 +56,7 @@ define([
                         "include": ["person"]
                     }
                 };
-                filter = angular.merge(filter || {}, defaultMemberListFilter);
+                filter = angular.merge(defaultMemberListFilter, filter || {});
                 return restInterface.get('/api/Members', null, filter);
             };
             this.listWithSearchString = function listWithSearchString(searchString) {
@@ -74,8 +74,7 @@ define([
                         }
                     }
                 };
-                var filter = angular.merge(filter || {}, memberListFilter);
-                return restInterface.get('/api/People', null, filter);
+                return restInterface.get('/api/People', null, memberListFilter);
             };
             this.getMemberDetail = function getMemberDetail(id, filter) {
                 var defaultMemberFilter = {
@@ -85,7 +84,7 @@ define([
                             {"memberNominee": [{"nominee": ["address", "member"]}]}
                         ]}
                 };
-                filter = angular.merge(filter || {}, defaultMemberFilter);
+                filter = angular.merge(defaultMemberFilter, filter || {});
                 return restInterface.get('/api/Members/' + id, null, filter);
             };
             this.isPersonExistingMember = function isPersonExistingMember(personId) {

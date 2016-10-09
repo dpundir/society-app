@@ -5,15 +5,27 @@ define([
     angular.module("societyApp.person.controllers.detail",
         ["societyApp.person.services.detail"])
         .controller('personDetailController',
-        ['$scope', '$rootScope', 'PersonService', '$location', '$routeParams', '$filter','fileUpload',
-            function ($scope, $rootScope, PersonService, $location, $routeParams, $filter, fileUpload) {
+        ['$scope', '$rootScope', 'PersonService', '$location', '$routeParams', '$filter','MemberService',
+            function ($scope, $rootScope, PersonService, $location, $routeParams, $filter, MemberService) {
 
                 var VIEW_MODE = {
                     NEW: 1,
                     VIEW: 2,
                     EDIT: 3
                 };
-
+                $scope.existingPerson = false;
+                $scope.message = {
+                    showSuccessMsg: false,
+                    showErrorMessage: false,
+                    confirmMessage: {
+                        type: 'confirm',
+                        textPrimary: 'Yes',
+                        textHeader: 'Confirm',
+                        message: 'Are you sure you want to add this person as member?'
+                    },
+                    successMsg:'Member added successfully.',
+                    errorMessage:'Error in adding member, please try again.'
+                };
                 function updateFormView(action){
                     switch(action) {
                         case 'view':
@@ -77,6 +89,8 @@ define([
                  * initialize the form in view mode with all data
                  * */
                 function initRegistrationFormViewMode(action, personId) {
+                    $scope.personId = personId;
+                    $scope.existingPerson = true;
                     PersonService.getPersonDetail(personId).then(function (data) {
                         $scope.primaryHeaderText = 'Person Details';
                         $scope.secondaryHeaderText = 'To edit person details, click on edit button.';
@@ -105,6 +119,8 @@ define([
                  * initialization, view or new mode
                  * */
                 function init() {
+                    $scope.message.showSuccessMsg = false;
+                    $scope.message.showErrorMessage = false;
                     var action = $routeParams.action,
                         id = $routeParams.id;
                     switch (action) {
@@ -126,6 +142,31 @@ define([
                             updatePersonDetail(form, 'update');
                             break;
                     }
+                };
+
+                $scope.addMember = function(){
+                    $scope.message.confirmMessage.openModal();
+                };
+
+                $scope.onAddMemberConfirm = function(){
+                    var entity = {
+                        id:'',
+                        createDate:new Date(),
+                        status: 1,
+                        personId: $scope.personId,
+                        deposit: 0
+                    };
+                    MemberService.addUserAsMember(entity).then(function(result){
+                        console.log(result);
+                        MemberService.updateUser({memberId:result.id},$scope.personId).then(function(){
+                            $scope.message.showSuccessMsg = true;
+                            $scope.existingPerson = false;
+                        }, function(){
+                            $scope.message.showErrorMessage = true;
+                        });
+                    }, function(error){
+                        $scope.message.showErrorMessage = true;
+                    })
                 };
                 /*
                  * Initialize on load

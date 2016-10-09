@@ -5,11 +5,13 @@ define(['angular', 'bootstrap'], function(angular){
             return {
                 restrict: 'EA',
                 scope: {
-                    message: '='
+                    message: '=',
+                    action: '&'
                 },
                 controller: function($scope){
                     var modalInstance;
                     $scope.primaryAction = function () {
+                        $scope.action();
                         modalInstance.close();
                     };
 

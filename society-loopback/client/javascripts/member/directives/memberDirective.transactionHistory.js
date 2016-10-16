@@ -4,9 +4,10 @@
 define([
   'angular',
   'lodash',
-    'javascripts/common/services/grid-service'
+    'javascripts/common/services/grid-service',
+    "javascripts/common/directives/print-directive"
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.transactionHistory", ['societyApp.common.services.gridService'])
+  angular.module("societyApp.member.directives.transactionHistory", ['societyApp.common.services.gridService', "societyApp.common.directives.print"])
     .directive('transactionHistory',['$filter', 'gridService', function ($filter, gridService) {
       return{
         restrict: 'A',
@@ -16,6 +17,10 @@ define([
           clickHandler:'&'
         },
         controller: ['$scope',function($scope){
+            $scope.printTransaction = {
+                context: {},
+                options: {}
+            };
           $scope.transactionHistory = $scope.transactionHistory || {
               transactionMode: 'single'
           };
@@ -46,6 +51,7 @@ define([
             $scope.showErrorMsg = false
           }
           $scope.transactionHistoryGrid = gridService.getDefaultGridConfig([
+              {field: 'id', enableHiding: false},
               {field: 'date', enableHiding: false},
               {field: 'depositAmount', enableHiding: false},
               {field: 'penaltyAmount', enableHiding: false},
@@ -54,6 +60,11 @@ define([
           ], true, {
             onRegisterApi: function(gridApi){
               $scope.gridApi = gridApi;
+                var that = this;
+
+                gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+                    that.selectedTransction = row.entity;
+                });
             }
           });
           if($scope.transactionHistory.transactionMode == 'all'){
@@ -66,6 +77,7 @@ define([
                 if($scope.transactionHistory.transactionMode == 'all'){
                     history.memberId = transaction.memberId;
                 }
+                history.id = transaction.id;
               history.date = $filter('date')(transaction.createDate,$scope.date.format);
               history.depositAmount = transaction.depositAmount;
               history.penaltyAmount = transaction.penaltyAmount;
@@ -89,7 +101,15 @@ define([
             $scope.transactionHistoryHeaderText =
               'Transaction history between ' + $filter('date')($scope.date.startDate, $scope.date.format)
               + ' and ' + $filter('date')($scope.date.endDate, $scope.date.format);
-          }
+          };
+            $scope.printDeposit = function(){
+                $scope.printTransaction.context.transactionId = $scope.transactionHistoryGrid.selectedTransction.id;
+                $scope.printTransaction.options.openModal();
+
+            };
+            if($scope.transactionHistory.transactionMode == 'all') {
+                $scope.clickHandler({startDate: $scope.date.startDate, endDate: $scope.date.endDate});
+            }
         }],
         templateUrl:'javascripts/member/partials/memberTransactionHistory.html',
         link:function(){}

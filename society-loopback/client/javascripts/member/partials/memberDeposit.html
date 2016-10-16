@@ -10,7 +10,7 @@
                     ng-hide="deposit.configureHidden"></button>
             <button type="button"
                     class="btn btn-primary"
-                    ng-click="isCollapsed = !isCollapsed">New deposit</button>
+                    ng-click="configureSave()">New deposit</button>
         </div>
     </div>
     <div class="panel-body">
@@ -63,7 +63,6 @@
     </div>
 </div>
 </br>
-</br>
 <div ng-hide="isCollapsed">
     <form class="form-horizontal reg-form" name="depositForm" non-validate>
         <div class="form-bottom">
@@ -73,6 +72,14 @@
                     <div class="row btn-setting pull-right">
                         <button type="button"
                                 class="btn btn-primary"
+                                ng-disabled="isCollapsed || !transactionId"
+                                ng-click="printDeposit(depositForm)">Print</button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                ng-click="cancelNewDeposit(depositForm)">Cancel</button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                ng-disabled="transactionId"
                                 ng-click="saveNewDeposit(depositForm)">Save</button>
                     </div>
                 </div>
@@ -137,3 +144,4 @@
         </div>
     </form>
 </div>
+<print-transaction context="printTransaction.context" options="printTransaction.options"/>

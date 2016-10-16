@@ -26,6 +26,7 @@ module.exports = function (Member) {
                         }
                         tx.commit();
                         cb(null, {
+                            transactionId: data1.id,
                             deposit: updatedDeposit
                         });
                     });

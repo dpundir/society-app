@@ -4,9 +4,10 @@
 define([
     'angular',
     'lodash',
-    'javascripts/member/services/Member'
+    'javascripts/member/services/Member',
+    "javascripts/common/directives/print-directive"
 ], function (angular, _) {
-    angular.module("societyApp.member.directives.memberDeposit", ["societyApp.member.services.member"])
+    angular.module("societyApp.member.directives.memberDeposit", ["societyApp.member.services.member", "societyApp.common.directives.print"])
         .directive('memberDeposit', ['MemberService', 'SelectOptions', function (MemberService, SelectOptions) {
             return {
                 restrict: 'A',
@@ -16,6 +17,11 @@ define([
                     saveHandler: "&"
                 },
                 controller: ['$scope', function ($scope) {
+                    $scope.printTransaction = {
+                        context: {},
+                        options: {}
+                    };
+
                     $scope.depositFrequencyOptions = SelectOptions.getDepositFrequencyOptions();
 
                     function getActionText() {
@@ -97,6 +103,12 @@ define([
                             }
                         }
                     };
+                    $scope.configureSave = function(){
+                        $scope.isCollapsed = false;
+                        $scope.printTransaction.context.transactionId = $scope.transactionId = undefined;
+                        $scope.showSuccessMsg = false;
+                        $scope.successMsg = '';
+                    };
                     $scope.saveNewDeposit = function (form) {
                         var isValidDepositForm = validateDepositForm(form);
                         if (isValidDepositForm) {
@@ -104,8 +116,23 @@ define([
                             $scope.saveHandler({transaction: $scope.transaction});
                         }
                     };
+                    $scope.cancelNewDeposit = function (form) {
+                        $scope.isCollapsed = true;
+                        $scope.printTransaction.context.transactionId = $scope.transactionId = undefined;
+                        $scope.showSuccessMsg = false;
+                        $scope.successMsg = '';
+                    };
+                    $scope.printDeposit = function (form) {
+                        $scope.printTransaction.context.transactionId = $scope.transactionId;
+                        $scope.printTransaction.options.openModal();
+                        $scope.printTransaction.options.modalInstance.result.then(function (selectedItem){
+                            $scope.cancelNewDeposit();
+                        }, function(){
+                            $scope.cancelNewDeposit();
+                        });
+                    };
                     $scope.deposit.successCB = function (data, showSuccessMsg) {
-                        if (data) {
+                        if (!showSuccessMsg) {
                             if (data.installmentValue) {
                                 $scope.transaction.depositAmount = data.installmentValue;
                             }
@@ -117,13 +144,14 @@ define([
                             $scope.deposit.isViewMode = !!data.id;
                             $scope.actionText = getActionText();
                         } else {
-                            $scope.isCollapsed = true;
-                            $scope.successMsg = 'Deposit Successful.';
+                            //$scope.isCollapsed = true;
+                            $scope.transactionId = data.transactionId;
+                            $scope.successMsg = 'Deposit Successful with Transaction ID:'+data.transactionId;
                             $scope.showSuccessMsg = true;
                         }
                         resetTransaction();
                         !showSuccessMsg && resetError();
-                        $scope.isCollapsed = true;
+                        //$scope.isCollapsed = true;
                     };
                     $scope.deposit.errorCB = function (error) {
                         if (error) {

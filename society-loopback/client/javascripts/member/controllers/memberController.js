@@ -229,7 +229,7 @@ define([
                     transaction.depositAmount = Number(transaction.depositAmount);
                     MemberService.addNewTransaction(transaction).then(function (data) {
                         $scope.memberDeposit.deposit = data.transaction.deposit;
-                        $scope.memberDeposit.successCB(undefined, true);
+                        $scope.memberDeposit.successCB(data.transaction, true);
                     }, function (error) {
                         $scope.memberDeposit.errorCB(error);
                     })

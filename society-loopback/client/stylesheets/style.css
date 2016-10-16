@@ -848,3 +848,24 @@ legend{
     font-size: 10px;
 }
 
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        height: 100%;
+        width: 100%;
+        left:0;
+        top:0;
+    }
+}

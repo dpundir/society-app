@@ -14,15 +14,18 @@ define([
                 },
                 controller: ['$scope', function ($scope) {
                     $scope.message = {};
+                    $scope.navigation = {};
+
                     var user = $cookies.getObject('user');
-                    $scope.roleName = user? user.roleName : '';
+                    $scope.navigation.roleName = user? user.roleName : '';
+
                     $scope.$watch(function() {
                         var user = $cookies.getObject('user');
                         return user? (user.username? user.username: user.email) : null;
                     }, function(newValue, oldValue) {
-                        if(newValue != oldValue || (newValue &&!$scope.username)) {
+                        if(newValue != oldValue || (newValue &&!$scope.navigation.username)) {
                             var user = $cookies.getObject('user');
-                            $scope.username = "Welcome " + (user?(user.username || user.email) : 'User');
+                            $scope.navigation.username = "Welcome " + (user?(user.username || user.email) : 'User');
                         }
                     });
                     $scope.logout = function () {
@@ -32,15 +35,15 @@ define([
                         $location.url('/userprofile/view');
                     };
                     $scope.searchMemberById = function(){
-                        restInterface.get('/api/Members/'+$scope.memberId+'/exists').then(
+                        restInterface.get('/api/Members/'+$scope.navigation.memberId+'/exists').then(
                             function(data){
                                 if(data.exists) {
-                                    $location.url('/member/view/' + $scope.memberId);
+                                    $location.url('/member/view/' + $scope.navigation.memberId);
                                 } else{
-                                    $scope.message.message = "Member Id:" + $scope.memberId + " Not Found";
+                                    $scope.message.message = "Member Id:" + $scope.navigation.memberId + " Not Found";
                                     $scope.message.openModal();
                                 }
-                                $scope.memberId = undefined;
+                                $scope.navigation.memberId = undefined;
                             });
                     };
                 }],

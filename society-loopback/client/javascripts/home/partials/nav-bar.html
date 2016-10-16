@@ -11,17 +11,17 @@
                         <a href="app/#/home">Home</a>
                     </span>
                 </li>
-                <li class="header" ng-if="roleName != 'member'">
+                <li class="header" ng-if="navigation.roleName != 'member'">
                     <h5>Member</h5>
                 </li>
-                <li class="divider" ng-if="roleName != 'member'"></li>
-                <li ng-if="roleName != 'member'">
+                <li class="divider" ng-if="navigation.roleName != 'member'"></li>
+                <li ng-if="navigation.roleName != 'member'">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                     <span class="text-primary">
                         <a href="app/#/member/registration">Add Member</a>
                     </span>
                 </li>
-                <li ng-if="roleName != 'member'">
+                <li ng-if="roleName != 'navigation.member'">
                     <span class="glyphicon glyphicon-th-list"></span>
                     <span class="text-primary">
                         <a href="app/#/member">View All Member</a>
@@ -43,17 +43,17 @@
                         <a href="app/#/deposit/view">View deposit history</a>
                     </span>
                 </li>
-                <li class="header" ng-if="roleName != 'member'">
+                <li class="header" ng-if="navigation.roleName != 'member'">
                     <h5>Settings</h5>
                 </li>
-                <li class="divider" ng-if="roleName != 'member'"></li>
-                <li ng-if="roleName != 'member'">
+                <li class="divider" ng-if="navigation.roleName != 'member'"></li>
+                <li ng-if="navigation.roleName != 'member'">
                     <span class="glyphicon glyphicon-cog"></span>
                     <span class="text-primary">
                         <a href="app/#/settings/configure">Configure</a>
                     </span>
                 </li>
-                <li ng-if="roleName != 'member'">
+                <li ng-if="navigation.roleName != 'member'">
                     <span class="glyphicon glyphicon-user"></span>
                     <span class="text-primary">
                         <a href="app/#/settings/manage-user">Manage User</a>
@@ -73,7 +73,7 @@
                     </a>
                     <ul class="dropdown-menu profile-menu">
                         <li class="header">
-                            <h5 class="text-info" ng-bind="username">Welcome User</h5>
+                            <h5 class="text-info" ng-bind="navigation.username">Welcome User</h5>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -92,10 +92,10 @@
                 </div>
             </div>
         </div>
-        <div class="collapse navbar-collapse navbar-search navbar-right" ng-if="roleName != 'member'">
+        <div class="collapse navbar-collapse navbar-search navbar-right" ng-if="roleName != 'navigation.member'">
             <form class="navbar-form navbar-left" role="search" ng-submit="searchMemberById()">
                 <div class="form-group">
-                    <input type="text" class="form-control search-input" ng-model="memberId" placeholder="Search member...">
+                    <input type="text" class="form-control search-input" ng-model="navigation.memberId" placeholder="Search member...">
                 </div>
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
             </form>

@@ -69,6 +69,7 @@ define([
                     return restInterface.get('/api/TransactionHistories/'+$scope.context.transactionId, null, filter).then(function (data) {
                         //data will be sorted in descending order of expire date
                         $scope.transaction = data;
+                        $scope.transaction.loanId = $scope.transaction.loanId || 'NA';
                         $scope.transaction.member.person.name = data.member.person.fname
                             + (data.member.person.mname?" "+data.member.person.mname:"")
                             + (data.member.person.lname?" "+data.member.person.lname:"");

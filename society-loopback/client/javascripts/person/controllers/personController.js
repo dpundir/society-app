@@ -158,6 +158,8 @@ define([
                     };
                     MemberService.addUserAsMember(entity).then(function(result){
                         console.log(result);
+
+                        //TODO correct this..not working now
                         MemberService.updateUser({memberId:result.id},$scope.personId).then(function(){
                             $scope.message.showSuccessMsg = true;
                             $scope.existingPerson = false;

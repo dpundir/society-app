@@ -115,6 +115,7 @@ define([
 
                     fileInput.bind('change', function () {
                         scope.file = fileInput[0].files[0];
+                        scope.addEditProfilePhoto();
                     });
                 }
             }

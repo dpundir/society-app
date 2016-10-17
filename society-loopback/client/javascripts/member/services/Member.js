@@ -106,7 +106,6 @@ define([
                 return restInterface.get('/api/Members/' + id, null, filter);
             };
             this.updateMember = function updateMember(member, entity) {
-                var defer = $q.defer();
                 var memberRequest = {
                     id: member.id
                 };
@@ -119,16 +118,20 @@ define([
                     memberRequest['memberNominee'] = member['memberNominee'];
                     delete memberRequest['memberNominee'][0].nominee.member;
                 }
-
-                restInterface.update('/api/Members/' + entity, memberRequest).then(function (data) {
-                    defer.resolve(data);
-                }, function () {
-                    defer.reject();
-                });
-                return defer.promise;
+                return restInterface.update('/api/Members/' + entity, memberRequest);
+            };
+            this.addUserAsMember = function(entity){
+                return restInterface.post('api/Members',entity);
+            };
+            this.updateUser = function(data, id){
+                var filter = {
+                    "filter": {
+                        "where": {"personId": id}
+                    }
+                };
+                return restInterface.post('api/users/update',data, filter);
             };
             this.addMember = function addMember(member, entity) {
-                var defer = $q.defer();
                 var memberRequest = {
                     id: member.id,
                     status: 1
@@ -143,14 +146,7 @@ define([
                     memberRequest['memberNominee'] = member['memberNominee'];
                     delete memberRequest['memberNominee'][0].nominee.member;
                 }
-
-                restInterface.post('/api/Members/' + entity, memberRequest).then(function (data) {
-                    defer.resolve(data);
-                }, function () {
-                    defer.reject();
-                });
-
-                return defer.promise;
+                return restInterface.post('/api/Members/' + entity, memberRequest);
             };
             this.getMemberDeposit = function (id) {
                 return restInterface.get('api/MemberDeposits/' + id);
@@ -195,7 +191,7 @@ define([
                             "where": {"memberid": memberId}
                         }
                     }
-                };
+                }
                 return restInterface.get('/api/Loans/' + loanId, null, filter);
             };
             this.getMemberLoans = function (memberId, isLoanAvailedOrRefferedOrBoth, startDate, endDate) {

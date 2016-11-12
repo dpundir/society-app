@@ -26,6 +26,9 @@ define([
                     successMsg:'Member added successfully.',
                     errorMessage:'Error in adding member, please try again.'
                 };
+                function userSuccessCB() {
+                    $location.url('/settings/manage-user');
+                }
                 function updateFormView(action){
                     switch(action) {
                         case 'view':
@@ -46,10 +49,6 @@ define([
                  * to update existing member OR add new member
                  * */
                 function updatePersonDetail(form, type) {
-                    function successCB() {
-                        $location.url('/settings/manage-user');
-                    }
-
                     function errorCB() {
                         //show message.
                     }
@@ -60,8 +59,8 @@ define([
                         PersonService.updatePerson(personRequest).then(successCB, errorCB);
                     } else {
                         PersonService.addPerson(personRequest).then(function(data){
-                            restInterface.update('/api/users/' + $scope.userId, {personId: data.person.id}).then(function(data){
-                                successCB(data);
+                            MemberService.updateUser({personId: data.person.id}, $scope.userId).then(function(data){
+                                userSuccessCB(data);
                             });
                         }, errorCB);
                     }
@@ -162,9 +161,10 @@ define([
                     MemberService.addUserAsMember(entity).then(function(result){
                         console.log(result);
 
-                        MemberService.updateUser({memberId:result.id}, $scope.userId).then(function(){
+                        MemberService.updateUser({memberId:result.id}, $scope.userId).then(function(data){
                             $scope.message.showSuccessMsg = true;
                             $scope.existingPerson = false;
+                            userSuccessCB(data);
                         }, function(){
                             $scope.message.showErrorMessage = true;
                         });

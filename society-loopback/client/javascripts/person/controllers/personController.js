@@ -5,8 +5,8 @@ define([
     angular.module("societyApp.person.controllers.detail",
         ["societyApp.person.services.detail"])
         .controller('personDetailController',
-        ['$scope', '$rootScope', 'PersonService', '$location', '$routeParams', '$filter','MemberService',
-            function ($scope, $rootScope, PersonService, $location, $routeParams, $filter, MemberService) {
+        ['$scope', '$rootScope', 'PersonService', '$location', '$routeParams', '$filter','MemberService', 'restInterface',
+            function ($scope, $rootScope, PersonService, $location, $routeParams, $filter, MemberService, restInterface) {
 
                 var VIEW_MODE = {
                     NEW: 1,
@@ -60,8 +60,9 @@ define([
                         PersonService.updatePerson(personRequest).then(successCB, errorCB);
                     } else {
                         PersonService.addPerson(personRequest).then(function(data){
-                            $rootScope.$broadcast('person:created', data.person);
-                            successCB(data);
+                            restInterface.update('/api/users/' + $scope.userId, {personId: data.person.id}).then(function(data){
+                                successCB(data);
+                            });
                         }, errorCB);
                     }
                 }
@@ -89,7 +90,6 @@ define([
                  * initialize the form in view mode with all data
                  * */
                 function initRegistrationFormViewMode(action, userId, personId) {
-                    $scope.userId = userId;
                     $scope.personId = personId;
                     $scope.existingPerson = true;
                     PersonService.getPersonDetail(personId).then(function (data) {
@@ -125,6 +125,7 @@ define([
                     var action = $routeParams.action,
                         id = $routeParams.id,
                         userId = $routeParams.userId;
+                    $scope.userId = userId;
                     switch (action) {
                         case 'view':
                             initRegistrationFormViewMode(action, userId, id);

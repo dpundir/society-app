@@ -124,12 +124,7 @@ define([
                 return restInterface.post('api/Members',entity);
             };
             this.updateUser = function(data, id){
-                var filter = {
-                    "filter": {
-                        "where": {"personId": id}
-                    }
-                };
-                return restInterface.post('api/users/update',data, filter);
+                return restInterface.update('api/users/'+id,data);
             };
             this.addMember = function addMember(member, entity) {
                 var memberRequest = {

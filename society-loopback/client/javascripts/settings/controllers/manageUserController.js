@@ -87,9 +87,9 @@ define([
                         if(selectedPerson.memberId){
                             $location.url('member/view/' + selectedPerson.memberId);
                         }else if(selectedPerson.personId) {
-                            $location.url('person/view/' + selectedPerson.personId);
+                            $location.url('user/' + selectedPerson.id + '/person/view/' + selectedPerson.personId);
                         }else{
-                            $location.url('person/registration');
+                            $location.url('user/' + selectedPerson.id + '/person/registration');
                         }
                     }
                 };

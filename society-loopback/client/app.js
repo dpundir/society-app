@@ -54,7 +54,7 @@ define([
             }).when('/balance', {
                 'templateUrl': 'javascripts/member/partials/balance-list.html',
                 'controller': 'memberBalanceController'
-            }).when('/person/:action/:id?', {
+            }).when('/user/:userId/person/:action/:id?', {
                 'templateUrl': 'javascripts/person/partials/personDetails.html',
                 'controller': 'personDetailController'
             }).when('/userprofile/:action/:id?', {

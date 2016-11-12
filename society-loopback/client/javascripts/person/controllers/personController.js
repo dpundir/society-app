@@ -88,7 +88,8 @@ define([
                  * @name initRegistrationFormViewMode
                  * initialize the form in view mode with all data
                  * */
-                function initRegistrationFormViewMode(action, personId) {
+                function initRegistrationFormViewMode(action, userId, personId) {
+                    $scope.userId = userId;
                     $scope.personId = personId;
                     $scope.existingPerson = true;
                     PersonService.getPersonDetail(personId).then(function (data) {
@@ -106,7 +107,7 @@ define([
                  * @method
                  * @name initRegistrationFormEditMode
                  * */
-                function initRegistrationFormEditMode(action) {
+                function initRegistrationFormEditMode(action, userId) {
                     $scope.primaryHeaderText = 'Edit Person Details';
                     $scope.secondaryHeaderText = '';
                     $scope.formValidationInfoText = 'Please fill all required fields marked with *.';
@@ -122,13 +123,14 @@ define([
                     $scope.message.showSuccessMsg = false;
                     $scope.message.showErrorMessage = false;
                     var action = $routeParams.action,
-                        id = $routeParams.id;
+                        id = $routeParams.id,
+                        userId = $routeParams.userId;
                     switch (action) {
                         case 'view':
-                            initRegistrationFormViewMode(action, id);
+                            initRegistrationFormViewMode(action, userId, id);
                             break;
                         case 'registration':
-                            initRegistrationFormNewMode(action);
+                            initRegistrationFormNewMode(action, userId);
                             break;
                     }
                 }
@@ -159,8 +161,7 @@ define([
                     MemberService.addUserAsMember(entity).then(function(result){
                         console.log(result);
 
-                        //TODO correct this..not working now
-                        MemberService.updateUser({memberId:result.id},$scope.personId).then(function(){
+                        MemberService.updateUser({memberId:result.id}, $scope.userId).then(function(){
                             $scope.message.showSuccessMsg = true;
                             $scope.existingPerson = false;
                         }, function(){

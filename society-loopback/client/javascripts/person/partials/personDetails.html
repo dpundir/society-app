@@ -1,7 +1,7 @@
 <div class="panel-body">
 <div class="alert alert-success" role="alert" ng-bind="message.successMsg" ng-show="message.showSuccessMsg"></div>
 <div class="alert alert-danger" role="alert" ng-bind="message.errorMessage" ng-show="message.showErrorMessage"></div>
-<div class="member-confirm-section btn-setting" ng-if="existingPerson">
+<div class="member-confirm-section btn-setting" ng-if="isAddMemberAllowed">
     <h4>Add this person as member:</h4>
     <button class="btn btn-primary" ng-click="addMember()">Add member</button>
 </div>

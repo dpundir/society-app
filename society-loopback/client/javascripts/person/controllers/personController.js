@@ -5,8 +5,8 @@ define([
     angular.module("societyApp.person.controllers.detail",
         ["societyApp.person.services.detail"])
         .controller('personDetailController',
-        ['$scope', '$rootScope', 'PersonService', '$location', '$routeParams', '$filter','MemberService', 'restInterface',
-            function ($scope, $rootScope, PersonService, $location, $routeParams, $filter, MemberService, restInterface) {
+        ['$scope', '$rootScope', '$cookies', 'PersonService', '$location', '$routeParams', '$filter','MemberService', 'restInterface',
+            function ($scope, $rootScope, $cookies, PersonService, $location, $routeParams, $filter, MemberService, restInterface) {
 
                 var VIEW_MODE = {
                     NEW: 1,
@@ -14,6 +14,7 @@ define([
                     EDIT: 3
                 };
                 $scope.existingPerson = false;
+                $scope.isAddMemberAllowed = $cookies.getObject('user').roleName == 'admin' && $scope.existingPerson;
                 $scope.message = {
                     showSuccessMsg: false,
                     showErrorMessage: false,
@@ -56,7 +57,7 @@ define([
                     var personRequest = $.extend(true, {}, $scope.person);
                     personRequest.dob = $filter('date')(personRequest.dob, 'yyyy-MM-dd');
                     if (type === 'update') {
-                        PersonService.updatePerson(personRequest).then(successCB, errorCB);
+                        PersonService.updatePerson(personRequest).then(userSuccessCB, errorCB);
                     } else {
                         PersonService.addPerson(personRequest).then(function(data){
                             MemberService.updateUser({personId: data.person.id}, $scope.userId).then(function(data){
@@ -159,8 +160,6 @@ define([
                         deposit: 0
                     };
                     MemberService.addUserAsMember(entity).then(function(result){
-                        console.log(result);
-
                         MemberService.updateUser({memberId:result.id}, $scope.userId).then(function(data){
                             $scope.message.showSuccessMsg = true;
                             $scope.existingPerson = false;
@@ -170,8 +169,14 @@ define([
                         });
                     }, function(error){
                         $scope.message.showErrorMessage = true;
-                    })
+                    });
                 };
+
+                /** watches **/
+                $scope.$watch('existingPerson', function(newValue, oldValue){
+                    $scope.isAddMemberAllowed = $cookies.getObject('user').roleName == 'admin' && $scope.existingPerson;
+                });
+
                 /*
                  * Initialize on load
                  * */

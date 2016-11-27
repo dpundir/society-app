@@ -37,6 +37,14 @@ define([
                             memberrefid2: '',
                             memberid: ''
                         };
+                        if($scope.memberId) {
+                            MemberService.getMemberLoans($scope.memberId, 1, undefined, undefined, true).then(function (data) {
+                                console.log('refer loan count: ', data.length)
+                            });
+                            MemberService.getMemberLoans($scope.memberId, 2, undefined, undefined, true).then(function (data) {
+                                console.log('self loan count: ', data.length)
+                            });
+                        }
                     }
 
                     function validateLoanDetails(loanDetail) {
@@ -107,6 +115,7 @@ define([
                             memberLoan.endDate = $filter('date')(loan.closedate, $scope.date.format);
                             memberLoans.push(memberLoan);
                         });
+
                         $scope.memberLoansGrid.data = memberLoans;
                         $scope.gridApi.core.handleWindowResize();
                         $scope.LOAN_MODE.NEW = false;

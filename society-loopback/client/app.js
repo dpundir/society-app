@@ -97,8 +97,9 @@ define([
                 'redirectTo': '/login'
             });
 
-        }).controller("appController", ['$rootScope', '$scope', 'AuthenticationService', '$location',
-            function ($rootScope, $scope, AuthenticationService, $location) {
+        }).controller("appController", ['$rootScope', '$scope', 'AuthenticationService', '$location', '$sessionStorage',
+            function ($rootScope, $scope, AuthenticationService, $location, $sessionStorage) {
+                $rootScope.$storage = $sessionStorage;
                 $rootScope.$on('global:error', function(event, error){
                     $scope.globalMessage.message = error.message;
                     $scope.globalMessage.openModal();

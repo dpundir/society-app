@@ -2,16 +2,19 @@ define([
     'angular'
 ], function () {
     angular.module("societyApp.member.services.member", ['ngStorage'])
-        .service('MemberService', ['$http', '$q', 'restInterface', '$localStorage', function ($http, $q, restInterface, $localStorage) {
+        .service('MemberService', ['$http', '$q', 'restInterface', '$sessionStorage', '$filter', function ($http, $q, restInterface, $sessionStorage, $filter) {
             this.getSocietyConfig = function () {
-                return $localStorage.memberConfig;
+                return $sessionStorage.memberConfig;
             };
             this.setSocietyConfig = function (config) {
-                $localStorage.memberConfig = config || {};
+                $sessionStorage.memberConfig = config || [];
+                _.forEach(config, function (value, key) {
+                    $sessionStorage[value.name] = value;
+                });
             };
             this.getTransformedSocietyConfig = function () {
-                if (Object.keys($localStorage.memberConfig).length > 0) {
-                    return _.transform($localStorage.memberConfig, function (result, value) {
+                if (Object.keys($sessionStorage.memberConfig).length > 0) {
+                    return _.transform($sessionStorage.memberConfig, function (result, value) {
                         result[value.name] = value.value;
                     }, {});
                 } else {
@@ -21,7 +24,9 @@ define([
             this.defaultMember = function defaultMember(member) {
                 member = member || {};
                 member.person = member.person || {guardianType: 1};
-                member.memberNominee = (member.memberNominee && member.memberNominee.length >0)? member.memberNominee : [{relation: 0, nominee: {guardianType: 1}}];
+                member.memberNominee = (member.memberNominee && member.memberNominee.length > 0) ? member.memberNominee : [
+                    {relation: 0, nominee: {guardianType: 1}}
+                ];
                 return {
                     status: member.status || 0,
                     createDate: member.createDate || '',
@@ -62,13 +67,13 @@ define([
             this.listWithSearchString = function listWithSearchString(searchString) {
                 var memberListFilter = {
                     "filter": {
-                        "fields": ['id','fname', 'lname', 'mname'],
+                        "fields": ['id', 'fname', 'lname', 'mname'],
                         "where": searchString ? {
                             "or": [
                                 {"fname": {"regexp": searchString}},
                                 {"lname": {"regexp": searchString}},
                                 {"mname": {"regexp": searchString}}
-                            ]}:{},
+                            ]} : {},
                         "include": {
                             relation: 'member'
                         }
@@ -81,7 +86,9 @@ define([
                     "filter": {
                         "include": [
                             {"person": ["address"]},
-                            {"memberNominee": [{"nominee": ["address", "member"]}]}
+                            {"memberNominee": [
+                                {"nominee": ["address", "member"]}
+                            ]}
                         ]}
                 };
                 filter = angular.merge(defaultMemberFilter, filter || {});
@@ -89,9 +96,9 @@ define([
             };
             this.isPersonExistingMember = function isPersonExistingMember(personId) {
                 var defaultMemberFilter = {
-                        "where": {
-                            "nomineeId": personId
-                        }
+                    "where": {
+                        "nomineeId": personId
+                    }
                 };
                 return restInterface.get('/api/Members/count', null, defaultMemberFilter);
             };
@@ -112,29 +119,29 @@ define([
                 if (entity === 'person') {
                     memberRequest.status = member.person.status;
                 }
-                if(entity == 'person') {
+                if (entity == 'person') {
                     memberRequest[entity] = member[entity];
-                } else{
+                } else {
                     memberRequest['memberNominee'] = member['memberNominee'];
                     delete memberRequest['memberNominee'][0].nominee.member;
                 }
                 return restInterface.update('/api/Members/' + entity, memberRequest);
             };
-            this.addUserAsMember = function(entity){
-                return restInterface.post('api/Members',entity);
+            this.addUserAsMember = function (entity) {
+                return restInterface.post('api/Members', entity);
             };
-            this.updateUser = function(data, id){
-                return restInterface.update('api/users/'+id,data);
+            this.updateUser = function (data, id) {
+                return restInterface.update('api/users/' + id, data);
             };
             this.addMember = function addMember(member, entity) {
                 var memberRequest = {
                     id: member.id,
                     status: 1
                 };
-                if(entity == 'person') {
+                if (entity == 'person') {
                     memberRequest[entity] = member[entity];
                     memberRequest[entity].status = 1;
-                } else{
+                } else {
                     member['memberNominee'][0].memberId = member.id;
                     member['memberNominee'][0].nomineeId = member['memberNominee'][0][entity].id;
                     member['memberNominee'][0].nominee.status = 1;
@@ -189,37 +196,101 @@ define([
                 }
                 return restInterface.get('/api/Loans/' + loanId, null, filter);
             };
-            this.getMemberLoans = function (memberId, isLoanAvailedOrRefferedOrBoth, startDate, endDate) {
-                var loanAvailFilter = {
-                    "filter": {
-                        "where": {"memberid": memberId}
-                    }
-                };
-                var loanReferredFilter = {
-                    "filter": {
-                        "where": {
-                            "or": [
-                                {"memberrefid1": memberId},
-                                {"memberrefid2": memberId}
-                            ]}
-                    }
-                };
-                var loanAvailedOrReferredFilter = {
-                    "filter": {
-                        "where": {
-                            "or": [
-                                {"memberid": memberId},
-                                {"memberrefid1": memberId},
-                                {"memberrefid2": memberId}
-                            ]}
-                    }
-                };
-                var filter;
+            this.getMemberLoans = function (memberId, isLoanAvailedOrRefferedOrBoth, startDate, endDate, isRunning) {
+                var loanAvailFilter, loanReferredFilter, loanAvailedOrReferredFilter, filter;
                 if (isLoanAvailedOrRefferedOrBoth == 1) {
+                    if (isRunning) {
+                        loanAvailFilter = {
+                            "filter": {
+                                "where": {
+                                    "memberid": memberId,
+                                    createdate: {
+                                        lte: $filter('date')(new Date(), 'yyyy-MM-dd')
+                                    },
+                                    closedate: {
+                                        gte: $filter('date')(new Date(), 'yyyy-MM-dd')
+                                    }
+                                }
+                            }
+                        };
+                    } else {
+                        loanAvailFilter = {
+                            "filter": {
+                                "where": {"memberid": memberId}
+                            }
+                        };
+                    }
                     filter = loanAvailFilter;
                 } else if (isLoanAvailedOrRefferedOrBoth == 2) {
+                    if (isRunning) {
+                        loanReferredFilter = {
+                            "filter": {
+                                "where": {
+                                    "and": [
+                                        {
+                                            "or": [
+                                                {"memberrefid1": memberId},
+                                                {"memberrefid2": memberId}
+                                            ]
+                                        }, {
+                                            "and": [
+                                                {createdate: {lte: $filter('date')(new Date(), 'yyyy-MM-dd')}},
+                                                {closedate: {gte: $filter('date')(new Date(), 'yyyy-MM-dd')}}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+
+                    } else {
+                        loanReferredFilter = {
+                            "filter": {
+                                "where": {
+                                    "or": [
+                                        {"memberrefid1": memberId},
+                                        {"memberrefid2": memberId}
+                                    ]
+                                }
+                            }
+                        }
+                    }
                     filter = loanReferredFilter;
                 } else if (isLoanAvailedOrRefferedOrBoth == 3) {
+                    if (isRunning) {
+                        loanAvailedOrReferredFilter = {
+                            "filter": {
+                                "where": {
+                                    "and": {
+                                        "or": [
+                                            {"memberid": memberId},
+                                            {"memberrefid1": memberId},
+                                            {"memberrefid2": memberId}
+                                        ],
+                                        and: [
+                                            {
+                                                createdate: {lte: $filter('date')(new Date(), 'yyyy-MM-dd')}
+                                            }, {
+                                                closedate: {gte: $filter('date')(new Date(), 'yyyy-MM-dd')}
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        };
+                    } else {
+                        loanAvailedOrReferredFilter = {
+                            "filter": {
+                                "where": {
+                                    "or": [
+                                        {"memberid": memberId},
+                                        {"memberrefid1": memberId},
+                                        {"memberrefid2": memberId}
+                                    ]
+                                }
+                            }
+                        };
+                    }
                     filter = loanAvailedOrReferredFilter;
                 }
                 return restInterface.get('/api/Loans', null, filter);
@@ -285,7 +356,7 @@ define([
                     {id: 6, label: 'Sister'}
                 ];
             };
-            this.getDepositFrequencyOptions = function(){
+            this.getDepositFrequencyOptions = function () {
                 return [
                     {id: 1, label: 'Monthly'},
                     {id: 3, label: 'Quaterly'},
@@ -293,7 +364,7 @@ define([
                     {id: 12, label: 'Yearly'}
                 ];
             };
-            this.getPersonStatusOptions = function(){
+            this.getPersonStatusOptions = function () {
                 return [
                     {id: 0, label: 'Inactive'},
                     {id: 1, label: 'Active'},
@@ -301,7 +372,7 @@ define([
                     {id: 3, label: 'Expired'}
                 ];
             };
-            this.getMaritalStatusOptions = function(){
+            this.getMaritalStatusOptions = function () {
                 return [
                     {id: 0, label: 'Unmarried'},
                     {id: 1, label: 'Married'},
@@ -309,7 +380,7 @@ define([
                     {id: 3, label: 'Widowed'}
                 ];
             };
-            this.getGenderOptions = function(){
+            this.getGenderOptions = function () {
                 return [
                     {id: 0, label: 'Male'},
                     {id: 1, label: 'Female'}

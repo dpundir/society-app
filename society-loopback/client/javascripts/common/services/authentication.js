@@ -38,6 +38,10 @@ define([
                 };
                 this.logout = function logout() {
                     restInterface.get('/logout').then(function (data) {
+                        _.forEach($sessionStorage.memberConfig, function(value, key){
+                            delete $sessionStorage[value.name];
+                        });
+                        delete $sessionStorage.memberConfig;
                         $cookies.remove('access-token');
                         $cookies.remove('user');
                         $location.url('/login');

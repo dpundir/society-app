@@ -2,7 +2,7 @@ define([
     'angular'
 ], function (angular) {
     angular.module("societyApp.expense.services.expenseListService", ['ngStorage'])
-        .service('expenseListService', ['$http', '$q', 'restInterface','$localStorage', function ($http, $q, restInterface,$localStorage) {
+        .service('expenseListService', ['$http', '$q', 'restInterface', function ($http, $q, restInterface) {
             this.list = function list(filter) {
                 var defaultSocietyExpenseListFilter = {
                     "filter": {

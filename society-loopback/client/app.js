@@ -100,10 +100,6 @@ define([
         }).controller("appController", ['$rootScope', '$scope', 'AuthenticationService', '$location', '$sessionStorage',
             function ($rootScope, $scope, AuthenticationService, $location, $sessionStorage) {
                 $rootScope.$storage = $sessionStorage;
-                $rootScope.$on('global:error', function(event, error){
-                    $scope.globalMessage.message = error.message;
-                    $scope.globalMessage.openModal();
-                });
                 $scope.heading = 'Application Heading';
                 $scope.ngViewPlaceholder = 'NG View Placeholder';
                 $scope.footer = 'Footer';
@@ -113,6 +109,11 @@ define([
                 $scope.loader = {
                     show: false
                 };
+
+				$rootScope.$on('global:error', function(event, error){
+					$scope.globalMessage.message = error.message;
+					$scope.globalMessage.openModal();
+				});
                 $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl, newState, oldState) {
                     if (!AuthenticationService.isAuthenticated()) {
                         $scope.navBarConfig.showNavBar = false;

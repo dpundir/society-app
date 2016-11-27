@@ -7,7 +7,7 @@ module.exports = function(SocietyBaseModel, app) {
 
     SocietyBaseModel.observe('before save', function filterProperties(ctx, next) {
         var isAuditable = ctx.Model.settings.auditable;
-        if(isAuditable && !ctx.options.transaction.id) {
+        if(isAuditable && !_.get(ctx, 'options.transaction.id')) {
             auditMessage = ctx.data.audit;
             delete ctx.data.audit;
             var filter = {where: ctx.where};
@@ -25,10 +25,10 @@ module.exports = function(SocietyBaseModel, app) {
 
     SocietyBaseModel.observe('after save', function filterProperties(ctx, next) {
         var isAuditable = ctx.Model.settings.auditable;
-        if(isAuditable && !ctx.options.transaction.id) {
+        if(isAuditable && !_.get(ctx, 'options.transaction.id')) {
             var newModelInstance = ctx.instance;
             var newValue = _.omit(newModelInstance.__data, function (v, k) {
-                return oldModelInstance[k] === v;
+                return oldModelInstance && oldModelInstance[k] === v;
             });
             var oldValue = _.omit(oldModelInstance, function (v, k) {
                 return newModelInstance.__data[k] === v;
@@ -40,8 +40,8 @@ module.exports = function(SocietyBaseModel, app) {
                 return k.includes('Date') || k.includes('date');
             });
             var entityName = _.snakeCase(ctx.Model.modelName);
-            ctx.Model.app.models.Entity.findOne({where: {entityName: entityName}}, function (err, data) {
-                if (err) {
+			ctx.Model.app.models.Entity.findOne({where: {entityName: entityName}}, function (err, data) {
+				if (err) {
                     next();
                 } else {
                     var auditData = {

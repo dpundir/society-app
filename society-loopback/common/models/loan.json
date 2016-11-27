@@ -4,7 +4,7 @@
   "idInjection": false,
   "options": {
     "validateUpsert": true,
-      "auditable":true
+      "auditable":false
   },
   "mysql": {
     "schema": "society",
@@ -60,6 +60,22 @@
       },
       "_selectable": true
     },
+	  "interestRate": {
+		  "type": "Number",
+		  "required": true,
+		  "length": null,
+		  "precision": 10,
+		  "scale": null,
+		  "mysql": {
+			  "columnName": "interest_rate",
+			  "dataType": "decimal",
+			  "dataLength": null,
+			  "dataPrecision": 10,
+			  "dataScale": null,
+			  "nullable": "N"
+		  },
+		  "_selectable": true
+	  },
     "createdate": {
       "type": "Date",
       "required": false,

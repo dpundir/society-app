@@ -58,7 +58,7 @@ CREATE TABLE `acl` (
   `principalType` varchar(512) DEFAULT NULL,
   `principalId` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `acl` (
 
 LOCK TABLES `acl` WRITE;
 /*!40000 ALTER TABLE `acl` DISABLE KEYS */;
-INSERT INTO `acl` VALUES (1,'Address','*','*','DENY','ROLE','$unauthenticated'),(2,'Audit','*','*','DENY','ROLE','$unauthenticated'),(3,'Entity','*','*','DENY','ROLE','$everyone'),(4,'Entity','*','*','ALLOW','ROLE','admin'),(5,'Loan','*','*','DENY','ROLE','$unauthenticated'),(6,'Member','*','*','DENY','ROLE','$unauthenticated'),(7,'Member','*','*','DENY','ROLE','$everyone'),(8,'Member','*','*','ALLOW','ROLE','admin'),(9,'Member','*','*','ALLOW','ROLE','employee'),(10,'Member','count','*','ALLOW','ROLE','member'),(11,'Member','total','*','ALLOW','ROLE','member'),(12,'MemberDeposit','*','*','DENY','ROLE','$unauthenticated'),(13,'MemberNominee','*','*','DENY','ROLE','$unauthenticated'),(14,'Person','*','*','DENY','ROLE','$unauthenticated'),(15,'Role','*','*','DENY','ROLE','$unauthenticated'),(16,'RoleMapping','*','*','DENY','ROLE','$unauthenticated'),(17,'SocietyConfig','*','*','DENY','ROLE','$unauthenticated'),(18,'SocietyConfig','*','*','DENY','ROLE','$everyone'),(19,'SocietyConfig','*','*','ALLOW','ROLE','admin'),(20,'SocietyConfig','*','READ','ALLOW','ROLE','employee'),(21,'SocietyExpense','*','*','DENY','ROLE','$unauthenticated'),(22,'SocietyExpense','*','*','DENY','ROLE','$everyone'),(23,'SocietyExpense','*','*','ALLOW','ROLE','admin'),(24,'SocietyExpense','*','*','ALLOW','ROLE','employee'),(25,'TransactionHistory','*','*','DENY','ROLE','$unauthenticated');
+INSERT INTO `acl` VALUES (1,'Address','*','*','DENY','ROLE','$unauthenticated'),(2,'Audit','*','*','DENY','ROLE','$unauthenticated'),(3,'Entity','*','*','DENY','ROLE','$everyone'),(4,'Entity','*','*','ALLOW','ROLE','admin'),(5,'Loan','*','*','DENY','ROLE','$unauthenticated'),(6,'Member','*','*','DENY','ROLE','$unauthenticated'),(7,'Member','*','*','DENY','ROLE','$everyone'),(8,'Member','*','*','ALLOW','ROLE','admin'),(9,'Member','*','*','ALLOW','ROLE','employee'),(10,'Member','count','*','ALLOW','ROLE','member'),(11,'Member','total','*','ALLOW','ROLE','member'),(12,'MemberDeposit','*','*','DENY','ROLE','$unauthenticated'),(13,'MemberNominee','*','*','DENY','ROLE','$unauthenticated'),(14,'Person','*','*','DENY','ROLE','$unauthenticated'),(15,'Role','*','*','DENY','ROLE','$unauthenticated'),(16,'RoleMapping','*','*','DENY','ROLE','$unauthenticated'),(17,'SocietyConfig','*','*','DENY','ROLE','$unauthenticated'),(18,'SocietyConfig','*','*','DENY','ROLE','$everyone'),(19,'SocietyConfig','*','*','ALLOW','ROLE','admin'),(20,'SocietyConfig','*','READ','ALLOW','ROLE','employee'),(21,'SocietyExpense','*','*','DENY','ROLE','$unauthenticated'),(22,'SocietyExpense','*','*','DENY','ROLE','$everyone'),(23,'SocietyExpense','*','*','ALLOW','ROLE','admin'),(24,'SocietyExpense','*','*','ALLOW','ROLE','employee'),(25,'TransactionHistory','*','*','DENY','ROLE','$unauthenticated'),(26,'user','*','*','DENY','ROLE','$everyone'),(27,'user','*','*','ALLOW','ROLE','admin');
 /*!40000 ALTER TABLE `acl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,6 +167,7 @@ CREATE TABLE `loan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `memberid` int(11) NOT NULL,
   `active` int(11) DEFAULT NULL,
+  `interest_rate` decimal(10,0) NOT NULL,
   `createdate` datetime DEFAULT NULL,
   `closedate` datetime DEFAULT NULL,
   `amount` double NOT NULL,
@@ -398,7 +399,7 @@ CREATE TABLE `society_config` (
   `description` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='society rules configuration details';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='society rules configuration details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -407,7 +408,7 @@ CREATE TABLE `society_config` (
 
 LOCK TABLES `society_config` WRITE;
 /*!40000 ALTER TABLE `society_config` DISABLE KEYS */;
-INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,10,'2015-11-19 00:00:00',NULL,'share value interest rate'),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate'),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value'),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value'),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value'),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value'),(7,'loanInterestRate',5,10,'2015-11-19 00:00:00',NULL,'Loan interest rate');
+INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate'),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate'),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value'),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value'),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value'),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value'),(7,'loanInterestRate',5,10,'2015-11-19 00:00:00',NULL,'Loan interest rate'),(8,'maxRunningLoan',1,2,'2015-11-19 00:00:00',NULL,'maximum running loan for member'),(9,'maxReferLoan',1,2,'2015-11-19 00:00:00',NULL,'maximum number of loan a member can refer');
 /*!40000 ALTER TABLE `society_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -519,4 +520,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-25 23:37:28
+-- Dump completed on 2016-12-02 11:26:06

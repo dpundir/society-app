@@ -840,9 +840,12 @@ legend{
     cursor: pointer;
     opacity: 0;
     top: 0;
-    height: 1px;
+    height: 15px;
     width: 1px;
     z-index: -1;
+}
+.btn-setting.photo-upload{
+    padding-left: 20px;
 }
 .btn-setting.photo-upload .btn{
     font-size: 10px;
@@ -875,5 +878,11 @@ legend{
         width: 100%;
         left:0;
         top:0;
+        text-align: left;
+    }
+    #printSection .col-sm-6{
+        width: 50%;
+        float: left;
+        position: relative;
     }
 }

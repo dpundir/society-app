@@ -337,11 +337,19 @@ define([
                 var uploadUrl = "/file/" + personId + "/profile";
                 var fd = new FormData();
                 fd.append('file', file);
-                return restInterface.post(uploadUrl, fd, undefined, {
-                    'Content-Type': undefined
-                }, {
-                    transformRequest: angular.identity
-                });
+				if(isAddProfilePhoto){
+					return restInterface.post(uploadUrl, fd, undefined, {
+						'Content-Type': undefined
+					}, {
+						transformRequest: angular.identity
+					});
+				} else{
+					return restInterface.update(uploadUrl, fd, undefined, {
+						'Content-Type': undefined
+					}, {
+						transformRequest: angular.identity
+					});
+				}
             };
         }])
         .service('SelectOptions', function () {

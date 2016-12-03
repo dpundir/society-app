@@ -22,7 +22,7 @@ module.exports = function (app) {
     router.post('/reset/password', authentication.resetPassword);
 
     router.post('/file/:personId/:document', document.uploadFile);
-
+	router.put('/file/:personId/:document', document.editFile);
     router.get('/file/:personId/:document', document.fileList);
 
     router.get('/file/:personId/:document/:fileName', document.downloadFile);

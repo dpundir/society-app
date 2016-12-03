@@ -2,6 +2,7 @@ define([
     'angular',
     'lodash',
     'javascripts/common/services/grid-service',
+	'javascripts/common/services/date-service',
     'javascripts/expense/services/expenseService'
 ], function (angular, _) {
     angular

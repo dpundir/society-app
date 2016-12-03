@@ -6,7 +6,7 @@ define([
   'javascripts/common/services/authentication',
   'javascripts/common/services/http-interceptor',
   'javascripts/common/services/rest-interface',
-  'javascripts/common/services/dateService',
+  'javascripts/common/services/date-service',
   'javascripts/common/services/grid-service',
   'javascripts/admin/services/user-profile-service',
   'javascripts/admin/controllers/adminLoginController',

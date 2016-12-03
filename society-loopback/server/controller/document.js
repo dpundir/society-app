@@ -21,7 +21,7 @@ var uploadFile = function(req, res) {
             var dirname = path.resolve(".", "storage", personId); // path.resolve(“.”) get application directory path
             mkdirp(dirname, function(err) {
                 var fileExtn = mime.extension(mime.contentType(files.file.name));
-                var fileName = isProfileFile? ('userProfile.'+fileExtn) : files.file.name;
+                var fileName = isProfileFile? ('userProfile_' + Date.now() + '.' + fileExtn) : files.file.name;
                 var newPath = path.join(dirname, fileName); // add the file name
                 if (!err) {
                     fs.writeFile(newPath, data, function (err) { // write file in uploads folder
@@ -51,33 +51,47 @@ var downloadFile = function (req, res){
     var fileName = req.params.fileName;
     var personId = req.params.personId;
     var downloadFileName = path.resolve(".", "storage", personId, fileName);
-    console.log(downloadFileName);
     res.download(downloadFileName);
 };
 
-var deleteFile = function (req, res){
+var deleteFile = function (req, res, isNext){
     var Person = req.app.models.Person;
     var fileName = req.params.fileName;
     var personId = req.params.personId;
     var isProfileFile = req.params.document === 'profile';
-    var fileName = path.resolve(".", "storage", personId, fileName);
-    console.log(fileName);
-    var img = fs.unlink(fileName, function(err){
-        if(err){
-            res.status(500).json('error in deleting file from storage');
-        } else if(!err && isProfileFile){
-            Person.update({id: personId}, {profilePhotoName: null}, function (err, data) {
-                if (err) {
-                    res.status(500).json("error in deleting file from person");
-                } else if(req.method === 'DELETE'){
-                    res.sendStatus(200);
-                }
-            });
-        } else{
-            res.sendStatus(200);
-        }
-
-    });
+	if(isProfileFile){
+		var files = fs.readdirSync(path.resolve(".", "storage", personId));
+		var file = _.find(files, function(file){
+			return _.startsWith(file, "userProfile");
+		});
+		fileName = _.isEmpty(file) ? fileName : file;
+	}
+	if(fileName) {
+		fileName = path.resolve(".", "storage", personId, fileName);
+		var img = fs.unlink(fileName, function(err) {
+			if (err) {
+				res.status(500).json('error in deleting file from storage');
+			} else if (!err && isProfileFile) {
+				Person.update({id: personId}, {profilePhotoName: null}, function(err, data) {
+					if (err) {
+						res.status(500).json("error in deleting file from person");
+					} else if (req.method === 'DELETE') {
+						if(!isNext){
+							res.sendStatus(200);
+						}
+					}
+				});
+			} else {
+				if(!isNext){
+					res.sendStatus(200);
+				}
+			}
+		});
+	} else{
+		if(!isNext){
+			res.sendStatus(200);
+		}
+	}
 };
 
 var fileList = function (req, res){
@@ -97,7 +111,7 @@ var fileList = function (req, res){
 };
 
 var editFile = function(req, res){
-    deleteFile(req, res);
+    deleteFile(req, res, true);
     uploadFile(req, res);
 }
 

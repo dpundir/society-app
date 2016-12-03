@@ -1,7 +1,7 @@
 define([
     'angular',
     'lodash',
-    'javascripts/common/services/dateService',
+    'javascripts/common/services/date-service',
     'javascripts/common/services/rest-interface'
 ], function (angular, _) {
     angular.module("societyApp.common.directives.print", ["societyApp.common.services.dateService", "societyApp.common.services.restinterface"])

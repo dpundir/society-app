@@ -4,33 +4,60 @@ module.exports = function (Member) {
 
     Member.memberTransaction = function (req, cb) {
         var TransactionHistory = req.app.models.TransactionHistory;
+		var Loan = req.app.models.Loan;
         Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
             var memberid = req.body.memberId;
-            var deposit = req.body.depositAmount;
+            var depositAmount = req.body.depositAmount;
+			var interestAmount = req.body.interestAmount;
+			var depositType = req.body.type;
 
             TransactionHistory.create(req.body, {transaction: tx}, function (err1, data1) {
                 if (err1) {
                     tx.rollback();
                     cb(err1, null);
                 }
-                Member.findById(memberid, {transaction: tx}, function (err2, data2) {
-                    if (err2) {
-                        tx.rollback();
-                        cb(err2, null);
-                    }
-                    var updatedDeposit = data2.deposit + deposit;
-                    Member.update({id: memberid}, {deposit: updatedDeposit}, {transaction: tx}, function (err3, data3) {
-                        if (err3) {
-                            tx.rollback();
-                            cb(err3, null);
-                        }
-                        tx.commit();
-                        cb(null, {
-                            transactionId: data1.id,
-                            deposit: updatedDeposit
-                        });
-                    });
-                });
+				if(depositType == 1) {
+					Member.findById(memberid, {transaction: tx}, function(err2, data2) {
+						if (err2) {
+							tx.rollback();
+							cb(err2, null);
+						}
+						var updatedDeposit = data2.deposit + depositAmount;
+						Member.update({id: memberid}, {deposit: updatedDeposit}, {transaction: tx}, function(err3, data3) {
+							if (err3) {
+								tx.rollback();
+								cb(err3, null);
+							}
+							tx.commit();
+							cb(null, {
+								transactionId: data1.id,
+								deposit: updatedDeposit
+							});
+						});
+					});
+				} else if(depositType == 2){
+					var loanId = req.body.loanId;
+					Loan.findById(loanId, {transaction: tx}, function(err2, data2) {
+						if (err2) {
+							tx.rollback();
+							cb(err2, null);
+						}
+						var principalPaid = data2.amountPaid + depositAmount;
+						var interestPaid = data2.interestPaid + interestAmount;
+						Loan.update({id: loanId}, {amountPaid: principalPaid, interestPaid: interestPaid}, {transaction: tx}, function(err3, data3) {
+							if (err3) {
+								tx.rollback();
+								cb(err3, null);
+							}
+							tx.commit();
+							cb(null, {
+								transactionId: data1.id,
+								deposit: principalPaid,
+								interest: interestPaid
+							});
+						});
+					});
+				}
             });
         })
     };

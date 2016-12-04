@@ -76,15 +76,11 @@ define([
                      * */
                     $scope.addEditProfilePhoto = function () {
                         var isAddProfilePhoto = !$scope.person.profilePhotoName;
-						if($scope.file) {
-							fileUpload.addEditProfilePhoto($scope.person.id, $scope.file, isAddProfilePhoto).then(function(data) {
-								$scope.person.profilePhotoName = data.fileName;
-							}, function(error) {
-								console.log(error);
-							})
-						} else{
-							
-						}
+						fileUpload.addEditProfilePhoto($scope.person.id, $scope.file, isAddProfilePhoto).then(function(data) {
+							$scope.person.profilePhotoName = data.fileName;
+						}, function(error) {
+							console.log(error);
+						});
                     };
                     /*
                      * Save a new deposit entry of a member

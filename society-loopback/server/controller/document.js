@@ -54,7 +54,7 @@ var downloadFile = function (req, res){
     res.download(downloadFileName);
 };
 
-var deleteFile = function (req, res, isNext){
+var deleteFile = function (req, res){
     var Person = req.app.models.Person;
     var fileName = req.params.fileName;
     var personId = req.params.personId;
@@ -76,19 +76,17 @@ var deleteFile = function (req, res, isNext){
 					if (err) {
 						res.status(500).json("error in deleting file from person");
 					} else if (req.method === 'DELETE') {
-						if(!isNext){
-							res.sendStatus(200);
-						}
+						res.sendStatus(200);
 					}
 				});
 			} else {
-				if(!isNext){
+				if(req.method === 'DELETE'){
 					res.sendStatus(200);
 				}
 			}
 		});
 	} else{
-		if(!isNext){
+		if(req.method === 'DELETE'){
 			res.sendStatus(200);
 		}
 	}
@@ -111,7 +109,7 @@ var fileList = function (req, res){
 };
 
 var editFile = function(req, res){
-    deleteFile(req, res, true);
+    deleteFile(req, res);
     uploadFile(req, res);
 }
 

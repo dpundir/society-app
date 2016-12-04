@@ -150,9 +150,7 @@ define([
 							}
 							var memberId = $scope.MEMBER_CONTEXT? ($scope.memberLoansGrid.selectedRowMemberId === 'SELF'? $scope.memberId: $scope.memberLoansGrid.selectedRowMemberId) : $scope.memberLoansGrid.selectedRowMemberId;
 							MemberService.getLoanDetails(memberId, $scope.memberLoansGrid.selectedRowId).then(function (data) {
-								_.forOwn($scope.loanDetail, function (value, key) {
-									$scope.loanDetail[key] = data[key];
-								});
+								$scope.loanDetail = data;
 								$scope.loanDetail.createdate = new Date($scope.loanDetail.createdate);
 								$scope.loanDetail.closedate = new Date($scope.loanDetail.closedate);
 								$scope.loanDetail.remainingAmount = data.amount - data.amountPaid;
@@ -172,7 +170,9 @@ define([
 							initLoanDetails();
 						};
 						$scope.calculateInstallment = function () {
-							$scope.loanDetail.installment = $scope.loanDetail.amount / $scope.loanDetail.frequency;
+							$scope.loanDetail.installment = ($scope.loanDetail.amount * ((100+$scope.loanDetail.interestRate)/100)) / $scope.loanDetail.frequency;
+							$scope.loanDetail.installment = _.round($scope.loanDetail.installment);
+							$scope.loanDetail.interest = ($scope.loanDetail.amount * ($scope.loanDetail.interestRate)/100);
 						};
 						$scope.addNewLoan = function () {
 							if (!validateLoanDetails($scope.loanDetail)) {

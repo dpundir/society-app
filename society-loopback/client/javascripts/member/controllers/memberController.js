@@ -227,6 +227,11 @@ define([
                     transaction.createDate = $filter('date')(new Date(), 'yyyy-MM-dd');
                     transaction.memberId = $scope.member.id;
                     transaction.depositAmount = Number(transaction.depositAmount);
+					transaction.interestAmount = Number(transaction.interestAmount);
+					transaction.penaltyAmount = Number(transaction.penaltyAmount);
+					if(transaction.type == 1){
+						transaction.interestAmount = 0;
+					}
                     MemberService.addNewTransaction(transaction).then(function (data) {
                         $scope.memberDeposit.deposit = data.transaction.deposit;
                         $scope.memberDeposit.successCB(data.transaction, true);

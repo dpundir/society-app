@@ -3,6 +3,7 @@ define([
     'lodash',
     'javascripts/member/filters/memberFilters',
     'javascripts/member/directives/memberSearch',
+	"javascripts/member/directives/member-loan-search",
     'javascripts/member/directives/memberDirective.memberDetails',
     'javascripts/member/directives/memberDirective.memberDocument',
     'javascripts/member/directives/memberDirective.memberDeposit',
@@ -14,6 +15,7 @@ define([
         [
             "societyApp.member.filters",
             "societyApp.member.memberSearchDirective",
+			"societyApp.member.memberLoanSearchDirective",
             "societyApp.member.directives.memberDetails",
             "societyApp.member.directives.memberDocument",
             "societyApp.member.directives.memberDeposit",

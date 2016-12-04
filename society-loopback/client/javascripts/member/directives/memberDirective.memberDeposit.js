@@ -5,7 +5,8 @@ define([
     'angular',
     'lodash',
     'javascripts/member/services/Member',
-    "javascripts/common/directives/print-directive"
+    "javascripts/common/directives/print-directive",
+	"javascripts/member/directives/member-loan-search"
 ], function (angular, _) {
     angular.module("societyApp.member.directives.memberDeposit", ["societyApp.member.services.member", "societyApp.common.directives.print"])
         .directive('memberDeposit', ['MemberService', 'SelectOptions', function (MemberService, SelectOptions) {
@@ -21,6 +22,14 @@ define([
                         context: {},
                         options: {}
                     };
+
+					$scope.loanSearchOption = {
+						onSelectRow: function (loanDetails) {
+							$scope.transaction.loanId = loanDetails.id;
+							$scope.transaction.depositAmount = loanDetails.installment;
+							$scope.loanDetails = loanDetails;
+						}
+					};
 
                     $scope.depositFrequencyOptions = SelectOptions.getDepositFrequencyOptions();
 
@@ -38,7 +47,8 @@ define([
                             penaltyAmount: 0,
                             type: '1',
                             remarks: 'saving installment',
-                            id: ''
+                            id: '',
+							interestAmount: 0
                         };
                     }
 
@@ -131,6 +141,10 @@ define([
                             $scope.cancelNewDeposit();
                         });
                     };
+					$scope.openLoanSearchModal = function () {
+						$scope.loanSearchOption.memberId = $scope.memberId;
+						$scope.loanSearchOption.openModal();
+					};
                     $scope.deposit.successCB = function (data, showSuccessMsg) {
                         if (!showSuccessMsg) {
                             if (data.installmentValue) {
@@ -163,6 +177,12 @@ define([
                             $scope.showErrorMsg = true;
                         }
                     };
+
+					$scope.$watch('transaction.depositAmount', function(){
+						if($scope.transaction.type == 2){
+							$scope.transaction.interestAmount = $scope.loanDetails.installment - $scope.transaction.depositAmount;
+						}
+					});
                     $scope.isCollapsed = true;
                     resetTransaction();
                     resetError();

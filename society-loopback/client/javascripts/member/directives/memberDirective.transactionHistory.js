@@ -54,6 +54,7 @@ define([
               {field: 'id', enableHiding: false},
               {field: 'date', enableHiding: false},
               {field: 'depositAmount', enableHiding: false},
+			  {field: 'interestAmount', enableHiding: false},
               {field: 'penaltyAmount', enableHiding: false},
               {field: 'transactionType', enableHiding: false},
               {field: 'remarks', enableHiding: false}
@@ -80,6 +81,7 @@ define([
                 history.id = transaction.id;
               history.date = $filter('date')(transaction.createDate,$scope.date.format);
               history.depositAmount = transaction.depositAmount;
+			history.interestAmount = transaction.interestAmount;
               history.penaltyAmount = transaction.penaltyAmount;
               history.transactionType = $filter('transactionType')(transaction.type);
               history.remarks = transaction.remarks;

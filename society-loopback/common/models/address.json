@@ -4,7 +4,7 @@
   "idInjection": false,
   "options": {
     "validateUpsert": true,
-      "auditable":true
+    "auditable": true
   },
   "mysql": {
     "schema": "society",

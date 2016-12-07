@@ -123,7 +123,7 @@ define([
                             memberNominee.nominee.dob = new Date(memberNominee.nominee.dob);
                         });
 
-                        $scope.memberFullName = (data.person.fname||'')+' '+(data.person.mname||'')+' '+(data.person.lname||'');
+                        $scope.memberFullName = (data.person.firstName||'')+' '+(data.person.middleName||'')+' '+(data.person.lastName||'');
                         $scope.memberDeposit.deposit = data.deposit;
                         $scope.memberDeposit.id = data.depositId;
                     })

@@ -20,10 +20,10 @@
                                         <span class="form-text">First name</span>
                                         <span class="text-danger" ng-show="!isViewMode">*</span>
                                     </div>
-                                    <input type="text" name="fname"
+                                    <input type="text" name="first_name"
                                            class="form-control"
-                                           id="fname" ng-disabled="isViewMode"
-                                           required="" ng-model="person.fname">
+                                           id="first_name" ng-disabled="isViewMode"
+                                           required="" ng-model="person.firstName">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -33,7 +33,7 @@
                                     </div>
                                     <input type="text"
                                            class="form-control" ng-disabled="isViewMode"
-                                           id="mname" ng-model="person.mname">
+                                           id="middle_name" ng-model="person.middleName">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -42,10 +42,10 @@
                                         <span class="form-text">Last name</span>
                                         <span class="text-danger" ng-show="!isViewMode">*</span>
                                     </div>
-                                    <input type="text" name="lname"
+                                    <input type="text" name="last_name"
                                            class="form-control"
-                                           id="lname" ng-disabled="isViewMode"
-                                           required="" ng-model="person.lname">
+                                           id="last_name" ng-disabled="isViewMode"
+                                           required="" ng-model="person.lastName">
                                 </div>
                             </div>
                         </div>
@@ -89,9 +89,9 @@
                                         <span class="text-danger" ng-show="!isViewMode">*</span>
                                     </div>
                                     <input type="text"
-                                           class="form-control" name="ffname"
-                                           id="ffname" ng-disabled="isViewMode"
-                                           required="" ng-model="person.ffname">
+                                           class="form-control" name="father_first_name"
+                                           id="father_first_name" ng-disabled="isViewMode"
+                                           required="" ng-model="person.fatherFirstName">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -101,8 +101,9 @@
                                         <span class="form-text" ng-if="person.guardianType === 2">Husband's middle name</span>
                                     </div>
                                     <input type="text"
-                                           class="form-control" ng-disabled="isViewMode"
-                                           id="fmname" ng-model="person.fmname">
+                                           class="form-control" name="father_middle_name"
+                                           id="father_middle_name" ng-disabled="isViewMode"
+																					 ng-model="person.fatherMiddleName">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -113,12 +114,48 @@
                                         <span class="text-danger" ng-show="!isViewMode">*</span>
                                     </div>
                                     <input type="text"
-                                           class="form-control" name="flname"
-                                           id="flname" ng-disabled="isViewMode"
-                                           required="" ng-model="person.flname">
+                                           class="form-control" name="father_last_name"
+                                           id="father_last_name" ng-disabled="isViewMode"
+                                           required="" ng-model="person.fatherLastName">
                                 </div>
                             </div>
                         </div>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group">
+															<div class="label-input">
+																<span class="form-text">Mother's first name</span>
+																<span class="text-danger" ng-show="!isViewMode">*</span>
+															</div>
+															<input type="text"
+																		 class="form-control" name="mother_first_name"
+																		 id="mother_first_name" ng-disabled="isViewMode"
+																		 required="" ng-model="person.motherFirstName">
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group">
+															<div class="label-input">
+																<span class="form-text">Mother's middle name</span>
+															</div>
+															<input type="text"
+																		 class="form-control" ng-disabled="isViewMode"
+																		 id="mother_middle_name" ng-model="person.motherMiddleName">
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group">
+															<div class="label-input">
+																<span class="form-text">Mother's last name</span>
+																<span class="text-danger" ng-show="!isViewMode">*</span>
+															</div>
+															<input type="text"
+																		 class="form-control" name="mother_last_name"
+																		 id="mother_last_name" ng-disabled="isViewMode"
+																		 required="" ng-model="person.motherLastName">
+														</div>
+													</div>
+												</div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">

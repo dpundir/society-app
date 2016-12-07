@@ -70,9 +70,9 @@ define([
                         //data will be sorted in descending order of expire date
                         $scope.transaction = data;
                         $scope.transaction.loanId = $scope.transaction.loanId || 'NA';
-                        $scope.transaction.member.person.name = data.member.person.fname
-                            + (data.member.person.mname?" "+data.member.person.mname:"")
-                            + (data.member.person.lname?" "+data.member.person.lname:"");
+                        $scope.transaction.member.person.name = data.member.person.firstName
+                            + (data.member.person.middleName?" "+data.member.person.middleName:"")
+                            + (data.member.person.lastName?" "+data.member.person.lastName:"");
                         $scope.transaction.createDate = $filter('date')($scope.transaction.createDate, dateService.dateConfig().format);
                     });
                 }

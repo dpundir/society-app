@@ -22,9 +22,9 @@ define([
                 };
                 $scope.memberListSearchGrid = gridService.getDefaultGridConfig([
                     {field: 'member.id', displayName: 'Id'},
-                    {field: 'fname', displayName: 'First name'},
-                    {field: 'mname', displayName: 'Middle name'},
-                    {field: 'lname', displayName: 'Last name'}
+                    {field: 'firstName', displayName: 'First name'},
+                    {field: 'middleName', displayName: 'Middle name'},
+                    {field: 'lastName', displayName: 'Last name'}
                 ], false, {
                     onRegisterApi: function (gridApi) {
                         $scope.gridApi = gridApi;

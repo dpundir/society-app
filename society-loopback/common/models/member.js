@@ -110,7 +110,7 @@ module.exports = function (Member) {
                 }
                 var personData = req.body.person;
                 personData.id = '';
-                personData.addressid = data1.id;
+                personData.addressId = data1.id;
                 personData.createDate = new Date();
                 personData.modifiedDate = new Date();
                 delete personData.address;
@@ -157,7 +157,7 @@ module.exports = function (Member) {
                         cb(err1, null);
                     }
                     nomineeData.id = '';
-                    nomineeData.addressid = data1.id;
+                    nomineeData.addressId = data1.id;
                     nomineeData.createDate = new Date();
                     nomineeData.modifiedDate = new Date();
                     delete nomineeData.address;

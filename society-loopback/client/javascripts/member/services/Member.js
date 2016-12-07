@@ -67,12 +67,12 @@ define([
             this.listWithSearchString = function listWithSearchString(searchString) {
                 var memberListFilter = {
                     "filter": {
-                        "fields": ['id', 'fname', 'lname', 'mname'],
+                        "fields": ['id', 'firstName', 'lastName', 'middleName'],
                         "where": searchString ? {
                             "or": [
-                                {"fname": {"regexp": searchString}},
-                                {"lname": {"regexp": searchString}},
-                                {"mname": {"regexp": searchString}}
+                                {"firstName": {"regexp": searchString}},
+                                {"lastName": {"regexp": searchString}},
+                                {"middleName": {"regexp": searchString}}
                             ]} : {},
                         "include": {
                             relation: 'member'

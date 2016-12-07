@@ -8,21 +8,24 @@ define([
         person.address = person.address || {};
         return {
           id: person.id || '',
-          fname: person.fname || '',
-          mname: person.mname || '',
-          lname: person.lname || '',
-          ffname: person.ffname || '',
-          fmname: person.fmname || '',
-          flname: person.flname || '',
+			firstName: person.firstName || '',
+          middleName: person.middleName || '',
+          lastName: person.lastName || '',
+          fatherFirstName: person.fatherFirstName || '',
+			fatherMiddleName: person.fatherMiddleName || '',
+			fatherLastName: person.fatherLastName || '',
+			motherFirstName: person.motherFirstName || '',
+			motherMiddleName: person.motherMiddleName || '',
+			motherLastName: person.motherLastName || '',
           phone: person.phone || '',
           status: person.status || '',
           dob: person.dob || null,
           createDate: person.createDate || '',
           modifiedDate: person.modifiedDate || '',
           address: person.address,
-          addressid: person.addressid,
+          addressId: person.addressId,
           sex: person.sex,
-          marital_status: person.marital_status,
+          maritalStatus: person.maritalStatus,
           relation: person.relation
         }
       };

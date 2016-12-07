@@ -27,14 +27,14 @@
       },
       "_selectable": false
     },
-    "fname": {
+    "firstName": {
       "type": "String",
       "required": false,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "fname",
+        "columnName": "first_name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,
@@ -43,14 +43,14 @@
       },
       "_selectable": true
     },
-    "mname": {
+    "middleName": {
       "type": "String",
       "required": false,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "mname",
+        "columnName": "middle_name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,
@@ -59,14 +59,14 @@
       },
       "_selectable": true
     },
-    "lname": {
+    "lastName": {
       "type": "String",
       "required": false,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "lname",
+        "columnName": "last_name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,
@@ -91,14 +91,14 @@
       },
       "_selectable": false
     },
-    "addressid": {
+    "addressId": {
       "type": "Number",
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
       "mysql": {
-        "columnName": "addressid",
+        "columnName": "address_id",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -171,14 +171,14 @@
       },
       "_selectable": false
     },
-    "ffname": {
+    "fatherFirstName": {
       "type": "String",
       "required": false,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "ffname",
+        "columnName": "father_first_name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,
@@ -187,14 +187,14 @@
       },
       "_selectable": true
     },
-    "fmname": {
+    "fatherMiddleName": {
       "type": "String",
       "required": false,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "fmname",
+        "columnName": "father_middle_name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,
@@ -203,14 +203,62 @@
       },
       "_selectable": true
     },
-    "flname": {
+    "fatherLastName": {
       "type": "String",
       "required": false,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "flname",
+        "columnName": "father_last_name",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "motherFirstName": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "mother_first_name",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "motherMiddleName": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "mother_middle_name",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "motherLastName": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "mother_last_name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,
@@ -290,7 +338,7 @@
       "type": "hasOne",
       "model": "Address",
       "foreignKey": "id",
-      "keyFrom": "addressid"
+      "keyFrom": "addressId"
     },
     "member": {
       "type": "belongsTo",

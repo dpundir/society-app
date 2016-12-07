@@ -59,22 +59,22 @@
       },
       "_selectable": true
     },
-	  "interestAmount": {
-		  "type": "Number",
-		  "required": false,
-		  "length": null,
-		  "precision": 22,
-		  "scale": null,
-		  "mysql": {
-			  "columnName": "interest_amount",
-			  "dataType": "double",
-			  "dataLength": null,
-			  "dataPrecision": 22,
-			  "dataScale": null,
-			  "nullable": "Y"
-		  },
-		  "_selectable": true
-	  },
+    "interestAmount": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "interest_amount",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
     "penaltyAmount": {
       "type": "Number",
       "required": false,

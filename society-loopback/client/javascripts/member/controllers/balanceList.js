@@ -17,9 +17,9 @@ define([
                 $scope.filterText = 'Show filter';
                 $scope.memberListGrid = gridService.getDefaultGridConfig([
                     {field: 'id', enableHiding: false},
-                    {field: 'person.fname', displayName: 'First Name', enableHiding: false},
-                    {field: 'person.mname', displayName: 'Middle Name', enableHiding: false},
-                    {field: 'person.lname', displayName: 'Last Name', enableHiding: false},
+                    {field: 'person.firstName', displayName: 'First Name', enableHiding: false},
+                    {field: 'person.middleName', displayName: 'Middle Name', enableHiding: false},
+                    {field: 'person.lastName', displayName: 'Last Name', enableHiding: false},
                     {field: 'person.phone', displayName: 'Phone', enableHiding: false},
                     {field: 'deposit', enableHiding: false}
                 ], true, {

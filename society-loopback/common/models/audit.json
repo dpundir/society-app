@@ -142,12 +142,12 @@
   },
   "validations": [],
   "relations": {
-      "entity": {
-          "type": "hasOne",
-          "model": "Entity",
-          "foreignKey": "id",
-          "keyFrom": "entityId"
-      }
+    "entity": {
+      "type": "hasOne",
+      "model": "Entity",
+      "foreignKey": "id",
+      "keyFrom": "entityId"
+    }
   },
   "acls": [],
   "methods": {}

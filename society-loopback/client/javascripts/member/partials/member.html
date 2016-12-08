@@ -89,6 +89,14 @@
                         </div>
                     </div>
                 </uib-tab>
+							<uib-tab heading="Identity" disable="mode == 1" select="getMemberIdentities()">
+								<div class="row society-form">
+									<div class="form-top">
+										<div member-identities="memberIdentities" person-id="member.person.id"
+												 click-handler="getMemberIdentities()"></div>
+									</div>
+								</div>
+							</uib-tab>
             </uib-tabset>
         </div>
 

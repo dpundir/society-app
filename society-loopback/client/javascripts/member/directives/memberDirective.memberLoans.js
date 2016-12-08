@@ -4,16 +4,18 @@
 define([
     'angular',
     'lodash',
-    'javascripts/common/services/grid-service'
+    'javascripts/common/services/grid-service',
+	'javascripts/common/services/date-service'
 ], function (angular, _) {
     angular.module("societyApp.member.directives.memberLoans", [
         "ui.grid",
         "ui.grid.selection",
         "ui.grid.pagination",
         "ui.grid.exporter",
-        'societyApp.common.services.gridService'])
-        .directive('memberLoans', ['$location', '$filter', '$q', 'MemberService', 'SelectOptions', 'uiGridConstants', 'gridService',
-			function ($location, $filter, $q, MemberService, SelectOptions, uiGridConstants, gridService) {
+        'societyApp.common.services.gridService',
+		'societyApp.common.services.dateService'])
+        .directive('memberLoans', ['$location', '$filter', '$q', 'MemberService', 'SelectOptions', 'uiGridConstants', 'gridService', 'dateService',
+			function ($location, $filter, $q, MemberService, SelectOptions, uiGridConstants, gridService, dateService) {
 				return {
 					restrict: 'A',
 					scope: {
@@ -76,20 +78,7 @@ define([
 						$scope.openEnddate = function () {
 							$scope.date.status.endDateOpened = !$scope.date.status.endDateOpened;
 						};
-						$scope.date = {
-							dateOption: {
-								formatYear: 'yy',
-								startingDay: 1,
-								format: 'dd-MM-yyyy'
-							},
-							format: 'dd-MM-yyyy',
-							status: {
-								startDateOpened: false,
-								endDateOpened: false
-							},
-							startDate: new Date(),
-							endDate: new Date()
-						};
+						$scope.date = dateService.dateConfig();
 						$scope.memberLoansGrid = gridService.getDefaultGridConfig(
 							[
 								{field: 'id', enableHiding: false},

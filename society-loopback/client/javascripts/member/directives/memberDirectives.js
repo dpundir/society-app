@@ -7,6 +7,7 @@ define([
     'javascripts/member/directives/memberDirective.memberDetails',
     'javascripts/member/directives/memberDirective.memberDocument',
     'javascripts/member/directives/memberDirective.memberDeposit',
+	'javascripts/member/directives/memberDirective.memberIdentities',
     'javascripts/member/directives/memberDirective.memberLoans',
     'javascripts/member/directives/memberDirective.transactionHistory',
     'javascripts/member/directives/memberDirective.nomineeDetails'
@@ -19,6 +20,7 @@ define([
             "societyApp.member.directives.memberDetails",
             "societyApp.member.directives.memberDocument",
             "societyApp.member.directives.memberDeposit",
+			"societyApp.member.directives.memberIdentities",
             "societyApp.member.directives.memberLoans",
             "societyApp.member.directives.transactionHistory",
             "societyApp.member.directives.memberNominee"

@@ -36,6 +36,7 @@ define([
                     transactionMode: 'single'
                 };
                 $scope.memberLoans = {};
+				$scope.memberIdentities = {};
                 $scope.documents = {};
                 $scope.nomineeDetail = {};
                 $scope.nomineeCallbacks = {
@@ -210,6 +211,16 @@ define([
                         $scope.memberLoans.errorCB(error);
                     });
                 };
+				/*
+				 * Get all member identities of a member based on person id
+				 * */
+				$scope.getMemberIdentities = function () {
+					MemberService.getMemberIdentities($scope.member.person.id).then(function (data) {
+						$scope.memberIdentities.successCB(data);
+					}, function (error) {
+						$scope.memberIdentities.errorCB(error);
+					});
+				};
                 /*
                  * Get member nominee if a member based on member id
                  * */

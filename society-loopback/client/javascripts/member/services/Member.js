@@ -196,6 +196,17 @@ define([
                 }
                 return restInterface.get('/api/Loans/' + loanId, null, filter);
             };
+			this.getMemberIdentities = function (personId) {
+				var filter = {};
+				if (personId) {
+					filter = {
+						"filter": {
+							"where": {"personId": personId}
+						}
+					}
+				}
+				return restInterface.get('/api/PersonIdentities', null, filter);
+			};
             this.getMemberLoans = function (memberId, isLoanAvailedOrRefferedOrBoth, startDate, endDate, isRunning) {
                 var loanAvailFilter, loanReferredFilter, loanAvailedOrReferredFilter, filter;
                 if (isLoanAvailedOrRefferedOrBoth == 1) {
@@ -302,6 +313,14 @@ define([
             this.addNewLoan = function (loanDetail) {
                 return restInterface.post('/api/Loans', loanDetail);
             };
+
+			this.addNewIdentity = function (identityDetail) {
+				return restInterface.post('/api/PersonIdentities', identityDetail);
+			};
+
+			this.deleteIdentity = function (id) {
+				return restInterface.delete('/api/PersonIdentities/' + id);
+			};
         }])
         .service('fileUpload', ['$http', 'restInterface', function ($http, restInterface) {
             this.uploadFileToUrl = function (memberId, file) {
@@ -394,5 +413,14 @@ define([
                     {id: 1, label: 'Female'}
                 ];
             };
+			this.getIdentityOptions = function () {
+				return [
+					{id: 1, label: 'Aadhar'},
+					{id: 2, label: 'PAN'},
+					{id: 3, label: 'Driving License'},
+					{id: 4, label: 'Voter ID'},
+					{id: 5, label: 'Passport'}
+				];
+			};
         });
 });

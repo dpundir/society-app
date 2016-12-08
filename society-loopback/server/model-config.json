@@ -93,7 +93,7 @@
     "dataSource": "mysql-ds",
     "public": true
   },
-  "PersonIdentification": {
+  "PersonIdentity": {
     "dataSource": "mysql-ds",
     "public": true
   }

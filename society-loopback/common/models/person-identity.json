@@ -1,0 +1,90 @@
+{
+	"name": "PersonIdentity",
+	"base": "PersistedModel",
+	"idInjection": false,
+	"options": {
+		"validateUpsert": true
+	},
+	"mysql": {
+		"schema": "society",
+		"table": "person_identity"
+	},
+	"properties": {
+		"id": {
+			"type": "Number",
+			"id": true,
+			"required": true,
+			"length": null,
+			"precision": 10,
+			"scale": 0,
+			"mysql": {
+				"columnName": "id",
+				"dataType": "int",
+				"dataLength": null,
+				"dataPrecision": 10,
+				"dataScale": 0,
+				"nullable": "N"
+			},
+			"_selectable": false
+		},
+		"personId": {
+			"type": "Number",
+			"required": true,
+			"length": null,
+			"precision": 10,
+			"scale": 0,
+			"mysql": {
+				"columnName": "person_id",
+				"dataType": "int",
+				"dataLength": null,
+				"dataPrecision": 10,
+				"dataScale": 0,
+				"nullable": "N"
+			},
+			"_selectable": false
+		},
+		"type": {
+			"type": "Number",
+			"required": true,
+			"length": null,
+			"precision": 10,
+			"scale": 0,
+			"mysql": {
+				"columnName": "type",
+				"dataType": "int",
+				"dataLength": null,
+				"dataPrecision": 10,
+				"dataScale": 0,
+				"nullable": "N"
+			},
+			"_selectable": false
+		},
+		"identityNumber": {
+			"type": "String",
+			"required": true,
+			"length": 45,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "identity_number",
+				"dataType": "varchar",
+				"dataLength": 45,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "N"
+			},
+			"_selectable": false
+		}
+	},
+	"validations": [],
+	"relations": {
+		"person": {
+			"type": "belongsTo",
+			"model": "Person",
+			"foreignKey": "personId",
+			"keyFrom": "id"
+		}
+	},
+	"acls": [],
+	"methods": {}
+}

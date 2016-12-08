@@ -39,7 +39,7 @@ CREATE TABLE `accesstoken` (
 
 LOCK TABLES `accesstoken` WRITE;
 /*!40000 ALTER TABLE `accesstoken` DISABLE KEYS */;
-INSERT INTO `accesstoken` VALUES ('mimDutFdKFuh7uFnfPHtSsHKGCBSXj0ZFHHjawBnQmTSv3rL8WVTz0ApSbkIeFQ6',600,'2016-12-07 17:28:53',1);
+INSERT INTO `accesstoken` VALUES ('LRjoSudj8fAVygu6jmetZT0i9UpykbqV1FCNHvruBdVB9zxOVQg93wnhvZ3c4DaY',600,'2016-12-08 17:31:43',1);
 /*!40000 ALTER TABLE `accesstoken` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,28 +335,29 @@ INSERT INTO `person` VALUES (1,'deepak','singh','pundir','8287536955',1,1,'2015-
 UNLOCK TABLES;
 
 --
--- Table structure for table `person_identification`
+-- Table structure for table `person_identity`
 --
 
-DROP TABLE IF EXISTS `person_identification`;
+DROP TABLE IF EXISTS `person_identity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `person_identification` (
+CREATE TABLE `person_identity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `person_id` int(11) NOT NULL,
   `type` int(11) NOT NULL,
-  `identification_number` varchar(45) NOT NULL,
+  `identity_number` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `person_identification`
+-- Dumping data for table `person_identity`
 --
 
-LOCK TABLES `person_identification` WRITE;
-/*!40000 ALTER TABLE `person_identification` DISABLE KEYS */;
-/*!40000 ALTER TABLE `person_identification` ENABLE KEYS */;
+LOCK TABLES `person_identity` WRITE;
+/*!40000 ALTER TABLE `person_identity` DISABLE KEYS */;
+INSERT INTO `person_identity` VALUES (2,2,2,'302');
+/*!40000 ALTER TABLE `person_identity` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -551,4 +552,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-07 23:12:15
+-- Dump completed on 2016-12-08 23:03:13

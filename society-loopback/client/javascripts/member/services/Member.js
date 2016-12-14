@@ -371,6 +371,23 @@ define([
 				}
             };
         }])
+		.filter('identityFilter', function() {
+			var identityHash = {
+					1: 'Aadhar',
+					2: 'PAN',
+					3: 'Driving License',
+					4: 'Voter ID',
+					5: 'Passport'
+			};
+
+			return function(input) {
+				if (!input){
+					return '';
+				} else {
+					return identityHash[input];
+				}
+			};
+		})
         .service('SelectOptions', function () {
             this.getRelations = function () {
                 return [

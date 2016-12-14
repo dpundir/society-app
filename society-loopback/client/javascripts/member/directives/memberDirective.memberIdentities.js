@@ -73,7 +73,7 @@ define([
 						$scope.memberIdentitiesGrid = gridService.getDefaultGridConfig(
 							[
 								{field: 'id', enableHiding: false},
-								{field: 'type', enableHiding: false},
+								{field: 'type', enableHiding: false, cellFilter: 'identityFilter'},
 								{field: 'identityNumber', enableHiding: false},
 								{field: 'startDate', enableHiding: false},
 								{field: 'endDate', enableHiding: false}

@@ -371,25 +371,8 @@ define([
 				}
             };
         }])
-		.filter('identityFilter', function() {
-			var identityHash = {
-					1: 'Aadhar',
-					2: 'PAN',
-					3: 'Driving License',
-					4: 'Voter ID',
-					5: 'Passport'
-			};
-
-			return function(input) {
-				if (!input){
-					return '';
-				} else {
-					return identityHash[input];
-				}
-			};
-		})
-        .service('SelectOptions', function () {
-            this.getRelations = function () {
+        .value('SelectOptions', {
+            getRelations : function () {
                 return [
                     {id: 0, label: 'Father'},
                     {id: 1, label: 'Mother'},
@@ -399,38 +382,47 @@ define([
                     {id: 5, label: 'Brother'},
                     {id: 6, label: 'Sister'}
                 ];
-            };
-            this.getDepositFrequencyOptions = function () {
+            },
+            getDepositFrequencyOptions : function () {
                 return [
                     {id: 1, label: 'Monthly'},
                     {id: 3, label: 'Quaterly'},
                     {id: 6, label: 'Half-Yearly'},
                     {id: 12, label: 'Yearly'}
                 ];
-            };
-            this.getPersonStatusOptions = function () {
+            },
+			getDepositOptions : function () {
+				return [
+					{id: 1, label: 'CD'},
+					{id: 2, label: 'Loan'},
+					{id: 3, label: 'Share'},
+					{id: 4, label: 'Kalyan'},
+					{id: 5, label: 'Building'}
+				];
+			},
+            getPersonStatusOptions : function () {
                 return [
                     {id: 0, label: 'Inactive'},
                     {id: 1, label: 'Active'},
                     {id: 2, label: 'Dormant'},
                     {id: 3, label: 'Expired'}
                 ];
-            };
-            this.getMaritalStatusOptions = function () {
+            },
+            getMaritalStatusOptions : function () {
                 return [
                     {id: 0, label: 'Unmarried'},
                     {id: 1, label: 'Married'},
                     {id: 2, label: 'Divorcee'},
                     {id: 3, label: 'Widowed'}
                 ];
-            };
-            this.getGenderOptions = function () {
+            },
+            getGenderOptions : function () {
                 return [
                     {id: 0, label: 'Male'},
                     {id: 1, label: 'Female'}
                 ];
-            };
-			this.getIdentityOptions = function () {
+            },
+			getIdentityOptions : function () {
 				return [
 					{id: 1, label: 'Aadhar'},
 					{id: 2, label: 'PAN'},
@@ -438,6 +430,6 @@ define([
 					{id: 4, label: 'Voter ID'},
 					{id: 5, label: 'Passport'}
 				];
-			};
+			}
         });
 });

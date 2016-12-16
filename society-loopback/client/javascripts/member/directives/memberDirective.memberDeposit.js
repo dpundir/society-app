@@ -32,6 +32,7 @@ define([
 					};
 
                     $scope.depositFrequencyOptions = SelectOptions.getDepositFrequencyOptions();
+					$scope.depositOptions = SelectOptions.getDepositOptions();
 
                     function getActionText() {
                         if ($scope.deposit.isViewMode) {
@@ -45,8 +46,8 @@ define([
                         $scope.transaction = {
                             depositAmount: $scope.deposit.installmentValue,
                             penaltyAmount: 0,
-                            type: '1',
-                            remarks: 'saving installment',
+                            //type: 1,
+                            remarks: 'CD deposit',
                             id: '',
 							interestAmount: 0
                         };
@@ -163,7 +164,7 @@ define([
                             $scope.successMsg = 'Deposit Successful with Transaction ID:'+data.transactionId;
                             $scope.showSuccessMsg = true;
                         }
-                        resetTransaction();
+                        //resetTransaction();
                         !showSuccessMsg && resetError();
                         //$scope.isCollapsed = true;
                     };
@@ -179,7 +180,7 @@ define([
                     };
 
 					$scope.$watch('transaction.depositAmount', function(){
-						if($scope.transaction.type == 2){
+						if($scope.transaction.type === 2){
 							$scope.transaction.interestAmount = $scope.loanDetails.installment - $scope.transaction.depositAmount;
 						}
 					});

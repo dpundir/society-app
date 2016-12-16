@@ -3,12 +3,36 @@ define([
 ], function (angular, _) {
     angular.module("societyApp.member.filters", [])
         .filter('transactionType',function(){
+			var transactionHash = {
+				1: 'CD',
+				2: 'Loan',
+				3: 'Share',
+				4: 'Kalyan',
+				5: 'Building'
+			};
             return function(type){
-                if(type === 1){
-                    return 'Saving'
-                }else{
-                    return 'Loan'
-                }
+				if (!type){
+					return '';
+				} else {
+					return transactionHash[type];
+				}
             }
-        });
+        })
+		.filter('identityFilter', function() {
+			var identityHash = {
+				1: 'Aadhar',
+				2: 'PAN',
+				3: 'Driving License',
+				4: 'Voter ID',
+				5: 'Passport'
+			};
+
+			return function(input) {
+				if (!input){
+					return '';
+				} else {
+					return identityHash[input];
+				}
+			};
+		});
 });

@@ -39,6 +39,7 @@ CREATE TABLE `accesstoken` (
 
 LOCK TABLES `accesstoken` WRITE;
 /*!40000 ALTER TABLE `accesstoken` DISABLE KEYS */;
+INSERT INTO `accesstoken` VALUES ('RAB47C3M7ATetCawYqbEmv5XkfDkDgHECZX1fnVkGzhhuO3ZuXkPxBOyldYVKLAF',600,'2016-12-16 17:26:52',1);
 /*!40000 ALTER TABLE `accesstoken` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +120,7 @@ CREATE TABLE `audit` (
   PRIMARY KEY (`id`),
   KEY `entity_idx` (`entity_id`),
   CONSTRAINT `entity` FOREIGN KEY (`entity_id`) REFERENCES `entity` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='audit information for all entities';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='audit information for all entities';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +187,7 @@ CREATE TABLE `loan` (
   CONSTRAINT `loan_member_id` FOREIGN KEY (`memberid`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id1` FOREIGN KEY (`memberrefid1`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id2` FOREIGN KEY (`memberrefid2`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +212,10 @@ CREATE TABLE `member` (
   `modified_date` datetime DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `deposit_id` int(11) DEFAULT NULL,
-  `deposit` int(11) DEFAULT NULL,
+  `deposit` double DEFAULT NULL,
+  `share_value` double DEFAULT NULL,
+  `kalyan_fund` double DEFAULT NULL,
+  `building_fund` double DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `member_deposit_id_idx` (`deposit_id`),
@@ -227,7 +231,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'2015-11-13 00:00:00','2016-09-29 15:21:30',1,1,0,1),(2,'2015-11-30 00:00:00','2016-12-07 17:26:04',1,3,0,2),(3,'2015-11-13 00:00:00','2016-08-16 18:09:37',1,2,0,3);
+INSERT INTO `member` VALUES (1,'2015-11-13 00:00:00','2016-09-29 15:21:30',1,1,0,NULL,NULL,NULL,1),(2,'2015-11-30 00:00:00','2016-12-07 17:26:04',1,3,0,0,NULL,NULL,2),(3,'2015-11-13 00:00:00','2016-08-16 18:09:37',1,2,0,NULL,NULL,NULL,3);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,7 +350,7 @@ CREATE TABLE `person_identity` (
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -490,7 +494,7 @@ CREATE TABLE `transaction_history` (
   KEY `dh_loan_id_idx` (`loan_id`),
   CONSTRAINT `dh_loan_id` FOREIGN KEY (`loan_id`) REFERENCES `loan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -549,4 +553,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-14 22:17:47
+-- Dump completed on 2016-12-16 22:58:18

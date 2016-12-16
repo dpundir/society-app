@@ -10,20 +10,31 @@ module.exports = function (Member) {
             var depositAmount = req.body.depositAmount;
 			var interestAmount = req.body.interestAmount;
 			var depositType = req.body.type;
+			var updateAmount;
 
             TransactionHistory.create(req.body, {transaction: tx}, function (err1, data1) {
                 if (err1) {
                     tx.rollback();
                     cb(err1, null);
                 }
-				if(depositType == 1) {
+				if(depositType == 1 || depositType == 3 || depositType == 4) {
 					Member.findById(memberid, {transaction: tx}, function(err2, data2) {
 						if (err2) {
 							tx.rollback();
 							cb(err2, null);
 						}
-						var updatedDeposit = data2.deposit + depositAmount;
-						Member.update({id: memberid}, {deposit: updatedDeposit}, {transaction: tx}, function(err3, data3) {
+						if(depositType == 1){
+							updateAmount = {deposit: data2.deposit + depositAmount};
+						} else if(depositType == 3){
+							updateAmount = {shareValue: data2.shareValue + depositAmount};
+						} else if(depositType == 4) {
+							updateAmount = {kalyanFund: data2.kalyanFund + depositAmount};
+						} else if(depositType == 5) {
+							updateAmount = {buildingFund: data2.buildingFund + depositAmount};
+						}
+
+						Member.update({id: memberid}, updateAmount, {transaction: tx}, function(err3, data3) {
+							console.log('member updated: ',data3);
 							if (err3) {
 								tx.rollback();
 								cb(err3, null);
@@ -31,7 +42,7 @@ module.exports = function (Member) {
 							tx.commit();
 							cb(null, {
 								transactionId: data1.id,
-								deposit: updatedDeposit
+								deposit: updateAmount
 							});
 						});
 					});

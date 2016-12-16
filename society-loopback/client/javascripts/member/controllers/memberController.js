@@ -244,7 +244,9 @@ define([
 						transaction.interestAmount = 0;
 					}
                     MemberService.addNewTransaction(transaction).then(function (data) {
-                        $scope.memberDeposit.deposit = data.transaction.deposit;
+						if(data.transaction.deposit.deposit) {
+							$scope.memberDeposit.deposit = data.transaction.deposit.deposit;
+						}
                         $scope.memberDeposit.successCB(data.transaction, true);
                     }, function (error) {
                         $scope.memberDeposit.errorCB(error);

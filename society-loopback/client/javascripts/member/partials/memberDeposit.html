@@ -134,13 +134,13 @@
 							<div class="form-group">
 								<div class="label-input">
 									<span class="form-text">Type</span>
-									<span class="text-danger" ng-show="!deposit.isViewMode">*</span>
+									<span class="text-danger">*</span>
 								</div>
-								<select name="gender" ng-model="transaction.type"
+								<select name="transactionType"
 												class="form-control"
-												required="">
-									<option value="1">Saving</option>
-									<option value="2">Loan</option>
+												required ng-model="transaction.type"
+												ng-options="option.id as option.label for option in depositOptions track by option.id">
+									<option></option>
 								</select>
 							</div>
 						</div>

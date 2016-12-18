@@ -14,8 +14,8 @@ define([
         "ui.grid.exporter",
         'societyApp.common.services.gridService',
 		'societyApp.common.services.dateService'])
-        .directive('memberLoans', ['$location', '$filter', '$q', 'MemberService', 'SelectOptions', 'uiGridConstants', 'gridService', 'dateService',
-			function ($location, $filter, $q, MemberService, SelectOptions, uiGridConstants, gridService, dateService) {
+        .directive('memberLoans', ['$location', '$filter', '$q', '$log', 'MemberService', 'SelectOptions', 'uiGridConstants', 'gridService', 'dateService',
+			function ($location, $filter, $q, $log, MemberService, SelectOptions, uiGridConstants, gridService, dateService) {
 				return {
 					restrict: 'A',
 					scope: {
@@ -33,13 +33,13 @@ define([
 								id: '',
 								amount: '',
 								frequency: 12,
-								createdate: '',
-								closedate: '',
+								createDate: '',
+								closeDate: '',
 								installment: '',
 								interestRate: $scope.$root.$storage.loanInterestRate.value,
-								memberrefid1: '',
-								memberrefid2: '',
-								memberid: ''
+								memberRefid1: '',
+								memberRefid2: '',
+								memberId: ''
 							};
 							if($scope.memberId) {
 								$q.all([
@@ -104,10 +104,10 @@ define([
 								memberLoan.id = loan.id;
 								memberLoan.loanAmount = loan.amount;
 								memberLoan.interestRate = loan.interestRate;
-								memberLoan.memberId = $scope.memberId == loan.memberid ? 'SELF' : loan.memberid;
+								memberLoan.memberId = $scope.memberId == loan.memberId ? 'SELF' : loan.memberId;
 								memberLoan.remainingAmount = loan.amount - loan.amountPaid;
-								memberLoan.startDate = $filter('date')(loan.createdate, $scope.date.format);
-								memberLoan.endDate = $filter('date')(loan.closedate, $scope.date.format);
+								memberLoan.startDate = $filter('date')(loan.createDate, $scope.date.format);
+								memberLoan.endDate = $filter('date')(loan.closeDate, $scope.date.format);
 								memberLoans.push(memberLoan);
 							});
 
@@ -140,11 +140,11 @@ define([
 							var memberId = $scope.MEMBER_CONTEXT? ($scope.memberLoansGrid.selectedRowMemberId === 'SELF'? $scope.memberId: $scope.memberLoansGrid.selectedRowMemberId) : $scope.memberLoansGrid.selectedRowMemberId;
 							MemberService.getLoanDetails(memberId, $scope.memberLoansGrid.selectedRowId).then(function (data) {
 								$scope.loanDetail = data;
-								$scope.loanDetail.createdate = new Date($scope.loanDetail.createdate);
-								$scope.loanDetail.closedate = new Date($scope.loanDetail.closedate);
+								$scope.loanDetail.createDate = new Date($scope.loanDetail.createDate);
+								$scope.loanDetail.closeDate = new Date($scope.loanDetail.closeDate);
 								$scope.loanDetail.remainingAmount = data.amount - data.amountPaid;
 							}, function (error) {
-								console.log(error);
+								$log.log(error);
 							});
 							$scope.LOAN_MODE.VIEW = true;
 							$scope.LOAN_MODE.NEW = false;
@@ -160,40 +160,40 @@ define([
 						};
 						$scope.calculateInstallment = function () {
 							$scope.loanDetail.installment = ($scope.loanDetail.amount * ((100+$scope.loanDetail.interestRate)/100)) / $scope.loanDetail.frequency;
-							$scope.loanDetail.installment = _.round($scope.loanDetail.installment);
-							$scope.loanDetail.interest = ($scope.loanDetail.amount * ($scope.loanDetail.interestRate)/100);
+							$scope.loanDetail.installment = _.round($scope.loanDetail.installment, 2);
+							$scope.loanDetail.interest = _.round(($scope.loanDetail.amount * ($scope.loanDetail.interestRate)/100), 2);
 						};
 						$scope.addNewLoan = function () {
 							if (!validateLoanDetails($scope.loanDetail)) {
 								return;
 							}
 							var loanDetail = angular.copy($scope.loanDetail);
-							loanDetail.memberid = $scope.MEMBER_CONTEXT? $scope.memberId : $scope.loanDetail.memberid;
+							loanDetail.memberId = $scope.MEMBER_CONTEXT? $scope.memberId : $scope.loanDetail.memberId;
 							MemberService.addNewLoan(loanDetail).then(function (data) {
-								console.log(data);
+								$log.log(data);
 								$scope.showLoanSection = false;
 								initLoanDetails();
 							}, function (error) {
-								console.log(error);
+								$log.log(error);
 							});
 						};
 						$scope.openMemberIdSearchModal = function () {
 							$scope.memberIdOption.openModal();
 						};
 						$scope.memberIdOption.onSelectRow = function (memberId) {
-							$scope.loanDetail.memberid = memberId;
+							$scope.loanDetail.memberId = memberId;
 						};
 						$scope.openRef1SearchModal = function () {
 							$scope.refOption1.openModal();
 						};
 						$scope.refOption1.onSelectRow = function (memberId) {
-							$scope.loanDetail.memberrefid1 = memberId;
+							$scope.loanDetail.memberRefid1 = memberId;
 						};
 						$scope.openRef2SearchModal = function () {
 							$scope.refOption2.openModal();
 						};
 						$scope.refOption2.onSelectRow = function (memberId) {
-							$scope.loanDetail.memberrefid2 = memberId;
+							$scope.loanDetail.memberRefid2 = memberId;
 						};
 						initLoanDetails();
 					}],

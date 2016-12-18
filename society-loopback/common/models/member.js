@@ -5,20 +5,24 @@ module.exports = function (Member) {
     Member.memberTransaction = function (req, cb) {
         var TransactionHistory = req.app.models.TransactionHistory;
 		var Loan = req.app.models.Loan;
+		var MemberDeposit = req.app.models.MemberDeposit;
         Member.beginTransaction({isolationLevel: Member.Transaction.READ_COMMITTED}, function (err, tx) {
             var memberid = req.body.memberId;
+			var depositId = req.body.depositId;
             var depositAmount = req.body.depositAmount;
 			var interestAmount = req.body.interestAmount;
 			var depositType = req.body.type;
 			var updateAmount;
+
+			delete req.body.depositId;
 
             TransactionHistory.create(req.body, {transaction: tx}, function (err1, data1) {
                 if (err1) {
                     tx.rollback();
                     cb(err1, null);
                 }
-				if(depositType == 1 || depositType == 3 || depositType == 4) {
-					Member.findById(memberid, {transaction: tx}, function(err2, data2) {
+				if(depositType == 1 || depositType == 3 || depositType == 4 || depositType == 5) {
+					MemberDeposit.findById(depositId, {transaction: tx}, function(err2, data2) {
 						if (err2) {
 							tx.rollback();
 							cb(err2, null);
@@ -33,8 +37,7 @@ module.exports = function (Member) {
 							updateAmount = {buildingFund: data2.buildingFund + depositAmount};
 						}
 
-						Member.update({id: memberid}, updateAmount, {transaction: tx}, function(err3, data3) {
-							console.log('member updated: ',data3);
+						MemberDeposit.update({id: depositId}, updateAmount, {transaction: tx}, function(err3, count) {
 							if (err3) {
 								tx.rollback();
 								cb(err3, null);
@@ -63,8 +66,12 @@ module.exports = function (Member) {
 							tx.commit();
 							cb(null, {
 								transactionId: data1.id,
-								deposit: principalPaid,
-								interest: interestPaid
+								deposit: {
+									loanDetails: {
+										amountPaid: principalPaid,
+										interestPaid: interestPaid
+									}
+								}
 							});
 						});
 					});

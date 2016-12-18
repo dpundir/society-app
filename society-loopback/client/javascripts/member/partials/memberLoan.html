@@ -79,10 +79,10 @@
 							<span class="text-danger">*</span>
 						</div>
 						<div class="form-group input-group">
-							<input type="text" name="memberid" ng-disabled="true"
+							<input type="text" name="memberId" ng-disabled="true"
 										 class="form-control"
-										 id="memberid"
-										 required="" ng-model="loanDetail.memberid"/>
+										 id="memberId"
+										 required="" ng-model="loanDetail.memberId"/>
                               <span class="input-group-btn">
                                 <button type="button"
 																				class="btn btn-default btn-datepicker"
@@ -102,7 +102,7 @@
 					<div class="form-group input-group">
 						<input type="text" class="form-control" ng-disabled="!LOAN_MODE.NEW"
 									 uib-datepicker-popup="{{date.format}}"
-									 ng-model="loanDetail.createdate" is-open="date.status.startDateOpened"
+									 ng-model="loanDetail.createDate" is-open="date.status.startDateOpened"
 									 datepicker-options="date.dateOption" id="loanStartDate" name="loanStartDate"
 									 ng-required="true" close-text="Close" required=""/>
             <span class="input-group-btn">
@@ -121,7 +121,7 @@
 					<div class="form-group input-group">
 						<input type="text" class="form-control" ng-disabled="LOAN_MODE.VIEW"
 									 uib-datepicker-popup="{{date.format}}"
-									 ng-model="loanDetail.closedate" is-open="date.status.endDateOpened"
+									 ng-model="loanDetail.closeDate" is-open="date.status.endDateOpened"
 									 datepicker-options="date.dateOption" id="loanCloseDate" name="loanCloseDate"
 									 ng-required="true" close-text="Close" required=""/>
             <span class="input-group-btn">
@@ -157,10 +157,11 @@
 							<input type="text" name="reference1" ng-disabled="true"
 										 class="form-control"
 										 id="reference1"
-										 required="" ng-model="loanDetail.memberrefid1"/>
+										 required="" ng-model="loanDetail.memberRefid1"/>
               <span class="input-group-btn">
                 <button type="button"
 												class="btn btn-default btn-datepicker"
+												ng-disabled="!LOAN_MODE.NEW"
 												ng-click="openRef1SearchModal()">
 									<i class="glyphicon glyphicon-search"></i></button>
               </span>
@@ -175,10 +176,11 @@
 						</div>
 						<div class="form-group input-group">
 							<input type="text" class="form-control" id="reference2" name="reference2" ng-disabled="true"
-										 required="" ng-model="loanDetail.memberrefid2">
+										 required="" ng-model="loanDetail.memberRefid2">
               <span class="input-group-btn">
                 <button type="button"
 												class="btn btn-default btn-datepicker"
+												ng-disabled="!LOAN_MODE.NEW"
 												ng-click="openRef2SearchModal()">
 									<i class="glyphicon glyphicon-search"></i></button>
               </span>
@@ -198,6 +200,28 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-sm-4" ng-if="!LOAN_MODE.NEW">
+					<div class="form-group">
+						<div class="label-input">
+							<span class="form-text">Principal Paid:</span>
+						</div>
+						<input type="text" name="amountPaid" ng-disabled="true"
+									 class="form-control"
+									 id="amountPaid"
+									 required="" ng-model="loanDetail.amountPaid">
+					</div>
+				</div>
+				<div class="col-sm-4" ng-if="!LOAN_MODE.NEW">
+					<div class="form-group">
+						<div class="label-input">
+							<span class="form-text">Interest Paid:</span>
+						</div>
+						<input type="text" name="interestPaid" ng-disabled="true"
+									 class="form-control"
+									 id="interestPaid"
+									 required="" ng-model="loanDetail.interestPaid">
+					</div>
+				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
 						<div class="label-input">

@@ -43,6 +43,54 @@
       },
       "_selectable": true
     },
+	  "deposit": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "deposit",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+	  "kalyanFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "kalyan_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+	  "buildingFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "building_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
     "installmentValue": {
       "type": "Number",
       "required": false,

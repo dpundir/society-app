@@ -125,7 +125,7 @@ define([
                         });
 
                         $scope.memberFullName = (data.person.firstName||'')+' '+(data.person.middleName||'')+' '+(data.person.lastName||'');
-                        $scope.memberDeposit.deposit = data.deposit;
+                        //$scope.memberDeposit.deposit = data.deposit;
                         $scope.memberDeposit.id = data.depositId;
                     })
                 }
@@ -244,8 +244,8 @@ define([
 						transaction.interestAmount = 0;
 					}
                     MemberService.addNewTransaction(transaction).then(function (data) {
-						if(data.transaction.deposit.deposit) {
-							$scope.memberDeposit.deposit = data.transaction.deposit.deposit;
+						if(data.transaction.deposit) {
+							_.merge($scope.memberDeposit, data.transaction.deposit);
 						}
                         $scope.memberDeposit.successCB(data.transaction, true);
                     }, function (error) {

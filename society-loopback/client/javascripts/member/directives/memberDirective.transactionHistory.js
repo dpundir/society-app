@@ -5,9 +5,10 @@ define([
   'angular',
   'lodash',
     'javascripts/common/services/grid-service',
-    "javascripts/common/directives/print-directive"
+    "javascripts/common/directives/print-directive",
+	'javascripts/member/filters/memberFilters'
 ], function (angular, _) {
-  angular.module("societyApp.member.directives.transactionHistory", ['societyApp.common.services.gridService', "societyApp.common.directives.print"])
+  angular.module("societyApp.member.directives.transactionHistory", ['societyApp.common.services.gridService', "societyApp.common.directives.print", 'societyApp.member.filters'])
     .directive('transactionHistory',['$filter', 'gridService', function ($filter, gridService) {
       return{
         restrict: 'A',
@@ -56,7 +57,7 @@ define([
               {field: 'depositAmount', enableHiding: false},
 			  {field: 'interestAmount', enableHiding: false},
               {field: 'penaltyAmount', enableHiding: false},
-              {field: 'transactionType', enableHiding: false},
+              {field: 'type', enableHiding: false, cellFilter: 'transactionType'},
               {field: 'remarks', enableHiding: false}
           ], true, {
             onRegisterApi: function(gridApi){
@@ -83,7 +84,7 @@ define([
               history.depositAmount = transaction.depositAmount;
 			history.interestAmount = transaction.interestAmount;
               history.penaltyAmount = transaction.penaltyAmount;
-              history.transactionType = $filter('transactionType')(transaction.type);
+              history.type = transaction.type;
               history.remarks = transaction.remarks;
               transHistory.push(history);
             });

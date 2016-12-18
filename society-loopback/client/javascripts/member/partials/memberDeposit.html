@@ -17,30 +17,17 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 				<div class="form-group">
 					<label>Account Balance:</label>
 					<span>&#8377;</span>
 					<input type="text"
 								 class="form-control" name="deposit"
-								 id="deposit" ng-disabled="deposit.isViewMode"
+								 id="deposit" ng-disabled="true"
 								 required="" ng-model="deposit.deposit">
 				</div>
 			</div>
-			<div class="col-sm-6">
-				<div class="form-group">
-					<label>Share value:</label>
-					<span>&#8377;</span>
-					<input type="text"
-								 class="form-control" name="shareValue"
-								 id="shareValue" ng-disabled="deposit.isViewMode"
-								 required="" ng-model="deposit.shareValue">
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 				<div class="form-group">
 					<label>Installment frequency:</label>
 					<select name="installmentFrequency" id="installmentFrequency" ng-model="deposit.installmentFreq"
@@ -51,7 +38,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 				<div class="form-group">
 					<label>Installment value:</label>
 					<span>&#8377;</span>
@@ -59,6 +46,39 @@
 								 class="form-control" name="installmentValue"
 								 id="installmentValue" ng-disabled="deposit.isViewMode"
 								 required="" ng-model="deposit.installmentValue">
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label>Share value:</label>
+					<span>&#8377;</span>
+					<input type="text"
+								 class="form-control" name="shareValue"
+								 id="shareValue" ng-disabled="true"
+								 required="" ng-model="deposit.shareValue">
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label>Kalyan fund:</label>
+					<span>&#8377;</span>
+					<input type="text"
+								 class="form-control" name="kalyanFund"
+								 id="kalyanFund" ng-disabled="true"
+								 required="" ng-model="deposit.kalyanFund">
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label>Building fund:</label>
+					<span>&#8377;</span>
+					<input type="text"
+								 class="form-control" name="buildingFund"
+								 id="buildingFund" ng-disabled="true"
+								 required="" ng-model="deposit.buildingFund">
 				</div>
 			</div>
 		</div>
@@ -165,10 +185,10 @@
 									<span class="text-danger">*</span>
 								</div>
 								<div class="form-group input-group">
-									<input type="text" name="loanId" ng-disabled="true"
+									<input type="number" name="loanId" ng-disabled="true"
 												 class="form-control"
 												 id="loanId"
-												 ng-model="transaction.loanId"/>
+												 ng-model="deposit.loanDetails.id"/>
               <span class="input-group-btn">
                 <button type="button"
 												class="btn btn-default btn-datepicker"
@@ -183,10 +203,10 @@
 								<div class="label-input">
 									<span class="form-text">Loan Amount</span>
 								</div>
-								<input type="text" name="loanAmount" ng-disabled="true"
+								<input type="number" name="loanAmount" ng-disabled="true"
 											 class="form-control"
 											 id="loanAmount"
-											 ng-model="loanDetails.amount">
+											 ng-model="deposit.loanDetails.amount">
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -194,10 +214,10 @@
 								<div class="label-input">
 									<span class="form-text">Loan Interest</span>
 								</div>
-								<input type="text" name="loanInterest" ng-disabled="true"
+								<input type="number" name="loanInterest" ng-disabled="true"
 											 class="form-control"
 											 id="loanInterest"
-											 ng-model="loanDetails.interest">
+											 ng-model="deposit.loanDetails.interest">
 							</div>
 						</div>
 					</div>
@@ -207,10 +227,10 @@
 								<div class="label-input">
 									<span class="form-text">Principal Paid</span>
 								</div>
-								<input type="text" name="principalPaid" ng-disabled="true"
+								<input type="number" name="principalPaid" ng-disabled="true"
 											 class="form-control"
 											 id="principalPaid"
-											 ng-model="loanDetails.amountPaid">
+											 ng-model="deposit.loanDetails.amountPaid">
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -218,10 +238,10 @@
 								<div class="label-input">
 									<span class="form-text">Interest Paid</span>
 								</div>
-								<input type="text" name="interestPaid" ng-disabled="true"
+								<input type="number" name="interestPaid" ng-disabled="true"
 											 class="form-control"
 											 id="interestPaid"
-											 ng-model="loanDetails.interestPaid">
+											 ng-model="deposit.loanDetails.interestPaid">
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -229,10 +249,10 @@
 								<div class="label-input">
 									<span class="form-text">Loan Installment</span>
 								</div>
-								<input type="text" name="loanInstallment" ng-disabled="true"
+								<input type="number" name="loanInstallment" ng-disabled="true"
 											 class="form-control"
 											 id="loanInstallment"
-											 ng-model="loanDetails.installment">
+											 ng-model="deposit.loanDetails.installment">
 							</div>
 						</div>
 					</div>

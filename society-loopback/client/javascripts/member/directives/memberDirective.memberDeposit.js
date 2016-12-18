@@ -27,7 +27,7 @@ define([
 						onSelectRow: function (loanDetails) {
 							$scope.transaction.loanId = loanDetails.id;
 							$scope.transaction.depositAmount = loanDetails.installment;
-							$scope.loanDetails = loanDetails;
+							$scope.deposit.loanDetails = loanDetails;
 						}
 					};
 
@@ -44,6 +44,7 @@ define([
 
                     function resetTransaction() {
                         $scope.transaction = {
+							depositId: $scope.deposit.id,
                             depositAmount: $scope.deposit.installmentValue,
                             penaltyAmount: 0,
                             //type: 1,
@@ -51,6 +52,8 @@ define([
                             id: '',
 							interestAmount: 0
                         };
+						$scope.printTransaction.context.transactionId = $scope.transactionId = undefined;
+						$scope.deposit.loanDetails = undefined;
                     }
 
                     function resetError() {
@@ -80,11 +83,6 @@ define([
                             $scope.error.errorText = 'Deposit amount cannot be 0.';
                             return false;
                         }
-                        if ($scope.transaction.depositAmount < $scope.deposit.installmentValue) {
-                            $scope.error.isError = true;
-                            $scope.error.errorText = 'Deposit amount cannot be less than installment value.';
-                            return false;
-                        }
                         return true;
                     }
 
@@ -95,8 +93,7 @@ define([
                         } else {
                             var depositRequest = {
                                 installmentFreq: $scope.deposit.installmentFreq,
-                                installmentValue: $scope.deposit.installmentValue,
-                                shareValue: $scope.deposit.shareValue
+                                installmentValue: $scope.deposit.installmentValue
                             };
                             if ($scope.deposit.id) {
                                 MemberService.updateMemberDeposit($scope.deposit.id, depositRequest).then(function (data) {
@@ -116,9 +113,8 @@ define([
                     };
                     $scope.configureSave = function(){
                         $scope.isCollapsed = false;
-                        $scope.printTransaction.context.transactionId = $scope.transactionId = undefined;
-                        $scope.showSuccessMsg = false;
-                        $scope.successMsg = '';
+                        resetTransaction();
+						resetError();
                     };
                     $scope.saveNewDeposit = function (form) {
                         var isValidDepositForm = validateDepositForm(form);
@@ -148,25 +144,18 @@ define([
 					};
                     $scope.deposit.successCB = function (data, showSuccessMsg) {
                         if (!showSuccessMsg) {
-                            if (data.installmentValue) {
-                                $scope.transaction.depositAmount = data.installmentValue;
-                            }
-
-                            $scope.deposit.installmentFreq = data.installmentFreq;
-                            $scope.deposit.shareValue = data.shareValue;
-                            $scope.deposit.installmentValue = data.installmentValue;
-                            $scope.deposit.id = data.id;
-                            $scope.deposit.isViewMode = !!data.id;
+                            $scope.deposit = data;
+							$scope.deposit.isViewMode = !!data.id;
                             $scope.actionText = getActionText();
+							$scope.isCollapsed = true;
+							resetTransaction();
                         } else {
-                            //$scope.isCollapsed = true;
+							_.merge($scope.deposit, data.deposit);
                             $scope.transactionId = data.transactionId;
                             $scope.successMsg = 'Deposit Successful with Transaction ID:'+data.transactionId;
                             $scope.showSuccessMsg = true;
                         }
-                        //resetTransaction();
                         !showSuccessMsg && resetError();
-                        //$scope.isCollapsed = true;
                     };
                     $scope.deposit.errorCB = function (error) {
                         if (error) {
@@ -179,9 +168,9 @@ define([
                         }
                     };
 
-					$scope.$watch('transaction.depositAmount', function(){
-						if($scope.transaction.type === 2){
-							$scope.transaction.interestAmount = $scope.loanDetails.installment - $scope.transaction.depositAmount;
+					$scope.$watch('transaction.depositAmount', function(newValue, oldValue){
+						if($scope.transaction.type === 2 && newValue != oldValue){
+							$scope.transaction.interestAmount = $scope.deposit.loanDetails.installment - $scope.transaction.depositAmount;
 						}
 					});
                     $scope.isCollapsed = true;

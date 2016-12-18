@@ -190,7 +190,7 @@ define([
                 if (memberId) {
                     filter = {
                         "filter": {
-                            "where": {"memberid": memberId}
+                            "where": {"memberId": memberId}
                         }
                     }
                 }
@@ -214,11 +214,11 @@ define([
                         loanAvailFilter = {
                             "filter": {
                                 "where": {
-                                    "memberid": memberId,
-                                    createdate: {
+                                    "memberId": memberId,
+                                    createDate: {
                                         lte: $filter('date')(new Date(), 'yyyy-MM-dd')
                                     },
-                                    closedate: {
+                                    closeDate: {
                                         gte: $filter('date')(new Date(), 'yyyy-MM-dd')
                                     }
                                 }
@@ -227,7 +227,7 @@ define([
                     } else {
                         loanAvailFilter = {
                             "filter": {
-                                "where": {"memberid": memberId}
+                                "where": {"memberId": memberId}
                             }
                         };
                     }
@@ -240,13 +240,13 @@ define([
                                     "and": [
                                         {
                                             "or": [
-                                                {"memberrefid1": memberId},
-                                                {"memberrefid2": memberId}
+                                                {"memberRefid1": memberId},
+                                                {"memberRefid2": memberId}
                                             ]
                                         }, {
                                             "and": [
-                                                {createdate: {lte: $filter('date')(new Date(), 'yyyy-MM-dd')}},
-                                                {closedate: {gte: $filter('date')(new Date(), 'yyyy-MM-dd')}}
+                                                {createDate: {lte: $filter('date')(new Date(), 'yyyy-MM-dd')}},
+                                                {closeDate: {gte: $filter('date')(new Date(), 'yyyy-MM-dd')}}
                                             ]
                                         }
                                     ]
@@ -259,8 +259,8 @@ define([
                             "filter": {
                                 "where": {
                                     "or": [
-                                        {"memberrefid1": memberId},
-                                        {"memberrefid2": memberId}
+                                        {"memberRefid1": memberId},
+                                        {"memberRefid2": memberId}
                                     ]
                                 }
                             }
@@ -274,15 +274,15 @@ define([
                                 "where": {
                                     "and": {
                                         "or": [
-                                            {"memberid": memberId},
-                                            {"memberrefid1": memberId},
-                                            {"memberrefid2": memberId}
+                                            {"memberId": memberId},
+                                            {"memberRefid1": memberId},
+                                            {"memberRefid2": memberId}
                                         ],
                                         and: [
                                             {
-                                                createdate: {lte: $filter('date')(new Date(), 'yyyy-MM-dd')}
+                                                createDate: {lte: $filter('date')(new Date(), 'yyyy-MM-dd')}
                                             }, {
-                                                closedate: {gte: $filter('date')(new Date(), 'yyyy-MM-dd')}
+                                                closeDate: {gte: $filter('date')(new Date(), 'yyyy-MM-dd')}
                                             }
                                         ]
                                     }
@@ -294,9 +294,9 @@ define([
                             "filter": {
                                 "where": {
                                     "or": [
-                                        {"memberid": memberId},
-                                        {"memberrefid1": memberId},
-                                        {"memberrefid2": memberId}
+                                        {"memberId": memberId},
+                                        {"memberRefid1": memberId},
+                                        {"memberRefid2": memberId}
                                     ]
                                 }
                             }
@@ -385,10 +385,10 @@ define([
             },
             getDepositFrequencyOptions : function () {
                 return [
-                    {id: 1, label: 'Monthly'},
-                    {id: 3, label: 'Quaterly'},
-                    {id: 6, label: 'Half-Yearly'},
-                    {id: 12, label: 'Yearly'}
+                    {id: 12, label: 'Monthly'},
+                    {id: 4, label: 'Quarterly'},
+                    {id: 2, label: 'Half-Yearly'},
+                    {id: 1, label: 'Yearly'}
                 ];
             },
 			getDepositOptions : function () {

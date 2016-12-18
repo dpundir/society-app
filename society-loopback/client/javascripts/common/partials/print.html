@@ -5,13 +5,13 @@
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Member ID:</label>
                         <span ng-bind="transaction.member.id"></span>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Member Name:</label>
                         <span ng-bind="transaction.member.person.name"></span>
@@ -19,29 +19,58 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Account Balance:</label>
                         <span>&#8377;</span>
-                        <span ng-bind="transaction.member.deposit"></span>
+                        <span ng-bind="transaction.member.memberDeposit.deposit"></span>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Date:</label>
                         <span ng-bind="transaction.createDate"></span>
                     </div>
                 </div>
             </div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Share Value:</label>
+								<span>&#8377;</span>
+								<span ng-bind="transaction.member.memberDeposit.shareValue"></span>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Kalyan Fund:</label>
+								<span ng-bind="transaction.member.memberDeposit.kalyanFund"></span>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Building Fund:</label>
+								<span ng-bind="transaction.member.memberDeposit.buildingFund"></span>
+							</div>
+						</div>
+					</div>
+					<hr>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Transaction Amount:</label>
                         <span>&#8377;</span>
                         <span ng-bind="transaction.depositAmount"></span>
                     </div>
                 </div>
-                <div class="col-sm-6">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Transaction Interest:</label>
+									<span>&#8377;</span>
+									<span ng-bind="transaction.interestAmount"></span>
+								</div>
+							</div>
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Transaction Penalty:</label>
                         <span>&#8377;</span>
@@ -50,13 +79,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Type:</label>
                         <span ng-bind="transaction.type"></span>
                     </div>
                 </div>
-                <div class="col-sm-6" ng-if="transaction.loanId">
+                <div class="col-sm-4" ng-if="transaction.loanId">
                     <div class="form-group">
                         <label>Loan Id:</label>
                         <span ng-bind="transaction.loanId"></span>
@@ -64,7 +93,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Remarks:</label>
                         <span ng-bind="transaction.remarks"></span>

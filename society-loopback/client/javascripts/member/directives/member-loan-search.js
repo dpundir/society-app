@@ -2,9 +2,10 @@ define([
     'angular',
     'lodash',
     'javascripts/common/services/grid-service',
-	'javascripts/common/services/date-service'
+	'javascripts/common/services/date-service',
+	'javascripts/member/services/Member'
 ], function (angular, _) {
-    angular.module("societyApp.member.memberLoanSearchDirective", ["societyApp.common.services.gridService"])
+    angular.module("societyApp.member.memberLoanSearchDirective", ["societyApp.common.services.gridService", 'societyApp.member.services.member'])
         .directive('memberLoanSearch', ['MemberService', '$filter', '$uibModal', 'gridService', 'dateService', function (MemberService, $filter, $uibModal, gridService, DateService) {
             return {
                 restrict: 'EA',
@@ -23,13 +24,13 @@ define([
                 };
                 $scope.memberLoanListSearchGrid = gridService.getDefaultGridConfig([
                     {field: 'id', displayName: 'Id'},
-                    {field: 'memberid', displayName: 'Member Id'},
-                    {field: 'createdate', displayName: 'Create Date'},
-                    {field: 'closedate', displayName: 'Close Date'},
+                    {field: 'memberId', displayName: 'Member Id'},
+                    {field: 'createDate', displayName: 'Create Date', cellFilter: 'date:"dd-MM-yyyy"'},
+                    {field: 'closeDate', displayName: 'Close Date', cellFilter: 'date:"dd-MM-yyyy"'},
 					{field: 'amount', displayName: 'Loan Amount'},
 					{field: 'interest', displayName: 'Interest'},
 					{field: 'installment', displayName: 'Installment'},
-					{field: 'frequency', displayName: 'Frequency'}
+					{field: 'frequency', displayName: 'Frequency', cellFilter: 'installmentFrequency'}
                 ], false, {
                     onRegisterApi: function (gridApi) {
                         $scope.gridApi = gridApi;

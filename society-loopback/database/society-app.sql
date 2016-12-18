@@ -39,7 +39,7 @@ CREATE TABLE `accesstoken` (
 
 LOCK TABLES `accesstoken` WRITE;
 /*!40000 ALTER TABLE `accesstoken` DISABLE KEYS */;
-INSERT INTO `accesstoken` VALUES ('RAB47C3M7ATetCawYqbEmv5XkfDkDgHECZX1fnVkGzhhuO3ZuXkPxBOyldYVKLAF',600,'2016-12-16 17:26:52',1);
+INSERT INTO `accesstoken` VALUES ('S8uT328O64haYYa1Os8QJp6Cgapz00pDaM73NSWpQ1YE8ZWcK180yI8bnP3iKtoe',600,'2016-12-18 13:52:14',1);
 /*!40000 ALTER TABLE `accesstoken` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,28 +166,28 @@ DROP TABLE IF EXISTS `loan`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `loan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `memberid` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
   `active` int(11) DEFAULT NULL,
-  `interest_rate` decimal(10,0) NOT NULL,
-  `createdate` datetime DEFAULT NULL,
-  `closedate` datetime DEFAULT NULL,
+  `interest_rate` double NOT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `close_date` datetime DEFAULT NULL,
   `amount` double NOT NULL,
   `interest` double NOT NULL DEFAULT '0',
   `amount_paid` double DEFAULT NULL,
   `interest_paid` double DEFAULT NULL,
-  `memberrefid1` int(11) NOT NULL,
-  `memberrefid2` int(11) NOT NULL,
+  `member_refid1` int(11) NOT NULL,
+  `member_refid2` int(11) NOT NULL,
   `last_installment` datetime DEFAULT NULL,
   `frequency` int(11) NOT NULL,
   `installment` double NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `loan_member_id_idx` (`memberid`),
-  KEY `loan_member_ref_id1_idx` (`memberrefid1`),
-  KEY `loan_member_ref_id2_idx` (`memberrefid2`),
-  CONSTRAINT `loan_member_id` FOREIGN KEY (`memberid`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `loan_member_ref_id1` FOREIGN KEY (`memberrefid1`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `loan_member_ref_id2` FOREIGN KEY (`memberrefid2`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `loan_member_id_idx` (`member_id`),
+  KEY `loan_member_ref_id1_idx` (`member_refid1`),
+  KEY `loan_member_ref_id2_idx` (`member_refid2`),
+  CONSTRAINT `loan_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `loan_member_ref_id1` FOREIGN KEY (`member_refid1`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `loan_member_ref_id2` FOREIGN KEY (`member_refid2`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,10 +212,6 @@ CREATE TABLE `member` (
   `modified_date` datetime DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `deposit_id` int(11) DEFAULT NULL,
-  `deposit` double DEFAULT NULL,
-  `share_value` double DEFAULT NULL,
-  `kalyan_fund` double DEFAULT NULL,
-  `building_fund` double DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `member_deposit_id_idx` (`deposit_id`),
@@ -231,7 +227,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'2015-11-13 00:00:00','2016-09-29 15:21:30',1,1,0,NULL,NULL,NULL,1),(2,'2015-11-30 00:00:00','2016-12-07 17:26:04',1,3,0,0,NULL,NULL,2),(3,'2015-11-13 00:00:00','2016-08-16 18:09:37',1,2,0,NULL,NULL,NULL,3);
+INSERT INTO `member` VALUES (1,'2015-11-13 00:00:00','2016-09-29 15:21:30',1,1,1),(2,'2015-11-30 00:00:00','2016-12-07 17:26:04',1,3,2),(3,'2015-11-13 00:00:00','2016-08-16 18:09:37',1,2,3);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,9 +240,12 @@ DROP TABLE IF EXISTS `member_deposit`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `member_deposit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `share_value` double DEFAULT NULL,
-  `installment_value` double DEFAULT NULL,
+  `share_value` double DEFAULT '0',
+  `installment_value` double DEFAULT '0',
   `installment_freq` int(11) DEFAULT NULL,
+  `deposit` double DEFAULT '0',
+  `kalyan_fund` double DEFAULT '0',
+  `building_fund` double DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='member deposit configuration';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -257,7 +256,7 @@ CREATE TABLE `member_deposit` (
 
 LOCK TABLES `member_deposit` WRITE;
 /*!40000 ALTER TABLE `member_deposit` DISABLE KEYS */;
-INSERT INTO `member_deposit` VALUES (1,1000,100,12),(2,1000,100,3),(3,100,100,1);
+INSERT INTO `member_deposit` VALUES (1,1000,100,1,0,0,0),(2,500,500,2,0,0,0),(3,1000,1000,4,0,0,0);
 /*!40000 ALTER TABLE `member_deposit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,7 +440,7 @@ CREATE TABLE `society_config` (
 
 LOCK TABLES `society_config` WRITE;
 /*!40000 ALTER TABLE `society_config` DISABLE KEYS */;
-INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate'),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate'),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value'),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value'),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value'),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value'),(7,'loanInterestRate',5,10,'2015-11-19 00:00:00',NULL,'Loan interest rate'),(8,'maxRunningLoan',1,3,'2015-11-19 00:00:00',NULL,'maximum running loan for member'),(9,'maxReferLoan',1,2,'2015-11-19 00:00:00',NULL,'maximum number of loan a member can refer');
+INSERT INTO `society_config` VALUES (1,'shareInterestRate',1,8,'2015-11-19 00:00:00',NULL,'share value interest rate'),(2,'depInterestRate',2,6,'2015-11-19 00:00:00',NULL,'installment value interest rate'),(3,'minShareValue',3,2500,'2015-11-19 00:00:00',NULL,'minimum share value'),(4,'minDepositValue',4,500,'2015-11-19 00:00:00',NULL,'minimum installment value'),(5,'maxShareValue',3,50000,'2015-11-19 00:00:00',NULL,'maximum share value'),(6,'maxDepositValue',4,50000,'2015-11-19 00:00:00',NULL,'maximum installment value'),(7,'loanInterestRate',5,13.2,'2015-11-19 00:00:00',NULL,'Loan interest rate'),(8,'maxRunningLoan',1,3,'2015-11-19 00:00:00',NULL,'maximum running loan for member'),(9,'maxReferLoan',1,2,'2015-11-19 00:00:00',NULL,'maximum number of loan a member can refer');
 /*!40000 ALTER TABLE `society_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -494,7 +493,7 @@ CREATE TABLE `transaction_history` (
   KEY `dh_loan_id_idx` (`loan_id`),
   CONSTRAINT `dh_loan_id` FOREIGN KEY (`loan_id`) REFERENCES `loan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -553,4 +552,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-16 22:58:18
+-- Dump completed on 2016-12-18 19:28:06

@@ -28,14 +28,14 @@
       },
       "_selectable": false
     },
-    "memberid": {
+    "memberId": {
       "type": "Number",
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
       "mysql": {
-        "columnName": "memberid",
+        "columnName": "member_id",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -76,14 +76,14 @@
       },
       "_selectable": true
     },
-    "createdate": {
+    "createDate": {
       "type": "Date",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "createdate",
+        "columnName": "create_date",
         "dataType": "datetime",
         "dataLength": null,
         "dataPrecision": null,
@@ -92,14 +92,14 @@
       },
       "_selectable": true
     },
-    "closedate": {
+    "closeDate": {
       "type": "Date",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "closedate",
+        "columnName": "close_date",
         "dataType": "datetime",
         "dataLength": null,
         "dataPrecision": null,
@@ -172,14 +172,14 @@
       },
       "_selectable": true
     },
-    "memberrefid1": {
+    "memberRefid1": {
       "type": "Number",
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
       "mysql": {
-        "columnName": "memberrefid1",
+        "columnName": "member_refid1",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -188,14 +188,14 @@
       },
       "_selectable": false
     },
-    "memberrefid2": {
+    "memberRefid2": {
       "type": "Number",
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
       "mysql": {
-        "columnName": "memberrefid2",
+        "columnName": "member_refid2",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,

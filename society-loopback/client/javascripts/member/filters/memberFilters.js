@@ -2,13 +2,12 @@ define([
     'angular'
 ], function (angular, _) {
     angular.module("societyApp.member.filters", [])
-        .filter('transactionType',function(){
+        .filter('installmentFrequency',function(){
 			var transactionHash = {
-				1: 'CD',
-				2: 'Loan',
-				3: 'Share',
-				4: 'Kalyan',
-				5: 'Building'
+				12: 'Monthly',
+				4: 'Quarterly',
+				2: 'Half Yearly',
+				1: 'Yearly'
 			};
             return function(type){
 				if (!type){
@@ -18,6 +17,22 @@ define([
 				}
             }
         })
+		.filter('transactionType',function(){
+			var transactionHash = {
+				1: 'CD',
+				2: 'Loan',
+				3: 'Share',
+				4: 'Kalyan',
+				5: 'Building'
+			};
+			return function(type){
+				if (!type){
+					return '';
+				} else {
+					return transactionHash[type];
+				}
+			}
+		})
 		.filter('identityFilter', function() {
 			var identityHash = {
 				1: 'Aadhar',

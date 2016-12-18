@@ -10,6 +10,7 @@ define([
 					middleName: person.middleName || '',
 					lastName: person.lastName || '',
                     phone: person.phone || '',
+					altPhone: person.altPhone || '',
                     status: person.status || 0,
                     addressId: person.addressId || -1,
                     dob: person.dob || '',
@@ -26,6 +27,7 @@ define([
                     modifiedDate: person.modifiedDate || '',
                     id: person.id || '',
                     address: person.address || {},
+					permanentAddress: person.permanentAddress || {},
                     profilePhotoName: person.profilePhotoName || ''
                 }
             };

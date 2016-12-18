@@ -91,6 +91,22 @@
       },
       "_selectable": false
     },
+	  "altPhone": {
+		  "type": "String",
+		  "required": false,
+		  "length": 10,
+		  "precision": null,
+		  "scale": null,
+		  "mysql": {
+			  "columnName": "alt_phone",
+			  "dataType": "varchar",
+			  "dataLength": 10,
+			  "dataPrecision": null,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": false
+	  },
     "addressId": {
       "type": "Number",
       "required": true,
@@ -107,6 +123,22 @@
       },
       "_selectable": false
     },
+	  "permanentAddressId": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "permanent_address_id",
+			  "dataType": "int",
+			  "dataLength": null,
+			  "dataPrecision": 10,
+			  "dataScale": 0,
+			  "nullable": "Y"
+		  },
+		  "_selectable": false
+	  },
     "createDate": {
       "type": "Date",
       "required": true,
@@ -340,6 +372,12 @@
       "foreignKey": "id",
       "keyFrom": "addressId"
     },
+	  "permanentAddress": {
+		  "type": "hasOne",
+		  "model": "Address",
+		  "foreignKey": "id",
+		  "keyFrom": "permanentAddressId"
+	  },
     "member": {
       "type": "belongsTo",
       "model": "Member",

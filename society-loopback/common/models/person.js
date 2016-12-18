@@ -21,10 +21,10 @@ module.exports = function (Person) {
             cb(err2, null);
           }
           var memberData = {
-            'create_date': new Date(),
-            'modified_date': new Date(),
-            'status': personData.status,
-            'person_id': data2
+            createDate: new Date(),
+            modifiedDate: new Date(),
+            status: personData.status,
+            personId: data2
           };
           Member.create(memberData, {transaction: tx}, function (err3, data3) {
             if (err3) {
@@ -54,7 +54,7 @@ module.exports = function (Person) {
           cb(err1, null);
         }
         var personData = req.body;
-        personData.modified_date = new Date();
+        personData.modifiedDate = new Date();
         var memberId = req.body.memberId;
         var personid = req.body.id;
         delete personData.address;
@@ -66,8 +66,8 @@ module.exports = function (Person) {
             cb(err2, null);
           }
           var memberData = {
-            'modified_date': new Date(),
-            'status': personData.status
+            modifiedDate: new Date(),
+            status: personData.status
           };
           Member.update({id: memberId}, memberData, {transaction: tx}, function (err3, data3) {
             if (err3) {
@@ -95,6 +95,7 @@ module.exports = function (Person) {
         var personData = req.body;
         delete personData.address;
         personData.addressId = data1.id;
+		personData.permanentAddressId = data1.id;
         personData.createDate = new Date();
         personData.modifiedDate = new Date();
         Person.create(personData, {transaction: tx}, function (err2, data2) {

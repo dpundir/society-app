@@ -18,6 +18,7 @@ define([
 			motherMiddleName: person.motherMiddleName || '',
 			motherLastName: person.motherLastName || '',
           phone: person.phone || '',
+		altPhone: person.altPhone || '',
           status: person.status || '',
           dob: person.dob || null,
           createDate: person.createDate || '',

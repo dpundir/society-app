@@ -39,7 +39,6 @@ CREATE TABLE `accesstoken` (
 
 LOCK TABLES `accesstoken` WRITE;
 /*!40000 ALTER TABLE `accesstoken` DISABLE KEYS */;
-INSERT INTO `accesstoken` VALUES ('S8uT328O64haYYa1Os8QJp6Cgapz00pDaM73NSWpQ1YE8ZWcK180yI8bnP3iKtoe',600,'2016-12-18 13:52:14',1);
 /*!40000 ALTER TABLE `accesstoken` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +186,7 @@ CREATE TABLE `loan` (
   CONSTRAINT `loan_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id1` FOREIGN KEY (`member_refid1`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loan_member_ref_id2` FOREIGN KEY (`member_refid2`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -349,7 +348,7 @@ CREATE TABLE `person_identity` (
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -493,7 +492,7 @@ CREATE TABLE `transaction_history` (
   KEY `dh_loan_id_idx` (`loan_id`),
   CONSTRAINT `dh_loan_id` FOREIGN KEY (`loan_id`) REFERENCES `loan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='transaction history details';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

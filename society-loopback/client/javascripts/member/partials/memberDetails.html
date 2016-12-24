@@ -1,4 +1,3 @@
-
 <form class="form-horizontal reg-form" name="registrationForm" non-validate>
     <div class=" form-bottom">
         <div class="panel panel-primary">
@@ -177,7 +176,9 @@
                                         <span class="text-danger" ng-show="!isViewMode">*</span>
                                     </div>
                                     <input type="text" class="form-control" id="phone" name="phone"
-                                           ng-disabled="isViewMode" required="" ng-model="person.phone">
+                                           ng-disabled="isViewMode" required="" ng-model="person.phone" ng-pattern="phonePattern">
+																		<span class="text-danger" ng-show="registrationForm.phone.$error.pattern">Please match pattern
+																			[910-367-8658]</span>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -220,7 +221,8 @@
 																<span class="form-text">Alternate Mobile number</span>
 															</div>
 															<input type="text" class="form-control" id="altPhone" name="altPhone"
-																		 ng-disabled="isViewMode" ng-model="person.altPhone">
+																		 ng-disabled="isViewMode" ng-model="person.altPhone" ng-pattern="phonePattern">
+															<span class="text-danger" ng-show="registrationForm.altPhone.$error.pattern">Please match pattern [910-367-8658]</span>
 														</div>
 													</div>
                             <div class="col-sm-4" ng-if="entity !== 'person'">

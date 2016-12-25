@@ -101,21 +101,46 @@
                         <span ng-bind="transaction.type"></span>
                     </div>
                 </div>
-                <div class="col-sm-4" ng-if="transaction.loanId">
-                    <div class="form-group">
-                        <label>Loan Id:</label>
-                        <span ng-bind="transaction.loanId"></span>
-                    </div>
-                </div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Remarks:</label>
+									<span ng-bind="transaction.remarks"></span>
+								</div>
+							</div>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label>Remarks:</label>
-                        <span ng-bind="transaction.remarks"></span>
-                    </div>
-                </div>
-            </div>
+					<hr>
+					<div class="row" ng-if="transaction.loanId">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Loan Id:</label>
+								<span ng-bind="transaction.loanId"></span>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Loan Amount:</label>
+								<span ng-bind="transaction.loan.amount"></span>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Loan Interest:</label>
+								<span ng-bind="transaction.loan.interest"></span>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Loan Amount Paid:</label>
+								<span ng-bind="transaction.loan.amountPaid"></span>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Loan Interest Paid:</label>
+								<span ng-bind="transaction.loan.interestPaid"></span>
+							</div>
+						</div>
+					</div>
         </div>
     </div>
     <div class="modal-footer">

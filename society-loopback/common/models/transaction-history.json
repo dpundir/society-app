@@ -162,7 +162,12 @@
       "type": "belongsTo",
       "model": "Member",
       "foreignKey": "memberId"
-    }
+    },
+	  "loan": {
+		  "type": "belongsTo",
+		  "model": "Loan",
+		  "foreignKey": "loanId"
+	  }
   },
   "acls": [],
   "methods": {}

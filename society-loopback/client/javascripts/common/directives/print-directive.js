@@ -61,16 +61,17 @@ define([
                     // pass type of the selected configuration
                     var filter = {
                         "filter": {
-                            "include": {
-                                "member": ["person", "memberDeposit"]
-                            }
+                            "include": [
+								{"member": ["person", "memberDeposit"]},
+								"loan"
+                            ]
                         }
                     };
                     return restInterface.get('/api/TransactionHistories/'+$scope.context.transactionId, null, filter).then(function (data) {
                         //data will be sorted in descending order of expire date
                         $scope.transaction = data;
 						$scope.transaction.type = $filter('transactionType')(data.type);
-                        $scope.transaction.loanId = $scope.transaction.loanId || 'NA';
+                        $scope.transaction.loanId = $scope.transaction.loanId;
                         $scope.transaction.member.person.name = data.member.person.firstName
                             + (data.member.person.middleName?" "+data.member.person.middleName:"")
                             + (data.member.person.lastName?" "+data.member.person.lastName:"");

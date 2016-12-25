@@ -20,7 +20,8 @@ define([
                     {field: 'person.firstName', displayName: 'First Name', enableHiding: false},
                     {field: 'person.middleName', displayName: 'Middle Name', enableHiding: false},
                     {field: 'person.lastName', displayName: 'Last Name', enableHiding: false},
-                    {field: 'person.phone', displayName: 'Phone', enableHiding: false}
+                    {field: 'person.phone', displayName: 'Phone', enableHiding: false},
+					{field: 'person.aadharNumber', displayName: 'Aadhar Number', enableHiding: false}
                 ], true, {
                     onRegisterApi: function(gridApi){
                         $scope.gridApi = gridApi;
@@ -30,7 +31,7 @@ define([
                         });
                     }
                 });
-                $scope.memberLoansGrid =  $.extend(true, $scope.memberLoansGrid, gridService.getDefaultPrintConfig());
+                $scope.memberListGrid =  $.extend(true, $scope.memberListGrid, gridService.getDefaultPrintConfig());
                 $scope.toggleFilter = function(){
                     $scope.memberListGrid.enableFiltering = !$scope.memberListGrid.enableFiltering;
                     if($scope.memberListGrid.enableFiltering){
@@ -49,6 +50,13 @@ define([
                     $location.url('/member/view/'+$scope.memberListGrid.selectedRowId);
                 };
                 MemberService.list().then(function (data) {
+					_.forEach(data, function(member){
+						_.forEach(member.person.identities, function(identity){
+							if(identity.type === 1) {
+								member.person.aadharNumber = identity.identityNumber;
+							}
+						});
+					});
                     $scope.memberListGrid.data  = data;
                 });
             }]);

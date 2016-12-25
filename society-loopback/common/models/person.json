@@ -389,7 +389,12 @@
       "model": "MemberNominee",
       "foreignKey": "nomineeId",
       "keyFrom": "id"
-    }
+    },
+	  "identities": {
+		  "type": "hasMany",
+		  "model": "PersonIdentity",
+		  "foreignKey": "personId"
+	  }
   },
   "acls": [],
   "methods": {}

@@ -23,7 +23,9 @@ define([
 				2: 'Loan',
 				3: 'Share',
 				4: 'Kalyan',
-				5: 'Building'
+				5: 'Building',
+				6: 'Admission',
+				7: 'Installation'
 			};
 			return function(type){
 				if (!type){

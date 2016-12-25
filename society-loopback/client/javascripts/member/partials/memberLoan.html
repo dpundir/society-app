@@ -233,6 +233,17 @@
 									 required="" ng-model="loanDetail.interest">
 					</div>
 				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<div class="label-input">
+							<span class="form-text">Processing Fee:</span>
+						</div>
+						<input type="text" name="processingFee" ng-disabled="!LOAN_MODE.NEW"
+									 class="form-control"
+									 id="processingFee"
+									 required="" ng-model="loanDetail.processingFee">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

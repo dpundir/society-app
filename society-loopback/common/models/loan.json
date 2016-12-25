@@ -76,6 +76,22 @@
       },
       "_selectable": true
     },
+	  "processingFee": {
+		  "type": "Number",
+		  "required": true,
+		  "length": null,
+		  "precision": 10,
+		  "scale": null,
+		  "mysql": {
+			  "columnName": "processing_fee",
+			  "dataType": "decimal",
+			  "dataLength": null,
+			  "dataPrecision": 10,
+			  "dataScale": null,
+			  "nullable": "N"
+		  },
+		  "_selectable": true
+	  },
     "createDate": {
       "type": "Date",
       "required": false,

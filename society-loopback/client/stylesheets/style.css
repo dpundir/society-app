@@ -707,7 +707,8 @@ label{
     font-size: 12px;
 }
 .ui-grid-top-panel{
-    padding: 0
+    padding: 0;
+	width: 100%;
 }
 .ui-grid-row{
     font-size: 14px;

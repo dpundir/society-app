@@ -39,6 +39,7 @@ CREATE TABLE `accesstoken` (
 
 LOCK TABLES `accesstoken` WRITE;
 /*!40000 ALTER TABLE `accesstoken` DISABLE KEYS */;
+INSERT INTO `accesstoken` VALUES ('FwjfsC3lF3NnZxr1OzITab4LHQ14r6bRcYC8SGuRdGJAzQB6ufRRiYYoFfXonmYM',600,'2016-12-18 15:17:41',1),('K0zWZqv1yy4EKYCpLIqdw4TyAfzCTu4SqVnRGr2EZtMEcP8sgeuYJHvAfgmWsBJZ',600,'2016-12-25 15:56:44',1);
 /*!40000 ALTER TABLE `accesstoken` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,6 +173,7 @@ CREATE TABLE `loan` (
   `close_date` datetime DEFAULT NULL,
   `amount` double NOT NULL,
   `interest` double NOT NULL DEFAULT '0',
+  `processing_fee` double DEFAULT '0',
   `amount_paid` double DEFAULT NULL,
   `interest_paid` double DEFAULT NULL,
   `member_refid1` int(11) NOT NULL,
@@ -245,6 +247,8 @@ CREATE TABLE `member_deposit` (
   `deposit` double DEFAULT '0',
   `kalyan_fund` double DEFAULT '0',
   `building_fund` double DEFAULT '0',
+  `admission_fund` double DEFAULT '0',
+  `installment_fund` double DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='member deposit configuration';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -255,7 +259,7 @@ CREATE TABLE `member_deposit` (
 
 LOCK TABLES `member_deposit` WRITE;
 /*!40000 ALTER TABLE `member_deposit` DISABLE KEYS */;
-INSERT INTO `member_deposit` VALUES (1,1000,100,1,0,0,0),(2,500,500,2,0,0,0),(3,1000,1000,4,0,0,0);
+INSERT INTO `member_deposit` VALUES (1,1000,100,1,0,0,0,0,0),(2,500,500,2,0,0,0,0,0),(3,1000,1000,4,0,0,0,0,0);
 /*!40000 ALTER TABLE `member_deposit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,7 +335,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'deepak','singh','pundir','8287536955',NULL,1,1,NULL,'2015-11-13 00:00:00','2016-09-29 15:21:30','1983-06-17','surbir','singh','pundir',NULL,NULL,NULL,0,1,'userProfile.jpeg',1),(2,'Usha','','pundir','9910995165',NULL,1,2,NULL,'2015-11-30 00:00:00','2016-12-07 17:26:04','1983-06-17','Deepak','singh','pundir','Sushila',NULL,'Devi',1,1,NULL,2),(3,'Debashis','','Mishra','9910995165',NULL,1,3,NULL,'2015-11-13 00:00:00','2016-07-31 15:21:16','1983-06-17','D','K','Mishra',NULL,NULL,NULL,1,1,'userProfile_1480785686413.jpeg',1);
+INSERT INTO `person` VALUES (1,'deepak','singh','pundir','8287536955',NULL,1,1,NULL,'2015-11-13 00:00:00','2016-09-29 15:21:30','1983-06-17','surbir','singh','pundir',NULL,NULL,NULL,0,1,'userProfile.jpeg',1),(2,'Usha','','pundir','9910995165','',1,2,NULL,'2015-11-30 00:00:00','2016-12-24 16:00:23','1983-06-17','Deepak','singh','pundir','Sushila',NULL,'Devi',1,1,NULL,2),(3,'Debashis','','Mishra','9910995165',NULL,1,3,NULL,'2015-11-13 00:00:00','2016-07-31 15:21:16','1983-06-17','D','K','Mishra',NULL,NULL,NULL,1,1,'userProfile_1480785686413.jpeg',1);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,7 +354,7 @@ CREATE TABLE `person_identity` (
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -553,4 +557,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-18 20:49:52
+-- Dump completed on 2016-12-25 21:28:24

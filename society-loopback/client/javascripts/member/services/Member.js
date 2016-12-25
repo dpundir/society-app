@@ -58,7 +58,7 @@ define([
                 //this relation is defined in member.json
                 var defaultMemberListFilter = {
                     "filter": {
-                        "include": ["person"]
+                        "include": {"person" : ["identities"]}
                     }
                 };
                 filter = angular.merge(defaultMemberListFilter, filter || {});
@@ -397,7 +397,9 @@ define([
 					{id: 2, label: 'Loan'},
 					{id: 3, label: 'Share'},
 					{id: 4, label: 'Kalyan'},
-					{id: 5, label: 'Building'}
+					{id: 5, label: 'Building'},
+					{id: 6, label: 'Admission'},
+					{id: 7, label: 'Installation'}
 				];
 			},
             getPersonStatusOptions : function () {

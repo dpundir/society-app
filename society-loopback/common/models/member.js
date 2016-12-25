@@ -21,7 +21,7 @@ module.exports = function (Member) {
                     tx.rollback();
                     cb(err1, null);
                 }
-				if(depositType == 1 || depositType == 3 || depositType == 4 || depositType == 5) {
+				if(depositType !== 2) {
 					MemberDeposit.findById(depositId, {transaction: tx}, function(err2, data2) {
 						if (err2) {
 							tx.rollback();
@@ -35,6 +35,10 @@ module.exports = function (Member) {
 							updateAmount = {kalyanFund: data2.kalyanFund + depositAmount};
 						} else if(depositType == 5) {
 							updateAmount = {buildingFund: data2.buildingFund + depositAmount};
+						} else if(depositType == 6) {
+							updateAmount = {admissionFund: data2.admissionFund + depositAmount};
+						} else if(depositType == 7) {
+							updateAmount = {installmentFund: data2.installmentFund + depositAmount};
 						}
 
 						MemberDeposit.update({id: depositId}, updateAmount, {transaction: tx}, function(err3, count) {

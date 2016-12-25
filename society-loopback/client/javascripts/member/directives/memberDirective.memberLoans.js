@@ -104,6 +104,7 @@ define([
 								memberLoan.id = loan.id;
 								memberLoan.loanAmount = loan.amount;
 								memberLoan.interestRate = loan.interestRate;
+								memberLoan.processingFee = loan.processingFee;
 								memberLoan.memberId = $scope.memberId == loan.memberId ? 'SELF' : loan.memberId;
 								memberLoan.remainingAmount = loan.amount - loan.amountPaid;
 								memberLoan.startDate = $filter('date')(loan.createDate, $scope.date.format);

@@ -91,6 +91,38 @@
 		  },
 		  "_selectable": true
 	  },
+	  "admissionFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "admission_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+	  "installmentFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "installment_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
     "installmentValue": {
       "type": "Number",
       "required": false,

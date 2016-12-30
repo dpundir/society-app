@@ -58,7 +58,34 @@ define([
                 //this relation is defined in member.json
                 var defaultMemberListFilter = {
                     "filter": {
-                        "include": {"person" : ["identities"]}
+						"fields": {
+							id: true,
+							person: true,
+							personId: true
+						},
+                        "include": {
+							relation: "person",
+							scope: {
+								fields: {
+									id: true,
+									firstName: true,
+									lastName: true,
+									middleName: true,
+									identities: true,
+									phone: true
+								},
+								"include": {
+									relation: "identities",
+									scope: {
+										fields: {
+											id: true,
+											identityNumber: true,
+											type: true
+										}
+									}
+								}
+							}
+						}
                     }
                 };
                 filter = angular.merge(defaultMemberListFilter, filter || {});

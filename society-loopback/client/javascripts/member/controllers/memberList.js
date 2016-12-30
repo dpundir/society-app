@@ -7,8 +7,8 @@ define([
     angular
         .module("societyApp.member.controller.memberlist", ["societyApp.member.services.member", "societyApp.common.services.gridService"])
         .controller('memberListController',
-        ['$scope', 'MemberService','$location','uiGridConstants', 'gridService',
-            function ($scope, MemberService, $location, uiGridConstants, gridService) {
+        ['$scope', '$parse', 'MemberService','$location','uiGridConstants', 'gridService',
+            function ($scope, $parse, MemberService, $location, uiGridConstants, gridService) {
                 var member = [];
                 $scope.error = {
                     showErrorMsg: false,
@@ -16,12 +16,12 @@ define([
                 };
                 $scope.filterText = 'Show filter';
                 $scope.memberListGrid = gridService.getDefaultGridConfig([
-                    {field: 'id', enableHiding: false},
+                    {field: 'id', enableHiding: false, enableFiltering: false},
                     {field: 'person.firstName', displayName: 'First Name', enableHiding: false},
                     {field: 'person.middleName', displayName: 'Middle Name', enableHiding: false},
                     {field: 'person.lastName', displayName: 'Last Name', enableHiding: false},
                     {field: 'person.phone', displayName: 'Phone', enableHiding: false},
-					{field: 'person.aadharNumber', displayName: 'Aadhar Number', enableHiding: false}
+					{field: 'person.aadharNumber', displayName: 'Aadhar Number', enableHiding: false, enableFiltering: false}
                 ], true, {
                     onRegisterApi: function(gridApi){
                         $scope.gridApi = gridApi;
@@ -29,6 +29,18 @@ define([
                         gridApi.selection.on.rowSelectionChanged($scope,function(row){
                             that.selectedRowId = row.entity.id;
                         });
+						$scope.gridApi.core.on.filterChanged($scope, function() {
+							var grid = this.grid,
+								refEntity;
+
+							that.filter = {};
+							_.forEach(grid.columns, function(column) {
+								if(column.filters[0].term) {
+									refEntity = $parse(column.field);
+									refEntity.assign(that.filter, {"regexp": column.filters[0].term});
+								}
+							});
+						});
                     }
                 });
                 $scope.memberListGrid =  $.extend(true, $scope.memberListGrid, gridService.getDefaultPrintConfig());
@@ -49,15 +61,32 @@ define([
                     }
                     $location.url('/member/view/'+$scope.memberListGrid.selectedRowId);
                 };
-                MemberService.list().then(function (data) {
-					_.forEach(data, function(member){
-						_.forEach(member.person.identities, function(identity){
-							if(identity.type === 1) {
-								member.person.aadharNumber = identity.identityNumber;
+				$scope.search = function() {
+					var filter;
+
+					if ($scope.memberListGrid.filter && $scope.memberListGrid.filter.person) {
+						filter = {
+							filter: {
+								include: {
+									scope: {
+										where: $scope.memberListGrid.filter.person
+									}
+								}
 							}
+						};
+					}
+					MemberService.list(filter).then(function (data) {
+						$scope.memberListGrid.data = _.filter(data, function(member){
+							if(member.person) {
+								_.forEach(member.person.identities, function(identity) {
+									if (identity.type === 1) {
+										member.person.aadharNumber = identity.identityNumber;
+									}
+								});
+							}
+							return !!member.person;
 						});
 					});
-                    $scope.memberListGrid.data  = data;
-                });
+				}
             }]);
 });

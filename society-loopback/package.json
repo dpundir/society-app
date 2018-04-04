@@ -9,24 +9,24 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
-    "consolidate": "^0.14.1",
-    "cors": "^2.7.1",
-    "errorhandler": "^1.4.3",
+    "consolidate": "^0.14.5",
+    "cors": "^2.8.1",
+    "errorhandler": "^1.5.0",
     "formidable": "1.0.17",
     "lodash": "^3.10.1",
-    "loopback": "^2.29.1",
-    "loopback-boot": "^2.21.0",
-    "loopback-component-explorer": "^2.5.0",
-    "loopback-connector-mysql": "^2.3.0",
-    "loopback-datasource-juggler": "^2.48.0",
-    "mime-types": "^2.1.11",
+    "loopback": "^3.0.0",
+    "loopback-boot": "^2.23.0",
+    "loopback-component-explorer": "^4.0.0",
+    "loopback-connector-mysql": "^2.4.0",
+    "mime-types": "^2.1.13",
     "mkdirp": "^0.5.1",
-    "moment": "2.14.1",
-    "serve-favicon": "^2.3.0"
+    "moment": "2.22.0",
+    "serve-favicon": "^2.3.2",
+    "strong-error-handler": "1.1.1"
   },
   "devDependencies": {
-    "jshint": "^2.9.2",
-    "tape": "^4.6.0"
+    "jshint": "^2.9.4",
+    "tape": "^4.6.3"
   },
   "repository": {
     "type": "",

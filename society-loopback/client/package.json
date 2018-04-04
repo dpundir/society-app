@@ -1,0 +1,50 @@
+{
+    "name": "society",
+    "version": "1.0.0",
+    "description": "society",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "less": "2.5.0",
+        "lodash": "4.15.0"
+    },
+    "dependencies": {
+        "angular": "1.4.0",
+        "angular-aria": "1.4.0",
+        "angular-animate": "1.4.0",
+        "angular-bootstrap-lightbox": "0.12.0",
+        "angular-cookies": "1.4.0",
+        "angular-gridster": "0.13.3",
+        "ng-lodash": "0.2.3",
+        "angular-resource": "1.4.0",
+        "angular-route": "1.4.0",
+        "angular-sanitize": "1.4.0",
+        "angular-touch": "1.4.0",
+        "angular-ui-grid": "^3.0.1",
+        "angular-messages": "1.4.0",
+        "angular-ui-bootstrap": "1.2.5",
+        "angular-internationalization": "1.1.7",
+        "bootstrap": "3.3.2",
+        "jquery-ui": "1.12.1",
+        "jquery": "3.3.1",
+        "json": "*",
+        "json2": "0.1.0",
+        "lodash": "4.15.0",
+        "ng-storage": "0.3.2",
+        "pdfmake": "0.1.18",
+        "requirejs": "^2.1.20",
+        "rx": "2.5.1",
+        "rx-jquery": "1.1.7"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [
+        "society"
+    ],
+    "author": "Pundir, Deepak",
+    "license": "MIT"
+}

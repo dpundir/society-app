@@ -1,0 +1,84 @@
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="alert alert-danger" role="alert" ng-bind="error.errorMsg"
+                     ng-show="error.showErrorMsg"></div>
+                <div class="filter-bar">
+                    <div>
+                        <button class="btn btn-primary" ng-click="toggleFilter()" ng-bind="filterText"></button>
+                        <button class="btn btn-primary" ng-click="showExpenseIncomeDetails()">File Expense/Income</button>
+                    </div>
+                </div>
+                <div ng-cloak class="member-list">
+                    <div ui-grid="expenseListGrid" ui-grid-selection ui-grid-pagination ui-grid-exporter class="myGrid"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="showExpenseIncomeSection">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>File Expense/Income</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="btn-group">
+                            <label class="btn btn-primary" ng-model="expense.type" uib-btn-radio="'expense'">Expense</label>
+                            <label class="btn btn-primary" ng-model="expense.type" uib-btn-radio="'income'">Income</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <div class="label-input">
+                                    <span class="form-text">Expense/Income Description:</span>
+                                </div>
+                                <input type="text" name="description"
+                                       class="form-control"
+                                       id="description"
+                                       required="" ng-model="expense.description">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <div class="label-input">
+                                    <span class="form-text">Amount:</span>
+                                </div>
+                                <input type="text" name="amount"
+                                       class="form-control"
+                                       id="amount"
+                                       required="" ng-model="expense.amount">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="label-input">
+                                <span class="form-text">Date:</span>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="form-group input-group">
+                                <input type="text" class="form-control"
+                                       uib-datepicker-popup="{{date.format}}"
+                                       ng-model="expense.createDate" is-open="date.status.startDateOpened"
+                                       datepicker-options="date.dateOption" id="expenseIncomeDate"
+                                       name="expenseIncomeDate"
+                                       ng-required="true" close-text="Close" required=""/>
+                                <span class="input-group-btn">
+                                  <button type="button"
+                                          class="btn btn-default btn-datepicker"
+                                          ng-click="openStartdate()">
+                                      <i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row add-loan-btn">
+                        <button class="btn btn-primary loan-btn" ng-click="addExpenseIncome()">Add Expense/Income
+                        </button>
+                        <button class="btn btn-primary loan-btn" ng-click="clear()">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

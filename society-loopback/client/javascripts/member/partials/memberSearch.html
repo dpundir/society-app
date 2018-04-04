@@ -1,0 +1,26 @@
+<div class="search-popup">
+    <div class="modal-header">
+        <h3 class="modal-title">Search Member</h3>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-danger" role="alert" ng-bind="error.errorText" ng-show="error.isError"></div>
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Enter name for search:</label>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" ng-model="option.searchModel" ng-keydown="keyDown($event)">
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-primary loan-btn" type="button" ng-click="search()">Search</button>
+            </div>
+        </div>
+        <div class="row search-grid">
+            <div ui-grid="memberListSearchGrid" ui-grid-selection ui-grid-exporter class="grid"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary loan-btn" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning loan-btn" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

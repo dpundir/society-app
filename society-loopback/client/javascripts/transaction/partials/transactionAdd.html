@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Add Deposit to Member</h4>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <div class="label-input">
+                    <span class="form-text">Member:</span>
+                    <span class="text-danger">*</span>
+                </div>
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" id="memberId" name="memberId" ng-disabled="true"
+                           required="" ng-model="member.id">
+                  <span class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-default btn-datepicker"
+                            ng-click="searchMember()">
+                        <i class="glyphicon glyphicon-search"></i></button>
+                  </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" ng-if="showNewDeposit">
+            <div member-deposit member-id="member.id" deposit="memberDeposit"
+                 save-handler="saveNewDeposit(transaction)"></div>
+        </div>
+    </div>
+</div>
+<member-search option="existingMember"></member-search>

@@ -1,0 +1,100 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "SocietyBaseModel": {
+    "dataSource": "db",
+    "public": false
+  },
+  "User": {
+    "dataSource": "mysql-ds",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "mysql-ds",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mysql-ds",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mysql-ds",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "mysql-ds",
+    "public": false
+  },
+  "Email": {
+    "dataSource": "emailDs"
+  },
+  "user": {
+    "dataSource": "mysql-ds",
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
+  },
+  "Address": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "Loan": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "Member": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "MemberDeposit": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "Person": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "SocietyConfig": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "SocietyExpense": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "TransactionHistory": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "MemberNominee": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "Audit": {
+    "dataSource": "mysql-ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Entity": {
+    "dataSource": "mysql-ds",
+    "public": true
+  },
+  "PersonIdentity": {
+    "dataSource": "mysql-ds",
+    "public": true
+  }
+}

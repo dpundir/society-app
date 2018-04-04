@@ -1,0 +1,20 @@
+<form class="form-horizontal reg-form" name="memberList" non-validate>
+    <div class=" form-bottom">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div><h4>Member list</h4></div>
+                <div class="row btn-setting pull-right">
+										<button class="btn btn-primary" ng-click="search()">Search</button>
+                    <button class="btn btn-primary" ng-click="toggleFilter()" ng-bind="filterText"></button>
+                    <button class="btn btn-primary" ng-click="showDetails()">Show details</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger" role="alert" ng-bind="error.errorMsg" ng-show="error.showErrorMsg"></div>
+                <div ng-cloak class="member-list">
+                    <div ui-grid="memberListGrid" ui-grid-selection ui-grid-pagination ui-grid-exporter class="myGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

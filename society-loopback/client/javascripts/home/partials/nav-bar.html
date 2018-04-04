@@ -1,0 +1,106 @@
+<nav class="navbar navbar-default navbar-fixed-top" ng-show="navBarConfig.showNavBar">
+    <div class="container-fluid">
+        <div class="menu dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span class="text-primary">
+                        <a href="app/#/home">Home</a>
+                    </span>
+                </li>
+                <li class="header" ng-if="navigation.roleName != 'member'">
+                    <h5>Member</h5>
+                </li>
+                <li class="divider" ng-if="navigation.roleName != 'member'"></li>
+                <li ng-if="navigation.roleName != 'member'">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    <span class="text-primary">
+                        <a href="app/#/member/registration">Add Member</a>
+                    </span>
+                </li>
+                <li ng-if="roleName != 'navigation.member'">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                    <span class="text-primary">
+                        <a href="app/#/member">View All Member</a>
+                    </span>
+                </li>
+                <li class="header">
+                    <h5>Deposit</h5>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="text-primary">
+                        <a href="app/#/deposit/new">Enter new deposit</a>
+                    </span>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <span class="text-primary">
+                        <a href="app/#/deposit/view">View deposit history</a>
+                    </span>
+                </li>
+                <li class="header" ng-if="navigation.roleName != 'member'">
+                    <h5>Settings</h5>
+                </li>
+                <li class="divider" ng-if="navigation.roleName != 'member'"></li>
+                <li ng-if="navigation.roleName != 'member'">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span class="text-primary">
+                        <a href="app/#/settings/configure">Configure</a>
+                    </span>
+                </li>
+                <li ng-if="navigation.roleName != 'member'">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="text-primary">
+                        <a href="app/#/settings/manage-user">Manage User</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="app/#/home">Society App</a>
+        </div>
+        <div class="nav navbar-nav navbar-right">
+            <div class="profile-btn">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user profile"></span>
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                    </a>
+                    <ul class="dropdown-menu profile-menu">
+                        <li class="header">
+                            <h5 class="text-info" ng-bind="navigation.username">Welcome User</h5>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span class="text-primary">
+                                <a href="" ng-click="userProfile()">User profile</a>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            <span class="text-primary">
+                                <a href="" ng-click="logout()">Logout</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse navbar-search navbar-right" ng-if="roleName != 'navigation.member'">
+            <form class="navbar-form navbar-left" role="search" ng-submit="searchMemberById()">
+                <div class="form-group">
+                    <input type="text" class="form-control search-input" ng-model="navigation.memberId" placeholder="Search member...">
+                </div>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+        </div>
+
+    </div>
+</nav>
+<message-modal message="message"></message-modal>

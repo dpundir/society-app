@@ -1,0 +1,7 @@
+<div class="row acct-detail-section">
+    <uib-tabset>
+        <uib-tab ng-repeat="tab in tabConfig" heading="{{tab.title}}" active="tab.active">
+            {{tab.content}}
+        </uib-tab>
+    </uib-tabset>
+</div>

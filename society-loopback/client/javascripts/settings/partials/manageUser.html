@@ -1,0 +1,24 @@
+<form class="form-horizontal reg-form" name="manageUser" non-validate>
+    <div class=" form-bottom">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div><h4>Manage User</h4></div>
+                <div class="row btn-setting pull-right">
+                    <button type="button"
+                            class="btn btn-primary"
+                            ng-click="save()"
+                            ng-disabled="!manageUserGrid.selectedRowId">Save</button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            ng-click="addUserDetail()"
+                            ng-disabled="!manageUserGrid.selectedRowId">Add user details</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div ui-grid="manageUserGrid" ui-grid-edit ui-grid-selection ui-grid-pagination class="settingsConfigGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

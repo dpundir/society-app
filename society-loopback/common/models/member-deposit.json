@@ -1,0 +1,163 @@
+{
+  "name": "MemberDeposit",
+  "base": "SocietyBaseModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mysql": {
+    "schema": "society",
+    "table": "member_deposit"
+  },
+  "properties": {
+    "id": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "id",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
+    "shareValue": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "share_value",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+	  "deposit": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "deposit",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+	  "kalyanFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "kalyan_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+	  "buildingFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "building_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+	  "admissionFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "admission_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+	  "installmentFund": {
+		  "type": "Number",
+		  "required": false,
+		  "length": null,
+		  "precision": 10,
+		  "scale": 0,
+		  "mysql": {
+			  "columnName": "installment_fund",
+			  "dataType": "double",
+			  "dataLength": null,
+			  "dataPrecision": 22,
+			  "dataScale": null,
+			  "nullable": "Y"
+		  },
+		  "_selectable": true
+	  },
+    "installmentValue": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "installment_value",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "installmentFreq": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "installment_freq",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

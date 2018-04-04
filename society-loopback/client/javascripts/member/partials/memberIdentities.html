@@ -1,0 +1,107 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h4>Identity Information</h4>
+
+		<div class="loan-buttons btn-setting pull-right">
+			<button class="btn btn-primary loan-btn" ng-click="showFilter()" ng-bind="filterText"></button>
+			<button class="btn btn-primary loan-btn" ng-click="newIdentity()" ng-disabled="newLoanDisallowed">Add New Identity</button>
+			<button class="btn btn-primary loan-btn" ng-click="deleteIdentity()" ng-disabled="!memberIdentitiesGrid.selectedRowId">Delete Identity</button>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="alert alert-danger" role="alert" ng-bind="error.errorText" ng-show="error.isError">
+		</div>
+
+		<div ui-grid="memberIdentitiesGrid" ui-grid-selection ui-grid-pagination ui-grid-exporter class="loanGrid"></div>
+	</div>
+</div>
+<div ng-show="showIdentitySection">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h4 ng-bind="identitySectionHeading"></h4>
+
+			<div class="row add-loan-btn btn-setting pull-right" ng-if="IDENTITY_MODE.NEW">
+				<button class="btn btn-primary loan-btn" ng-click="addNewIdentity()">Add Identity</button>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="form-group">
+						<div class="label-input">
+							<span class="form-text">Identity ID:</span>
+						</div>
+						<input type="text" name="identityId" ng-disabled="true"
+									 class="form-control"
+									 id="identityId"
+									 required="" ng-model="identityDetail.id">
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<div class="label-input">
+							<span class="form-text">Type:</span>
+							<span class="text-danger">*</span>
+						</div>
+						<select name="identityType"
+										class="form-control" ng-disabled="!IDENTITY_MODE.NEW"
+										required="" ng-model="identityDetail.type"
+										ng-options="option.id as option.label for option in identityOptions track by option.id">
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<div class="label-input">
+							<span class="form-text">Identity Number:</span>
+							<span class="text-danger">*</span>
+						</div>
+						<input type="text" name="identityNumber"
+									 class="form-control" ng-disabled="!IDENTITY_MODE.NEW"
+									 id="identityNumber" ng-model="identityDetail.identityNumber">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="label-input">
+						<span class="form-text">Start Date:</span>
+						<span class="text-danger">*</span>
+					</div>
+					<div class="form-group input-group">
+						<input type="text" class="form-control" ng-disabled="!IDENTITY_MODE.NEW"
+									 uib-datepicker-popup="{{date.format}}"
+									 ng-model="identityDetail.startDate" is-open="date.status.startDateOpened"
+									 datepicker-options="date.dateOption" id="identityStartDate" name="identityStartDate"
+									 ng-required="true" close-text="Close" required=""/>
+            <span class="input-group-btn">
+              <button type="button" ng-disabled="!IDENTITY_MODE.NEW"
+											class="btn btn-default btn-datepicker"
+											ng-click="openStartdate()">
+								<i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="label-input">
+						<span class="form-text">End Date:</span>
+						<span class="text-danger">*</span>
+					</div>
+					<div class="form-group input-group">
+						<input type="text" class="form-control" ng-disabled="IDENTITY_MODE.VIEW"
+									 uib-datepicker-popup="{{date.format}}"
+									 ng-model="identityDetail.endDate" is-open="date.status.endDateOpened"
+									 datepicker-options="date.dateOption" id="identityEndDate" name="identityEndDate"
+									 ng-required="true" close-text="Close" required=""/>
+            <span class="input-group-btn">
+              <button type="button" ng-disabled="!IDENTITY_MODE.NEW"
+											class="btn btn-default btn-datepicker"
+											ng-click="openEnddate()">
+								<i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Society Application</title>
+        <base href="/" target=""/>
+        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/node_modules/angular-ui-grid/ui-grid.min.css"/>
+        <link rel="stylesheet" href="/node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
+        <script src="/node_modules/pdfmake/build/pdfmake.js"></script>
+        <script src="/node_modules/pdfmake/build/vfs_fonts.js"></script>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+        <script src="/node_modules/requirejs/require.js"></script>
+        <script>
+            require(["/require-conf.js"], function () {
+                require(["/app.js"]);
+            });
+        </script>
+    </head>
+    <body ng-controller="appController">
+        <div class="spinner-body" ng-show="loader.show">
+            <div class="spinner-loader"></div>
+        </div>
+        <div nav-bar config="navBarConfig"></div>
+        <section>
+            <div ng-view></div>
+        </section>
+        <message-modal message="globalMessage"></message-modal>
+    </body>
+</html>

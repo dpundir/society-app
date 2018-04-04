@@ -1,0 +1,68 @@
+<div class="admin-login">
+    <div class="inner-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 society-form">
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h1 class="text-primary" ng-bind="headerText"></h1>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-bottom">
+                            <form role="form" class="login-form" name="loginForm" novalidate="">
+                                <div>
+                                    <div class="alert alert-danger" role="alert" ng-bind="errorLoginText" ng-show="isError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="label-input">
+                                        <span class="form-text">Username</span>
+                                    </div>
+                                    <input type="text"
+                                           name="username"
+                                           placeholder="Enter your username"
+                                           class="form-username form-control" required=""
+                                           id="form-username" ng-model="username">
+                                </div>
+                                <div class="form-group" ng-show="actionText === 'Register'">
+                                    <div class="label-input">
+                                        <span class="form-text">Email</span>
+                                    </div>
+                                    <input type="text"
+                                           name="email"
+                                           placeholder="Enter your email"
+                                           class="form-email form-control" required=""
+                                           id="form-email" ng-model="email">
+                                </div>
+                                <div class="form-group" ng-hide="actionText === 'Reset'">
+                                    <div class="label-input">
+                                        <span class="form-text">Password</span>
+                                    </div>
+                                    <input type="password"
+                                           name="password"
+                                           placeholder="Enter your password"
+                                           class="form-password form-control" required=""
+                                           id="form-password" ng-model="password">
+                                </div>
+                                <button type="submit"
+                                        class="btn btn-primary"
+                                        ng-click="adminLogin(loginForm)"
+                                        ng-bind="actionText"></button>
+                            </form>
+                            <div ng-show="actionText === 'Login'">
+                                Forgot password? <a href="app/#/login/reset" class="text-primary">Reset Here</a></br>
+                                New User? <a href="app/#/login/register" class="text-primary">Register</a>
+                            </div>
+                            <div ng-show="actionText === 'Reset' || actionText === 'Register'">
+                                Back to <a href="app/#/login" class="text-primary">Login page</a></br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    </div>
+</div>

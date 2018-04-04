@@ -1,0 +1,40 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Nominee Relation</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="label-input">
+                        <span class="form-text">Nominee Relation</span>
+                    </div>
+                    <select name="relation" ng-model="member.memberNominee[0].relation"
+                            class="form-control"
+                            ng-disabled="!editRelation"
+                            ng-options="relation.id as relation.label for relation in nomineeRelations">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="!showDetails">
+    <div>
+        <h4 class="text-info">Add new nominee details:</h4>
+        <hr/>
+    </div>
+    <button class="btn btn-primary loan-btn" ng-click="searchMember()">Search Existing Member</button>
+    <button class="btn btn-primary loan-btn" ng-click="newNominee()">Enter New</button>
+</div>
+<div ng-if="showDetails">
+    <div member-details person="member.memberNominee[0].nominee"
+         entity="nominee"
+         address="member.memberNominee[0].nominee.address"
+         is-view-mode="isNomineeViewMode"
+         action-text="actionText"
+         click-handler="register(form, entity)"
+         editable="editable"></div>
+</div>
+<member-search option="existingMember"></member-search>
